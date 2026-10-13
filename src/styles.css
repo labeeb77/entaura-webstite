@@ -56,39 +56,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 /* Second heading lines used to be gradient text; they are now a quiet grey. */
 .gradient-text { color: var(--faint); }
 
-/* ---------- Gradient orb ---------- */
+/* ---------- Aura (see components/Aura.jsx) ---------- */
 
-.orb {
-  position: relative;
-  display: block;
-  border-radius: 50%;
-  overflow: hidden;
-  isolation: isolate;
-  background: #dfe9ff;
-  box-shadow: inset 0 -12px 30px rgba(255, 255, 255, .55), inset 0 10px 24px rgba(40, 60, 120, .08);
-}
-.orb::before {
-  content: "";
-  position: absolute;
-  inset: -25%;
-  z-index: -1;
-  background: conic-gradient(from 210deg, #9cc8ff, #a8eadf, #d6c2ff, #ffc9b8, #ffe6a8, #9cc8ff);
-  filter: blur(var(--orb-blur, 14px));
-  animation: orb-spin 18s linear infinite;
-}
-.orb::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 42%);
-}
-/* Small orbs need a tighter blur or their colours wash out to grey. */
-.orb.small { --orb-blur: 3px; }
-.orb.small::after { background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .8), rgba(255, 255, 255, 0) 38%); }
-.orb.ask::before { background: conic-gradient(from 200deg, #a8eadf, #c9f3e9, #9cc8ff, #a8eadf); }
-.orb.insight::before { background: conic-gradient(from 200deg, #9cc8ff, #c8dcff, #a8eadf, #9cc8ff); }
-.orb.watch::before { background: conic-gradient(from 200deg, #d6c2ff, #ffc9b8, #ece2ff, #d6c2ff); }
-@keyframes orb-spin { to { transform: rotate(360deg); } }
+.aura { display: block; flex: none; overflow: visible; }
+.aura-corona { transform-box: fill-box; transform-origin: center; animation: aura-spin 60s linear infinite; }
+.aura-blob { animation: aura-drift 9s ease-in-out infinite alternate; }
+.aura-blob.two { animation-duration: 12s; animation-direction: alternate-reverse; }
+@keyframes aura-spin { to { transform: rotate(360deg); } }
+@keyframes aura-drift { to { transform: translate(-6px, -5px); } }
 
 /* ---------- Header ---------- */
 
@@ -130,7 +105,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .nav-dropdown:hover .nav-mega, .nav-dropdown:focus-within .nav-mega, .nav-dropdown.open .nav-mega { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 .nav-mega a { display: flex; gap: 12px; padding: 12px; border-radius: 12px; }
 .nav-mega a:hover, .nav-mega a:focus { background: var(--soft); }
-.nav-mega .orb { flex: none; width: 32px; height: 32px; }
 .nav-mega strong, .nav-mega small { display: block; }
 .nav-mega strong { color: var(--text); font-size: 14px; font-weight: 600; }
 .nav-mega small { margin-top: 2px; color: var(--body); font-size: 12.5px; }
@@ -404,5 +378,5 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .orb::before, .analytics-bars i { animation: none; }
+  .aura-corona, .aura-blob, .analytics-bars i { animation: none; }
 }
