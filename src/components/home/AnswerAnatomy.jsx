@@ -6,7 +6,7 @@ function Marker({ n }) {
 
 function AnswerAnatomy() {
   return (
-    <section className="h-section h-anatomy">
+    <section className="h-section h-soft h-anatomy">
       <div className="container">
         <div className="h-head reveal">
           <span className="eyebrow">Transparent answers</span>

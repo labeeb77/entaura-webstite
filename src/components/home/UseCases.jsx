@@ -8,7 +8,7 @@ function UseCases() {
   const current = useCases[active]
 
   return (
-    <section className="h-section h-cases">
+    <section className="h-section h-soft h-cases">
       <div className="container">
         <div className="h-head reveal">
           <span className="eyebrow">Use cases</span>
@@ -24,7 +24,7 @@ function UseCases() {
         <div className="uc-grid" key={current.team}>
           {current.prompts.map(prompt => (
             <article key={prompt.text} className={`uc-card tone-${prompt.product}`}>
-              <span>{productNames[prompt.product]}</span>
+              <span className="chip-label">{productNames[prompt.product]}</span>
               <p>“{prompt.text}”</p>
             </article>
           ))}

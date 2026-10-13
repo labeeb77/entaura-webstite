@@ -142,8 +142,11 @@ function ProductShowcase() {
                   aria-controls="showcase-panel"
                   onClick={() => setActive(index)}
                 >
-                  <span className="sn-tag">0{index + 1} / {item.tag}</span>
-                  <strong>EntAura {item.name}</strong>
+                  <i className={`orb small ${item.key}`} aria-hidden="true"></i>
+                  <span>
+                    <span className="sn-tag">0{index + 1} / {item.tag}</span>
+                    <strong>EntAura {item.name}</strong>
+                  </span>
                 </button>
                 {index === active && (
                   <div className="sn-detail">

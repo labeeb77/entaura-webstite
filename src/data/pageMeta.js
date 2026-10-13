@@ -2,7 +2,7 @@
 export const pageMeta = {
   home: {
     file: 'index.html',
-    themeColor: '#080b14',
+    themeColor: '#ffffff',
     description: 'EntAura connects enterprise policies, documents, and transactional data in one intelligent layer, with Ask, Insight, and Watch.',
     ogTitle: 'EntAura | Enterprise agentic AI platform',
     ogDescription: 'Verify facts, analyse data against policy, and monitor operations with Ask, Insight, and Watch.',
@@ -42,7 +42,7 @@ export const pageMeta = {
   },
   contact: {
     file: 'contact.html',
-    themeColor: '#080b14',
+    themeColor: '#ffffff',
     description: 'Contact EntAura to discuss business knowledge, monitoring, analytics, and connected workflows.',
     ogTitle: 'Contact EntAura | Talk to our team',
     ogDescription: 'Tell us what your team needs to know, monitor, or understand.',

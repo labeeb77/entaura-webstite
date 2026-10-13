@@ -115,10 +115,9 @@ function HeroConsole() {
 
   return (
     <section className="h-hero">
-      <div className="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <div className="container h-hero-grid">
         <div className="h-hero-copy">
-          <span className="h-pill"><i></i>Enterprise agentic AI platform</span>
+          <span className="h-pill"><i className="orb small" aria-hidden="true"></i>Enterprise agentic AI platform</span>
           <h1>Turn enterprise knowledge <span className="gradient-text">into action.</span></h1>
           <p>EntAura connects your policies, documents, and live transactional data in one intelligent layer. Verify facts, analyse performance against the rules, and act before issues become incidents.</p>
           <div className="h-actions">
@@ -126,32 +125,35 @@ function HeroConsole() {
             <Link className="button ghost" to="#products">Explore the products</Link>
           </div>
           <div className="h-trio" aria-label="Products">
-            {heroScenes.map((item, index) => (
-              <span key={item.key} className={`tone-${item.key}`}>{index > 0 && <b>•</b>}{item.label}</span>
+            {heroScenes.map(item => (
+              <span key={item.key} className={`tone-${item.key}`}>{item.label}</span>
             ))}
           </div>
         </div>
 
-        <div className="h-console" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-          <div className="hc-bar">
-            <span className="hc-dots"><i></i><i></i><i></i></span>
-            <div className="hc-tabs" role="tablist" aria-label="Product demos">
-              {heroScenes.map((item, index) => (
-                <button
-                  key={item.key}
-                  role="tab"
-                  aria-selected={index === active}
-                  className={`tone-${item.key}${index === active ? ' active' : ''}`}
-                  onClick={() => setActive(index)}
-                >
-                  {item.label}
-                  {index === active && !reduced && !paused && <i className="hc-progress" style={{ animationDuration: `${sceneDuration}ms` }}></i>}
-                </button>
-              ))}
+        <div className="h-stage">
+          <i className="orb" aria-hidden="true"></i>
+          <div className="h-console" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+            <div className="hc-bar">
+              <span className="hc-dots"><i></i><i></i><i></i></span>
+              <div className="hc-tabs" role="tablist" aria-label="Product demos">
+                {heroScenes.map((item, index) => (
+                  <button
+                    key={item.key}
+                    role="tab"
+                    aria-selected={index === active}
+                    className={`tone-${item.key}${index === active ? ' active' : ''}`}
+                    onClick={() => setActive(index)}
+                  >
+                    {item.label}
+                    {index === active && !reduced && !paused && <i className="hc-progress" style={{ animationDuration: `${sceneDuration}ms` }}></i>}
+                  </button>
+                ))}
+              </div>
+              <span className="hc-caption">{scene.caption}</span>
             </div>
-            <span className="hc-caption">{scene.caption}</span>
+            <Console key={scene.key} scene={scene} animate={!reduced} />
           </div>
-          <Console key={scene.key} scene={scene} animate={!reduced} />
         </div>
       </div>
     </section>

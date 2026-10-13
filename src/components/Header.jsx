@@ -59,7 +59,7 @@ function Header() {
             <div className="nav-mega">
               {megaItems.map(item => (
                 <Link key={item.to} to={item.to}>
-                  <b>{item.icon}</b>
+                  <i className={`orb small ${item.key}`} aria-hidden="true"></i>
                   <span>
                     <strong>{item.title}</strong>
                     <small>{item.text}</small>

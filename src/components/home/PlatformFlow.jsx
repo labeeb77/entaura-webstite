@@ -15,22 +15,23 @@ function PlatformFlow() {
             <span className="fl-label">Your sources</span>
             {flow.sources.map(item => <div key={item} className="fl-node">{item}</div>)}
           </div>
-          <div className="fl-wire" aria-hidden="true"><i></i></div>
+          <div className="fl-wire" aria-hidden="true"></div>
           <div className="fl-col fl-core">
-            <img src="/assets/entaura-mark.png" alt="" />
+            <i className="orb" aria-hidden="true"></i>
             <strong>EntAura intelligence layer</strong>
             {flow.core.map(item => <span key={item}>{item}</span>)}
           </div>
-          <div className="fl-wire" aria-hidden="true"><i></i></div>
+          <div className="fl-wire" aria-hidden="true"></div>
           <div className="fl-col">
             <span className="fl-label">Products</span>
             {showcase.map(item => (
               <div key={item.key} className={`fl-node fl-product tone-${item.key}`}>
-                <strong>{item.name}</strong><small>{item.tag}</small>
+                <i className={`orb small ${item.key}`} aria-hidden="true"></i>
+                <span><strong>{item.name}</strong><small>{item.tag}</small></span>
               </div>
             ))}
           </div>
-          <div className="fl-wire" aria-hidden="true"><i></i></div>
+          <div className="fl-wire" aria-hidden="true"></div>
           <div className="fl-col">
             <span className="fl-label">Where teams act</span>
             {flow.channels.map(item => <div key={item} className="fl-node">{item}</div>)}
