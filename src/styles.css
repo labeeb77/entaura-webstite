@@ -72,22 +72,29 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   position: absolute;
   inset: -25%;
   z-index: -1;
-  background: conic-gradient(from 210deg, #9cc8ff, #a8eadf, #d6c2ff, #ffc9b8, #ffe6a8, #9cc8ff);
+  background: conic-gradient(from 210deg, #8fb4f7, #8fdce6, #bfe8a8, #f7dc9a, #f8bca8, #e9b0dc, #c3a6f3, #8fb4f7);
   filter: blur(var(--orb-blur, 14px));
   animation: orb-spin 18s linear infinite;
 }
+/* EntAura's variation: logo colours, plus a faint halo line inside the rim. */
 .orb::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 42%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 42%),
+    radial-gradient(circle, transparent 69%, rgba(255, 255, 255, .9) 71.5%, transparent 74%);
 }
 /* Small orbs need a tighter blur or their colours wash out to grey. */
 .orb.small { --orb-blur: 3px; }
 .orb.small::after { background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .8), rgba(255, 255, 255, 0) 38%); }
-.orb.ask::before { background: conic-gradient(from 200deg, #a8eadf, #c9f3e9, #9cc8ff, #a8eadf); }
-.orb.insight::before { background: conic-gradient(from 200deg, #9cc8ff, #c8dcff, #a8eadf, #9cc8ff); }
-.orb.watch::before { background: conic-gradient(from 200deg, #d6c2ff, #ffc9b8, #ece2ff, #d6c2ff); }
+.orb.ask::before { background: conic-gradient(from 200deg, #8fb4f7, #8fdce6, #a9d8fb, #8fb4f7); }
+.orb.insight::before { background: conic-gradient(from 200deg, #8fdce6, #bfe8a8, #f7dc9a, #8fdce6); }
+.orb.watch::before { background: conic-gradient(from 200deg, #f8bca8, #e9b0dc, #c3a6f3, #f8bca8); }
+/* The original pastel sphere, kept for the home hero. */
+.orb.classic::before { background: conic-gradient(from 210deg, #9cc8ff, #a8eadf, #d6c2ff, #ffc9b8, #ffe6a8, #9cc8ff); }
+.orb.classic::after { background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 42%); }
 @keyframes orb-spin { to { transform: rotate(360deg); } }
 
 /* ---------- Header ---------- */

@@ -117,7 +117,7 @@ function HeroConsole() {
     <section className="h-hero">
       <div className="container h-hero-grid">
         <div className="h-hero-copy">
-          <span className="h-pill"><i className="orb small" aria-hidden="true"></i>Enterprise agentic AI platform</span>
+          <span className="h-pill"><i className="orb small classic" aria-hidden="true"></i>Enterprise agentic AI platform</span>
           <h1>Turn enterprise knowledge <span className="gradient-text">into action.</span></h1>
           <p>EntAura connects your policies, documents, and live transactional data in one intelligent layer. Verify facts, analyse performance against the rules, and act before issues become incidents.</p>
           <div className="h-actions">
@@ -132,7 +132,7 @@ function HeroConsole() {
         </div>
 
         <div className="h-stage">
-          <i className="orb" aria-hidden="true"></i>
+          <i className="orb classic" aria-hidden="true"></i>
           <div className="h-console" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
             <div className="hc-bar">
               <span className="hc-dots"><i></i><i></i><i></i></span>
