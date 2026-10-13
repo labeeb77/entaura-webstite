@@ -1,0 +1,63 @@
+// Head content per page. Only the keys a page defines are present in <head>.
+export const pageMeta = {
+  home: {
+    file: 'index.html',
+    themeColor: '#080b14',
+    description: 'EntAura connects enterprise policies, documents, and transactional data in one intelligent layer, with Ask, Insight, and Watch.',
+    ogTitle: 'EntAura | Enterprise agentic AI platform',
+    ogDescription: 'Verify facts, analyse data against policy, and monitor operations with Ask, Insight, and Watch.',
+    ogType: 'website',
+    ogImage: 'assets/entaura-mark.png',
+    canonical: 'https://entaura.ai/',
+    title: 'EntAura | Enterprise agentic AI platform',
+  },
+  ask: {
+    file: 'ask.html',
+    description: 'EntAura Ask searches ERP records and policy documents together and returns the exact entry or clause behind every answer.',
+    ogTitle: 'EntAura Ask | Answers you can verify',
+    canonical: 'https://entaura.ai/ask.html',
+    title: 'EntAura Ask | Answers you can verify',
+  },
+  watch: {
+    file: 'watch.html',
+    description: 'EntAura Watch monitors limits, sensor data, and compliance continuously and alerts teams before incidents occur.',
+    ogTitle: 'EntAura Watch | Monitor changes before incidents',
+    canonical: 'https://entaura.ai/watch.html',
+    title: 'EntAura Watch | Monitor changes before incidents',
+  },
+  insight: {
+    file: 'insight.html',
+    description: 'EntAura Insight combines transactional data with policy limits in one query and shows the charts, SQL, and reasoning.',
+    ogTitle: 'EntAura Insight | Data and policy, analysed together',
+    canonical: 'https://entaura.ai/insight.html',
+    title: 'EntAura Insight | Data and policy, analysed together',
+  },
+  solutions: {
+    file: 'solutions.html',
+    description: 'See how EntAura helps organizations connect policies, documents, and transactional data to decide better, stay compliant, and manage proactively.',
+    ogTitle: 'EntAura Solutions | Better decisions, compliance, and foresight',
+    ogDescription: 'Connect policies, documents, and transactional data across your organization.',
+    canonical: 'https://entaura.ai/solutions.html',
+    title: 'EntAura Solutions | Better decisions, compliance, and foresight',
+  },
+  contact: {
+    file: 'contact.html',
+    themeColor: '#080b14',
+    description: 'Contact EntAura to discuss business knowledge, monitoring, analytics, and connected workflows.',
+    ogTitle: 'Contact EntAura | Talk to our team',
+    ogDescription: 'Tell us what your team needs to know, monitor, or understand.',
+    canonical: 'https://entaura.ai/contact.html',
+    title: 'Contact EntAura | Talk to our team',
+  },
+}
+
+// [meta key, tag, identifying attribute, identifying value, value attribute]
+export const metaTags = [
+  ['themeColor', 'meta', 'name', 'theme-color', 'content'],
+  ['description', 'meta', 'name', 'description', 'content'],
+  ['ogTitle', 'meta', 'property', 'og:title', 'content'],
+  ['ogDescription', 'meta', 'property', 'og:description', 'content'],
+  ['ogType', 'meta', 'property', 'og:type', 'content'],
+  ['ogImage', 'meta', 'property', 'og:image', 'content'],
+  ['canonical', 'link', 'rel', 'canonical', 'href'],
+]

@@ -1,0 +1,95 @@
+import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { megaItems } from '../data/nav.js'
+import Brand from './Brand.jsx'
+import NavDropdown from './NavDropdown.jsx'
+
+const closedDropdowns = { products: false, solutions: false }
+
+function Header() {
+  const { pathname, hash, key } = useLocation()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [dropdowns, setDropdowns] = useState(closedDropdowns)
+  const previousPath = useRef(pathname)
+
+  const isHome = pathname === '/' || pathname === '/index.html'
+  const isContact = pathname === '/contact.html'
+
+  // Every page used to be a fresh document, so menus start closed after a
+  // navigation. In-page anchor jumps did not reload and leave them as they are.
+  useEffect(() => {
+    if (previousPath.current !== pathname || !hash) {
+      setMenuOpen(false)
+      setDropdowns(closedDropdowns)
+    }
+    previousPath.current = pathname
+  }, [key, pathname, hash])
+
+  useEffect(() => {
+    const closeOnOutsideClick = event => {
+      if (!event.target.closest('.nav-dropdown')) setDropdowns(closedDropdowns)
+    }
+    document.addEventListener('click', closeOnOutsideClick)
+    return () => document.removeEventListener('click', closeOnOutsideClick)
+  }, [])
+
+  const toggleDropdown = name => setDropdowns(current => ({ ...current, [name]: !current[name] }))
+
+  return (
+    <header className="topbar">
+      <nav className="container nav" aria-label={isHome || isContact ? 'Main navigation' : undefined}>
+        <Brand />
+        <button
+          className="menu-button"
+          aria-label="Toggle navigation"
+          aria-expanded={String(menuOpen)}
+          onClick={() => setMenuOpen(open => !open)}
+        >
+          {menuOpen ? '✕' : '☰'}
+        </button>
+        <div className={menuOpen ? 'navlinks open' : 'navlinks'}>
+          <NavDropdown
+            open={dropdowns.products}
+            trigger={
+              <button className="nav-dropdown-trigger" onClick={() => toggleDropdown('products')}>
+                Products <span>⌄</span>
+              </button>
+            }
+          >
+            <div className="nav-mega">
+              {megaItems.map(item => (
+                <Link key={item.to} to={item.to}>
+                  <b>{item.icon}</b>
+                  <span>
+                    <strong>{item.title}</strong>
+                    <small>{item.text}</small>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </NavDropdown>
+          <NavDropdown
+            className="solutions-dropdown"
+            open={dropdowns.solutions}
+            trigger={
+              <Link className="nav-dropdown-trigger" to="/solutions.html" onClick={() => toggleDropdown('solutions')}>
+                Solutions
+              </Link>
+            }
+          />
+          <Link to="/index.html#platform">Platform</Link>
+          {isContact ? (
+            <Link to="/contact.html" aria-current="page">Contact</Link>
+          ) : (
+            <Link to="/index.html#contact">Contact</Link>
+          )}
+        </div>
+        <Link className="button primary navcta" to="/contact.html">
+          {isHome || isContact ? <>Talk to our team <span>↗</span></> : 'Talk to our team ↗'}
+        </Link>
+      </nav>
+    </header>
+  )
+}
+
+export default Header
