@@ -1,46 +1,33 @@
-import { useState } from 'react'
-import Capabilities from '../components/Capabilities.jsx'
+import { useRef } from 'react'
 import ContactLayout from '../components/ContactLayout.jsx'
-import Hero from '../components/Hero.jsx'
-import IntegrationSection from '../components/IntegrationSection.jsx'
-import ProductCard from '../components/ProductCard.jsx'
-import SectionHead from '../components/SectionHead.jsx'
-import Statement from '../components/Statement.jsx'
+import AnswerAnatomy from '../components/home/AnswerAnatomy.jsx'
+import CtaBand from '../components/home/CtaBand.jsx'
+import HeroConsole from '../components/home/HeroConsole.jsx'
+import LogoMarquee from '../components/home/LogoMarquee.jsx'
+import PlatformFlow from '../components/home/PlatformFlow.jsx'
+import ProductShowcase from '../components/home/ProductShowcase.jsx'
+import UseCases from '../components/home/UseCases.jsx'
+import VisionBand from '../components/home/VisionBand.jsx'
 import { pageMeta } from '../data/pageMeta.js'
-import { products } from '../data/products.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
+import { useReveal } from '../hooks/useReveal.js'
+import '../home.css'
 
 function Home() {
   usePageMeta(pageMeta.home)
-  // Tap-to-expand on product cards is decided once, from the width at load.
-  const [tapToExpand] = useState(() => Boolean(window.matchMedia?.('(max-width: 850px)').matches))
+  const main = useRef(null)
+  useReveal(main)
 
   return (
-    <main>
-      <Hero />
-      <section className="section" id="products">
-        <div className="container">
-          <SectionHead
-            eyebrow="The EntAura product family"
-            title="Three products."
-            gradient="One intelligent layer."
-            text="Ask verifies, Insight explains, and Watch safeguards. Each works on the same connected foundation of policies, documents, and transactional data."
-          />
-          <div className="products">
-            {products.map(product => (
-              <ProductCard key={product.key} product={product} tapToExpand={tapToExpand} />
-            ))}
-          </div>
-        </div>
-      </section>
-      <Statement />
-      <IntegrationSection />
-      <section className="section">
-        <div className="container">
-          <SectionHead eyebrow="Why teams trust the answers" title="Built to be checked." gradient="Not just believed." />
-          <Capabilities />
-        </div>
-      </section>
+    <main className="home" ref={main}>
+      <HeroConsole />
+      <LogoMarquee />
+      <VisionBand />
+      <ProductShowcase />
+      <AnswerAnatomy />
+      <PlatformFlow />
+      <UseCases />
+      <CtaBand />
       <section className="contact-section container" id="contact">
         <div className="contact-heading">
           <span className="eyebrow">Start a smarter conversation</span>
