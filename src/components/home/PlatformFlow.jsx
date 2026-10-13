@@ -1,5 +1,4 @@
 import { flow, showcase } from '../../data/home.js'
-import Aura from '../Aura.jsx'
 
 function PlatformFlow() {
   return (
@@ -18,7 +17,7 @@ function PlatformFlow() {
           </div>
           <div className="fl-wire" aria-hidden="true"></div>
           <div className="fl-col fl-core">
-            <Aura size={96} />
+            <i className="orb" aria-hidden="true"></i>
             <strong>EntAura intelligence layer</strong>
             {flow.core.map(item => <span key={item}>{item}</span>)}
           </div>
@@ -27,7 +26,7 @@ function PlatformFlow() {
             <span className="fl-label">Products</span>
             {showcase.map(item => (
               <div key={item.key} className={`fl-node fl-product tone-${item.key}`}>
-                <Aura variant={item.key} size={30} />
+                <i className={`orb small ${item.key}`} aria-hidden="true"></i>
                 <span><strong>{item.name}</strong><small>{item.tag}</small></span>
               </div>
             ))}

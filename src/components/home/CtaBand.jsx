@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
-import Aura from '../Aura.jsx'
 
 function CtaBand() {
   return (
     <section className="container h-cta reveal">
-      <Aura soft size={520} />
+      <i className="orb" aria-hidden="true"></i>
       <span className="eyebrow">Ask • Insight • Watch</span>
       <h2>Transform your enterprise today.</h2>
       <p>See EntAura working on your own policies, documents, and transactional data.</p>

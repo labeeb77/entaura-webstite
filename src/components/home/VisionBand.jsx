@@ -1,5 +1,4 @@
 import { vision } from '../../data/home.js'
-import Aura from '../Aura.jsx'
 
 function VisionBand() {
   return (
@@ -12,7 +11,7 @@ function VisionBand() {
         <ol className="h-vision-steps">
           {vision.map((item, index) => (
             <li key={item.label} className="reveal" style={{ '--delay': `${index * 90}ms` }}>
-              {index === 1 && <Aura size={190} />}
+              {index === 1 && <i className="orb" aria-hidden="true"></i>}
               <span>{String(index + 1).padStart(2, '0')} · {item.label}</span>
               <h3>{item.title}</h3>
               <p>{item.text}</p>

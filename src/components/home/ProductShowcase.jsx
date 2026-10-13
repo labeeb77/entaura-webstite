@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { askRecord, heroScenes, insightTable, showcase, watchRecipe } from '../../data/home.js'
-import Aura from '../Aura.jsx'
 
 function AskPanel() {
   return (
@@ -143,7 +142,7 @@ function ProductShowcase() {
                   aria-controls="showcase-panel"
                   onClick={() => setActive(index)}
                 >
-                  <Aura variant={item.key} size={38} />
+                  <i className={`orb small ${item.key}`} aria-hidden="true"></i>
                   <span>
                     <span className="sn-tag">0{index + 1} / {item.tag}</span>
                     <strong>EntAura {item.name}</strong>
