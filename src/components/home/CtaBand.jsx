@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 
 function CtaBand() {
   return (
-    <section className="container h-cta streak reveal">
+    <section className="container h-cta reveal">
+      <i className="orb" aria-hidden="true"></i>
       <span className="eyebrow">Ask • Insight • Watch</span>
       <h2>Transform your enterprise today.</h2>
       <p>See EntAura working on your own policies, documents, and transactional data.</p>
