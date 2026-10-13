@@ -131,7 +131,25 @@ export const flow = {
   sources: ['ERP and transactions', 'Policy documents', 'Enterprise tools', 'IoT sensors', 'Ad hoc sources'],
   core: ['Retrieval-augmented generation', 'Agentic workflows', 'Unified data warehouse', 'Advanced LLMs'],
   products: ['ask', 'insight', 'watch'],
-  channels: ['Microsoft Teams', 'Slack', 'WhatsApp', 'Email'],
+  channels: [
+    { name: 'Microsoft Teams', icon: 'teams.png' },
+    { name: 'Slack', icon: 'slack.png' },
+    { name: 'WhatsApp', icon: 'whatsapp.png' },
+    { name: 'Email', icon: 'gmail.svg' },
+  ],
+  steps: [
+    { label: 'Connect', caption: 'Your data and policies flow in.' },
+    { label: 'Understand', caption: 'EntAura reasons over them together.' },
+    { label: 'Act', caption: 'The right product answers.' },
+    { label: 'Deliver', caption: 'Your team is notified where they work.' },
+  ],
+  // One request traced end to end per product. Sources and channel are
+  // indexes into `sources` and `channels`.
+  scenarios: [
+    { product: 'ask', sources: [0, 1], channel: 0, output: 'Evidence: PO-4471 · Policy §4.2', message: 'Answer with sources shared' },
+    { product: 'insight', sources: [0, 2], channel: 1, output: 'Chart + SQL: overtime vs. cap', message: 'Report posted to #finance' },
+    { product: 'watch', sources: [3, 1], channel: 2, output: 'CS-02 above 8°C for 12 min', message: 'Alert sent to the shift lead' },
+  ],
 }
 
 export const useCases = [
