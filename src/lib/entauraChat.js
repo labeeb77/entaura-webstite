@@ -1,9 +1,13 @@
-// WebSocket client for the EntAura Ask demo bot.
+// WebSocket client for the EntAura Ask demo bot (`/bot/ws`).
 //
-// The socket's message format is not documented here yet, so everything that
-// depends on it lives in this file: the request sent for each question and
-// the tolerant reading of replies. Adjust `buildRequest` and `readFrame` once
-// the format is confirmed.
+// Protocol (EntAura developer guide, section 14):
+//   server → {type: 'ready'}
+//   client → {type: 'auth', api_key, project_key}          (must be first)
+//   server → {type: 'authenticated', ...} | {type: 'error', code, error}
+//   client → {type: 'query', query, system_prompt, chat_id?, stream, ...}
+//   server → {type: 'event', event: 'start' | 'agent_step' | 'evidence_found' | 'token', data}
+//   server → {type: 'complete' | 'result', data: {answer, citations, followups, chat_id}}
+//            | {type: 'error', code, error}
 
 const env = import.meta.env
 
@@ -13,132 +17,159 @@ export const chatConfig = {
   projectKey: env.VITE_ENTAURA_PROJECT_KEY || 'demo-texol',
 }
 
-function socketUrl() {
-  // Browsers cannot set headers on a WebSocket, so the keys go in the URL.
-  const url = new URL(chatConfig.url)
-  if (chatConfig.apiKey) url.searchParams.set('api_key', chatConfig.apiKey)
-  url.searchParams.set('project_key', chatConfig.projectKey)
-  return url.toString()
+const errorMessages = {
+  authentication_failed: 'The demo could not sign in to EntAura. Please try again later.',
+  insufficient_credits: 'The demo has used its free credits for now. Please try again later.',
 }
 
-function buildRequest({ query, systemPrompt, progressId }) {
-  return {
-    api_key: chatConfig.apiKey,
-    project_key: chatConfig.projectKey,
-    query,
-    system_prompt: systemPrompt,
-    language: 'en',
-    include_followups: true,
-    retrieval_depth: 'normal',
-    web_search_enabled: false,
-    progress_id: progressId,
-    stream: true,
-  }
+// Citations become short source labels, e.g. "[1] Pricing_Policy.pdf".
+function sourcesFrom(citations) {
+  if (!Array.isArray(citations)) return []
+  const seen = new Set()
+  return citations
+    .map(citation => {
+      const name = citation?.document_name || citation?.source_name || citation?.project_name
+      if (!name) return null
+      return citation.label ? `${citation.label} ${name}` : name
+    })
+    .filter(label => label && !seen.has(label) && seen.add(label))
 }
 
-const textKeys = ['answer', 'response', 'result', 'message', 'text', 'output']
-const chunkKeys = ['token', 'delta', 'chunk', 'content']
-const finalTypes = ['final', 'complete', 'completed', 'done', 'answer', 'result', 'end']
-const progressTypes = ['progress', 'status', 'thinking', 'step']
+const followupsFrom = list => (Array.isArray(list) ? list.filter(item => typeof item === 'string') : [])
 
-const firstString = (data, keys) => keys.map(key => data?.[key]).find(value => typeof value === 'string')
-
-function toList(value) {
-  if (!Array.isArray(value)) return []
-  return value
-    .map(item => (typeof item === 'string' ? item : item?.question || item?.title || item?.name || item?.source || item?.text))
-    .filter(Boolean)
-}
-
-// Turns one socket frame into zero or more chat events.
-function readFrame(raw) {
-  let data
-  try {
-    data = JSON.parse(raw)
-  } catch {
-    return [{ type: 'chunk', text: String(raw) }]
-  }
-  if (typeof data === 'string') return [{ type: 'chunk', text: data }]
-  const body = data?.data && typeof data.data === 'object' ? { ...data, ...data.data } : data
-  const type = String(body?.type || body?.event || '').toLowerCase()
-
-  if (type === 'error' || body?.error) {
-    return [{ type: 'error', message: firstString(body, ['error', 'message', 'detail']) || 'The assistant could not answer.' }]
-  }
-  if (progressTypes.includes(type) && !body.done) {
-    const text = firstString(body, ['message', 'status', 'progress', 'step', 'text'])
-    return text ? [{ type: 'progress', text }] : []
-  }
-
-  const followups = toList(body.followups || body.follow_ups || body.follow_up_questions || body.suggested_questions)
-  const sources = toList(body.sources || body.evidence || body.citations || body.references)
-  const isFinal = finalTypes.includes(type) || body.done === true || body.final === true || body.is_final === true
-  const chunk = firstString(body, chunkKeys)
-  const text = firstString(body, textKeys)
-
-  if (isFinal || (!chunk && text)) {
-    return [{ type: 'final', text: text ?? chunk ?? null, followups, sources }]
-  }
-  if (chunk) return [{ type: 'chunk', text: chunk }]
-  if (followups.length || sources.length) return [{ type: 'meta', followups, sources }]
-  return []
-}
-
-// Opens the socket lazily and reconnects once if it drops. `onEvent` receives
-// { type: 'status' | 'chunk' | 'final' | 'meta' | 'progress' | 'error', ... }.
+// Opens the socket lazily, authenticates, and reconnects once if it drops.
+// `onEvent` receives { type: 'status' | 'chunk' | 'final' | 'progress' | 'error', ... }.
 export function createChatConnection({ onEvent }) {
   let socket = null
+  let authenticated = false
   let pending = []
+  let inFlight = null
+  let streaming = false
+  let chatId = null
   let retried = false
   let closedByUs = false
 
   const status = state => onEvent({ type: 'status', state })
+  const send = frame => socket.send(JSON.stringify(frame))
+
+  function sendQuery(frame) {
+    inFlight = frame
+    streaming = false
+    send(chatId ? { ...frame, chat_id: chatId } : frame)
+  }
+
+  function handle(frame) {
+    const data = frame.data || {}
+    switch (frame.type) {
+      case 'ready':
+        return
+      case 'authenticated':
+        authenticated = true
+        retried = false
+        status('live')
+        pending.forEach(sendQuery)
+        pending = []
+        return
+      case 'event':
+        if (frame.event === 'start') {
+          if (data.chat_id) chatId = data.chat_id
+        } else if (frame.event === 'agent_step' && data.step) {
+          onEvent({ type: 'progress', text: data.step })
+        } else if (frame.event === 'evidence_found') {
+          onEvent({ type: 'progress', text: 'Evidence found, writing the answer' })
+        } else if (frame.event === 'token' && typeof data.content === 'string') {
+          streaming = true
+          onEvent({ type: 'chunk', text: data.content })
+        }
+        return
+      case 'complete':
+      case 'result':
+        if (data.chat_id) chatId = data.chat_id
+        inFlight = null
+        onEvent({ type: 'final', text: data.answer || null, followups: followupsFrom(data.followups), sources: sourcesFrom(data.citations) })
+        return
+      case 'error':
+        inFlight = null
+        if (frame.code === 'authentication_failed') {
+          authenticated = false
+          closedByUs = true
+          status('offline')
+          socket?.close()
+        }
+        onEvent({ type: 'error', message: errorMessages[frame.code] || frame.error || frame.message || 'The assistant could not answer this question.' })
+        return
+      default:
+    }
+  }
 
   function open() {
     if (socket && (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING)) return
     closedByUs = false
+    authenticated = false
     status('connecting')
     try {
-      socket = new WebSocket(socketUrl())
+      socket = new WebSocket(chatConfig.url)
     } catch {
       status('offline')
       onEvent({ type: 'error', message: 'Could not reach the EntAura demo.' })
       return
     }
-    socket.addEventListener('open', () => {
-      retried = false
-      status('live')
-      pending.forEach(message => socket.send(message))
-      pending = []
+    // Auth must be the first frame; sending it on open is fine before `ready`.
+    socket.addEventListener('open', () => send({ type: 'auth', api_key: chatConfig.apiKey, project_key: chatConfig.projectKey }))
+    socket.addEventListener('message', event => {
+      try {
+        handle(JSON.parse(event.data))
+      } catch {
+        // Ignore frames that are not JSON.
+      }
     })
-    socket.addEventListener('message', event => readFrame(event.data).forEach(onEvent))
     socket.addEventListener('close', () => {
+      authenticated = false
       if (closedByUs) return
       if (!retried) {
         retried = true
+        // Resend a question that had not started answering yet.
+        if (inFlight && !streaming) pending.unshift(inFlight)
+        inFlight = null
         setTimeout(open, 800)
         return
       }
       status('offline')
-      onEvent({ type: 'error', message: 'The connection to the EntAura demo was lost.' })
+      if (inFlight || pending.length) onEvent({ type: 'error', message: 'The connection to the EntAura demo was lost.' })
+      inFlight = null
+      pending = []
     })
   }
 
   return {
     open,
     ask(query, systemPrompt) {
-      const progressId = `web-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
-      const message = JSON.stringify(buildRequest({ query, systemPrompt, progressId }))
-      if (socket?.readyState === WebSocket.OPEN) socket.send(message)
+      const frame = {
+        type: 'query',
+        query,
+        system_prompt: systemPrompt,
+        stream: true,
+        include_followups: true,
+        retrieval_depth: 'normal',
+        web_search_enabled: false,
+        progress_id: `web-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`,
+      }
+      if (authenticated && socket?.readyState === WebSocket.OPEN) sendQuery(frame)
       else {
-        pending.push(message)
+        pending.push(frame)
         open()
       }
     },
+    // Starts a fresh conversation on the server side.
+    reset() {
+      chatId = null
+    },
     retry() {
       retried = false
-      socket = null
-      open()
+      if (!socket || socket.readyState === WebSocket.CLOSED || socket.readyState === WebSocket.CLOSING) {
+        socket = null
+        open()
+      }
     },
     close() {
       closedByUs = true

@@ -98,6 +98,7 @@ function Try() {
   }
 
   const reset = () => {
+    chat.current?.reset()
     setMessages([])
     setShowSuggestions(false)
   }
