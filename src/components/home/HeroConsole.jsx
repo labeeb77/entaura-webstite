@@ -121,7 +121,7 @@ function HeroConsole() {
           <h1>Turn enterprise knowledge <span className="gradient-text">into action.</span></h1>
           <p>EntAura connects your policies, documents, and live transactional data in one intelligent layer. Verify facts, analyse performance against the rules, and act before issues become incidents.</p>
           <div className="h-actions">
-            <Link className="button primary" to="/contact.html">Book a demo <span>↗</span></Link>
+            <Link className="button primary" to="/try.html">Try for free <span>↗</span></Link>
             <Link className="button ghost" to="#products">Explore the products</Link>
           </div>
           <div className="h-trio" aria-label="Products">

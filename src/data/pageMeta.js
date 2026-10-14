@@ -40,6 +40,14 @@ export const pageMeta = {
     canonical: 'https://entaura.ai/solutions.html',
     title: 'EntAura Solutions | Better decisions, compliance, and foresight',
   },
+  try: {
+    file: 'try.html',
+    description: 'Try EntAura Ask for free: ask questions about sample policies, pricing, revenue, and invoices and see answers with their sources.',
+    ogTitle: 'Try EntAura Ask for free',
+    ogDescription: 'Ask a live EntAura demo about policies, pricing, revenue, and invoices.',
+    canonical: 'https://entaura.ai/try.html',
+    title: 'Try EntAura Ask | Free live demo',
+  },
   contact: {
     file: 'contact.html',
     themeColor: '#ffffff',
