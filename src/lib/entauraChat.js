@@ -48,9 +48,17 @@ export function createChatConnection({ onEvent }) {
   let chatId = null
   let retried = false
   let closedByUs = false
+  let authSent = false
+  let reauthTried = false
 
   const status = state => onEvent({ type: 'status', state })
   const send = frame => socket.send(JSON.stringify(frame))
+
+  function sendAuth() {
+    if (authSent || socket?.readyState !== WebSocket.OPEN) return
+    authSent = true
+    send({ type: 'auth', api_key: chatConfig.apiKey, project_key: chatConfig.projectKey })
+  }
 
   function sendQuery(frame) {
     inFlight = frame
@@ -62,6 +70,8 @@ export function createChatConnection({ onEvent }) {
     const data = frame.data || {}
     switch (frame.type) {
       case 'ready':
+        // The guide's order: connect → ready → auth → authenticated → query.
+        sendAuth()
         return
       case 'authenticated':
         authenticated = true
@@ -86,9 +96,22 @@ export function createChatConnection({ onEvent }) {
       case 'result':
         if (data.chat_id) chatId = data.chat_id
         inFlight = null
+        reauthTried = false
         onEvent({ type: 'final', text: data.answer || null, followups: followupsFrom(data.followups), sources: sourcesFrom(data.citations) })
         return
-      case 'error':
+      case 'error': {
+        const text = String(frame.error || frame.message || '')
+        // The server lost our auth: authenticate again and resend once.
+        if (frame.code !== 'authentication_failed' && (frame.code === 'not_authenticated' || /authenticate/i.test(text)) && inFlight && !reauthTried) {
+          reauthTried = true
+          authenticated = false
+          authSent = false
+          pending.unshift(inFlight)
+          inFlight = null
+          status('connecting')
+          sendAuth()
+          return
+        }
         inFlight = null
         if (frame.code === 'authentication_failed') {
           authenticated = false
@@ -96,8 +119,9 @@ export function createChatConnection({ onEvent }) {
           status('offline')
           socket?.close()
         }
-        onEvent({ type: 'error', message: errorMessages[frame.code] || frame.error || frame.message || 'The assistant could not answer this question.' })
+        onEvent({ type: 'error', message: errorMessages[frame.code] || text || 'The assistant could not answer this question.' })
         return
+      }
       default:
     }
   }
@@ -106,6 +130,7 @@ export function createChatConnection({ onEvent }) {
     if (socket && (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING)) return
     closedByUs = false
     authenticated = false
+    authSent = false
     status('connecting')
     try {
       socket = new WebSocket(chatConfig.url)
@@ -114,8 +139,10 @@ export function createChatConnection({ onEvent }) {
       onEvent({ type: 'error', message: 'Could not reach the EntAura demo.' })
       return
     }
-    // Auth must be the first frame; sending it on open is fine before `ready`.
-    socket.addEventListener('open', () => send({ type: 'auth', api_key: chatConfig.apiKey, project_key: chatConfig.projectKey }))
+    // Auth goes out when the server sends `ready`. If `ready` never comes,
+    // authenticate anyway after a short wait.
+    const current = socket
+    socket.addEventListener('open', () => setTimeout(() => { if (current === socket) sendAuth() }, 2000))
     socket.addEventListener('message', event => {
       try {
         handle(JSON.parse(event.data))
