@@ -177,7 +177,6 @@ export function createChatConnection({ onEvent }) {
         system_prompt: systemPrompt,
         stream: true,
         include_followups: true,
-        retrieval_depth: 'normal',
         web_search_enabled: false,
         progress_id: `web-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`,
       }
