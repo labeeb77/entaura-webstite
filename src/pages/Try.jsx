@@ -89,6 +89,18 @@ function Try() {
     chat.current?.ask(query, systemPrompt)
   }, [busy])
 
+  // A question linked from the home page (/try.html?q=…) is asked once on arrival.
+  const prefilled = useRef(false)
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search).get('q')?.trim()
+    if (!query || prefilled.current) return undefined
+    const timer = setTimeout(() => {
+      prefilled.current = true
+      ask(query)
+    }, 0)
+    return () => clearTimeout(timer)
+  }, [ask])
+
   const retry = () => {
     const failed = messages[messages.length - 1]
     if (!failed?.query) return

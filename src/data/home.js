@@ -112,31 +112,9 @@ export const flow = {
   ],
 }
 
-// Example questions from the entaura.ai deck, grouped by team.
+// Two example questions per product, from the TEXOL demo data used on /try.
 export const useCases = [
-  {
-    team: 'Finance',
-    prompts: [
-      { product: 'ask', text: 'Show the policy for customer credit limits.' },
-      { product: 'insight', text: 'Compare sales and collections for the last six months.' },
-      { product: 'insight', text: 'Which promotions paid for their discount?' },
-      { product: 'watch', text: 'Notify finance if overdue invoices increase from the threshold.' },
-    ],
-  },
-  {
-    team: 'Sales',
-    prompts: [
-      { product: 'insight', text: 'Give total sales orders by distributors.' },
-      { product: 'insight', text: 'Which retailers buying biscuits are not buying our beverages?' },
-      { product: 'watch', text: 'Alert me when a distributor reaches 80% of the target required to qualify for the scheme.' },
-    ],
-  },
-  {
-    team: 'Operations',
-    prompts: [
-      { product: 'insight', text: 'Where are last quarter\'s orders getting stuck?' },
-      { product: 'insight', text: 'Which orders are missing focused products?' },
-      { product: 'watch', text: 'Alert me whenever high-value credit sales are held longer than usual.' },
-    ],
-  },
+  { product: 'ask', questions: ['What is the refund request period?', 'What are the differences between TEXOL Start, Growth, and Enterprise?'] },
+  { product: 'insight', questions: ['Which product had the highest revenue in March 2026?', 'What was the total Europe revenue in April 2026?'] },
+  { product: 'watch', questions: ['Which invoice is overdue?', 'Which products are running low on stock?'] },
 ]

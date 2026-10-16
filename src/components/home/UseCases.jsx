@@ -1,11 +1,8 @@
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useCases } from '../../data/home.js'
 import ProductMark from '../ProductMark.jsx'
 
 function UseCases() {
-  const [active, setActive] = useState(0)
-  const current = useCases[active]
-
   return (
     <section className="h-section h-soft h-cases">
       <div className="container">
@@ -13,18 +10,20 @@ function UseCases() {
           <span className="eyebrow">Use cases</span>
           <h2>Questions your teams <span className="muted">can ask today.</span></h2>
         </div>
-        <div className="uc-tabs reveal" role="tablist" aria-label="Teams">
-          {useCases.map((item, index) => (
-            <button key={item.team} role="tab" aria-selected={index === active} className={index === active ? 'active' : ''} onClick={() => setActive(index)}>
-              {item.team}
-            </button>
-          ))}
-        </div>
-        <div className="uc-grid" key={current.team}>
-          {current.prompts.map(prompt => (
-            <article key={prompt.text} className={`uc-card tone-${prompt.product}`}>
-              <ProductMark product={prompt.product} size="sm" />
-              <p>“{prompt.text}”</p>
+        <div className="uc-grid">
+          {useCases.map((group, index) => (
+            <article key={group.product} className={`uc-card tone-${group.product} reveal`} style={{ '--delay': `${index * 80}ms` }}>
+              <ProductMark product={group.product} />
+              <ul>
+                {group.questions.map(question => (
+                  <li key={question}>
+                    <Link to={`/try.html?q=${encodeURIComponent(question)}`}>
+                      <span>“{question}”</span>
+                      <i aria-hidden="true">↗</i>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>
