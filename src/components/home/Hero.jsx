@@ -42,6 +42,18 @@ function Rich({ text, limit = Infinity }) {
 
 const richLength = text => parseRich(text).reduce((total, segment) => total + segment.text.length, 0)
 
+// Splits a word into letters so each can slide on its own.
+function Letters({ word, mode }) {
+  return (
+    <span className={`hx-word ${mode}`}>
+      {[...word].map((letter, index) => (
+        <span key={index} className="hx-ch" style={{ '--i': index }}>{letter === ' ' ? '\u00a0' : letter}</span>
+      ))}
+    </span>
+  )
+}
+
+// The rotating word: letters of the old word slide up and out while the new ones cascade in.
 function Rotator({ reduced }) {
   const [index, setIndex] = useState(0)
   const [previous, setPrevious] = useState(null)
@@ -57,14 +69,14 @@ function Rotator({ reduced }) {
 
   useEffect(() => {
     if (previous === null) return undefined
-    const timer = setTimeout(() => setPrevious(null), 700)
+    const timer = setTimeout(() => setPrevious(null), 1100)
     return () => clearTimeout(timer)
   }, [previous])
 
   return (
     <span className="hx-rot">
-      {previous !== null && <span key={`out-${previous}-${index}`} className="hx-word out">{heroWords[previous]}</span>}
-      <span key={`in-${index}`} className={`hx-word${reduced ? '' : ' in'}`}>{heroWords[index]}</span>
+      {previous !== null && <Letters key={`out-${previous}-${index}`} word={heroWords[previous]} mode="out" />}
+      <Letters key={`in-${index}`} word={heroWords[index]} mode={previous !== null ? 'in' : 'still'} />
     </span>
   )
 }
@@ -312,12 +324,12 @@ function Hero() {
       <HeroRibbon reduced={reduced} />
       <div className="container">
         <div className="hx-top">
-          <span className="hx-badge"><i aria-hidden="true"></i>Enterprise agentic AI platform</span>
-          <h1 aria-label="Transform Enterprise Policies, Documents, and Transactional Data into Actionable Insights">
+          <span className="hx-badge"><i aria-hidden="true"></i>Enterprise Agentic AI Platform</span>
+          <h1 aria-label="Transform enterprise policies, documents, and transactional data into actionable insights.">
             <span aria-hidden="true">
-              <span className="hx-line">Transform Enterprise</span>
-              <span className="hx-line"><Rotator reduced={reduced} /></span>
-              <span className="hx-line">into Actionable Insights</span>
+              <span className="hx-line"><span>Transform enterprise</span></span>
+              <span className="hx-line"><span><Rotator reduced={reduced} /></span></span>
+              <span className="hx-line muted"><span>into actionable insights.</span></span>
             </span>
           </h1>
           <p className="hx-desc">One intelligent layer turning your documents and live ERP data into verified answers.</p>
@@ -325,6 +337,7 @@ function Hero() {
             <Link className="button primary" to="/try.html">Try for free</Link>
             <Link className="button ghost" to="/contact.html">Contact sales</Link>
           </div>
+          <Link className="hx-live" to="/try.html"><i aria-hidden="true"></i>Live demo on sample data — no sign-up</Link>
         </div>
 
         <div className="hx-card" ref={card} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>

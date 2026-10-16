@@ -65,35 +65,41 @@
 }
 @keyframes hx-ribbon-in { from { opacity: 0; } }
 .home .hx-top { display: grid; justify-items: start; max-width: 760px; min-height: 480px; align-content: center; margin-bottom: 72px; }
-.home .hx h1 { margin: 28px 0 24px; font-size: clamp(44px, 5.4vw, 78px); line-height: 1.01; letter-spacing: -.05em; font-weight: 400; }
-.home .hx-line { display: block; animation: hx-up .9s cubic-bezier(.2, .7, .2, 1) both; }
-.home .hx-line:nth-child(2) { animation-delay: .08s; }
-.home .hx-line:nth-child(3) { animation-delay: .16s; }
-@keyframes hx-up { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } }
-.home .hx-rot { position: relative; display: inline-grid; vertical-align: bottom; padding-bottom: .08em; }
-.home .hx-rot::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: .02em; height: 3px; border-radius: 3px;
-  background: linear-gradient(90deg, #2ab7e3, #1d4fd8 30%, #2cc9a6 60%, #a06cf0 85%, #d9539c);
-  transform-origin: left; animation: hx-line 2.6s ease-in-out infinite;
-}
-@keyframes hx-line { 0% { transform: scaleX(0); } 25%, 80% { transform: scaleX(1); } 100% { transform: scaleX(1); opacity: 0; } }
+.home .hx h1 { margin: 30px 0 26px; font-size: clamp(46px, 5.6vw, 82px); line-height: 1; letter-spacing: -.05em; font-weight: 400; }
+/* Each headline line rises out of its own mask. */
+.home .hx-line { display: block; clip-path: inset(-.1em -.2em -.2em -.1em); }
+.home .hx-line > span { display: inline-block; animation: hx-rise 1s cubic-bezier(.2, .8, .2, 1) both; }
+.home .hx-line:nth-child(2) > span { animation-delay: .09s; }
+.home .hx-line:nth-child(3) > span { animation-delay: .18s; }
+.home .hx-line.muted { color: #a1a1aa; }
+@keyframes hx-rise { from { transform: translateY(130%); } }
+@keyframes hx-up { from { opacity: 0; transform: translateY(16px); } }
+
+/* Rotating word: letters cascade through a clean window. */
+.home .hx-rot { display: inline-grid; clip-path: inset(.1em -.2em -.04em 0); }
 .home .hx-word { grid-area: 1 / 1; white-space: nowrap; }
-.home .hx-word.in { animation: hx-word-in .7s cubic-bezier(.2, .7, .2, 1) both; }
-.home .hx-word.out { animation: hx-word-out .55s cubic-bezier(.5, 0, .7, .4) both; }
-@keyframes hx-word-in { from { opacity: 0; transform: translateY(55%) rotateX(-70deg); filter: blur(8px); } }
-@keyframes hx-word-out { to { opacity: 0; transform: translateY(-55%) rotateX(70deg); filter: blur(8px); } }
+.home .hx-ch { display: inline-block; }
+.home .hx-word.in .hx-ch { animation: hx-ch-in .65s calc(var(--i) * 30ms + 260ms) cubic-bezier(.2, .8, .2, 1) both; }
+.home .hx-word.out .hx-ch { animation: hx-ch-out .38s calc(var(--i) * 20ms) cubic-bezier(.5, 0, .75, .3) both; }
+@keyframes hx-ch-in { from { transform: translateY(115%); } }
+@keyframes hx-ch-out { to { transform: translateY(-120%); } }
+
+/* Small live-demo note under the buttons. */
+.home .hx-live { display: inline-flex; align-items: center; gap: 9px; margin-top: 26px; font-size: 13.5px; color: var(--faint); transition: color .2s; animation: hx-up .9s .42s cubic-bezier(.2, .7, .2, 1) both; }
+.home .hx-live:hover { color: var(--text); }
+.home .hx-live i { width: 7px; height: 7px; border-radius: 50%; background: #22a06b; animation: hx-wf-pulse 1.8s ease-out infinite; }
 .home .hx-actions { display: flex; flex-wrap: wrap; gap: 10px; animation: hx-up .9s .3s cubic-bezier(.2, .7, .2, 1) both; }
 .home .hx-actions .button { padding: 13px 24px; font-size: 15px; }
-.home .hx-desc { margin: 0 0 36px; max-width: 470px; font-size: 19px; line-height: 1.55; color: var(--body); animation: hx-up .9s .2s cubic-bezier(.2, .7, .2, 1) both; }
+.home .hx-desc { margin: 0 0 34px; max-width: 460px; font-size: 18px; line-height: 1.55; color: var(--body); animation: hx-up .9s .2s cubic-bezier(.2, .7, .2, 1) both; }
 
 /* "Enterprise agentic AI platform" badge: grainy gradient pill with a slow drift and sheen. */
 .home .hx-badge {
   position: relative; overflow: hidden; isolation: isolate;
   display: inline-flex; align-items: center; gap: 9px;
-  padding: 8px 18px 8px 14px; border-radius: 999px;
-  color: #fff; font-size: 14px; font-weight: 600; letter-spacing: -.005em;
+  padding: 7px 16px 7px 13px; border-radius: 999px;
+  color: #fff; font-size: 13px; font-weight: 600; letter-spacing: -.005em;
   background: linear-gradient(100deg, #5a3fd2, #3f63de 35%, #2f8fe6 65%, #5a3fd2) 0 0 / 300% 100%;
-  box-shadow: 0 10px 28px -14px rgba(60, 80, 220, .7), inset 0 1px 0 rgba(255, 255, 255, .25);
+  box-shadow: 0 8px 22px -14px rgba(60, 80, 220, .55), inset 0 1px 0 rgba(255, 255, 255, .25);
   animation: hx-badge-drift 8s linear infinite, hx-up .9s .2s cubic-bezier(.2, .7, .2, 1) both;
 }
 .home .hx-badge::before {
@@ -557,7 +563,8 @@
 @media (max-width: 760px) {
   .home .hx { padding: 56px 0 56px; }
   .home .hx-top { min-height: 0; margin-bottom: 40px; }
-  .home .hx h1 { margin: 22px 0 18px; }
+  .home .hx h1 { margin: 22px 0 18px; font-size: clamp(40px, 11vw, 52px); }
+  .home .hx-live { margin-top: 20px; }
   .home .hx-ribbon { width: 115vw; right: -30vw; height: 520px; opacity: .55; }
   .home .hx-desc { font-size: 16.5px; margin-bottom: 28px; }
   .home .hx-card { border-radius: 24px; padding: 6px; }
@@ -614,5 +621,5 @@
 @media (prefers-reduced-motion: reduce) {
   .home .h-marquee-track, .home .fl-core.is-active > .orb, .home .fl-core.is-active span { animation: none; }
   .home .reveal { opacity: 1; transform: none; transition: none; }
-  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line, .home .hx-actions, .home .hx-desc, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::after, .home .hx-badge i, .home .hx-card, .home .hx-rot::after, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-facts > div::before, .home .hx-wf * { animation: none !important; }
+  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-live, .home .hx-live i, .home .hx-actions, .home .hx-desc, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::after, .home .hx-badge i, .home .hx-card, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-facts > div::before, .home .hx-wf * { animation: none !important; }
 }

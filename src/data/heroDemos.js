@@ -2,7 +2,7 @@
 // fictional TEXOL company. In answer text, **bold** marks a value and
 // ==highlight== marks the key result.
 
-export const heroWords = ['Policies', 'Documents', 'Transactional Data']
+export const heroWords = ['policies', 'documents', 'transactional data']
 
 export const heroDemos = {
   ask: {
