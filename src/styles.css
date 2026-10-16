@@ -252,7 +252,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .tool-chip.storage i { background: var(--insight-tint); color: var(--insight); }
 .tool-chip.marketing i, .tool-chip.engineering i { background: var(--peach-tint); color: var(--peach); }
 .tool-chip.sales i { background: var(--watch-tint); color: var(--watch); }
-.diagram-core, .knowledge-core {
+.diagram-core {
   position: relative;
   z-index: 2;
   display: grid;
@@ -267,18 +267,55 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   box-shadow: 0 0 0 10px rgba(255, 255, 255, .6), 0 20px 40px -20px rgba(40, 70, 140, .35);
   text-align: center;
 }
-.diagram-core img, .knowledge-core img { width: 42px; height: 27px; object-fit: contain; margin-bottom: 4px; }
-.diagram-core strong, .knowledge-core strong { font-family: var(--display); font-size: 14px; font-weight: 600; line-height: 1.05; }
+.diagram-core img img { width: 42px; height: 27px; object-fit: contain; margin-bottom: 4px; }
+.diagram-core strong strong { font-family: var(--display); font-size: 14px; font-weight: 600; line-height: 1.05; }
 .diagram-core small { display: block; margin-top: 4px; color: var(--faint); font-size: 9px; }
 .diagram-foot { display: flex; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line-strong); color: var(--body); font-size: 11px; }
 .diagram-foot b { display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: var(--ask); }
-.knowledge-flow { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: center; min-height: 260px; margin-top: 16px; }
-.knowledge-node, .knowledge-answer { padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--text); font-size: 13px; z-index: 1; }
-.knowledge-node:nth-child(2) { justify-self: end; }
-.knowledge-node:nth-child(3) { grid-column: 1 / -1; justify-self: center; }
-.knowledge-core { grid-column: 1 / -1; grid-row: 2; width: 112px; height: 112px; }
-.knowledge-answer { grid-column: 1 / -1; justify-self: center; background: var(--ask-tint); border-color: #bfe8de; color: #146e5e; }
-.knowledge-flow::before { content: ""; position: absolute; left: 50%; top: 27px; bottom: 48px; border-left: 1px dashed var(--line-strong); }
+/* Ask: sources orbiting the core (components/KnowledgeDiagram.jsx) */
+.knowledge-diagram { display: flex; flex-direction: column; }
+.orbit { position: relative; width: min(100%, 440px); aspect-ratio: 1; margin: 28px auto 8px; container-type: inline-size; }
+.orbit-ring {
+  position: absolute; left: 50%; top: 50%;
+  width: calc(var(--s) * 1cqw); height: calc(var(--s) * 1cqw);
+  margin: calc(var(--s) * -.5cqw) 0 0 calc(var(--s) * -.5cqw);
+  border-radius: 50%; border: 1px solid rgba(120, 140, 255, .28);
+  transform: rotate(var(--offset));
+  animation: orbit-spin var(--d) linear infinite;
+}
+.orbit-ring.reverse { animation-direction: reverse; border-color: rgba(200, 140, 240, .26); }
+/* A soft spark that rides each ring. */
+.orbit-ring::after {
+  content: ""; position: absolute; left: 50%; top: -3px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%;
+  background: #6f9bff; box-shadow: 0 0 10px 3px rgba(111, 155, 255, .55);
+}
+.orbit-ring.reverse::after { background: #c38cf0; box-shadow: 0 0 10px 3px rgba(195, 140, 240, .5); }
+.orbit-item { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--a)) translateY(calc(var(--s) * -.5cqw)) rotate(calc(var(--a) * -1)); }
+.orbit-logo {
+  position: absolute; left: 0; top: 0; display: grid; place-items: center;
+  --chip: clamp(30px, 10cqw, 44px);
+  width: var(--chip); height: var(--chip); margin: calc(var(--chip) / -2) 0 0 calc(var(--chip) / -2); border-radius: 50%;
+  background: #fff; border: 1px solid var(--line); box-shadow: 0 6px 16px -8px rgba(20, 30, 70, .35);
+  transform: rotate(calc(var(--offset) * -1));
+  animation: orbit-counter var(--d) linear infinite;
+  transition: box-shadow .25s;
+}
+.orbit-ring.reverse .orbit-logo { animation-direction: reverse; }
+.orbit-logo img { width: 55%; height: 55%; object-fit: contain; }
+.orbit-logo:hover { box-shadow: 0 0 0 4px rgba(111, 155, 255, .18), 0 8px 18px -8px rgba(20, 30, 70, .4); }
+/* Ring and logo turn by equal and opposite amounts, so logos stay level. */
+@keyframes orbit-spin { from { transform: rotate(var(--offset)); } to { transform: rotate(calc(var(--offset) + 360deg)); } }
+@keyframes orbit-counter { from { transform: rotate(calc(var(--offset) * -1)); } to { transform: rotate(calc(var(--offset) * -1 - 360deg)); } }
+.orbit-core {
+  position: absolute; left: 50%; top: 50%; width: 22cqw; height: 22cqw; margin: -11cqw 0 0 -11cqw;
+  display: grid; place-items: center; border-radius: 50%; background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, .7), 0 20px 40px -18px rgba(40, 70, 140, .45);
+}
+.orbit-core img { position: relative; width: 62%; }
+.orbit-core i { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(111, 155, 255, .5); animation: orbit-ping 3.2s ease-out infinite; }
+.orbit-core i + i { animation-delay: 1.6s; border-color: rgba(195, 140, 240, .5); }
+@keyframes orbit-ping { from { transform: scale(1); opacity: .9; } to { transform: scale(2.6); opacity: 0; } }
+.knowledge-answer { align-self: center; padding: 10px 14px; border-radius: 12px; font-size: 13px; background: var(--ask-tint); border: 1px solid #bfe8de; color: #146e5e; }
 .analytics-window { margin-top: 24px; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
 .analytics-top { display: flex; justify-content: space-between; color: var(--body); font-size: 12px; }
 .analytics-top b { color: var(--insight); font-weight: 600; font-size: 12px; }
@@ -421,14 +458,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .connector-column.left { grid-row: 2; }
   .connector-column.right { grid-row: 3; }
   .diagram-foot { flex-direction: column; }
-  .knowledge-flow { grid-template-columns: 1fr; }
-  .knowledge-node, .knowledge-node:nth-child(2), .knowledge-node:nth-child(3), .knowledge-answer { grid-column: 1; justify-self: center; }
-  .knowledge-core { grid-row: 4; }
   .analytics-bars { height: 110px; }
   .footer-inner { flex-direction: column; gap: 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .orb::before, .analytics-bars i { animation: none; }
+  .orb::before, .analytics-bars i, .orbit-ring, .orbit-logo, .orbit-core i { animation: none; }
 }

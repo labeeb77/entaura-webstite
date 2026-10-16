@@ -155,7 +155,13 @@ export const connectorColumns = {
   ],
 }
 
-export const knowledgeNodes = ['▤ Policy documents', '◈ ERP records', '▦ Enterprise tools']
+// Ask's connected sources, drawn as logos on three orbits around the core.
+// `size` is the ring diameter as a percentage of the diagram's width.
+export const knowledgeOrbits = [
+  { size: 44, duration: 38, logos: [['sap.svg', 'SAP'], ['googledrive.svg', 'Google Drive'], ['postgresql.svg', 'PostgreSQL'], ['outlook.png', 'Outlook']] },
+  { size: 70, duration: 56, logos: [['oracle.png', 'Oracle'], ['slack.png', 'Slack'], ['mysql.svg', 'MySQL'], ['googledocs.svg', 'Google Docs'], ['zoho.png', 'Zoho'], ['teams.png', 'Microsoft Teams']] },
+  { size: 96, duration: 80, logos: [['azure.png', 'Azure'], ['gmail.svg', 'Gmail'], ['mongodb.svg', 'MongoDB'], ['aws.png', 'AWS'], ['whatsapp.png', 'WhatsApp'], ['basecamp.png', 'Basecamp']] },
+]
 
 export const analyticsKpis = [
   { label: 'Revenue', value: '↑ 18.4%' },
