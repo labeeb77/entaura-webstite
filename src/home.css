@@ -54,9 +54,18 @@
 
 /* ---------- Hero (ElevenLabs-style) ---------- */
 
-.home .hx { padding: 96px 0 72px; }
-.home .hx-top { display: grid; grid-template-columns: 1.7fr 1fr; gap: 48px; align-items: end; margin-bottom: 48px; }
-.home .hx h1 { margin: 0 0 32px; font-size: clamp(40px, 4.7vw, 66px); line-height: 1.02; letter-spacing: -.045em; font-weight: 400; }
+.home .hx { position: relative; isolation: isolate; padding: 112px 0 72px; overflow-x: clip; }
+.home .hx > .container { position: relative; z-index: 1; }
+/* Stripe-style ribbon: runs under the transparent header, fades out to the left and bottom. */
+.home .hx-ribbon {
+  position: absolute; z-index: 0; top: -68px; right: 0; width: 64vw; height: 760px; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 38%), linear-gradient(180deg, #000 70%, transparent 100%);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0, #000 38%), linear-gradient(180deg, #000 70%, transparent 100%); mask-composite: intersect;
+  animation: hx-ribbon-in 1.6s .2s ease both;
+}
+@keyframes hx-ribbon-in { from { opacity: 0; } }
+.home .hx-top { display: grid; justify-items: start; max-width: 760px; min-height: 480px; align-content: center; margin-bottom: 72px; }
+.home .hx h1 { margin: 28px 0 24px; font-size: clamp(44px, 5.4vw, 78px); line-height: 1.01; letter-spacing: -.05em; font-weight: 400; }
 .home .hx-line { display: block; animation: hx-up .9s cubic-bezier(.2, .7, .2, 1) both; }
 .home .hx-line:nth-child(2) { animation-delay: .08s; }
 .home .hx-line:nth-child(3) { animation-delay: .16s; }
@@ -73,10 +82,9 @@
 .home .hx-word.out { animation: hx-word-out .55s cubic-bezier(.5, 0, .7, .4) both; }
 @keyframes hx-word-in { from { opacity: 0; transform: translateY(55%) rotateX(-70deg); filter: blur(8px); } }
 @keyframes hx-word-out { to { opacity: 0; transform: translateY(-55%) rotateX(70deg); filter: blur(8px); } }
-.home .hx-actions { display: flex; flex-wrap: wrap; gap: 10px; animation: hx-up .9s .24s cubic-bezier(.2, .7, .2, 1) both; }
+.home .hx-actions { display: flex; flex-wrap: wrap; gap: 10px; animation: hx-up .9s .3s cubic-bezier(.2, .7, .2, 1) both; }
 .home .hx-actions .button { padding: 13px 24px; font-size: 15px; }
-.home .hx-side { justify-self: end; max-width: 440px; margin-bottom: 40px; display: grid; justify-items: start; gap: 18px; animation: hx-up .9s .3s cubic-bezier(.2, .7, .2, 1) both; }
-.home .hx-desc { margin: 0; font-size: 18px; line-height: 1.55; color: var(--body); }
+.home .hx-desc { margin: 0 0 36px; max-width: 470px; font-size: 19px; line-height: 1.55; color: var(--body); animation: hx-up .9s .2s cubic-bezier(.2, .7, .2, 1) both; }
 
 /* "Enterprise agentic AI platform" badge: grainy gradient pill with a slow drift and sheen. */
 .home .hx-badge {
@@ -530,8 +538,6 @@
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1080px) {
-  .home .hx-top { grid-template-columns: 1fr; gap: 0; }
-  .home .hx-side { justify-self: start; margin-bottom: 0; }
   .home .h-showcase { grid-template-columns: 1fr; }
   .home .h-showcase-nav { position: static; grid-template-columns: repeat(3, 1fr); }
   .home .sn-detail { display: none; }
@@ -550,10 +556,10 @@
 
 @media (max-width: 760px) {
   .home .hx { padding: 56px 0 56px; }
-  .home .hx-top { margin-bottom: 32px; }
-  .home .hx h1 { margin-bottom: 24px; }
-  .home .hx-side { margin-top: 28px; }
-  .home .hx-desc { font-size: 16.5px; }
+  .home .hx-top { min-height: 0; margin-bottom: 40px; }
+  .home .hx h1 { margin: 22px 0 18px; }
+  .home .hx-ribbon { width: 115vw; right: -30vw; height: 520px; opacity: .55; }
+  .home .hx-desc { font-size: 16.5px; margin-bottom: 28px; }
   .home .hx-card { border-radius: 24px; padding: 6px; }
   .home .hx-tabs button { height: 48px; }
   .home .hx-tabs .pmark { --pm: 16px; }
@@ -608,5 +614,5 @@
 @media (prefers-reduced-motion: reduce) {
   .home .h-marquee-track, .home .fl-core.is-active > .orb, .home .fl-core.is-active span { animation: none; }
   .home .reveal { opacity: 1; transform: none; transition: none; }
-  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line, .home .hx-actions, .home .hx-side, .home .hx-badge, .home .hx-badge::after, .home .hx-badge i, .home .hx-card, .home .hx-rot::after, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-facts > div::before, .home .hx-wf * { animation: none !important; }
+  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line, .home .hx-actions, .home .hx-desc, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::after, .home .hx-badge i, .home .hx-card, .home .hx-rot::after, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-facts > div::before, .home .hx-wf * { animation: none !important; }
 }

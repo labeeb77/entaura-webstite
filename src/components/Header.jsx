@@ -11,6 +11,7 @@ function Header() {
   const { pathname, hash, key } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdowns, setDropdowns] = useState(closedDropdowns)
+  const [atTop, setAtTop] = useState(true)
   const previousPath = useRef(pathname)
 
   const isHome = pathname === '/' || pathname === '/index.html'
@@ -34,10 +35,17 @@ function Header() {
     return () => document.removeEventListener('click', closeOnOutsideClick)
   }, [])
 
+  useEffect(() => {
+    const update = () => setAtTop(window.scrollY < 8)
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    return () => window.removeEventListener('scroll', update)
+  }, [])
+
   const toggleDropdown = name => setDropdowns(current => ({ ...current, [name]: !current[name] }))
 
   return (
-    <header className="topbar">
+    <header className={`topbar${isHome && atTop && !menuOpen ? ' at-top' : ''}`}>
       <nav className="container nav" aria-label={isHome || isContact ? 'Main navigation' : undefined}>
         <Brand />
         <button

@@ -4,6 +4,7 @@ import { heroDemos, heroWords, notifyChannels } from '../../data/heroDemos.js'
 import { useReducedMotion } from '../../hooks/useReducedMotion.js'
 import ChannelIcon from '../ChannelIcon.jsx'
 import ProductMark from '../ProductMark.jsx'
+import HeroRibbon from './HeroRibbon.jsx'
 import InsightChart from './InsightChart.jsx'
 
 const products = ['ask', 'insight', 'watch']
@@ -308,24 +309,21 @@ function Hero() {
 
   return (
     <section className="hx">
+      <HeroRibbon reduced={reduced} />
       <div className="container">
         <div className="hx-top">
-          <div className="hx-copy">
-            <h1 aria-label="Transform Enterprise Policies, Documents, and Transactional Data into Actionable Insights">
-              <span aria-hidden="true">
-                <span className="hx-line">Transform Enterprise</span>
-                <span className="hx-line"><Rotator reduced={reduced} /></span>
-                <span className="hx-line">into Actionable Insights</span>
-              </span>
-            </h1>
-            <div className="hx-actions">
-              <Link className="button primary" to="/try.html">Try for free</Link>
-              <Link className="button ghost" to="/contact.html">Contact sales</Link>
-            </div>
-          </div>
-          <div className="hx-side">
-            <span className="hx-badge"><i aria-hidden="true"></i>Enterprise agentic AI platform</span>
-            <p className="hx-desc">One intelligent layer turning your documents and live ERP data into verified answers.</p>
+          <span className="hx-badge"><i aria-hidden="true"></i>Enterprise agentic AI platform</span>
+          <h1 aria-label="Transform Enterprise Policies, Documents, and Transactional Data into Actionable Insights">
+            <span aria-hidden="true">
+              <span className="hx-line">Transform Enterprise</span>
+              <span className="hx-line"><Rotator reduced={reduced} /></span>
+              <span className="hx-line">into Actionable Insights</span>
+            </span>
+          </h1>
+          <p className="hx-desc">One intelligent layer turning your documents and live ERP data into verified answers.</p>
+          <div className="hx-actions">
+            <Link className="button primary" to="/try.html">Try for free</Link>
+            <Link className="button ghost" to="/contact.html">Contact sales</Link>
           </div>
         </div>
 
