@@ -145,6 +145,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .nav-mega a:hover, .nav-mega a:focus { background: var(--soft); }
 .nav-mega .orb { flex: none; width: 32px; height: 32px; }
 .nav-mega strong, .nav-mega small { display: block; }
+.nav-mega .pmark { --pm: 15px; margin-bottom: 2px; }
 .nav-mega strong { color: var(--text); font-size: 14px; font-weight: 600; }
 .nav-mega small { margin-top: 2px; color: var(--body); font-size: 12.5px; }
 .solutions-dropdown .nav-mega { display: none !important; }
