@@ -68,21 +68,133 @@ function Rotator({ reduced }) {
   )
 }
 
+// Ask: the key facts as tiles, and the documents they came from.
+function AskResult({ item }) {
+  return (
+    <div className="hx-ask">
+      <div className="hx-facts">
+        {item.facts.map((fact, index) => (
+          <div key={fact.label} style={{ '--d': `${index * 90}ms` }}>
+            <strong>{fact.value}</strong>
+            <span>{fact.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="hx-docs">
+        {item.sources.map((source, index) => {
+          const [name, section] = source.replace(/^\[\d+\]\s*/, '').split(' · ')
+          return (
+            <span key={source} style={{ '--d': `${300 + index * 90}ms` }}>
+              <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 2.5h6.5L15 6v11.5H5z M11.5 2.5V6H15" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>
+              <b>{name}</b>{section && <small>{section}</small>}
+              <i>{index + 1}</i>
+            </span>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function InsightResult({ item }) {
+  return (
+    <div className="hx-insight">
+      <div className="hx-facts">
+        {item.kpis.map((kpi, index) => (
+          <div key={kpi.label} className={kpi.up ? 'up' : ''} style={{ '--d': `${index * 90}ms` }}>
+            <strong>{kpi.value}</strong>
+            <span>{kpi.label}</span>
+          </div>
+        ))}
+      </div>
+      <InsightChart chart={item.chart} />
+    </div>
+  )
+}
+
+// Watch: a line of stock on hand that crosses the minimum, then the projection.
+function Trend({ trend }) {
+  const width = 320
+  const height = 100
+  const points = [...trend.history, ...trend.projected.slice(1)]
+  const top = Math.max(...points) * 1.1
+  const x = index => (index / (points.length - 1)) * width
+  const y = value => height - (value / top) * height
+  const line = list => list.map((value, index) => `${index ? 'L' : 'M'}${x(index).toFixed(1)} ${y(value).toFixed(1)}`).join(' ')
+  const past = line(trend.history)
+  const offset = trend.history.length - 1
+  const future = trend.projected.map((value, index) => `${index ? 'L' : 'M'}${x(offset + index).toFixed(1)} ${y(value).toFixed(1)}`).join(' ')
+  const now = { x: x(offset), y: y(trend.history[offset]) }
+
+  const pct = (value, total) => `${(value / total) * 100}%`
+
+  return (
+    <div className="hx-trend">
+      <div className="hx-trend-plot">
+        <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="hx-trend-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="var(--watch)" stopOpacity=".22" />
+              <stop offset="1" stopColor="var(--watch)" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <line className="min" x1="0" x2={width} y1={y(trend.minimum)} y2={y(trend.minimum)} />
+          <path className="area" d={`${past} L${now.x} ${height} L0 ${height} Z`} fill="url(#hx-trend-fill)" />
+          <path className="past" d={past} />
+          <path className="future" d={future} />
+        </svg>
+        <small className="hx-trend-min" style={{ top: pct(y(trend.minimum), height) }}>Minimum {trend.minimum}</small>
+        <i className="hx-trend-now" style={{ left: pct(now.x, width), top: pct(now.y, height) }}></i>
+      </div>
+      <div className="hx-trend-axis">
+        <span>6 days ago</span>
+        <span style={{ left: pct(now.x, width) }}>Today</span>
+        <span>+4 days</span>
+      </div>
+    </div>
+  )
+}
+
+function Timeline({ timeline }) {
+  const last = timeline.steps[timeline.steps.length - 1].day
+  return (
+    <div className="hx-timeline">
+      <div className="hx-tl-track">
+        <i className="hx-tl-fill" style={{ width: `${(timeline.steps[1].day / last) * 100}%` }}></i>
+        <i className="hx-tl-over" style={{ left: `${(timeline.steps[1].day / last) * 100}%` }}></i>
+        {timeline.steps.map(step => (
+          <span key={step.label} style={{ left: `${(step.day / last) * 100}%` }}>
+            <b></b>
+            <strong>{step.label}</strong>
+            <small>{step.date}</small>
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function WatchResult({ item, notify, onNotify, onChoose }) {
+  const visual = item.trend || item.timeline
   return (
     <div className="hx-watch">
-      <ul className="hx-items">
-        {item.items.map(entry => (
-          <li key={entry.name}>
+      <ul className={`hx-gauges${item.items.length === 1 ? ' one' : ''}`}>
+        {item.items.map((entry, index) => (
+          <li key={entry.name} style={{ '--d': `${index * 90}ms` }}>
+            <svg className="hx-ring" viewBox="0 0 48 48" aria-hidden="true">
+              <circle cx="24" cy="24" r="19" pathLength="100" />
+              <circle className="val" cx="24" cy="24" r="19" pathLength="100" style={{ '--off': 100 - entry.level * 100 }} />
+              <text x="24" y="28" textAnchor="middle">{entry.ring}</text>
+            </svg>
             <div><strong>{entry.name}</strong><small>{entry.note}</small></div>
-            <span className="hx-level"><i style={{ width: `${entry.level * 100}%` }}></i></span>
             <b>{entry.value}</b>
           </li>
         ))}
       </ul>
-      <div className="hx-alert">
-        <span className="hx-alert-icon" aria-hidden="true">!</span>
-        <p><strong>Important.</strong> <Rich text={item.alert} /></p>
+      <div className="hx-visual">
+        <span className="hx-visual-title">{visual.title}</span>
+        {item.trend ? <Trend trend={item.trend} /> : <Timeline timeline={item.timeline} />}
+        <p><Rich text={visual.caption} /></p>
       </div>
       {notify.state === 'idle' && (
         <button className="hx-notify" onClick={onNotify}>
@@ -194,8 +306,7 @@ function Hero() {
     if (element) element.scrollTop = element.scrollHeight
   }, [phase, streamed])
 
-  const showQuestion = phase !== 'typing'
-  const inputText = phase === 'typing' ? item.q.slice(0, typed) : ''
+  const typing = phase === 'typing'
   const finished = phase === 'done'
 
   return (
@@ -215,9 +326,10 @@ function Hero() {
               <Link className="button ghost" to="/contact.html">Contact sales</Link>
             </div>
           </div>
-          <p className="hx-desc">
-            One intelligent layer connecting enterprise knowledge with business action. entaura.ai blends your policy documents with live ERP and transactional data, so teams can ask, analyse, and watch with answers they can verify.
-          </p>
+          <div className="hx-side">
+            <span className="hx-badge"><i aria-hidden="true"></i>Enterprise agentic AI platform</span>
+            <p className="hx-desc">One intelligent layer turning your documents and live ERP data into verified answers.</p>
+          </div>
         </div>
 
         <div className="hx-card" ref={card} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
@@ -232,19 +344,20 @@ function Hero() {
 
           <div className={`hx-stage tone-${key}`}>
             <div className="hx-log" ref={log} key={`${key}-${questionIndex}-${run}`}>
-              {showQuestion && <p className="hx-q">{item.q}</p>}
+              {(!typing || typed > 0) && (
+                <p className={`hx-q${typing ? ' typing' : ''}`}>
+                  {typing ? item.q.slice(0, typed) : item.q}
+                  {typing && live && <i className="hx-caret"></i>}
+                </p>
+              )}
               {phase === 'thinking' && (
                 <div className="hx-thinking"><i></i><i></i><i></i><span>{thinkingText[key]}</span></div>
               )}
               {(phase === 'answer' || finished) && (
                 <div className="hx-a">
                   <p><Rich text={item.answer} limit={finished ? Infinity : streamed} /></p>
-                  {finished && key === 'ask' && (
-                    <div className="hx-extra">
-                      <div className="hx-sources">{item.sources.map(source => <em key={source}>{source}</em>)}</div>
-                    </div>
-                  )}
-                  {finished && key === 'insight' && <div className="hx-extra"><InsightChart chart={item.chart} /></div>}
+                  {finished && key === 'ask' && <div className="hx-extra"><AskResult item={item} /></div>}
+                  {finished && key === 'insight' && <div className="hx-extra"><InsightResult item={item} /></div>}
                   {finished && key === 'watch' && (
                     <div className="hx-extra">
                       <WatchResult
@@ -264,12 +377,6 @@ function Hero() {
                 {demo.questions.map((entry, index) => (
                   <button key={entry.q} className={index === questionIndex ? 'on' : ''} onClick={() => play(product, index, true)}>{entry.q}</button>
                 ))}
-              </div>
-              <div className={`hx-input${phase === 'typing' && typed > 0 ? ' typing' : ''}`}>
-                <span className={inputText ? 'text' : 'placeholder'}>{inputText || 'Ask a question…'}{phase === 'typing' && live && <i className="hx-caret"></i>}</span>
-                <Link className="hx-send" to="/try.html" aria-label="Try it with your own question">
-                  <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M10 15V5M5 10l5-5 5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </Link>
               </div>
               <div className="hx-note">
                 <span>Sample data · TEXOL demo</span>
