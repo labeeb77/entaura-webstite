@@ -87,7 +87,7 @@
 }
 .home .hx-tabs button { position: relative; z-index: 1; display: grid; place-items: center; min-width: 0; padding: 0 6px; height: 60px; border: 0; background: none; cursor: pointer; border-radius: 24px; opacity: .75; transition: opacity .3s; }
 .home .hx-tabs button:hover, .home .hx-tabs button.on { opacity: 1; }
-.home .hx-tabs .pmark { --pm: 20px; }
+.home .hx-tabs .pmark { --pm: 21px; }
 
 .home .hx-stage {
   position: relative; display: flex; flex-direction: column;
@@ -433,7 +433,7 @@
   .home .hx-desc { font-size: 16.5px; margin-top: 24px; }
   .home .hx-card { border-radius: 24px; padding: 6px; }
   .home .hx-tabs button { height: 48px; }
-  .home .hx-tabs .pmark { --pm: 15px; }
+  .home .hx-tabs .pmark { --pm: 16px; }
   .home .hx-stage { height: 600px; border-radius: 20px; }
   .home .ic-copy { display: none; }
   .home .ic-axis small:nth-child(even) { display: none; }
