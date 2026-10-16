@@ -134,39 +134,43 @@ function SetupRow({ label, value, shown, icon }) {
   )
 }
 
-function Phone({ channel, alert, shown }) {
-  const whatsapp = channel.key === 'whatsapp'
+// One cropped phone on a lock screen; alerts arrive as glass notifications.
+function LockScreen({ flow, step }) {
+  const { alert } = flow
+  const detail = alert.rows.slice(0, 2).map(row => row.value).join(' · ')
+  const arrived = notifyChannels.filter((_, index) => step >= 5 + index).reverse()
+  const island = step >= 5 ? 'got' : step === 4 ? 'live' : ''
+
   return (
-    <div className="hx-wf-device">
-      <div className={`hx-wf-app${shown ? ' got' : ''}`}>
-        <ChannelIcon channel={channel.key} size={22} />
-        <span>{channel.name}</span>
-        <b>1</b>
-      </div>
-      <div className={`hx-phone ${channel.key}`}>
-        <div className="hx-phone-bar"><span>9:41</span><i></i></div>
-        <div className="hx-phone-head">
-          <img src="/assets/entaura-mark.png" alt="" />
-          <div><strong>{whatsapp ? 'entaura.ai' : 'entaura watch'}</strong><small>{whatsapp ? 'Business account' : 'bot'}</small></div>
-        </div>
-        <div className="hx-phone-chat">
-          <span className="hx-phone-day">Today</span>
-          {shown && (
-            <div className="hx-phone-msg">
-              <div className="hx-phone-brand"><img src="/assets/entaura-mark.png" alt="" />entaura.ai</div>
-              <div className="hx-phone-title">
-                <i aria-hidden="true"><svg viewBox="0 0 20 20" width="12" height="12"><path d="M10 2.5a5 5 0 0 0-5 5v3l-1.5 2.5h13L15 10.5v-3a5 5 0 0 0-5-5zM8 15.5a2 2 0 0 0 4 0" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></i>
-                <strong>{alert.title}</strong>
+    <div className="hx-ls" aria-label={`${alert.title}, sent to ${notifyChannels.map(channel => channel.name).join(' and ')}`} role="img">
+      <div className="hx-ls-phone">
+        <div className="hx-ls-screen">
+          <div className="hx-ls-status">
+            <span>9:41</span>
+            <span className="hx-ls-icons" aria-hidden="true"><i></i><i></i><b></b></span>
+          </div>
+          <div className={`hx-ls-island ${island}`}>
+            <i></i>
+            <span>{step >= 5 ? 'Alert sent' : 'Watching…'}</span>
+          </div>
+          <div className="hx-ls-clock">
+            <small>Thursday 16 October</small>
+            <strong>9:41</strong>
+          </div>
+          <div className="hx-ls-stack">
+            {arrived.map((channel, position) => (
+              <div className="hx-ls-note" key={channel.key} style={{ '--pos': position }}>
+                <div className="hx-ls-note-head">
+                  <ChannelIcon channel={channel.key} size={18} />
+                  <span>{channel.name}</span>
+                  <time>now</time>
+                </div>
+                <strong>entaura.ai</strong>
+                <p><b>{alert.title}</b> · {detail}</p>
               </div>
-              <dl>
-                {alert.rows.map(row => <div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}
-              </dl>
-              <span className="hx-phone-btn">View details</span>
-              <time>{alert.time}</time>
-            </div>
-          )}
+            ))}
+          </div>
         </div>
-        <div className="hx-phone-input"><span>Message</span><i></i></div>
       </div>
     </div>
   )
@@ -218,11 +222,7 @@ function WatchFlow({ flow, live, reduced, onDone }) {
           </small>
         </div>
       </div>
-      <div className="hx-wf-phones">
-        {notifyChannels.map((channel, index) => (
-          <Phone key={channel.key} channel={channel} alert={flow.alert} shown={step >= 5 + index} />
-        ))}
-      </div>
+      <LockScreen flow={flow} step={step} />
     </div>
   )
 }
