@@ -324,7 +324,7 @@ function Hero() {
       <HeroRibbon reduced={reduced} />
       <div className="container">
         <div className="hx-top">
-          <span className="hx-badge"><i aria-hidden="true"></i>Enterprise Agentic AI Platform</span>
+          <span className="hx-badge"><img src="/assets/entaura-mark.png" alt="" />Enterprise Agentic AI Platform</span>
           <h1 aria-label="Transform enterprise policies, documents, and transactional data into actionable insights.">
             <span aria-hidden="true">
               <span className="hx-line"><span>Transform enterprise</span></span>

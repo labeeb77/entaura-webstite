@@ -92,29 +92,29 @@
 .home .hx-actions .button { padding: 13px 24px; font-size: 15px; }
 .home .hx-desc { margin: 0 0 34px; max-width: 460px; font-size: 18px; line-height: 1.55; color: var(--body); animation: hx-up .9s .2s cubic-bezier(.2, .7, .2, 1) both; }
 
-/* "Enterprise agentic AI platform" badge: grainy gradient pill with a slow drift and sheen. */
+/* Badge: white pill whose hairline border carries a travelling light in the logo colours. */
+@property --hx-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .home .hx-badge {
-  position: relative; overflow: hidden; isolation: isolate;
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 7px 16px 7px 13px; border-radius: 999px;
-  color: #fff; font-size: 13px; font-weight: 600; letter-spacing: -.005em;
-  background: linear-gradient(100deg, #5a3fd2, #3f63de 35%, #2f8fe6 65%, #5a3fd2) 0 0 / 300% 100%;
-  box-shadow: 0 8px 22px -14px rgba(60, 80, 220, .55), inset 0 1px 0 rgba(255, 255, 255, .25);
-  animation: hx-badge-drift 8s linear infinite, hx-up .9s .2s cubic-bezier(.2, .7, .2, 1) both;
+  position: relative; display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px 6px 9px; border-radius: 999px; background: #fff;
+  color: #111; font-size: 13px; font-weight: 500; letter-spacing: -.005em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+  animation: hx-up .9s .2s cubic-bezier(.2, .7, .2, 1) both;
 }
-.home .hx-badge::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .35; mix-blend-mode: overlay;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+.home .hx-badge img { width: 20px; height: 14px; object-fit: contain; }
+.home .hx-badge::before, .home .hx-badge::after {
+  content: ""; position: absolute; inset: 0; padding: 1px; border-radius: inherit; pointer-events: none;
+  background: conic-gradient(from var(--hx-a), var(--line-strong) 0 62%, #1d4fd8 68%, #2ab7e3 74%, #2cc9a6 80%, #a06cf0 86%, #d9539c 92%, var(--line-strong) 98%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: hx-badge-spin 4.5s linear infinite;
 }
+/* A blurred copy of the ring gives the travelling light a soft glow. */
 .home .hx-badge::after {
-  content: ""; position: absolute; top: 0; bottom: 0; left: -40%; width: 30%; z-index: -1;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent);
-  transform: skewX(-20deg); animation: hx-badge-sheen 4.5s 1.2s ease-in-out infinite;
+  inset: -2px; padding: 3px; filter: blur(4px); opacity: .6;
+  background: conic-gradient(from var(--hx-a), transparent 0 62%, #1d4fd8 68%, #2ab7e3 74%, #2cc9a6 80%, #a06cf0 86%, #d9539c 92%, transparent 98%);
 }
-.home .hx-badge i { width: 7px; height: 7px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 0 rgba(255, 255, 255, .7); animation: hx-badge-pulse 2.2s ease-out infinite; }
-@keyframes hx-badge-drift { to { background-position: 150% 0; } }
-@keyframes hx-badge-sheen { 0% { left: -40%; } 45%, 100% { left: 130%; } }
-@keyframes hx-badge-pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, .7); } 70%, 100% { box-shadow: 0 0 0 7px rgba(255, 255, 255, 0); } }
+@keyframes hx-badge-spin { to { --hx-a: 360deg; } }
 
 /* Product card */
 .home .hx-card { border-radius: 32px; background: var(--card); padding: 8px; border: 1px solid var(--line); animation: hx-up 1s .35s cubic-bezier(.2, .7, .2, 1) both; }
@@ -621,5 +621,5 @@
 @media (prefers-reduced-motion: reduce) {
   .home .h-marquee-track, .home .fl-core.is-active > .orb, .home .fl-core.is-active span { animation: none; }
   .home .reveal { opacity: 1; transform: none; transition: none; }
-  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-live, .home .hx-live i, .home .hx-actions, .home .hx-desc, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::after, .home .hx-badge i, .home .hx-card, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-facts > div::before, .home .hx-wf * { animation: none !important; }
+  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-live, .home .hx-live i, .home .hx-actions, .home .hx-desc, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::before, .home .hx-badge::after, .home .hx-card, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-facts > div::before, .home .hx-wf * { animation: none !important; }
 }
