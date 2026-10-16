@@ -15,7 +15,7 @@ const thinkingText = {
   watch: 'Checking live levels against your limits…',
 }
 // How long a finished answer stays before the demo moves on.
-const holdFor = { ask: 4200, insight: 6500, watch: 6200 }
+const holdFor = { ask: 4200, insight: 6500, watch: 4500 }
 
 // Splits "**bold**" and "==highlight==" markers into segments.
 function parseRich(text) {
@@ -112,112 +112,117 @@ function InsightResult({ item }) {
   )
 }
 
-// Watch: a line of stock on hand that crosses the minimum, then the projection.
-function Trend({ trend }) {
-  const width = 320
-  const height = 100
-  const points = [...trend.history, ...trend.projected.slice(1)]
-  const top = Math.max(...points) * 1.1
-  const x = index => (index / (points.length - 1)) * width
-  const y = value => height - (value / top) * height
-  const line = list => list.map((value, index) => `${index ? 'L' : 'M'}${x(index).toFixed(1)} ${y(value).toFixed(1)}`).join(' ')
-  const past = line(trend.history)
-  const offset = trend.history.length - 1
-  const future = trend.projected.map((value, index) => `${index ? 'L' : 'M'}${x(offset + index).toFixed(1)} ${y(value).toFixed(1)}`).join(' ')
-  const now = { x: x(offset), y: y(trend.history[offset]) }
+// Watch: set up a watch (what, when, how), then the alert lands on each channel.
+const flowDelays = [0, 550, 550, 650, 1500, 750, 900]
+const doneStep = flowDelays.length
 
-  const pct = (value, total) => `${(value / total) * 100}%`
+const icons = {
+  what: <svg viewBox="0 0 20 20" width="16" height="16"><ellipse cx="10" cy="5" rx="6" ry="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M4 5v10c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V5M4 10c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>,
+  when: <svg viewBox="0 0 20 20" width="16" height="16"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M10 6v4l2.5 2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>,
+  how: <svg viewBox="0 0 20 20" width="16" height="16"><path d="M3 5h14M6 10h8M8.5 15h3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>,
+}
 
+function SetupRow({ label, value, shown, icon }) {
   return (
-    <div className="hx-trend">
-      <div className="hx-trend-plot">
-        <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="hx-trend-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="var(--watch)" stopOpacity=".22" />
-              <stop offset="1" stopColor="var(--watch)" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <line className="min" x1="0" x2={width} y1={y(trend.minimum)} y2={y(trend.minimum)} />
-          <path className="area" d={`${past} L${now.x} ${height} L0 ${height} Z`} fill="url(#hx-trend-fill)" />
-          <path className="past" d={past} />
-          <path className="future" d={future} />
-        </svg>
-        <small className="hx-trend-min" style={{ top: pct(y(trend.minimum), height) }}>Minimum {trend.minimum}</small>
-        <i className="hx-trend-now" style={{ left: pct(now.x, width), top: pct(now.y, height) }}></i>
+    <li className={shown ? 'on' : ''}>
+      <span className="hx-wf-icon" aria-hidden="true">{icon}</span>
+      <div><small>{label}</small><strong>{shown ? value : '—'}</strong></div>
+      <i className="hx-wf-check" aria-hidden="true">
+        <svg viewBox="0 0 16 16" width="12" height="12"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </i>
+    </li>
+  )
+}
+
+function Phone({ channel, alert, shown }) {
+  const whatsapp = channel.key === 'whatsapp'
+  return (
+    <div className="hx-wf-device">
+      <div className={`hx-wf-app${shown ? ' got' : ''}`}>
+        <ChannelIcon channel={channel.key} size={22} />
+        <span>{channel.name}</span>
+        <b>1</b>
       </div>
-      <div className="hx-trend-axis">
-        <span>6 days ago</span>
-        <span style={{ left: pct(now.x, width) }}>Today</span>
-        <span>+4 days</span>
+      <div className={`hx-phone ${channel.key}`}>
+        <div className="hx-phone-bar"><span>9:41</span><i></i></div>
+        <div className="hx-phone-head">
+          <img src="/assets/entaura-mark.png" alt="" />
+          <div><strong>{whatsapp ? 'entaura.ai' : 'entaura watch'}</strong><small>{whatsapp ? 'Business account' : 'bot'}</small></div>
+        </div>
+        <div className="hx-phone-chat">
+          <span className="hx-phone-day">Today</span>
+          {shown && (
+            <div className="hx-phone-msg">
+              <div className="hx-phone-brand"><img src="/assets/entaura-mark.png" alt="" />entaura.ai</div>
+              <div className="hx-phone-title">
+                <i aria-hidden="true"><svg viewBox="0 0 20 20" width="12" height="12"><path d="M10 2.5a5 5 0 0 0-5 5v3l-1.5 2.5h13L15 10.5v-3a5 5 0 0 0-5-5zM8 15.5a2 2 0 0 0 4 0" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></i>
+                <strong>{alert.title}</strong>
+              </div>
+              <dl>
+                {alert.rows.map(row => <div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}
+              </dl>
+              <span className="hx-phone-btn">View details</span>
+              <time>{alert.time}</time>
+            </div>
+          )}
+        </div>
+        <div className="hx-phone-input"><span>Message</span><i></i></div>
       </div>
     </div>
   )
 }
 
-function Timeline({ timeline }) {
-  const last = timeline.steps[timeline.steps.length - 1].day
+function WatchFlow({ flow, live, reduced, onDone }) {
+  const [typed, setTyped] = useState(reduced ? flow.prompt.length : 0)
+  const [step, setStep] = useState(reduced ? doneStep : 0)
+
+  useEffect(() => {
+    if (!live || step >= doneStep) return undefined
+    let timer
+    if (step > 0) timer = setTimeout(() => setStep(step + 1), flowDelays[step])
+    else if (typed < flow.prompt.length) timer = setTimeout(() => setTyped(typed + 1), typeSpeed)
+    else timer = setTimeout(() => setStep(1), 350)
+    return () => clearTimeout(timer)
+  }, [live, step, typed, flow.prompt.length])
+
+  useEffect(() => {
+    if (step >= doneStep) onDone()
+  }, [step, onDone])
+
+  const status = step < 4 ? 'draft' : step === 4 ? 'watching' : 'met'
+
   return (
-    <div className="hx-timeline">
-      <div className="hx-tl-track">
-        <i className="hx-tl-fill" style={{ width: `${(timeline.steps[1].day / last) * 100}%` }}></i>
-        <i className="hx-tl-over" style={{ left: `${(timeline.steps[1].day / last) * 100}%` }}></i>
-        {timeline.steps.map(step => (
-          <span key={step.label} style={{ left: `${(step.day / last) * 100}%` }}>
-            <b></b>
-            <strong>{step.label}</strong>
-            <small>{step.date}</small>
+    <div className="hx-wf">
+      <div className="hx-wf-setup">
+        <div className="hx-wf-top">
+          <strong>New watch</strong>
+          <span className={`hx-wf-status ${status}`}>
+            <i></i>{status === 'draft' ? 'Draft' : status === 'watching' ? 'Enabled · watching' : 'Condition met'}
           </span>
+        </div>
+        <p className="hx-wf-prompt">
+          {flow.prompt.slice(0, typed)}
+          {step === 0 && live && <i className="hx-caret"></i>}
+        </p>
+        <ul className="hx-wf-rows">
+          <SetupRow label="What to watch" value={flow.what} shown={step >= 1} icon={icons.what} />
+          <SetupRow label="When to check" value={flow.when} shown={step >= 2} icon={icons.when} />
+          <SetupRow label="How to decide" value={flow.how} shown={step >= 3} icon={icons.how} />
+        </ul>
+        <div className={`hx-wf-run ${status}`}>
+          <span className="hx-wf-scan"><i></i></span>
+          <small>
+            {status === 'draft' && 'Waiting for setup'}
+            {status === 'watching' && 'Checking live data against your logic…'}
+            {status === 'met' && `Alert sent to ${notifyChannels.length} channels`}
+          </small>
+        </div>
+      </div>
+      <div className="hx-wf-phones">
+        {notifyChannels.map((channel, index) => (
+          <Phone key={channel.key} channel={channel} alert={flow.alert} shown={step >= 5 + index} />
         ))}
       </div>
-    </div>
-  )
-}
-
-function WatchResult({ item, notify, onNotify, onChoose }) {
-  const visual = item.trend || item.timeline
-  return (
-    <div className="hx-watch">
-      <ul className={`hx-gauges${item.items.length === 1 ? ' one' : ''}`}>
-        {item.items.map((entry, index) => (
-          <li key={entry.name} style={{ '--d': `${index * 90}ms` }}>
-            <svg className="hx-ring" viewBox="0 0 48 48" aria-hidden="true">
-              <circle cx="24" cy="24" r="19" pathLength="100" />
-              <circle className="val" cx="24" cy="24" r="19" pathLength="100" style={{ '--off': 100 - entry.level * 100 }} />
-              <text x="24" y="28" textAnchor="middle">{entry.ring}</text>
-            </svg>
-            <div><strong>{entry.name}</strong><small>{entry.note}</small></div>
-            <b>{entry.value}</b>
-          </li>
-        ))}
-      </ul>
-      <div className="hx-visual">
-        <span className="hx-visual-title">{visual.title}</span>
-        {item.trend ? <Trend trend={item.trend} /> : <Timeline timeline={item.timeline} />}
-        <p><Rich text={visual.caption} /></p>
-      </div>
-      {notify.state === 'idle' && (
-        <button className="hx-notify" onClick={onNotify}>
-          <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M10 2.5a5 5 0 0 0-5 5v3l-1.5 2.5h13L15 10.5v-3a5 5 0 0 0-5-5zM8 15.5a2 2 0 0 0 4 0" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          {item.notify}
-        </button>
-      )}
-      {notify.state === 'choose' && (
-        <div className="hx-channels">
-          <span>Send alerts to</span>
-          {notifyChannels.map(channel => (
-            <button key={channel.key} onClick={() => onChoose(channel.key)} className={notify.highlight === channel.key ? 'hint' : ''}>
-              <ChannelIcon channel={channel.key} />{channel.name}
-            </button>
-          ))}
-        </div>
-      )}
-      {notify.state === 'done' && (
-        <div className="hx-toast">
-          <ChannelIcon channel={notify.channel} />
-          <span><strong>Watching.</strong> You’ll get an alert on {notifyChannels.find(channel => channel.key === notify.channel).name} as soon as this happens.</span>
-        </div>
-      )}
     </div>
   )
 }
@@ -232,15 +237,16 @@ function Hero() {
   const [phase, setPhase] = useState(reduced ? 'done' : 'typing')
   const [typed, setTyped] = useState(0)
   const [streamed, setStreamed] = useState(0)
-  const [notify, setNotify] = useState({ state: 'idle' })
   const [auto, setAuto] = useState(true)
   const [inView, setInView] = useState(false)
   const [paused, setPaused] = useState(false)
 
   const key = products[product]
   const demo = heroDemos[key]
-  const item = demo.questions[questionIndex]
-  const answerLength = richLength(item.answer)
+  const entries = demo.questions || demo.flows
+  const item = entries[questionIndex]
+  const question = item.q || ''
+  const answerLength = item.answer ? richLength(item.answer) : 0
   const live = inView && !reduced
 
   const play = useCallback((nextProduct, nextQuestion, byUser) => {
@@ -249,8 +255,7 @@ function Hero() {
     setQuestionIndex(nextQuestion)
     setTyped(0)
     setStreamed(0)
-    setNotify({ state: 'idle' })
-    setPhase(reduced ? 'done' : 'typing')
+    setPhase(reduced ? 'done' : products[nextProduct] === 'watch' ? 'flow' : 'typing')
     setRun(count => count + 1)
   }, [reduced])
 
@@ -267,7 +272,7 @@ function Hero() {
     if (!live) return undefined
     let timer
     if (phase === 'typing') {
-      timer = typed < item.q.length
+      timer = typed < question.length
         ? setTimeout(() => setTyped(typed + 1), typeSpeed)
         : setTimeout(() => setPhase('thinking'), 380)
     } else if (phase === 'thinking') {
@@ -278,27 +283,19 @@ function Hero() {
         : setTimeout(() => setPhase('done'), 150)
     }
     return () => clearTimeout(timer)
-  }, [live, phase, typed, streamed, item.q.length, answerLength, run])
-
-  // Watch shows its notify flow on its own while the demo plays itself.
-  useEffect(() => {
-    if (!live || !auto || key !== 'watch' || phase !== 'done') return undefined
-    let timer
-    if (notify.state === 'idle') timer = setTimeout(() => setNotify({ state: 'choose', highlight: 'whatsapp' }), 1300)
-    else if (notify.state === 'choose') timer = setTimeout(() => setNotify({ state: 'done', channel: 'whatsapp' }), 1400)
-    return () => clearTimeout(timer)
-  }, [live, auto, key, phase, notify.state])
+  }, [live, phase, typed, streamed, question.length, answerLength, run])
 
   // Then move to the next question, and to the next product after the last.
   useEffect(() => {
     if (!live || !auto || paused || phase !== 'done') return undefined
-    if (key === 'watch' && notify.state !== 'done') return undefined
     const timer = setTimeout(() => {
-      if (questionIndex + 1 < demo.questions.length) play(product, questionIndex + 1)
+      if (questionIndex + 1 < entries.length) play(product, questionIndex + 1)
       else play((product + 1) % products.length, 0)
     }, holdFor[key])
     return () => clearTimeout(timer)
-  }, [live, auto, paused, phase, key, notify.state, questionIndex, product, run, play, demo.questions.length])
+  }, [live, auto, paused, phase, key, questionIndex, product, run, play, entries.length])
+
+  const flowDone = useCallback(() => setPhase('done'), [])
 
   // Keep the newest part of the answer in view as it streams.
   useEffect(() => {
@@ -343,39 +340,33 @@ function Hero() {
           </div>
 
           <div className={`hx-stage tone-${key}`}>
-            <div className="hx-log" ref={log} key={`${key}-${questionIndex}-${run}`}>
-              {(!typing || typed > 0) && (
-                <p className={`hx-q${typing ? ' typing' : ''}`}>
-                  {typing ? item.q.slice(0, typed) : item.q}
-                  {typing && live && <i className="hx-caret"></i>}
-                </p>
-              )}
-              {phase === 'thinking' && (
-                <div className="hx-thinking"><i></i><i></i><i></i><span>{thinkingText[key]}</span></div>
-              )}
-              {(phase === 'answer' || finished) && (
-                <div className="hx-a">
-                  <p><Rich text={item.answer} limit={finished ? Infinity : streamed} /></p>
-                  {finished && key === 'ask' && <div className="hx-extra"><AskResult item={item} /></div>}
-                  {finished && key === 'insight' && <div className="hx-extra"><InsightResult item={item} /></div>}
-                  {finished && key === 'watch' && (
-                    <div className="hx-extra">
-                      <WatchResult
-                        item={item}
-                        notify={notify}
-                        onNotify={() => { setAuto(false); setNotify({ state: 'choose' }) }}
-                        onChoose={channel => { setAuto(false); setNotify({ state: 'done', channel }) }}
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+            {key === 'watch' ? (
+              <WatchFlow key={`${questionIndex}-${run}`} flow={item} live={live} reduced={reduced} onDone={flowDone} />
+            ) : (
+              <div className="hx-log" ref={log} key={`${key}-${questionIndex}-${run}`}>
+                {(!typing || typed > 0) && (
+                  <p className={`hx-q${typing ? ' typing' : ''}`}>
+                    {typing ? item.q.slice(0, typed) : item.q}
+                    {typing && live && <i className="hx-caret"></i>}
+                  </p>
+                )}
+                {phase === 'thinking' && (
+                  <div className="hx-thinking"><i></i><i></i><i></i><span>{thinkingText[key]}</span></div>
+                )}
+                {(phase === 'answer' || finished) && (
+                  <div className="hx-a">
+                    <p><Rich text={item.answer} limit={finished ? Infinity : streamed} /></p>
+                    {finished && key === 'ask' && <div className="hx-extra"><AskResult item={item} /></div>}
+                    {finished && key === 'insight' && <div className="hx-extra"><InsightResult item={item} /></div>}
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="hx-dock">
               <div className="hx-chips">
-                {demo.questions.map((entry, index) => (
-                  <button key={entry.q} className={index === questionIndex ? 'on' : ''} onClick={() => play(product, index, true)}>{entry.q}</button>
+                {entries.map((entry, index) => (
+                  <button key={entry.q || entry.label} className={index === questionIndex ? 'on' : ''} onClick={() => play(product, index, true)}>{entry.q || entry.label}</button>
                 ))}
               </div>
               <div className="hx-note">

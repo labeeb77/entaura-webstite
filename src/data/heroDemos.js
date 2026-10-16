@@ -96,40 +96,55 @@ export const heroDemos = {
   },
   watch: {
     tag: 'Autonomous Monitoring and Alerts',
-    questions: [
+    // Each flow sets up a watch (what, when, how), then shows the alert it sends.
+    flows: [
       {
-        q: 'Which products are running low on stock?',
-        answer: 'Stock is low for ==2 products== at the Riyadh warehouse.',
-        items: [
-          { name: 'Qamh Flour 5kg', value: '42 units left', note: 'Minimum 100', level: 0.42, ring: '42%' },
-          { name: 'Nadeef Detergent 3L', value: '65 units left', note: 'Minimum 120', level: 0.54, ring: '54%' },
-        ],
-        // Units on hand over the last six days, then the projection at the current sales rate.
-        trend: {
-          title: 'Qamh Flour 5kg · units on hand',
-          history: [176, 151, 124, 98, 71, 42],
-          projected: [42, 31, 21, 10, 0],
-          minimum: 100,
-          caption: 'At the current sales rate, both run out in about **4 days**.',
+        label: 'High-value orders',
+        prompt: 'Alert me when a high-value order is added',
+        what: 'Sales orders · ERP',
+        when: 'Real-time event',
+        how: 'Order value > SAR 100,000 · Credit Policy',
+        alert: {
+          title: 'A high-value order is added',
+          rows: [
+            { label: 'Order value', value: 'SAR 125,000' },
+            { label: 'Customer', value: 'Al Noor Trading' },
+            { label: 'Checked against', value: 'Credit Policy §2' },
+          ],
+          time: '9:41 AM',
         },
-        notify: 'Notify me when stock falls below the minimum',
       },
       {
-        q: 'Which invoice is overdue?',
-        answer: '==1 invoice== is overdue: **INV-2041** for Al Noor Trading.',
-        items: [
-          { name: 'INV-2041 · Al Noor Trading', value: 'SAR 48,200', note: '18 days overdue', level: 0.6, ring: '48d' },
-        ],
-        timeline: {
-          title: 'INV-2041 · payment timeline',
-          steps: [
-            { label: 'Issued', date: '12 Mar', day: 0 },
-            { label: 'Due', date: '11 Apr', day: 30 },
-            { label: 'Today', date: '29 Apr', day: 48 },
+        label: 'Low stock',
+        prompt: 'Tell me when any product drops below its minimum stock',
+        what: 'Inventory · Riyadh warehouse',
+        when: 'Every 5 minutes',
+        how: 'Below minimum · days left from 7-day sales',
+        alert: {
+          title: 'Qamh Flour 5kg is below minimum',
+          rows: [
+            { label: 'On hand', value: '42 units (min 100)' },
+            { label: 'Runs out in', value: 'About 4 days' },
+            { label: 'Warehouse', value: 'Riyadh' },
           ],
-          caption: 'It is past the **30-day credit term** in the Credit Policy §3.',
+          time: '11:05 AM',
         },
-        notify: 'Notify finance when overdue invoices exceed the threshold',
+      },
+      {
+        label: 'Overdue invoices',
+        prompt: 'Notify finance when an invoice passes its credit term',
+        what: 'Receivables · invoices',
+        when: 'Daily at 09:00',
+        how: 'Past the 30-day term · Credit Policy §3',
+        alert: {
+          title: 'INV-2041 is overdue',
+          rows: [
+            { label: 'Amount', value: 'SAR 48,200' },
+            { label: 'Customer', value: 'Al Noor Trading' },
+            { label: 'Overdue by', value: '18 days' },
+          ],
+          time: '9:00 AM',
+        },
       },
     ],
   },
