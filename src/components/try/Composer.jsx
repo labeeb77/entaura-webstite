@@ -28,7 +28,7 @@ function Composer({ onSend, disabled }) {
         rows={1}
         value={value}
         placeholder="Ask about pricing, policies, revenue, invoices…"
-        aria-label="Ask EntAura a question"
+        aria-label="Ask entaura.ai a question"
         onChange={event => setValue(event.target.value)}
         onKeyDown={event => {
           if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {

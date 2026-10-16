@@ -5,7 +5,7 @@ function SolutionDetail({ items }) {
   return (
     <section className="solution-detail section">
       <div className="container">
-        <SectionHead eyebrow="How EntAura helps" title="Choose the product" gradient="for the problem in front of you." />
+        <SectionHead eyebrow="How entaura.ai helps" title="Choose the product" gradient="for the problem in front of you." />
         <div className="solution-detail-grid">
           {items.map(solution => (
             <article id={solution.id} key={solution.id}>

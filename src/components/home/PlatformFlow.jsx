@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { flow, showcase } from '../../data/home.js'
 import { useReducedMotion } from '../../hooks/useReducedMotion.js'
+import ProductMark from '../ProductMark.jsx'
 
 const stepDuration = 2600
 
@@ -115,7 +116,7 @@ function PlatformFlow() {
         <div className="h-head reveal">
           <span className="eyebrow">How it works</span>
           <h2>From enterprise data <span className="muted">to business action.</span></h2>
-          <p>EntAura blends unstructured policy documents with structured transactional data, then puts RAG and agentic AI to work on top of it.</p>
+          <p>entaura.ai blends unstructured policy documents with structured transactional data, then puts RAG and agentic AI to work on top of it.</p>
         </div>
 
         <div className="fl-shell reveal" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
@@ -166,7 +167,7 @@ function PlatformFlow() {
 
             <div className={`fl-col fl-core${shown === 1 ? ' is-active' : shown > 1 ? ' is-done' : ''}`} ref={node('core')}>
               <i className="orb" aria-hidden="true"></i>
-              <strong>EntAura intelligence layer</strong>
+              <strong>entaura.ai intelligence layer</strong>
               {flow.core.map((item, index) => (
                 <span key={item} style={{ '--i': index }}>{item}</span>
               ))}
@@ -178,9 +179,8 @@ function PlatformFlow() {
                 const active = item.key === scenario.product
                 return (
                   <div key={item.key} ref={node(`p-${item.key}`)} className={`fl-node fl-product tone-${item.key} ${stateOf(active, 2)}`}>
-                    <i className={`orb small ${item.key}`} aria-hidden="true"></i>
                     <span>
-                      <strong>{item.name}</strong>
+                      <ProductMark product={item.key} size="sm" />
                       <small>{active && shown >= 2 ? scenario.output : item.tag}</small>
                     </span>
                   </div>

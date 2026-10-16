@@ -20,7 +20,7 @@ function ConnectorDiagram() {
         </div>
         <div className="diagram-core">
           <img src="/assets/entaura-mark.png" alt="" />
-          <strong>EntAura<br />Watch</strong>
+          <strong>entaura<br />watch</strong>
           <small>monitoring intelligence</small>
         </div>
         <div className="connector-column right">

@@ -4,7 +4,7 @@ function ContactStrip({ title, text }) {
       <div className="container">
         <h2>{title}</h2>
         <p>{text}</p>
-        <a className="button primary" href="mailto:support@texolworld.com">Contact support@texolworld.com ↗</a>
+        <a className="button primary" href="mailto:aslam@texolgulf.com">Email aslam@texolgulf.com ↗</a>
       </div>
     </section>
   )

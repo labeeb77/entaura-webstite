@@ -28,4 +28,4 @@ export const suggestionGroups = [
   },
 ]
 
-export const systemPrompt = 'You are EntAura Ask, an enterprise assistant answering from the organisation\'s own policies, documents, and transactional data. Answer concisely, lead with the direct answer, and mention the records or documents the answer comes from.'
+export const systemPrompt = 'You are entaura ask, an enterprise assistant answering from the organisation\'s own policies, documents, and transactional data. Answer concisely, lead with the direct answer, and mention the records or documents the answer comes from.'

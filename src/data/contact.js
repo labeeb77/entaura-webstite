@@ -1,1 +1,1 @@
-export const interestOptions = ['EntAura Ask', 'EntAura Insight', 'EntAura Watch', 'Solutions and integrations']
+export const interestOptions = ['entaura ask', 'entaura insight', 'entaura watch', 'Solutions and integrations']

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useCases } from '../../data/home.js'
-
-const productNames = { ask: 'Ask', insight: 'Insight', watch: 'Watch' }
+import ProductMark from '../ProductMark.jsx'
 
 function UseCases() {
   const [active, setActive] = useState(0)
@@ -24,7 +23,7 @@ function UseCases() {
         <div className="uc-grid" key={current.team}>
           {current.prompts.map(prompt => (
             <article key={prompt.text} className={`uc-card tone-${prompt.product}`}>
-              <span className="chip-label">{productNames[prompt.product]}</span>
+              <ProductMark product={prompt.product} size="sm" />
               <p>“{prompt.text}”</p>
             </article>
           ))}

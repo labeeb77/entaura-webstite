@@ -5,7 +5,7 @@ export const productPages = {
       eyebrow: '01 / Targeted verification',
       title: 'Ask the question.',
       gradientLines: ['See the proof.'],
-      text: 'EntAura Ask searches your ERP records and policy repositories together and returns the exact entry or clause that answers the question.',
+      text: 'entaura ask searches your ERP records and policy repositories together and returns the exact entry or clause that answers the question.',
     },
     detail: {
       eyebrow: 'Unified data and document search',
@@ -61,7 +61,7 @@ export const productPages = {
       eyebrow: '02 / Smart cross-analysis',
       title: 'One AI.',
       gradientLines: ['Multiple sources.', 'Lightning-fast insights.'],
-      text: 'EntAura Insight combines transactional data with policy limits in a single query and shows the charts, tables, SQL, and reasoning behind the result.',
+      text: 'entaura insight combines transactional data with policy limits in a single query and shows the charts, tables, SQL, and reasoning behind the result.',
     },
     detail: {
       eyebrow: 'Combined context and analytics',
@@ -103,7 +103,7 @@ export const productPages = {
       eyebrow: '03 / Autonomous safeguard',
       title: 'Monitor changes',
       gradientLines: ['before they become incidents.'],
-      text: 'EntAura Watch continuously monitors your operations against the limits and policies you set, and notifies the right people before a critical incident occurs.',
+      text: 'entaura watch continuously monitors your operations against the limits and policies you set, and notifies the right people before a critical incident occurs.',
     },
     detail: {
       eyebrow: 'Proactive action and anomaly alerts',

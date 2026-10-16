@@ -6,7 +6,7 @@ function CtaBand() {
       <i className="orb" aria-hidden="true"></i>
       <span className="eyebrow">Ask • Insight • Watch</span>
       <h2>Transform your enterprise today.</h2>
-      <p>See EntAura working on your own policies, documents, and transactional data.</p>
+      <p>See entaura.ai working on your own policies, documents, and transactional data.</p>
       <div className="h-actions">
         <Link className="button primary" to="/try.html">Try for free <span>↗</span></Link>
         <Link className="button ghost" to="#contact">Send us a message</Link>

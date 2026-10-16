@@ -5,7 +5,7 @@ function submitContact(event) {
   const data = new FormData(event.currentTarget)
   const subject = encodeURIComponent(`${data.get('interest')} enquiry from ${data.get('name')}`)
   const body = encodeURIComponent(`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nCompany: ${data.get('company')}\nInterest: ${data.get('interest')}\n\n${data.get('message')}`)
-  window.location.href = `mailto:support@texolworld.com?subject=${subject}&body=${body}`
+  window.location.href = `mailto:aslam@texolgulf.com?cc=rj@texolgulf.com&subject=${subject}&body=${body}`
 }
 
 function ContactLayout({ messageRows }) {
@@ -30,9 +30,9 @@ function ContactLayout({ messageRows }) {
         <span className="eyebrow">Find us</span>
         <h3>iCohort Business Ventures Pvt. Ltd</h3>
         <p>Pantheerankavu, Kozhikode,<br />Kerala, India, 673019</p>
-        <p><strong>India</strong><br /><a href="tel:+919037981865">+91 90379 81865</a></p>
+        <p><strong>India</strong><br /><a href="tel:+919037972444">+91 903 797 2444</a></p>
         <p><strong>Saudi Arabia</strong><br />Office No. 17, Dammam Business Center<br />Dammam, Saudi Arabia<br /><a href="tel:+966599823554">+966 59 982 3554</a></p>
-        <a href="mailto:support@texolworld.com">support@texolworld.com</a>
+        <p><strong>Email</strong><br /><a href="mailto:aslam@texolgulf.com">aslam@texolgulf.com</a><br /><a href="mailto:rj@texolgulf.com">rj@texolgulf.com</a></p>
       </aside>
     </div>
   )

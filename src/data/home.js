@@ -1,49 +1,6 @@
 // Content for the home page. Example records, figures, and policy references
 // are illustrative, chosen to show how each product answers.
 
-export const heroScenes = [
-  {
-    key: 'ask',
-    label: 'Ask',
-    caption: 'Targeted verification',
-    question: 'Is PO-4471 within the approved procurement limit?',
-    answer: 'No. PO-4471 totals SAR 186,400, above the SAR 150,000 department-head limit. CFO approval is required before release.',
-    evidence: [
-      { kind: 'ERP', text: 'purchase_orders · PO-4471 · SAR 186,400' },
-      { kind: 'Policy', text: 'Purchase Policy v3.1 · §4.2 Approval limits' },
-    ],
-    confidence: 96,
-  },
-  {
-    key: 'insight',
-    label: 'Insight',
-    caption: 'Smart cross-analysis',
-    question: 'Compare overtime cost with the HR policy cap, by department.',
-    bars: [
-      { label: 'Ops', value: 92 },
-      { label: 'Sales', value: 58 },
-      { label: 'Finance', value: 41 },
-      { label: 'Logistics', value: 77 },
-      { label: 'IT', value: 35 },
-    ],
-    cap: 70,
-    sql: 'SELECT dept, SUM(ot_cost) FROM payroll\nWHERE month = :current GROUP BY dept;',
-    finding: 'Ops and Logistics exceed the 70% overtime cap in HR Policy §7.1.',
-  },
-  {
-    key: 'watch',
-    label: 'Watch',
-    caption: 'Autonomous safeguard',
-    question: 'Alert me when cold-storage temperature stays above 8°C for 10 minutes.',
-    rules: [
-      { label: 'What', value: 'IoT sensor · Cold room CS-02' },
-      { label: 'When', value: 'Above 8°C for 10 min' },
-      { label: 'How', value: 'Skip defrost cycles per SOP-12' },
-    ],
-    alert: { channel: 'Microsoft Teams', time: '02:14', text: 'CS-02 held 9.4°C for 12 min. Warehouse team notified.' },
-  },
-]
-
 export const logos = [
   { file: 'sap.svg', name: 'SAP' },
   { file: 'oracle.png', name: 'Oracle' },
@@ -64,67 +21,70 @@ export const logos = [
 ]
 
 export const vision = [
-  { label: 'The challenge', title: 'Knowledge and data live apart.', text: 'Business policies, tools, and structured and unstructured transactional data sit in disconnected systems.' },
-  { label: 'The EntAura vision', title: 'One intelligent layer.', text: 'EntAura connects enterprise knowledge with business action, so every answer draws on the full picture.' },
-  { label: 'The value', title: 'Decide, comply, and act sooner.', text: 'Better decisions, improved compliance, and proactive management across the organization.' },
+  { label: 'The enterprise challenge', title: 'Knowledge and data live apart.', text: 'Business policies, tools, and structured and unstructured transactional data are disconnected.' },
+  { label: 'The entaura.ai vision', title: 'One intelligent layer.', text: 'One intelligent layer connecting enterprise knowledge with business action.' },
+  { label: 'Business value', title: 'Decide, comply, and act sooner.', text: 'Better decisions, improved compliance, and proactive management.' },
 ]
 
 export const showcase = [
   {
     key: 'ask',
     name: 'Ask',
-    tag: 'Targeted verification',
+    tag: 'Knowledge',
     title: 'Ask the question. See the proof.',
-    text: 'Search live ERP records and policy repositories together. Ask isolates the exact database entry or document clause behind each answer, so teams validate instead of trusting.',
-    points: ['One ERP connector for live transactional records', 'Scans unstructured policy and document stores', 'Evidence extracted separately for targeted validation'],
+    text: 'Unified data and document search. Ask connects directly to your ERP transactional database alongside your policy repositories.',
+    points: ['One ERP connector fetches live transactional records', 'Scans unstructured policy and document stores', 'Isolates the exact database entry or document clause for validation'],
+    question: 'Show the policy for customer credit limits.',
     to: '/ask.html',
   },
   {
     key: 'insight',
     name: 'Insight',
-    tag: 'Smart cross-analysis',
+    tag: 'Smart & Trusted Analytics',
     title: 'Data and policy, analysed together.',
-    text: 'Query policy limits and live transactions in one shot. Insight returns charts, tables, the underlying SQL, and structured reasoning from a unified, optimized data store.',
-    points: ['Automatic graphs and visual tables', 'SQL you can inspect and reuse', 'Step-by-step reasoning for every result'],
+    text: 'Combined context and analytics. Insight combines transactional data with policy compliance in a single analytics query.',
+    points: ['Queries policy limits and live transactions in one shot', 'Automated graphs, visual tables, SQL, and structured reasoning', 'A unified data store for fast, accurate answers'],
+    question: 'Give me profit, margin, cost and tax by quarter.',
     to: '/insight.html',
   },
   {
     key: 'watch',
     name: 'Watch',
-    tag: 'Autonomous safeguard',
-    title: 'Act before issues become incidents.',
-    text: 'The real action engine. Define what to watch, when to check, and how to read the data, and Watch alerts the right people across the messengers they already use.',
-    points: ['Custom targets, from ledgers to sensor telemetry', 'Event, schedule, or threshold triggers', 'Agentic logic that removes false positives'],
+    tag: 'Autonomous Monitoring and Alerts',
+    title: 'The real action engine.',
+    text: 'Proactive action and anomaly alerts. Watch monitors operations continuously and notifies teams before critical business incidents occur.',
+    points: ['Custom targets: what to watch, from ledgers to sensor telemetry', 'Custom triggers: real-time events, schedules, or thresholds', 'Custom logic: aggregations and agentic workflows that cut false positives'],
+    question: 'Alert me when a distributor reaches 80% of the target required to qualify for the scheme.',
     to: '/watch.html',
   },
 ]
 
+// Ask panel: the customer record behind a credit-limit answer.
 export const askRecord = [
-  ['PO number', 'PO-4471'],
-  ['Vendor', 'Gulf Industrial Supplies'],
-  ['Department', 'Operations'],
-  ['Amount', 'SAR 186,400'],
-  ['Approver', 'Dept. head'],
+  ['Customer', 'Al Noor Trading'],
+  ['Credit limit', 'SAR 250,000'],
+  ['Outstanding', 'SAR 231,400'],
+  ['Utilisation', '93%'],
+  ['Payment terms', '30 days'],
 ]
 
-export const insightTable = [
-  ['Ops', '92%', 'Over cap'],
-  ['Logistics', '77%', 'Over cap'],
-  ['Sales', '58%', 'Within'],
+// Insight panel: profit, margin, cost, and tax by quarter (deck sample, SAR).
+export const quarterTable = [
+  { quarter: 'Q4 2025', profit: 8.03, margin: '33.5%', cost: 15.95, tax: 3.59 },
+  { quarter: 'Q1 2026', profit: 9.44, margin: '33.5%', cost: 18.75, tax: 4.22 },
+  { quarter: 'Q2 2026', profit: 8.84, margin: '33.6%', cost: 17.49, tax: 3.94 },
+  { quarter: 'Q3 2026', profit: 9.78, margin: '33.5%', cost: 19.46, tax: 4.38 },
 ]
 
 export const watchRecipe = [
-  { step: 'What to watch', items: ['Financial ledgers', 'Procurement policy', 'Sales quotas', 'Sensor telemetry', 'HR attendance'], active: 3 },
+  { step: 'What to watch', items: ['Financial ledgers', 'Procurement policies', 'Sales quotas', 'Sensor telemetry', 'HR attendance'], active: 2 },
   { step: 'When to watch', items: ['Real-time events', 'Scheduled intervals', 'Threshold conditions'], active: 2 },
-  { step: 'How to read it', items: ['Custom aggregations', 'Policy limits on the fly', 'Agentic workflows'], active: 1 },
+  { step: 'How to cook data', items: ['Custom aggregations', 'Policy limits on the fly', 'Agentic workflows'], active: 1 },
 ]
 
-export const anatomy = [
-  { n: 1, title: 'Confidence and relevance', text: 'Every answer is scored, so teams know how far to rely on it.' },
-  { n: 2, title: 'Source evidence', text: 'The exact record and clause, linked back to where they live.' },
-  { n: 3, title: 'Logical reasoning', text: 'The steps that led from the question to the conclusion.' },
-  { n: 4, title: 'Dynamic SQL', text: 'The query run against your ERP, tools, IoT, and ad hoc sources.' },
-  { n: 5, title: 'Interactive disambiguation', text: 'When a question lacks context, EntAura asks before it answers.' },
+export const watchAlerts = [
+  { channel: 'whatsapp', meta: 'entaura watch · Sales · 09:12', title: 'Al Faisal Distribution reached 80% of the scheme target', text: 'SAR 412,000 of SAR 515,000 · 9 days left to qualify.' },
+  { channel: 'telegram', meta: 'entaura watch · Finance · 14:40', title: 'High-value credit sale held longer than usual', text: 'SO-7781 · SAR 186,000 · held 3 days (usual: under 1 day).' },
 ]
 
 export const flow = {
@@ -139,7 +99,7 @@ export const flow = {
   ],
   steps: [
     { label: 'Connect', caption: 'Your data and policies flow in.' },
-    { label: 'Understand', caption: 'EntAura reasons over them together.' },
+    { label: 'Understand', caption: 'entaura.ai reasons over them together.' },
     { label: 'Act', caption: 'The right product answers.' },
     { label: 'Deliver', caption: 'Your team is notified where they work.' },
   ],
@@ -152,37 +112,31 @@ export const flow = {
   ],
 }
 
+// Example questions from the entaura.ai deck, grouped by team.
 export const useCases = [
   {
     team: 'Finance',
     prompts: [
-      { product: 'ask', text: 'Which invoices this month exceeded the approved credit limit?' },
-      { product: 'insight', text: 'Show budget versus actual by cost centre against the spending policy.' },
-      { product: 'watch', text: 'Notify me when receivables over 90 days pass SAR 500,000.' },
+      { product: 'ask', text: 'Show the policy for customer credit limits.' },
+      { product: 'insight', text: 'Compare sales and collections for the last six months.' },
+      { product: 'insight', text: 'Which promotions paid for their discount?' },
+      { product: 'watch', text: 'Notify finance if overdue invoices increase from the threshold.' },
     ],
   },
   {
-    team: 'Procurement',
+    team: 'Sales',
     prompts: [
-      { product: 'ask', text: 'What does the purchase policy say about quote approvals, and did this order follow it?' },
-      { product: 'insight', text: 'Which vendors had the most single-source purchases this quarter?' },
-      { product: 'watch', text: 'Flag any PO raised without three quotations above the policy threshold.' },
+      { product: 'insight', text: 'Give total sales orders by distributors.' },
+      { product: 'insight', text: 'Which retailers buying biscuits are not buying our beverages?' },
+      { product: 'watch', text: 'Alert me when a distributor reaches 80% of the target required to qualify for the scheme.' },
     ],
   },
   {
-    team: 'HR',
+    team: 'Operations',
     prompts: [
-      { product: 'ask', text: 'How many leave days is this employee entitled to under the current policy?' },
-      { product: 'insight', text: 'Compare overtime by department with the HR policy cap.' },
-      { product: 'watch', text: 'Alert managers when attendance drops below 90% for a week.' },
-    ],
-  },
-  {
-    team: 'Operations & IoT',
-    prompts: [
-      { product: 'ask', text: 'What is the safety procedure for a cold-room temperature breach?' },
-      { product: 'insight', text: 'Chart machine downtime against the maintenance schedule.' },
-      { product: 'watch', text: 'Message the shift lead when vibration on line 3 crosses its limit.' },
+      { product: 'insight', text: 'Where are last quarter\'s orders getting stuck?' },
+      { product: 'insight', text: 'Which orders are missing focused products?' },
+      { product: 'watch', text: 'Alert me whenever high-value credit sales are held longer than usual.' },
     ],
   },
 ]

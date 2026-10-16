@@ -2,7 +2,7 @@ export const problems = [
   { icon: '⌕', title: 'Proof is hard to find', text: 'Ask isolates the exact record or policy clause, so teams verify instead of search.' },
   { icon: '◈', title: 'Data ignores the rules', text: 'Insight analyses transactions against policy limits in the same query.' },
   { icon: '↗', title: 'Problems surface too late', text: 'Watch monitors limits, sensor readings, and compliance, and alerts teams first.' },
-  { icon: '✧', title: 'Answers are hard to trust', text: 'EntAura shows the confidence scores, sources, reasoning, and SQL behind what it tells you.' },
+  { icon: '✧', title: 'Answers are hard to trust', text: 'entaura.ai shows the confidence scores, sources, reasoning, and SQL behind what it tells you.' },
 ]
 
 export const solutionSteps = [
@@ -26,7 +26,7 @@ export const solutionDetails = [
   {
     id: 'solution-ask',
     icon: '⌕',
-    title: 'EntAura Ask',
+    title: 'entaura ask',
     lead: 'When teams cannot find proof:',
     text: 'Ask searches ERP records and policy documents together and returns the exact entry or clause.',
     items: ['Verify answers against the source', 'Search records and policies in one place', 'See confidence and relevance scores'],
@@ -36,7 +36,7 @@ export const solutionDetails = [
   {
     id: 'solution-insight',
     icon: '◈',
-    title: 'EntAura Insight',
+    title: 'entaura insight',
     lead: 'When data and policy sit apart:',
     text: 'Insight combines transactions with policy limits in one query and shows how the answer was reached.',
     items: ['Charts and tables generated for you', 'Inspect the underlying SQL', 'Follow the reasoning step by step'],
@@ -46,7 +46,7 @@ export const solutionDetails = [
   {
     id: 'solution-watch',
     icon: '↗',
-    title: 'EntAura Watch',
+    title: 'entaura watch',
     lead: 'When issues are found too late:',
     text: 'Watch turns limits, thresholds, and policy rules into monitors that alert teams early.',
     items: ['Events, schedules, or thresholds', 'Custom logic to reduce false positives', 'Alerts in your messaging apps'],

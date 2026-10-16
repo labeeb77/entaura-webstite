@@ -13,7 +13,7 @@ function KnowledgeDiagram() {
         ))}
         <div className="knowledge-core">
           <img src="/assets/entaura-mark.png" alt="" />
-          <strong>EntAura<br />Ask</strong>
+          <strong>entaura<br />ask</strong>
         </div>
         <span className="knowledge-answer">✦ Evidence-backed answer</span>
       </div>

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { megaItems } from '../data/nav.js'
 import Brand from './Brand.jsx'
 import NavDropdown from './NavDropdown.jsx'
+import ProductMark from './ProductMark.jsx'
 
 const closedDropdowns = { products: false, solutions: false }
 
@@ -59,9 +60,8 @@ function Header() {
             <div className="nav-mega">
               {megaItems.map(item => (
                 <Link key={item.to} to={item.to}>
-                  <i className={`orb small ${item.key}`} aria-hidden="true"></i>
                   <span>
-                    <strong>{item.title}</strong>
+                    <strong><ProductMark product={item.key} size="sm" /></strong>
                     <small>{item.text}</small>
                   </span>
                 </Link>

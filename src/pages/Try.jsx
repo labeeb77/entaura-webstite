@@ -108,7 +108,7 @@ function Try() {
   return (
     <main className="try">
       <section className="try-hero container">
-        <span className="try-pill"><i className="orb small classic" aria-hidden="true"></i>Try EntAura Ask</span>
+        <span className="try-pill"><i className="orb small classic" aria-hidden="true"></i>Try entaura ask</span>
         <h1>Ask your business anything. <span className="gradient-text">See the proof.</span></h1>
         <p>A live demo on sample data for TEXOL, a fictional software company: pricing, policies, revenue, and invoices.</p>
       </section>
@@ -119,7 +119,7 @@ function Try() {
           <header className="tc-head">
             <div className="tc-title">
               <img src="/assets/entaura-mark.png" alt="" />
-              <strong>EntAura Ask</strong>
+              <strong>entaura ask</strong>
               <span className={`tc-status ${connection}`}><i></i>{statusLabels[connection]}</span>
             </div>
             {!empty && <button className="tc-new" onClick={reset}>New chat</button>}

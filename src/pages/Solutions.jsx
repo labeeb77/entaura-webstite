@@ -19,7 +19,7 @@ function Solutions() {
         eyebrow="Solutions for real work"
         title="Less searching."
         gradientLines={['More moving forward.']}
-        text="EntAura helps organizations connect policies, documents, and transactional data, so teams decide better, stay compliant, and manage proactively."
+        text="entaura.ai helps organizations connect policies, documents, and transactional data, so teams decide better, stay compliant, and manage proactively."
       />
       <section className="section">
         <div className="container">
@@ -40,7 +40,7 @@ function Solutions() {
       </section>
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Where EntAura fits" title="Built around your" gradient="industry reality." />
+          <SectionHead eyebrow="Where entaura.ai fits" title="Built around your" gradient="industry reality." />
           <IndustryGrid items={industries} />
         </div>
       </section>

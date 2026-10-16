@@ -12,7 +12,7 @@ function Contact() {
         eyebrow="Start a smarter conversation"
         title="Tell us what your team"
         gradientLines={['needs to know.']}
-        text="Share your goals, systems, or business challenge. We’ll help you find the right EntAura starting point."
+        text="Share your goals, systems, or business challenge. We’ll help you find the right entaura.ai starting point."
       />
       <section className="contact-section container">
         <ContactLayout messageRows={6} />

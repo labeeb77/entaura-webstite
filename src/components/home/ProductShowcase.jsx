@@ -1,86 +1,95 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { askRecord, heroScenes, insightTable, showcase, watchRecipe } from '../../data/home.js'
+import { askRecord, quarterTable, showcase, watchAlerts, watchRecipe } from '../../data/home.js'
+import ChannelIcon from '../ChannelIcon.jsx'
+import ProductMark from '../ProductMark.jsx'
 
-function AskPanel() {
+function Question({ text }) {
+  return <p className="sp-question"><span>Q</span>{text}</p>
+}
+
+function AskPanel({ product }) {
   return (
     <div className="sp-ask">
+      <Question text={product.question} />
       <div className="sp-card">
-        <header><b>ERP</b> purchase_orders · live record</header>
+        <header><b>Policy</b> Credit Policy v2 · page 4</header>
+        <p className="sp-doc">
+          <small>§4.1 Customer credit limits</small>
+          Each customer is assigned a credit limit by the finance committee.{' '}
+          <mark>Orders that take a customer above 90% of its limit require approval from the Finance Manager</mark>{' '}
+          before dispatch.
+        </p>
+      </div>
+      <div className="sp-card">
+        <header><b>ERP</b> customers · live record</header>
         <dl>
           {askRecord.map(([key, value]) => (
-            <div key={key} className={key === 'Amount' ? 'hit' : ''}><dt>{key}</dt><dd>{value}</dd></div>
+            <div key={key} className={key === 'Utilisation' ? 'hit' : ''}><dt>{key}</dt><dd>{value}</dd></div>
           ))}
         </dl>
       </div>
-      <div className="sp-card">
-        <header><b>Policy</b> Purchase Policy v3.1 · page 6</header>
-        <p className="sp-doc">
-          <small>§4.2 Approval limits</small>
-          Purchase orders raised by a department are subject to tiered approval.{' '}
-          <mark>Orders above SAR 150,000 require approval from the Chief Financial Officer</mark>{' '}
-          before release to the vendor.
-        </p>
-      </div>
       <div className="sp-verdict">
-        <span className="sp-badge">Not compliant</span>
-        PO-4471 exceeds the department-head limit by SAR 36,400. Route to CFO.
+        <span className="sp-badge">Needs approval</span>
+        Al Noor Trading is at 93% of its limit. New orders need Finance Manager approval.
         <strong>96%</strong>
       </div>
     </div>
   )
 }
 
-function InsightPanel() {
-  const { bars, cap } = heroScenes[1]
+function InsightPanel({ product }) {
+  const max = Math.max(...quarterTable.map(row => row.cost))
   return (
     <div className="sp-insight">
-      <div className="sp-card sp-chart-card">
-        <header><b>Chart</b> Overtime cost vs. policy cap</header>
-        <div className="sp-chart">
-          <span className="hc-cap" style={{ bottom: `${cap}%` }}><small>Cap 70%</small></span>
-          {bars.map(bar => (
-            <div key={bar.label} className={bar.value > cap ? 'over' : ''}>
-              <i style={{ height: `${bar.value}%` }}></i>
-              <small>{bar.label}</small>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="sp-card">
-        <header><b>Table</b> Exceptions</header>
+      <Question text={product.question} />
+      <div className="sp-card sp-table">
+        <header><b>Table</b> SAR millions</header>
         <table>
+          <thead><tr><th>Quarter</th><th>Profit</th><th>Margin</th><th>Cost</th><th>Tax</th></tr></thead>
           <tbody>
-            {insightTable.map(([dept, value, status]) => (
-              <tr key={dept}><td>{dept}</td><td>{value}</td><td className={status === 'Within' ? 'ok' : 'bad'}>{status}</td></tr>
+            {quarterTable.map(row => (
+              <tr key={row.quarter} className={row.quarter === 'Q3 2026' ? 'top' : ''}>
+                <td>{row.quarter}</td><td>{row.profit.toFixed(2)}</td><td>{row.margin}</td><td>{row.cost.toFixed(2)}</td><td>{row.tax.toFixed(2)}</td>
+              </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="sp-card">
-        <header><b>SQL</b> Generated query</header>
-        <pre>{`SELECT p.dept,
-  SUM(p.ot_cost) / SUM(p.base) AS ot_ratio
-FROM payroll p
-WHERE p.month = '2026-09'
-GROUP BY p.dept
-HAVING ot_ratio > :policy_cap;`}</pre>
+        <header><b>Chart</b> Profit and cost by quarter</header>
+        <div className="sp-qchart" role="img" aria-label="Profit and cost by quarter">
+          {quarterTable.map(row => (
+            <div key={row.quarter} className={row.quarter === 'Q3 2026' ? 'top' : ''}>
+              <span className="bars">
+                <i style={{ height: `${(row.profit / max) * 100}%` }}></i>
+                <i className="cost" style={{ height: `${(row.cost / max) * 100}%` }}></i>
+              </span>
+              <small>{row.quarter.replace(' 20', " '")}</small>
+            </div>
+          ))}
+        </div>
+        <div className="sp-legend"><span><i></i>Profit</span><span><i className="cost"></i>Cost</span></div>
       </div>
       <div className="sp-card">
-        <header><b>Reasoning</b> How this was reached</header>
-        <ol className="sp-steps">
-          <li>Read the overtime cap from HR Policy §7.1</li>
-          <li>Aggregated September payroll by department</li>
-          <li>Flagged departments above the cap</li>
-        </ol>
+        <header><b>SQL</b> Generated and verified</header>
+        <pre>{`SELECT date_trunc('quarter', d.document_date) AS quarter,
+  SUM(l.gross_profit) AS profit,
+  SUM(l.gross_profit) / SUM(l.paid_value) AS margin,
+  SUM(l.paid_value - l.gross_profit) AS cost,
+  SUM(d.tax_amount) AS tax
+FROM sales_documents d JOIN sales_lines l USING (document_id)
+WHERE d.status <> 'cancelled'
+GROUP BY 1 ORDER BY 1;`}</pre>
       </div>
     </div>
   )
 }
 
-function WatchPanel() {
+function WatchPanel({ product }) {
   return (
     <div className="sp-watch">
+      <Question text={product.question} />
       <div className="sp-recipe">
         {watchRecipe.map(column => (
           <div key={column.step} className="sp-card">
@@ -94,22 +103,16 @@ function WatchPanel() {
         ))}
       </div>
       <div className="sp-feed">
-        <div className="sp-msg">
-          <img src="/assets/integrations/teams.png" alt="" />
-          <div>
-            <small>EntAura Watch · Warehouse channel · 02:14</small>
-            <strong>Cold room CS-02 above 8°C for 12 minutes</strong>
-            <span>Peak 9.4°C. Not a defrost cycle (SOP-12). Shift lead assigned.</span>
+        {watchAlerts.map(alert => (
+          <div className="sp-msg" key={alert.title}>
+            <ChannelIcon channel={alert.channel} size={30} />
+            <div>
+              <small>{alert.meta}</small>
+              <strong>{alert.title}</strong>
+              <span>{alert.text}</span>
+            </div>
           </div>
-        </div>
-        <div className="sp-msg">
-          <img src="/assets/integrations/whatsapp.png" alt="" />
-          <div>
-            <small>EntAura Watch · Finance · 08:00 daily</small>
-            <strong>3 POs pending above approval limit</strong>
-            <span>Combined SAR 412,900. Oldest waiting 4 days.</span>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   )
@@ -128,7 +131,7 @@ function ProductShowcase() {
         <div className="h-head reveal">
           <span className="eyebrow">Ask • Insight • Watch</span>
           <h2>Three products. <span className="gradient-text">One intelligent layer.</span></h2>
-          <p>Ask verifies, Insight explains, and Watch safeguards, all on the same connected foundation of policies, documents, and transactional data.</p>
+          <p>Ask finds the proof, Insight explains the numbers, and Watch acts before issues become incidents, all on one connected foundation of policies, documents, and transactional data.</p>
         </div>
 
         <div className="h-showcase reveal">
@@ -142,11 +145,8 @@ function ProductShowcase() {
                   aria-controls="showcase-panel"
                   onClick={() => setActive(index)}
                 >
-                  <i className={`orb small ${item.key}`} aria-hidden="true"></i>
-                  <span>
-                    <span className="sn-tag">0{index + 1} / {item.tag}</span>
-                    <strong>EntAura {item.name}</strong>
-                  </span>
+                  <span className="sn-tag">0{index + 1} / {item.tag}</span>
+                  <ProductMark product={item.key} size="lg" />
                 </button>
                 {index === active && (
                   <div className="sn-detail">
@@ -160,9 +160,9 @@ function ProductShowcase() {
           <div className={`h-showcase-stage tone-${product.key}`} id="showcase-panel" role="tabpanel" aria-labelledby={`tab-${product.key}`}>
             <div className="stage-head">
               <h3>{product.title}</h3>
-              <Link to={product.to}>Explore {product.name} →</Link>
+              <Link to={product.to}>Explore entaura {product.key} →</Link>
             </div>
-            <div className="stage-body" key={product.key}><Panel /></div>
+            <div className="stage-body" key={product.key}><Panel product={product} /></div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
-// WebSocket client for the EntAura Ask demo bot (`/bot/ws`).
+// WebSocket client for the entaura ask demo bot (`/bot/ws`).
 //
-// Protocol (EntAura developer guide, section 14):
+// Protocol (entaura.ai developer guide, section 14):
 //   server → {type: 'ready'}
 //   client → {type: 'auth', api_key, project_key}          (must be first)
 //   server → {type: 'authenticated', ...} | {type: 'error', code, error}
@@ -18,7 +18,7 @@ export const chatConfig = {
 }
 
 const errorMessages = {
-  authentication_failed: 'The demo could not sign in to EntAura. Please try again later.',
+  authentication_failed: 'The demo could not sign in to entaura.ai. Please try again later.',
   insufficient_credits: 'The demo has used its free credits for now. Please try again later.',
 }
 
@@ -136,7 +136,7 @@ export function createChatConnection({ onEvent }) {
       socket = new WebSocket(chatConfig.url)
     } catch {
       status('offline')
-      onEvent({ type: 'error', message: 'Could not reach the EntAura demo.' })
+      onEvent({ type: 'error', message: 'Could not reach the entaura.ai demo.' })
       return
     }
     // Auth goes out when the server sends `ready`. If `ready` never comes,
@@ -162,7 +162,7 @@ export function createChatConnection({ onEvent }) {
         return
       }
       status('offline')
-      if (inFlight || pending.length) onEvent({ type: 'error', message: 'The connection to the EntAura demo was lost.' })
+      if (inFlight || pending.length) onEvent({ type: 'error', message: 'The connection to the entaura.ai demo was lost.' })
       inFlight = null
       pending = []
     })
