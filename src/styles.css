@@ -99,22 +99,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 
 /* ---------- Product wordmark (components/ProductMark.jsx) ---------- */
 
-.pmark { --pm: 20px; display: inline-flex; align-items: center; gap: calc(var(--pm) * .22); font-family: var(--display); font-weight: 400; line-height: 1; white-space: nowrap; color: var(--text); }
-.pmark-word { font-size: var(--pm); letter-spacing: -.035em; }
-.pmark-pill {
-  position: relative; overflow: hidden; isolation: isolate;
-  display: inline-flex; align-items: center;
-  padding: calc(var(--pm) * .1) calc(var(--pm) * .48) calc(var(--pm) * .16);
-  border-radius: 999px; color: #fff; font-size: calc(var(--pm) * .96); letter-spacing: -.02em;
-  background: linear-gradient(100deg, var(--pm-a), var(--pm-b));
-}
-.pmark-pill::after { content: ""; position: absolute; inset: 0; z-index: -1; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"); mix-blend-mode: overlay; opacity: .8; }
-.pmark-ask { --pm-a: #2ab7e3; --pm-b: #1d4fd8; }
-.pmark-insight { --pm-a: #2cc9a6; --pm-b: #1b7f8f; }
-.pmark-watch { --pm-a: #a06cf0; --pm-b: #d9539c; }
-.pmark-sm { --pm: 15px; }
-.pmark-lg { --pm: 28px; }
-.pmark-xl { --pm: 120px; }
+.pmark { --pm: 26px; display: inline-block; height: var(--pm); width: auto; max-width: 100%; object-fit: contain; vertical-align: middle; user-select: none; }
+.pmark-sm { --pm: 19px; }
+.pmark-lg { --pm: 34px; }
 
 /* ---------- Header ---------- */
 
