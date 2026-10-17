@@ -6,9 +6,12 @@ function UseCases() {
   return (
     <section className="h-section h-soft h-cases">
       <div className="container">
-        <div className="h-head reveal">
-          <span className="eyebrow">Use cases</span>
-          <h2>Questions your teams <span className="muted">can ask today.</span></h2>
+        <div className="uc-head">
+          <div className="h-head reveal">
+            <span className="eyebrow">Use cases</span>
+            <h2>Questions your teams <span className="muted">can ask today.</span></h2>
+          </div>
+          <Link className="button primary uc-cta reveal" to="/try.html">Try Entaura <span>↗</span></Link>
         </div>
         <div className="uc-grid">
           {useCases.map((group, index) => (
