@@ -258,8 +258,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   box-shadow: 0 0 0 10px rgba(255, 255, 255, .6), 0 20px 40px -20px rgba(40, 70, 140, .35);
   text-align: center;
 }
-.diagram-core img img { width: 42px; height: 27px; object-fit: contain; margin-bottom: 4px; }
-.diagram-core strong strong { font-family: var(--display); font-size: 14px; font-weight: 600; line-height: 1.05; }
+.diagram-core img { width: 42px; height: 27px; object-fit: contain; margin-bottom: 4px; }
+.diagram-core strong { font-family: var(--display); font-size: 14px; font-weight: 600; line-height: 1.05; }
 .diagram-core small { display: block; margin-top: 4px; color: var(--faint); font-size: 9px; }
 .diagram-foot { display: flex; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line-strong); color: var(--body); font-size: 11px; }
 .diagram-foot b { display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: var(--ask); }
