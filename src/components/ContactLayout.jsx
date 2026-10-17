@@ -27,11 +27,10 @@ function ContactLayout({ messageRows }) {
         <button className="button primary" type="submit">Send enquiry ↗</button>
       </form>
       <aside className="contact-office">
-        <span className="eyebrow">Find us</span>
+        <span className="eyebrow">Talk to us</span>
         <h3>iCohort Business Ventures Pvt. Ltd</h3>
-        <p>Pantheerankavu, Kozhikode,<br />Kerala, India, 673019</p>
         <p><strong>India</strong><br /><a href="tel:+919037972444">+91 903 797 2444</a></p>
-        <p><strong>Saudi Arabia</strong><br />Office No. 17, Dammam Business Center<br />Dammam, Saudi Arabia<br /><a href="tel:+966599823554">+966 59 982 3554</a></p>
+        <p><strong>Saudi Arabia</strong><br /><a href="tel:+966599823554">+966 59 982 3554</a></p>
         <p><strong>Email</strong><br /><a href="mailto:aslam@texolgulf.com">aslam@texolgulf.com</a><br /><a href="mailto:rj@texolgulf.com">rj@texolgulf.com</a></p>
       </aside>
     </div>

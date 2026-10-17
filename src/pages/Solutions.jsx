@@ -4,9 +4,8 @@ import PageHero from '../components/PageHero.jsx'
 import ProblemGrid from '../components/ProblemGrid.jsx'
 import SectionHead from '../components/SectionHead.jsx'
 import SolutionDetail from '../components/SolutionDetail.jsx'
-import Steps from '../components/Steps.jsx'
 import { pageMeta } from '../data/pageMeta.js'
-import { industries, problems, solutionDetails, solutionSteps } from '../data/solutions.js'
+import { industries, problems, solutionDetails } from '../data/solutions.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 
 function Solutions() {
@@ -19,7 +18,7 @@ function Solutions() {
         eyebrow="Solutions for real work"
         title="Less searching."
         gradientLines={['More moving forward.']}
-        text="entaura.ai helps organizations connect policies, documents, and transactional data, so teams decide better, stay compliant, and manage proactively."
+        text="Better decisions, improved compliance, and proactive management."
       />
       <section className="section">
         <div className="container">
@@ -27,15 +26,8 @@ function Solutions() {
             eyebrow="Why organizations need it"
             title="Disconnected knowledge"
             gradient="costs more than time."
-            text="Business policies, tools, and structured and unstructured data usually live apart. Decisions slow down, compliance gaps go unnoticed, and problems are found after the fact."
           />
           <ProblemGrid items={problems} />
-        </div>
-      </section>
-      <section className="info-band">
-        <div className="container">
-          <SectionHead eyebrow="One family, three jobs" title="Use the right intelligence" gradient="for the moment." />
-          <Steps items={solutionSteps} />
         </div>
       </section>
       <section className="section">

@@ -131,7 +131,6 @@ function ProductShowcase() {
         <div className="h-head reveal">
           <span className="eyebrow">Ask • Insight • Watch</span>
           <h2>Three products. <span className="gradient-text">One intelligent layer.</span></h2>
-          <p>Ask finds the proof, Insight explains the numbers, and Watch acts before issues become incidents, all on one connected foundation of policies, documents, and transactional data.</p>
         </div>
 
         <div className="h-showcase reveal">

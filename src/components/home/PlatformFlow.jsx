@@ -116,7 +116,7 @@ function PlatformFlow() {
         <div className="h-head reveal">
           <span className="eyebrow">How it works</span>
           <h2>From enterprise data <span className="muted">to business action.</span></h2>
-          <p>entaura.ai blends unstructured policy documents with structured transactional data, then puts RAG and agentic AI to work on top of it.</p>
+          <p>Policies, documents, and transactional data in. Answers and alerts out.</p>
         </div>
 
         <div className="fl-shell reveal" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>

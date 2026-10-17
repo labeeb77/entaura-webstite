@@ -1,5 +1,4 @@
 import { useRef } from 'react'
-import ContactLayout from '../components/ContactLayout.jsx'
 import CtaBand from '../components/home/CtaBand.jsx'
 import Hero from '../components/home/Hero.jsx'
 import LogoMarquee from '../components/home/LogoMarquee.jsx'
@@ -26,14 +25,6 @@ function Home() {
       <PlatformFlow />
       <UseCases />
       <CtaBand />
-      <section className="contact-section container" id="contact">
-        <div className="contact-heading">
-          <span className="eyebrow">Start a smarter conversation</span>
-          <h2>Tell us what your team<br /><span className="gradient-text">needs to know.</span></h2>
-          <p>Share your goals, systems, or business challenge. Our team will help you find the right entaura.ai starting point.</p>
-        </div>
-        <ContactLayout messageRows={5} />
-      </section>
     </main>
   )
 }

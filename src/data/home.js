@@ -22,7 +22,7 @@ export const logos = [
 
 export const vision = [
   { label: 'The enterprise challenge', title: 'Knowledge and data live apart.', text: 'Business policies, tools, and structured and unstructured transactional data are disconnected.' },
-  { label: 'The entaura.ai vision', title: 'One intelligent layer.', text: 'One intelligent layer connecting enterprise knowledge with business action.' },
+  { label: 'The entaura.ai vision', title: 'One intelligent layer.', text: 'Connecting enterprise knowledge with business action.' },
   { label: 'Business value', title: 'Decide, comply, and act sooner.', text: 'Better decisions, improved compliance, and proactive management.' },
 ]
 
@@ -32,7 +32,7 @@ export const showcase = [
     name: 'Ask',
     tag: 'Knowledge',
     title: 'Ask the question. See the proof.',
-    text: 'Unified data and document search. Ask connects directly to your ERP transactional database alongside your policy repositories.',
+    text: 'Connects your ERP data and document repositories, and isolates the exact proof on demand.',
     points: ['One ERP connector fetches live transactional records', 'Scans unstructured policy and document stores', 'Isolates the exact database entry or document clause for validation'],
     question: 'Show the policy for customer credit limits.',
     to: '/ask.html',
@@ -42,7 +42,7 @@ export const showcase = [
     name: 'Insight',
     tag: 'Smart & Trusted Analytics',
     title: 'Data and policy, analysed together.',
-    text: 'Combined context and analytics. Insight combines transactional data with policy compliance in a single analytics query.',
+    text: 'Combines transactional data with policy limits and returns charts, tables, SQL, and reasoning.',
     points: ['Queries policy limits and live transactions in one shot', 'Automated graphs, visual tables, SQL, and structured reasoning', 'A unified data store for fast, accurate answers'],
     question: 'Give me profit, margin, cost and tax by quarter.',
     to: '/insight.html',
@@ -52,7 +52,7 @@ export const showcase = [
     name: 'Watch',
     tag: 'Autonomous Monitoring and Alerts',
     title: 'The real action engine.',
-    text: 'Proactive action and anomaly alerts. Watch monitors operations continuously and notifies teams before critical business incidents occur.',
+    text: 'Monitors limits, IoT metrics, and compliance, and notifies teams across instant messengers.',
     points: ['Custom targets: what to watch, from ledgers to sensor telemetry', 'Custom triggers: real-time events, schedules, or thresholds', 'Custom logic: aggregations and agentic workflows that cut false positives'],
     question: 'Alert me when a distributor reaches 80% of the target required to qualify for the scheme.',
     to: '/watch.html',
@@ -112,9 +112,9 @@ export const flow = {
   ],
 }
 
-// Two example questions per product, from the TEXOL demo data used on /try.
+// Two example questions per product from the /try list, other than the ones the hero demo plays.
 export const useCases = [
-  { product: 'ask', questions: ['What is the refund request period?', 'What are the differences between TEXOL Start, Growth, and Enterprise?'] },
-  { product: 'insight', questions: ['Which product had the highest revenue in March 2026?', 'What was the total Europe revenue in April 2026?'] },
+  { product: 'ask', questions: ['How long is the TEXOL Start trial?', 'What should I do if I cannot sign in?'] },
+  { product: 'insight', questions: ['What are the differences between TEXOL Start, Growth, and Enterprise?', 'Compare the support commitments for Start, Growth, and Enterprise.'] },
   { product: 'watch', questions: ['Which invoice is overdue?', 'Which products are running low on stock?'] },
 ]

@@ -1,10 +1,15 @@
+import { Link } from 'react-router-dom'
+
 function ContactStrip({ title, text }) {
   return (
     <section className="contact-strip">
       <div className="container">
         <h2>{title}</h2>
         <p>{text}</p>
-        <a className="button primary" href="mailto:aslam@texolgulf.com">Email aslam@texolgulf.com ↗</a>
+        <div className="contact-strip-actions">
+          <Link className="button primary" to="/try.html">Try for free</Link>
+          <Link className="button ghost" to="/contact.html">Contact sales</Link>
+        </div>
       </div>
     </section>
   )
