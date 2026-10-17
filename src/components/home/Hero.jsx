@@ -100,7 +100,7 @@ function AskResult({ item }) {
             <span key={source} style={{ '--d': `${300 + index * 90}ms` }}>
               <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 2.5h6.5L15 6v11.5H5z M11.5 2.5V6H15" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>
               <b>{name}</b>{section && <small>{section}</small>}
-              <i>{index + 1}</i>
+              <i>[{index + 1}]</i>
             </span>
           )
         })}

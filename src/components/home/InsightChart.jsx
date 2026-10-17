@@ -13,6 +13,8 @@ function axisTicks(max) {
   return Array.from({ length: Math.round(top / step) + 1 }, (_, index) => index * step)
 }
 
+const shortSar = value => (value >= 1e6 ? `${(value / 1e6).toFixed(2)}M` : `${Math.round(value / 1e3)}K`)
+
 const tickLabel = value => (value === 0 ? 'SAR 0' : value >= 1e6 ? `SAR ${value / 1e6}M` : `SAR ${value / 1e3}K`)
 
 function InsightChart({ chart }) {
@@ -59,6 +61,7 @@ function InsightChart({ chart }) {
                 {row.values.map((value, series) => (
                   <b key={series} className={`s${series}`} style={{ width: percent(value), animationDelay: `${index * 60}ms` }} title={formatSar(value)}></b>
                 ))}
+                <em className="ic-val" style={{ left: `calc(${row.values[0] / top} * (100% - 52px))` }}>{shortSar(row.values[0])}</em>
               </div>
             </div>
           ))}
