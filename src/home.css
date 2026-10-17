@@ -125,9 +125,9 @@
 
 .home .hx-stage {
   position: relative; display: flex; flex-direction: column;
-  height: 700px; border-radius: 24px; background: #f7f7f6; border: 1px solid var(--line); overflow: hidden;
+  height: 640px; border-radius: 24px; background: #f7f7f6; border: 1px solid var(--line); overflow: hidden;
 }
-.home .hx-log { flex: 1; min-height: 0; width: min(780px, 100% - 48px); margin: 0 auto; padding: 36px 0 12px; display: flex; flex-direction: column; gap: 18px; overflow-y: auto; scrollbar-width: none; }
+.home .hx-log { flex: 1; min-height: 0; width: min(780px, 100% - 48px); margin: 0 auto; padding: 24px 0 10px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; scrollbar-width: none; }
 .home .hx-log::-webkit-scrollbar { display: none; }
 .home .hx-q.typing { box-shadow: 0 0 0 1px var(--line-strong); background: #fff; }
 .home .hx-q { align-self: flex-end; transition: background .3s, box-shadow .3s; margin: 0; max-width: 80%; padding: 11px 18px; border-radius: 18px; background: #e9ebef; color: var(--text); font-size: 15px; animation: hc-rise .35s ease both; }
@@ -145,7 +145,7 @@
 /* Result tiles shared by ask and insight */
 .home .hx-ask, .home .hx-insight { display: grid; gap: 12px; }
 .home .hx-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.home .hx-facts > div { display: grid; gap: 4px; padding: 14px 18px; animation: hc-rise .5s var(--d, 0ms) ease both; }
+.home .hx-facts > div { display: grid; gap: 4px; padding: 10px 18px; animation: hc-rise .5s var(--d, 0ms) ease both; }
 .home .hx-facts > div + div { border-left: 1px solid var(--line); }
 .home .hx-facts > div:first-child { padding-left: 0; }
 .home .hx-facts strong { font-family: var(--display); font-weight: 400; font-size: 26px; letter-spacing: -.035em; line-height: 1.1; color: #111; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -169,7 +169,7 @@
 .home .hx-caret { display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -3px; background: var(--text); animation: hc-blink 1s steps(1) infinite; }
 
 /* Insight chart */
-.home .ic { padding: 20px 22px 14px; border-radius: 18px; background: #fff; border: 1px solid var(--line); }
+.home .ic { padding: 16px 22px 12px; border-radius: 18px; background: #fff; border: 1px solid var(--line); }
 .home .ic-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .home .ic-head strong { display: block; font-size: 15px; font-weight: 600; }
 .home .ic-head small { color: var(--faint); font-size: 12.5px; }
