@@ -56,9 +56,9 @@
 
 .home .hx { position: relative; isolation: isolate; padding: 64px 0 72px; overflow-x: clip; }
 .home .hx > .container { position: relative; z-index: 1; }
-/* Stripe-style ribbon: runs under the transparent header, fades out to the left and bottom. */
+/* Stripe-style ribbon: runs under the transparent header and behind the demo card, fades out to the left and bottom. */
 .home .hx-ribbon {
-  position: absolute; z-index: 2; top: -68px; right: 0; width: 64vw; height: 700px; pointer-events: none;
+  position: absolute; z-index: 0; top: -68px; right: 0; width: 64vw; height: 700px; pointer-events: none;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 38%), linear-gradient(180deg, #000 74%, transparent 100%);
   -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0, #000 38%), linear-gradient(180deg, #000 74%, transparent 100%); mask-composite: intersect;
   animation: hx-ribbon-in 1.6s .2s ease both;
@@ -581,7 +581,7 @@
   .home .hx { padding: 40px 0 48px; }
   .home .hx-top { margin-bottom: 28px; }
   .home .hx h1 { margin: 18px 0 24px; font-size: clamp(36px, 10vw, 46px); }
-  .home .hx-ribbon { z-index: 0; width: 115vw; right: -30vw; height: 520px; opacity: .55; }
+  .home .hx-ribbon { width: 115vw; right: -30vw; height: 520px; opacity: .55; }
   .home .hx-card { border-radius: 24px; padding: 6px; }
   .home .hx-tabs button { height: 40px; }
   .home .hx-tabs .pmark { --pm: 14px; }
