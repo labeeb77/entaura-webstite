@@ -8,7 +8,7 @@ function CtaBand() {
       <h2>Transform your enterprise today.</h2>
       <p>See entaura.ai working on your own policies, documents, and transactional data.</p>
       <div className="h-actions">
-        <Link className="button primary" to="/try.html">Try for free <span>↗</span></Link>
+        <Link className="button primary" to="/try.html">Try Entaura <span>↗</span></Link>
         <Link className="button ghost" to="/contact.html">Contact sales</Link>
       </div>
     </section>

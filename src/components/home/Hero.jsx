@@ -326,7 +326,7 @@ function Hero() {
             </span>
           </h1>
           <div className="hx-actions">
-            <Link className="button primary" to="/try.html">Try for free</Link>
+            <Link className="button primary" to="/try.html">Try Entaura</Link>
             <Link className="button ghost" to="/contact.html">Contact sales</Link>
           </div>
         </div>
@@ -371,7 +371,7 @@ function Hero() {
                   <button key={entry.q || entry.label} className={index === questionIndex ? 'on' : ''} onClick={() => play(product, index, true)}>{entry.q || entry.label}</button>
                 ))}
               </div>
-              <Link className="hx-dock-cta" to="/try.html">Try for free</Link>
+              <Link className="hx-dock-cta" to="/try.html">Try Entaura</Link>
             </div>
           </div>
         </div>

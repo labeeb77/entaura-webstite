@@ -7,7 +7,7 @@ function ContactStrip({ title, text }) {
         <h2>{title}</h2>
         <p>{text}</p>
         <div className="contact-strip-actions">
-          <Link className="button primary" to="/try.html">Try for free</Link>
+          <Link className="button primary" to="/try.html">Try Entaura</Link>
           <Link className="button ghost" to="/contact.html">Contact sales</Link>
         </div>
       </div>
