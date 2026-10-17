@@ -324,12 +324,16 @@ function Hero() {
     return () => clearTimeout(timer)
   }, [live, phase, typed, streamed, question.length, answerLength, thinkFor, run])
 
-  // Then move to the next question, and to the next product after the last.
+  // Then move to the next question. Left alone, the demo also moves on to the
+  // next product; after a click it keeps cycling the chosen product's
+  // questions. Hovering pauses ask and insight answers so they can be read,
+  // but watch keeps going so each alert flows into the next.
   useEffect(() => {
-    if (!live || !auto || paused || phase !== 'done') return undefined
+    if (!live || phase !== 'done' || (paused && key !== 'watch')) return undefined
     const timer = setTimeout(() => {
       if (questionIndex + 1 < entries.length) play(product, questionIndex + 1)
-      else play((product + 1) % products.length, 0)
+      else if (auto) play((product + 1) % products.length, 0)
+      else play(product, 0)
     }, holdFor[key])
     return () => clearTimeout(timer)
   }, [live, auto, paused, phase, key, questionIndex, product, run, play, entries.length])
