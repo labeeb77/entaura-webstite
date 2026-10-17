@@ -28,7 +28,7 @@ function ConnectorDiagram() {
         </div>
       </div>
       <div className="diagram-foot">
-        <span><b></b> 600+ connection paths</span>
+        <span><b></b> 500+ connection paths</span>
         <span><b></b> Alerts via instant messengers</span>
       </div>
     </div>
