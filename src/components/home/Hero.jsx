@@ -42,7 +42,18 @@ function Rich({ text, limit = Infinity }) {
 
 const richLength = text => parseRich(text).reduce((total, segment) => total + segment.text.length, 0)
 
-// The rotating word: the old word blurs out upward while the new one comes into focus.
+// Splits a word into letters so each can slide on its own.
+function Letters({ word, mode }) {
+  return (
+    <span className={`hx-word ${mode}`}>
+      {[...word].map((letter, index) => (
+        <span key={index} className="hx-ch" style={{ '--i': index }}>{letter === ' ' ? '\u00a0' : letter}</span>
+      ))}
+    </span>
+  )
+}
+
+// The rotating word: letters of the old word slide up and out while the new ones cascade in.
 function Rotator({ reduced }) {
   const [index, setIndex] = useState(0)
   const [previous, setPrevious] = useState(null)
@@ -58,14 +69,14 @@ function Rotator({ reduced }) {
 
   useEffect(() => {
     if (previous === null) return undefined
-    const timer = setTimeout(() => setPrevious(null), 700)
+    const timer = setTimeout(() => setPrevious(null), 1100)
     return () => clearTimeout(timer)
   }, [previous])
 
   return (
     <span className="hx-rot">
-      {previous !== null && <span key={`out-${previous}-${index}`} className="hx-word out">{heroWords[previous]}</span>}
-      <span key={`in-${index}`} className={`hx-word${previous !== null ? ' in' : ''}`}>{heroWords[index]}</span>
+      {previous !== null && <Letters key={`out-${previous}-${index}`} word={heroWords[previous]} mode="out" />}
+      <Letters key={`in-${index}`} word={heroWords[index]} mode={previous !== null ? 'in' : 'still'} />
     </span>
   )
 }
