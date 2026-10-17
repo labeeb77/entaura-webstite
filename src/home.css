@@ -127,6 +127,10 @@
   position: relative; display: flex; flex-direction: column;
   height: 640px; border-radius: 24px; background: #f7f7f6; border: 1px solid var(--line); overflow: hidden;
 }
+/* A soft orb in the panel's top-right corner, half hidden by the edge, in the active product's colours. */
+.home .hx-corner-orb { position: absolute; z-index: 0; top: -84px; right: -84px; width: 230px; height: 230px; opacity: .5; pointer-events: none; animation: hx-orb-in .9s ease both; }
+@keyframes hx-orb-in { from { opacity: 0; transform: scale(.9); } }
+.home .hx-log, .home .hx-wf, .home .hx-dock { position: relative; z-index: 1; }
 .home .hx-log { flex: 1; min-height: 0; width: min(780px, 100% - 48px); margin: 0 auto; padding: 24px 0 10px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; scrollbar-width: none; }
 .home .hx-log::-webkit-scrollbar { display: none; }
 .home .hx-q.typing { box-shadow: 0 0 0 1px var(--line-strong); background: #fff; }
@@ -586,6 +590,7 @@
   .home .hx-tabs button { height: 40px; }
   .home .hx-tabs .pmark { --pm: 14px; }
   .home .hx-stage { height: auto; min-height: 560px; border-radius: 20px; }
+  .home .hx-corner-orb { display: none; }
   .home .ic-copy { display: none; }
   .home .ic-axis small:nth-child(even) { display: none; }
   .home .ic-how { flex-wrap: wrap; text-align: left; }
@@ -640,5 +645,5 @@
 @media (prefers-reduced-motion: reduce) {
   .home .h-marquee-track, .home .fl-core.is-active > .orb, .home .fl-core.is-active span { animation: none; }
   .home .reveal { opacity: 1; transform: none; transition: none; }
-  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-actions, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::before, .home .hx-badge::after, .home .hx-card, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-reason-steps li, .home .hx-turn, .home .ic-cval, .home .hx-wf * { animation: none !important; }
+  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-actions, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::before, .home .hx-badge::after, .home .hx-card, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-corner-orb, .home .hx-corner-orb::before, .home .hx-reason-steps li, .home .hx-turn, .home .ic-cval, .home .hx-wf * { animation: none !important; }
 }

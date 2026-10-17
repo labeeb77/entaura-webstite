@@ -373,6 +373,7 @@ function Hero() {
           </div>
 
           <div className={`hx-stage tone-${key}`}>
+            <i key={`orb-${key}`} className={`orb ${key} hx-corner-orb`} aria-hidden="true"></i>
             {key === 'watch' ? (
               <WatchFlow key={`${questionIndex}-${run}`} flow={item} live={live} reduced={reduced} onDone={flowDone} />
             ) : (
