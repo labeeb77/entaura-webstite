@@ -242,7 +242,6 @@ function WatchFlow({ flow, live, reduced, onDone }) {
 function Hero() {
   const reduced = useReducedMotion()
   const card = useRef(null)
-  const log = useRef(null)
   const [product, setProduct] = useState(0)
   const [questionIndex, setQuestionIndex] = useState(0)
   const [run, setRun] = useState(0)
@@ -309,12 +308,6 @@ function Hero() {
 
   const flowDone = useCallback(() => setPhase('done'), [])
 
-  // Keep the newest part of the answer in view as it streams.
-  useEffect(() => {
-    const element = log.current
-    if (element) element.scrollTop = element.scrollHeight
-  }, [phase, streamed])
-
   const typing = phase === 'typing'
   const finished = phase === 'done'
 
@@ -352,7 +345,7 @@ function Hero() {
             {key === 'watch' ? (
               <WatchFlow key={`${questionIndex}-${run}`} flow={item} live={live} reduced={reduced} onDone={flowDone} />
             ) : (
-              <div className="hx-log" ref={log} key={`${key}-${questionIndex}-${run}`}>
+              <div className="hx-log" key={`${key}-${questionIndex}-${run}`}>
                 {(!typing || typed > 0) && (
                   <p className={`hx-q${typing ? ' typing' : ''}`}>
                     {typing ? item.q.slice(0, typed) : item.q}

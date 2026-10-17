@@ -128,11 +128,10 @@
 
 .home .hx-stage {
   position: relative; display: flex; flex-direction: column;
-  height: 620px; border-radius: 24px; background: #f7f7f6; border: 1px solid var(--line); overflow: hidden;
+  height: 700px; border-radius: 24px; background: #f7f7f6; border: 1px solid var(--line); overflow: hidden;
 }
-.home .hx-log { flex: 1; min-height: 0; width: min(780px, 100% - 48px); margin: 0 auto; padding: 28px 0 12px; display: flex; flex-direction: column; gap: 18px; overflow-y: auto; scrollbar-width: none; }
+.home .hx-log { flex: 1; min-height: 0; width: min(780px, 100% - 48px); margin: 0 auto; padding: 36px 0 12px; display: flex; flex-direction: column; gap: 18px; overflow-y: auto; scrollbar-width: none; }
 .home .hx-log::-webkit-scrollbar { display: none; }
-.home .hx-log > :first-child { margin-top: auto; }
 .home .hx-q.typing { box-shadow: 0 0 0 1px var(--line-strong); background: #fff; }
 .home .hx-q { align-self: flex-end; transition: background .3s, box-shadow .3s; margin: 0; max-width: 80%; padding: 11px 18px; border-radius: 18px; background: #e9ebef; color: var(--text); font-size: 15px; animation: hc-rise .35s ease both; }
 .home .hx-thinking { display: flex; align-items: center; gap: 5px; color: var(--faint); font-size: 14px; animation: hc-rise .3s ease both; }
@@ -553,7 +552,7 @@
   .home .hx-ribbon { width: 115vw; right: -30vw; height: 520px; opacity: .55; }
   .home .hx-card { border-radius: 24px; padding: 6px; }
   .home .hx-tabs button { height: 40px; font-size: 13px; gap: 7px; }
-  .home .hx-stage { height: 600px; border-radius: 20px; }
+  .home .hx-stage { height: auto; min-height: 560px; border-radius: 20px; }
   .home .ic-copy { display: none; }
   .home .ic-axis small:nth-child(even) { display: none; }
   .home .ic-how { flex-wrap: wrap; text-align: left; }
@@ -561,7 +560,6 @@
   .home .hx-dock { flex-direction: column; align-items: stretch; gap: 10px; padding: 10px 10px 12px; }
   .home .hx-chips { justify-content: flex-start; }
   .home .hx-dock-cta { text-align: center; }
-  .home .hx-stage.tone-watch { height: auto; }
   .home .hx-wf { grid-template-columns: 1fr; gap: 22px; padding-top: 16px; }
   .home .hx-wf-setup { padding: 14px; gap: 12px; }
   .home .hx-wf-prompt { font-size: 14.5px; min-height: 0; }
@@ -572,7 +570,7 @@
   .home .hx-ls-clock strong { font-size: 64px; }
   .home .hx-ls-status { padding: 0 22px; }
   .home .hx-ls-island.live, .home .hx-ls-island.got { width: 112px; }
-  .home .hx-log { padding-top: 20px; }
+  .home .hx-log { padding-top: 24px; }
   .home .hx-a > p { font-size: 15.5px; }
   .home .hx-facts > div { padding: 10px 10px; }
   .home .hx-facts strong { font-size: 18px; }
