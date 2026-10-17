@@ -10,11 +10,8 @@ import InsightChart from './InsightChart.jsx'
 const products = ['ask', 'insight', 'watch']
 const typeSpeed = 22
 const streamStep = 3
-const thinkingText = {
-  ask: 'Searching policies and documents…',
-  insight: 'Running 1 query on sales_invoices…',
-  watch: 'Checking live levels against your limits…',
-}
+// How long each reasoning step takes to tick off while the demo thinks.
+const stepTime = 380
 // How long a finished answer stays before the demo moves on.
 const holdFor = { ask: 4200, insight: 6500, watch: 4500 }
 
@@ -81,6 +78,43 @@ function Rotator({ reduced }) {
   )
 }
 
+const tick = <svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+
+// The steps behind an answer: ticked off one by one while thinking, then
+// folded into a single line that can be opened again.
+function Reasoning({ steps, thinking, reduced }) {
+  const [shown, setShown] = useState(reduced ? steps.length : 0)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!thinking || shown >= steps.length) return undefined
+    const timer = setTimeout(() => setShown(shown + 1), stepTime)
+    return () => clearTimeout(timer)
+  }, [thinking, shown, steps.length])
+
+  const list = (count, running) => (
+    <ol className="hx-reason-steps">
+      {steps.slice(0, count).map((step, index) => (
+        <li key={step} className={running && index === count - 1 && shown < steps.length ? 'run' : 'done'}>
+          <i aria-hidden="true">{tick}</i>{step}
+        </li>
+      ))}
+    </ol>
+  )
+
+  if (thinking) return <div className="hx-reason live">{list(Math.min(shown + 1, steps.length), true)}</div>
+
+  return (
+    <div className={`hx-reason${open ? ' open' : ''}`}>
+      <button onClick={() => setOpen(value => !value)} aria-expanded={open}>
+        <i aria-hidden="true">{tick}</i>Reasoned in {steps.length} steps · {(steps.length * stepTime / 1000 + 0.1).toFixed(1)}s
+        <svg className="chev" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </button>
+      {open && list(steps.length, false)}
+    </div>
+  )
+}
+
 // Ask: the key facts as tiles, and the documents they came from.
 function AskResult({ item }) {
   return (
@@ -100,7 +134,7 @@ function AskResult({ item }) {
             <span key={source} style={{ '--d': `${300 + index * 90}ms` }}>
               <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 2.5h6.5L15 6v11.5H5z M11.5 2.5V6H15" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>
               <b>{name}</b>{section && <small>{section}</small>}
-              <i>[{index + 1}]</i>
+              <i>{index + 1}</i>
             </span>
           )
         })}
@@ -112,14 +146,6 @@ function AskResult({ item }) {
 function InsightResult({ item }) {
   return (
     <div className="hx-insight">
-      <div className="hx-facts">
-        {item.kpis.map((kpi, index) => (
-          <div key={kpi.label} className={kpi.up ? 'up' : ''} style={{ '--d': `${index * 90}ms` }}>
-            <strong>{kpi.value}</strong>
-            <span>{kpi.label}</span>
-          </div>
-        ))}
-      </div>
       <InsightChart chart={item.chart} />
     </div>
   )
@@ -230,7 +256,7 @@ function WatchFlow({ flow, live, reduced, onDone }) {
           <span className="hx-wf-scan"><i></i></span>
           <small>
             {status === 'draft' && 'Waiting for setup'}
-            {status === 'watching' && 'Checking live data against your logic…'}
+            {status === 'watching' && 'Checked 1,309 rows · watching…'}
             {status === 'met' && `Alert sent to ${notifyChannels.length} channels`}
           </small>
         </div>
@@ -259,6 +285,7 @@ function Hero() {
   const item = entries[questionIndex]
   const question = item.q || ''
   const answerLength = item.answer ? richLength(item.answer) : 0
+  const thinkFor = (item.steps?.length || 2) * stepTime + 350
   const live = inView && !reduced
 
   const play = useCallback((nextProduct, nextQuestion, byUser) => {
@@ -288,14 +315,14 @@ function Hero() {
         ? setTimeout(() => setTyped(typed + 1), typeSpeed)
         : setTimeout(() => setPhase('thinking'), 380)
     } else if (phase === 'thinking') {
-      timer = setTimeout(() => setPhase('answer'), 950)
+      timer = setTimeout(() => setPhase('answer'), thinkFor)
     } else if (phase === 'answer') {
       timer = streamed < answerLength
         ? setTimeout(() => setStreamed(Math.min(answerLength, streamed + streamStep)), 16)
         : setTimeout(() => setPhase('done'), 150)
     }
     return () => clearTimeout(timer)
-  }, [live, phase, typed, streamed, question.length, answerLength, run])
+  }, [live, phase, typed, streamed, question.length, answerLength, thinkFor, run])
 
   // Then move to the next question, and to the next product after the last.
   useEffect(() => {
@@ -352,14 +379,15 @@ function Hero() {
                     {typing && live && <i className="hx-caret"></i>}
                   </p>
                 )}
-                {phase === 'thinking' && (
-                  <div className="hx-thinking"><i></i><i></i><i></i><span>{thinkingText[key]}</span></div>
-                )}
-                {(phase === 'answer' || finished) && (
-                  <div className="hx-a">
-                    <p><Rich text={item.answer} limit={finished ? Infinity : streamed} /></p>
-                    {finished && key === 'ask' && <div className="hx-extra"><AskResult item={item} /></div>}
-                    {finished && key === 'insight' && <div className="hx-extra"><InsightResult item={item} /></div>}
+                {!typing && (
+                  <div className="hx-turn">
+                    <span className="hx-avatar" aria-hidden="true"><img src="/assets/entaura-mark.png" alt="" /></span>
+                    <div className="hx-a">
+                      <Reasoning steps={item.steps} thinking={phase === 'thinking'} reduced={reduced} />
+                      {(phase === 'answer' || finished) && <p><Rich text={item.answer} limit={finished ? Infinity : streamed} /></p>}
+                      {finished && key === 'ask' && <div className="hx-extra"><AskResult item={item} /></div>}
+                      {finished && key === 'insight' && <div className="hx-extra"><InsightResult item={item} /></div>}
+                    </div>
                   </div>
                 )}
               </div>

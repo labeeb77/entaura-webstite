@@ -10,6 +10,7 @@ export const heroDemos = {
     questions: [
       {
         q: 'What is the refund request period?',
+        steps: ['Understanding the question', 'Searching 2 policy documents', 'Found Refund_Policy_2026.pdf · §2.1'],
         answer: 'Customers can request a refund within ==30 days== of the invoice date. Requests after that need **manager approval**, and refunds go back to the **original payment method** [1].',
         facts: [
           { value: '30 days', label: 'Refund window' },
@@ -21,6 +22,7 @@ export const heroDemos = {
       },
       {
         q: 'How many annual leave days do full-time employees receive?',
+        steps: ['Understanding the question', 'Searching HR policies', 'Found HR_Leave_Policy_v4.pdf · §3'],
         answer: 'Full-time employees receive ==30 calendar days== of paid annual leave a year, accrued at **2.5 days per month** [1]. Up to **10 unused days** can be carried into the next year [1].',
         facts: [
           { value: '30 days', label: 'Paid leave a year' },
@@ -32,6 +34,7 @@ export const heroDemos = {
       },
       {
         q: 'What is the price of TEXOL Growth per user per month?',
+        steps: ['Understanding the question', 'Searching pricing documents', 'Found Pricing_2026.pdf · Growth plan'],
         answer: 'TEXOL Growth costs ==$24 per user per month== on annual billing, or **$28** on monthly billing [1]. Teams over **50 seats** qualify for volume pricing [1].',
         facts: [
           { value: '$24', label: 'Per user, billed yearly' },
@@ -48,12 +51,8 @@ export const heroDemos = {
     questions: [
       {
         q: 'Which product had the highest revenue in March 2026?',
+        steps: ['Reading sales_invoices', 'Comparing March with February', 'Ranked 5 products by revenue'],
         answer: '==TEXOL Enterprise== led March 2026 with **SAR 1.84M** in revenue, **38%** of the month\'s total and **+12%** on February.',
-        kpis: [
-          { value: 'SAR 1.84M', label: 'Top product revenue' },
-          { value: '38%', label: 'Share of March' },
-          { value: '+12%', label: 'vs. February', up: true },
-        ],
         chart: {
           title: 'Revenue by product',
           subtitle: 'March 2026 vs. February 2026 · SAR',
@@ -71,12 +70,8 @@ export const heroDemos = {
       },
       {
         q: 'What was the total Europe revenue in April 2026?',
+        steps: ['Reading sales_invoices', 'Filtering to Europe, March–April', 'Grouped 5 countries'],
         answer: 'Europe brought in ==SAR 2.96M== in April 2026, up **8.4%** on March. **Germany** contributed the most at **SAR 1.02M**.',
-        kpis: [
-          { value: 'SAR 2.96M', label: 'Europe, April' },
-          { value: '+8.4%', label: 'vs. March', up: true },
-          { value: 'Germany', label: 'Largest market' },
-        ],
         chart: {
           title: 'Europe revenue by country',
           subtitle: 'April 2026 vs. March 2026 · SAR',

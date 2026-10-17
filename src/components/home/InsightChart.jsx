@@ -15,6 +15,9 @@ function axisTicks(max) {
 
 const shortSar = value => (value >= 1e6 ? `${(value / 1e6).toFixed(2)}M` : `${Math.round(value / 1e3)}K`)
 
+const change = row => (row.values[0] / row.values[1] - 1) * 100
+const changeLabel = value => `${value >= 0 ? '+' : '−'}${Math.abs(value).toFixed(1)}%`
+
 const tickLabel = value => (value === 0 ? 'SAR 0' : value >= 1e6 ? `SAR ${value / 1e6}M` : `SAR ${value / 1e3}K`)
 
 function InsightChart({ chart }) {
@@ -24,6 +27,8 @@ function InsightChart({ chart }) {
   const ticks = axisTicks(Math.max(...chart.rows.flatMap(row => row.values)))
   const top = ticks[ticks.length - 1]
   const percent = value => `${(value / top) * 100}%`
+  // Bar view: the track keeps room on the right (--ic-pad) for value labels.
+  const along = value => `calc(${value / top} * (100% - var(--ic-pad)))`
 
   const copy = () => {
     navigator.clipboard?.writeText(chart.sql).catch(() => {})
@@ -57,18 +62,25 @@ function InsightChart({ chart }) {
             <div className={`ic-row${index === 0 ? ' top' : ''}`} key={row.label}>
               <span className="ic-label">{row.label}</span>
               <div className="ic-track">
-                {ticks.map(tick => <i key={tick} className="ic-grid" style={{ left: percent(tick) }}></i>)}
+                {ticks.map(tick => <i key={tick} className="ic-grid" style={{ left: along(tick) }}></i>)}
                 {row.values.map((value, series) => (
                   <b key={series} className={`s${series}`} style={{ width: percent(value), animationDelay: `${index * 60}ms` }} title={formatSar(value)}></b>
                 ))}
-                <em className="ic-val" style={{ left: `calc(${row.values[0] / top} * (100% - 52px))` }}>{shortSar(row.values[0])}</em>
+                <em className="ic-val" style={{ left: along(row.values[0]) }}>
+                  {shortSar(row.values[0])}
+                  <i className={change(row) >= 0 ? 'up' : 'down'}>{changeLabel(change(row))}</i>
+                </em>
+                <span className="ic-tip" role="presentation">
+                  <b>{row.label}</b>
+                  {chart.series.map((name, series) => <span key={name}><i className={`s${series}`}></i>{name}<strong>{formatSar(row.values[series])}</strong></span>)}
+                </span>
               </div>
             </div>
           ))}
           <div className="ic-row ic-axis">
             <span></span>
             <div className="ic-track">
-              {ticks.map(tick => <small key={tick} style={{ left: percent(tick) }}>{tickLabel(tick)}</small>)}
+              {ticks.map(tick => <small key={tick} style={{ left: along(tick) }}>{tickLabel(tick)}</small>)}
             </div>
           </div>
         </div>
@@ -87,6 +99,7 @@ function InsightChart({ chart }) {
                   {row.values.map((value, series) => (
                     <b key={series} className={`s${series}`} style={{ height: percent(value), animationDelay: `${index * 60}ms` }} title={formatSar(value)}></b>
                   ))}
+                  <em className="ic-cval" style={{ bottom: `calc(${percent(row.values[0])} + 6px)` }}>{shortSar(row.values[0])}</em>
                 </div>
                 <span>{row.label}</span>
               </div>
@@ -103,12 +116,12 @@ function InsightChart({ chart }) {
             </thead>
             <tbody>
               {chart.rows.map((row, index) => {
-                const change = (row.values[0] / row.values[1] - 1) * 100
+                const delta = change(row)
                 return (
                   <tr key={row.label} className={index === 0 ? 'top' : ''}>
                     <td>{row.label}</td>
                     {row.values.map((value, series) => <td key={series}>{formatSar(value)}</td>)}
-                    <td className={change >= 0 ? 'up' : 'down'}>{change >= 0 ? '+' : ''}{change.toFixed(1)}%</td>
+                    <td><span className={`ic-chip ${delta >= 0 ? 'up' : 'down'}`}>{changeLabel(delta)}</span></td>
                   </tr>
                 )
               })}
