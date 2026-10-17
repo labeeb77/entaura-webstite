@@ -8,21 +8,16 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-inner">
-        <Brand />
-        <div className="footer-contact">
-          <strong>iCohort Business Ventures Pvt. Ltd</strong>
-          <span>Call Us: <a href="tel:+919037972444">+91 903 797 2444</a></span>
-          <span>Email: <a href="mailto:aslam@texolgulf.com">aslam@texolgulf.com</a>, <a href="mailto:rj@texolgulf.com">rj@texolgulf.com</a></span>
-          <span className="saudi-office">
-            <strong>Saudi Arabia</strong>Call Us: <a href="tel:+966599823554">+966 59 982 3554</a>
-          </span>
+        <div className="footer-brand">
+          <Brand />
+          <span className="footer-powered">Powered by Texol</span>
         </div>
         <div className="footer-links">
           {footerLinks.map(link => (
             <Link key={link.to} to={link.to}>{link.label}</Link>
           ))}
         </div>
-        <small className="legal">{`© ${year} entaura.ai. Powered by Texol.`}</small>
+        <small className="legal">{`© ${year} entaura.ai`}</small>
       </div>
     </footer>
   )

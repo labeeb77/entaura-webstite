@@ -373,12 +373,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 
 .footer { border-top: 1px solid var(--line); padding: 56px 0 40px; background: var(--soft); }
 .footer-inner { display: flex; align-items: flex-start; gap: 48px; flex-wrap: wrap; }
-.footer-contact { display: flex; flex-direction: column; color: var(--body); font-size: 13px; gap: 2px; line-height: 1.6; }
-.footer-contact strong { color: var(--text); font-size: 14px; font-weight: 600; }
-.footer-contact a { color: var(--text); }
-.footer-contact .saudi-office { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
-.footer-contact .saudi-office strong { display: block; }
-.footer-links { display: flex; gap: 22px; font-size: 14px; color: var(--body); margin-left: auto; }
+.footer-brand { display: flex; align-items: center; gap: 16px; }
+.footer-powered { padding-left: 16px; border-left: 1px solid var(--line-strong); font-size: 13.5px; color: var(--faint); }
+.footer-links { display: flex; align-self: center; gap: 22px; font-size: 14px; color: var(--body); margin-left: auto; }
 .legal { width: 100%; padding-top: 24px; border-top: 1px solid var(--line); color: var(--faint); font-size: 12.5px; }
 
 /* ---------- Responsive ---------- */
