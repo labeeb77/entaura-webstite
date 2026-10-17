@@ -50,11 +50,11 @@ export const pageMeta = {
   },
   try: {
     file: 'try.html',
-    description: 'Try entaura ask for free: ask questions about sample policies, pricing, revenue, and invoices and see answers with their sources.',
-    ogTitle: 'Try entaura ask for free',
-    ogDescription: 'Ask a live entaura.ai demo about policies, pricing, revenue, and invoices.',
+    description: 'Try Entaura: a live demo on sample data.',
+    ogTitle: 'Try Entaura',
+    ogDescription: 'A live entaura.ai demo on sample data.',
     canonical: 'https://entaura.ai/try.html',
-    title: 'Try entaura ask | Free live demo',
+    title: 'Try Entaura | Live demo',
   },
   contact: {
     file: 'contact.html',
