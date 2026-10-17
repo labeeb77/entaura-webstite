@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { heroDemos, heroWords, notifyChannels } from '../../data/heroDemos.js'
 import { useReducedMotion } from '../../hooks/useReducedMotion.js'
 import ChannelIcon from '../ChannelIcon.jsx'
-import ProductMark from '../ProductMark.jsx'
 import HeroRibbon from './HeroRibbon.jsx'
 import InsightChart from './InsightChart.jsx'
 
@@ -343,7 +342,8 @@ function Hero() {
             <span className="hx-tab-pill" aria-hidden="true"></span>
             {products.map((name, index) => (
               <button key={name} role="tab" aria-selected={index === product} className={index === product ? 'on' : ''} onClick={() => play(index, 0, true)}>
-                <ProductMark product={name} />
+                <i className={`hx-tab-dot dot-${name}`} aria-hidden="true"></i>
+                <span><span className="hx-tab-brand">entaura </span>{name}</span>
               </button>
             ))}
           </div>
@@ -378,10 +378,7 @@ function Hero() {
                   <button key={entry.q || entry.label} className={index === questionIndex ? 'on' : ''} onClick={() => play(product, index, true)}>{entry.q || entry.label}</button>
                 ))}
               </div>
-              <div className="hx-note">
-                <span>Sample data · TEXOL demo</span>
-                <Link to="/try.html">Ask your own question →</Link>
-              </div>
+              <Link className="hx-dock-cta" to="/try.html">Try for free</Link>
             </div>
           </div>
         </div>
