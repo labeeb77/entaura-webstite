@@ -34,7 +34,9 @@ function Try() {
           </div>
         </div>
         <p className="try-note">
-          Answers are AI-generated from demo data. <Link to="/contact.html">Talk to our team →</Link>
+          Answers are AI-generated from demo data.
+          <a href={DEMO_URL} target="_blank" rel="noopener noreferrer">Open the demo in a new tab ↗</a>
+          <Link to="/contact.html">Talk to our team →</Link>
         </p>
       </section>
     </main>
