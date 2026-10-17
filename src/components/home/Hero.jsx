@@ -13,7 +13,7 @@ const streamStep = 3
 // How long each reasoning step takes to tick off while the demo thinks.
 const stepTime = 380
 // How long a finished answer stays before the demo moves on.
-const holdFor = { ask: 4200, insight: 6500, watch: 4500 }
+const holdFor = { ask: 4200, insight: 6500, watch: 1500 }
 
 // Splits "**bold**" and "==highlight==" markers into segments.
 function parseRich(text) {
