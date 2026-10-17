@@ -362,7 +362,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="hx-card" ref={card} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        <div className={`hx-card glow-${key}`} ref={card} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
           <div className="hx-tabs" role="tablist" aria-label="entaura.ai products" style={{ '--i': product }}>
             <span className="hx-tab-pill" aria-hidden="true"></span>
             {products.map((name, index) => (
@@ -384,7 +384,7 @@ function Hero() {
                   </p>
                 )}
                 {!typing && (
-                  <div className="hx-turn">
+                  <div className={`hx-turn${phase === 'thinking' ? ' thinking' : ''}`}>
                     <span className="hx-avatar" aria-hidden="true"><img src="/assets/entaura-mark.png" alt="" /></span>
                     <div className="hx-a">
                       <Reasoning steps={item.steps} thinking={phase === 'thinking'} reduced={reduced} />

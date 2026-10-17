@@ -112,7 +112,19 @@
 @keyframes hx-badge-spin { to { --hx-a: 360deg; } }
 
 /* Product card */
-.home .hx-card { border-radius: 28px; background: var(--card); padding: 4px; border: 1px solid var(--line); animation: hx-up 1s .35s cubic-bezier(.2, .7, .2, 1) both; }
+.home .hx-card { position: relative; isolation: isolate; border-radius: 28px; background: var(--card); padding: 4px; border: 1px solid var(--line); animation: hx-up 1s .35s cubic-bezier(.2, .7, .2, 1) both; }
+/* Product glow: a soft halo behind the card that blends to the active tab's colours. */
+@property --g1 { syntax: '<color>'; inherits: true; initial-value: #2ab7e3; }
+@property --g2 { syntax: '<color>'; inherits: true; initial-value: #1d4fd8; }
+.home .hx-card { --g1: #2ab7e3; --g2: #1d4fd8; transition: --g1 .8s ease, --g2 .8s ease; }
+.home .hx-card.glow-insight { --g1: #7ccf3a; --g2: #b7a33c; }
+.home .hx-card.glow-watch { --g1: #b77cf0; --g2: #f0a0a8; }
+.home .hx-card::before {
+  content: ""; position: absolute; z-index: -1; inset: 8% 4% -3%; border-radius: 40px; pointer-events: none;
+  background: radial-gradient(60% 70% at 25% 60%, var(--g1), transparent 70%), radial-gradient(60% 70% at 78% 45%, var(--g2), transparent 70%);
+  filter: blur(48px); opacity: .22; animation: hx-glow 9s ease-in-out infinite alternate;
+}
+@keyframes hx-glow { from { transform: scale(.97) translateY(6px); opacity: .18; } to { transform: scale(1.02) translateY(-4px); opacity: .26; } }
 .home .hx-tabs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 0; margin-bottom: 4px; }
 .home .hx-tab-pill {
   position: absolute; top: 0; bottom: 0; left: calc(var(--i) * 100% / 3); width: calc(100% / 3);
@@ -125,7 +137,8 @@
 
 .home .hx-stage {
   position: relative; display: flex; flex-direction: column;
-  height: 640px; border-radius: 24px; background: #f7f7f6; border: 1px solid var(--line); overflow: hidden;
+  height: 640px; border-radius: 24px; border: 1px solid var(--line); overflow: hidden;
+  background: radial-gradient(70% 34% at 50% 0%, color-mix(in srgb, var(--g1) 9%, transparent), transparent), #f7f7f6;
 }
 .home .hx-log { flex: 1; min-height: 0; width: min(780px, 100% - 48px); margin: 0 auto; padding: 24px 0 10px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; scrollbar-width: none; }
 .home .hx-log::-webkit-scrollbar { display: none; }
@@ -134,6 +147,8 @@
 .home .hx-turn { display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 14px; align-items: start; animation: hc-rise .3s ease both; }
 .home .hx-avatar { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 1px solid var(--line); box-shadow: 0 2px 6px -3px rgba(0, 0, 0, .15); }
 .home .hx-avatar img { width: 17px; height: 11px; object-fit: contain; }
+.home .hx-turn.thinking .hx-avatar { animation: hx-avatar 1.4s ease-out infinite; }
+@keyframes hx-avatar { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--g2) 35%, transparent); } 100% { box-shadow: 0 0 0 9px transparent; } }
 .home .hx-a { display: grid; gap: 14px; min-width: 0; padding-top: 3px; }
 
 /* Reasoning: steps ticked off while thinking, then folded into one line. */
@@ -640,5 +655,5 @@
 @media (prefers-reduced-motion: reduce) {
   .home .h-marquee-track, .home .fl-core.is-active > .orb, .home .fl-core.is-active span { animation: none; }
   .home .reveal { opacity: 1; transform: none; transition: none; }
-  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-actions, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::before, .home .hx-badge::after, .home .hx-card, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-reason-steps li, .home .hx-turn, .home .ic-cval, .home .hx-wf * { animation: none !important; }
+  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-actions, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::before, .home .hx-badge::after, .home .hx-card, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-card::before, .home .hx-turn.thinking .hx-avatar, .home .hx-reason-steps li, .home .hx-turn, .home .ic-cval, .home .hx-wf * { animation: none !important; }
 }
