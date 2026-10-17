@@ -8,6 +8,7 @@ export const logos = [
   { file: 'aws.png', name: 'AWS' },
   { file: 'postgresql.svg', name: 'PostgreSQL' },
   { file: 'mysql.svg', name: 'MySQL' },
+  { file: 'mssqlserver.png', name: 'MS SQL Server' },
   { file: 'mongodb.svg', name: 'MongoDB' },
   { file: 'zoho.png', name: 'Zoho' },
   { file: 'googledrive.svg', name: 'Google Drive' },
@@ -18,6 +19,10 @@ export const logos = [
   { file: 'slack.png', name: 'Slack' },
   { file: 'whatsapp.png', name: 'WhatsApp' },
   { file: 'basecamp.png', name: 'Basecamp' },
+  { file: 'vanforces.png', name: 'Vanforces' },
+  { file: 'taskforces.svg', name: 'Taskforces' },
+  { file: 'speakorder.png', name: 'Speak Order' },
+  { file: 'whatasol.png', name: 'Whatasol' },
 ]
 
 export const vision = [

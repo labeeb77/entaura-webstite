@@ -324,7 +324,7 @@
 .home .h-logos > p { margin: 0 auto 24px; text-align: center; color: var(--body); font-size: 14px; }
 .home .h-logos strong { color: var(--text); font-weight: 600; }
 .home .h-marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
-.home .h-marquee-track { display: flex; width: max-content; animation: marquee 50s linear infinite; }
+.home .h-marquee-track { display: flex; width: max-content; animation: marquee 66s linear infinite; }
 .home .h-marquee:hover .h-marquee-track { animation-play-state: paused; }
 .home .h-marquee ul { display: flex; gap: 40px; margin: 0; padding: 0 20px; list-style: none; }
 .home .h-marquee li { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; color: #6f6f6b; white-space: nowrap; filter: grayscale(1); opacity: .75; transition: filter .25s, opacity .25s; }
