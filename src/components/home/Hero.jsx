@@ -4,6 +4,7 @@ import { heroDemos, heroWords, notifyChannels } from '../../data/heroDemos.js'
 import { useReducedMotion } from '../../hooks/useReducedMotion.js'
 import ChannelIcon from '../ChannelIcon.jsx'
 import HeroRibbon from './HeroRibbon.jsx'
+import ProductMark from '../ProductMark.jsx'
 import InsightChart from './InsightChart.jsx'
 
 const products = ['ask', 'insight', 'watch']
@@ -335,8 +336,7 @@ function Hero() {
             <span className="hx-tab-pill" aria-hidden="true"></span>
             {products.map((name, index) => (
               <button key={name} role="tab" aria-selected={index === product} className={index === product ? 'on' : ''} onClick={() => play(index, 0, true)}>
-                <i className={`hx-tab-dot dot-${name}`} aria-hidden="true"></i>
-                <span><span className="hx-tab-brand">entaura </span>{name}</span>
+                <ProductMark product={name} />
               </button>
             ))}
           </div>

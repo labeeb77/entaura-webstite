@@ -119,12 +119,9 @@
   border-radius: 22px; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 6px 18px -10px rgba(20, 30, 70, .25);
   transition: left .5s cubic-bezier(.3, .8, .2, 1);
 }
-.home .hx-tabs button { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 9px; min-width: 0; padding: 0 6px; height: 44px; border: 0; background: none; cursor: pointer; border-radius: 22px; font: inherit; font-size: 15.5px; font-weight: 450; color: #52525b; transition: color .3s; }
-.home .hx-tabs button:hover, .home .hx-tabs button.on { color: #111; }
-.home .hx-tab-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; }
-.home .hx-tab-dot.dot-ask { background: linear-gradient(135deg, #2ab7e3, #1d4fd8); }
-.home .hx-tab-dot.dot-insight { background: linear-gradient(135deg, #7ccf3a, #b7a33c); }
-.home .hx-tab-dot.dot-watch { background: linear-gradient(135deg, #b77cf0, #f0a0a8); }
+.home .hx-tabs button { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; min-width: 0; padding: 0 6px; height: 44px; border: 0; background: none; cursor: pointer; border-radius: 22px; }
+.home .hx-tabs .pmark { --pm: 18px; opacity: .6; transition: opacity .3s; }
+.home .hx-tabs button:hover .pmark, .home .hx-tabs button.on .pmark { opacity: 1; }
 
 .home .hx-stage {
   position: relative; display: flex; flex-direction: column;
@@ -551,7 +548,8 @@
   .home .hx h1 { margin: 18px 0 24px; font-size: clamp(36px, 10vw, 46px); }
   .home .hx-ribbon { width: 115vw; right: -30vw; height: 520px; opacity: .55; }
   .home .hx-card { border-radius: 24px; padding: 6px; }
-  .home .hx-tabs button { height: 40px; font-size: 13px; gap: 7px; }
+  .home .hx-tabs button { height: 40px; }
+  .home .hx-tabs .pmark { --pm: 14px; }
   .home .hx-stage { height: auto; min-height: 560px; border-radius: 20px; }
   .home .ic-copy { display: none; }
   .home .ic-axis small:nth-child(even) { display: none; }
@@ -599,10 +597,6 @@
   .home .fl-steps { margin: 0 -16px; }
   .home .fl-steps button { padding: 0 14px 16px; }
   .home .fl-steps i { margin: 0 -14px 12px; }
-}
-
-@media (max-width: 520px) {
-  .home .hx-tab-brand { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
