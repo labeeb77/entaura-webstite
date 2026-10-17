@@ -332,12 +332,10 @@ function Hero() {
               <span className="hx-line muted"><span>into actionable insights.</span></span>
             </span>
           </h1>
-          <p className="hx-desc">Ask questions, analyse performance, and get alerts, all grounded in your ERP data and policies.</p>
           <div className="hx-actions">
             <Link className="button primary" to="/try.html">Try for free</Link>
             <Link className="button ghost" to="/contact.html">Contact sales</Link>
           </div>
-          <Link className="hx-live" to="/try.html"><i aria-hidden="true"></i>Live demo on sample data — no sign-up</Link>
         </div>
 
         <div className="hx-card" ref={card} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>

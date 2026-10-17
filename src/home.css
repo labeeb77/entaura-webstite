@@ -65,7 +65,7 @@
 }
 @keyframes hx-ribbon-in { from { opacity: 0; } }
 .home .hx-top { display: grid; justify-items: start; max-width: 760px; min-height: 480px; align-content: center; margin-bottom: 72px; }
-.home .hx h1 { margin: 30px 0 26px; font-size: clamp(46px, 5.6vw, 82px); line-height: 1; letter-spacing: -.05em; font-weight: 400; }
+.home .hx h1 { margin: 30px 0 40px; font-size: clamp(46px, 5.6vw, 82px); line-height: 1; letter-spacing: -.05em; font-weight: 400; }
 /* Each headline line rises out of its own mask. */
 .home .hx-line { display: block; clip-path: inset(-.1em -.2em -.2em -.1em); }
 .home .hx-line > span { display: inline-block; animation: hx-rise 1s cubic-bezier(.2, .8, .2, 1) both; }
@@ -84,13 +84,8 @@
 @keyframes hx-ch-in { from { transform: translateY(115%); } }
 @keyframes hx-ch-out { to { transform: translateY(-120%); } }
 
-/* Small live-demo note under the buttons. */
-.home .hx-live { display: inline-flex; align-items: center; gap: 9px; margin-top: 26px; font-size: 13.5px; color: var(--faint); transition: color .2s; animation: hx-up .9s .42s cubic-bezier(.2, .7, .2, 1) both; }
-.home .hx-live:hover { color: var(--text); }
-.home .hx-live i { width: 7px; height: 7px; border-radius: 50%; background: #22a06b; animation: hx-wf-pulse 1.8s ease-out infinite; }
 .home .hx-actions { display: flex; flex-wrap: wrap; gap: 10px; animation: hx-up .9s .3s cubic-bezier(.2, .7, .2, 1) both; }
 .home .hx-actions .button { padding: 13px 24px; font-size: 15px; }
-.home .hx-desc { margin: 0 0 34px; max-width: 460px; font-size: 18px; line-height: 1.55; color: var(--body); animation: hx-up .9s .2s cubic-bezier(.2, .7, .2, 1) both; }
 
 /* Badge: white pill whose hairline border carries a travelling light in the logo colours. */
 @property --hx-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
@@ -551,10 +546,8 @@
 @media (max-width: 760px) {
   .home .hx { padding: 56px 0 56px; }
   .home .hx-top { min-height: 0; margin-bottom: 40px; }
-  .home .hx h1 { margin: 22px 0 18px; font-size: clamp(40px, 11vw, 52px); }
-  .home .hx-live { margin-top: 20px; }
+  .home .hx h1 { margin: 22px 0 28px; font-size: clamp(40px, 11vw, 52px); }
   .home .hx-ribbon { width: 115vw; right: -30vw; height: 520px; opacity: .55; }
-  .home .hx-desc { font-size: 16.5px; margin-bottom: 28px; }
   .home .hx-card { border-radius: 24px; padding: 6px; }
   .home .hx-tabs button { height: 48px; }
   .home .hx-tabs .pmark { --pm: 16px; }
@@ -609,5 +602,5 @@
 @media (prefers-reduced-motion: reduce) {
   .home .h-marquee-track, .home .fl-core.is-active > .orb, .home .fl-core.is-active span { animation: none; }
   .home .reveal { opacity: 1; transform: none; transition: none; }
-  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-live, .home .hx-live i, .home .hx-actions, .home .hx-desc, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::before, .home .hx-badge::after, .home .hx-card, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-wf * { animation: none !important; }
+  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-actions, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::before, .home .hx-badge::after, .home .hx-card, .home .ic-track b, .home .ic-bars b, .home .hx-facts > div, .home .hx-wf * { animation: none !important; }
 }
