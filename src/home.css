@@ -357,6 +357,7 @@
 .home .sn-item:not(.active):hover { background: var(--soft); }
 .home .sn-tag { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
 .home .sn-item strong { font-family: var(--display); font-weight: 500; font-size: 21px; letter-spacing: -.02em; }
+.home .sn-item .pmark { --pm: 28px; }
 .home .sn-detail { padding: 0 22px 22px; animation: hc-rise .4s ease both; }
 .home .sn-detail p { margin: 0 0 14px; color: var(--body); font-size: 15px; }
 .home .sn-detail ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
@@ -591,6 +592,7 @@
   .home .h-showcase-nav { grid-template-columns: 1fr; }
   .home .sn-item button { padding: 14px 16px; }
   .home .sn-item strong { font-size: 18px; }
+  .home .sn-item .pmark { --pm: 24px; }
   .home .h-showcase-stage { padding: 16px; border-radius: 24px; }
   .home .stage-head { flex-direction: column; gap: 8px; }
   .home .sp-ask, .home .sp-insight, .home .sp-recipe { grid-template-columns: 1fr; }
