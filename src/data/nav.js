@@ -7,5 +7,6 @@ export const megaItems = [
 export const footerLinks = [
   { to: '/index.html#products', label: 'Products' },
   { to: '/solutions.html', label: 'Solutions' },
+  { to: '/integration.html', label: 'Integration' },
   { to: '/contact.html', label: 'Contact' },
 ]

@@ -85,12 +85,9 @@ function Header() {
               </Link>
             }
           />
+          <Link to="/integration.html">Integration</Link>
           <Link to="/index.html#platform">Platform</Link>
-          {isContact ? (
-            <Link to="/contact.html" aria-current="page">Contact</Link>
-          ) : (
-            <Link to="/index.html#contact">Contact</Link>
-          )}
+          <Link to="/contact.html" aria-current={isContact ? 'page' : undefined}>Contact</Link>
         </div>
         <Link className="button primary navcta" to="/contact.html">
           {isHome || isContact ? <>Talk to our team <span>↗</span></> : 'Talk to our team ↗'}

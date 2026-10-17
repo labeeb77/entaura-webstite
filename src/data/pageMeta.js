@@ -40,6 +40,14 @@ export const pageMeta = {
     canonical: 'https://entaura.ai/solutions.html',
     title: 'entaura.ai Solutions | Better decisions, compliance, and foresight',
   },
+  integration: {
+    file: 'integration.html',
+    description: 'How entaura.ai is implemented: a five-phase engagement, managed or customer-hosted deployment, and what your team brings.',
+    ogTitle: 'Integration | entaura.ai',
+    ogDescription: 'Our team scopes, onboards, and deploys entaura with yours, in your infrastructure or ours.',
+    canonical: 'https://entaura.ai/integration.html',
+    title: 'Integration | entaura.ai',
+  },
   try: {
     file: 'try.html',
     description: 'Try entaura ask for free: ask questions about sample policies, pricing, revenue, and invoices and see answers with their sources.',

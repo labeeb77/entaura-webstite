@@ -5,6 +5,7 @@ import ScrollManager from './components/ScrollManager.jsx'
 import { productPages } from './data/productPages.js'
 import Contact from './pages/Contact.jsx'
 import Home from './pages/Home.jsx'
+import Integration from './pages/Integration.jsx'
 import ProductPage from './pages/ProductPage.jsx'
 import Solutions from './pages/Solutions.jsx'
 import Try from './pages/Try.jsx'
@@ -21,6 +22,7 @@ function App() {
         <Route path="/watch.html" element={<ProductPage key="watch" page={productPages.watch} />} />
         <Route path="/insight.html" element={<ProductPage key="insight" page={productPages.insight} />} />
         <Route path="/solutions.html" element={<Solutions />} />
+        <Route path="/integration.html" element={<Integration />} />
         <Route path="/contact.html" element={<Contact />} />
         <Route path="/try.html" element={<Try />} />
       </Routes>
