@@ -102,11 +102,11 @@ function Logo({ mark, name }) {
   return <b className="pp-glyph" aria-hidden="true">{name.slice(0, 2)}</b>
 }
 
-export function Integrations({ eyebrow, title, gradient, groups, models, setup }) {
+export function Integrations({ eyebrow, title, gradient, text, groups, models, setup }) {
   return (
     <section className="section pp-section pp-soft">
       <div className="container">
-        <SectionHead eyebrow={eyebrow} title={title} gradient={gradient} />
+        <SectionHead eyebrow={eyebrow} title={title} gradient={gradient} text={text} />
         <div className="pp-int">
           {groups.map((group, index) => (
             <article key={group.title} className="reveal" style={{ '--delay': `${index * 90}ms` }}>
@@ -120,6 +120,13 @@ export function Integrations({ eyebrow, title, gradient, groups, models, setup }
               {group.items.length > 0 && (
                 <ul>
                   {group.items.map(([mark, name]) => <li key={name}><Logo mark={mark} name={name} />{name}</li>)}
+                  {group.more && (
+                    <li className="pp-more">
+                      <Link to="/integration.html" aria-label={`${group.more} more ${group.title.toLowerCase()}`}>
+                        <span aria-hidden="true"><i></i><i></i><i></i></span>{group.more} more
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               )}
             </article>

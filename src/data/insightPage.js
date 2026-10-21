@@ -81,10 +81,12 @@ export const insightPage = {
     eyebrow: 'Works with your systems',
     title: 'Built for the ERP',
     gradient: 'you already run.',
+    text: 'These are the most common. Entaura connects to hundreds of databases, apps, and file stores.',
     groups: [
       {
         title: 'Databases',
-        note: 'Connected with a read-only account and synced on a schedule.',
+        note: 'Connected with a read-only account and synced on a schedule. Plus hundreds of other sources.',
+        more: '100+',
         items: [['postgresql.svg', 'PostgreSQL'], ['mysql.svg', 'MySQL'], ['mssqlserver.png', 'SQL Server'], ['oracle.png', 'Oracle'], ['sap.svg', 'SAP HANA'], ['doc', 'Snowflake'], ['doc', 'Redshift'], ['doc', 'Db2'], ['mongodb.svg', 'MongoDB']],
       },
       {

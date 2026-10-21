@@ -81,6 +81,7 @@ export const askPage = {
     eyebrow: 'Works with your systems',
     title: 'Connects to the tools',
     gradient: 'you already use.',
+    text: 'These are the most common. Entaura connects to hundreds of databases, apps, and file stores.',
     groups: [
       {
         title: 'Files',
@@ -94,7 +95,8 @@ export const askPage = {
       },
       {
         title: 'Connectors',
-        note: 'Pick the folders, buckets, or labels to sync.',
+        note: 'Pick the folders, buckets, or labels to sync. Hundreds more are available.',
+        more: '100+',
         items: [['aws.png', 'AWS S3'], ['azure.png', 'Azure Blob'], ['googledrive.svg', 'Google Drive'], ['gmail.svg', 'Gmail'], ['doc', 'GitHub'], ['doc', 'GitLab'], ['doc', 'Manual FAQ']],
       },
     ],
