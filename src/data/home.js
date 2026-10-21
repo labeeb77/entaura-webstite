@@ -117,9 +117,9 @@ export const flow = {
   ],
 }
 
-// Two example questions per product from the /try list, other than the ones the hero demo plays.
+// Two example questions per product, in line with the product pages and the live demo on /try.
 export const useCases = [
-  { product: 'ask', questions: ['How long is the Nuvora Start trial?', 'What should I do if I cannot sign in?'] },
-  { product: 'insight', questions: ['What are the differences between Nuvora Start, Growth, and Enterprise?', 'Compare the support commitments for Start, Growth, and Enterprise.'] },
+  { product: 'ask', questions: ['What is our credit limit policy for new retailers?', 'How many leave days can employees carry over to next year?'] },
+  { product: 'insight', questions: ['Which vans are underperforming today?', 'Which promotions paid for their discount?'] },
   { product: 'watch', questions: ['Which invoice is overdue?', 'Which products are running low on stock?'] },
 ]
