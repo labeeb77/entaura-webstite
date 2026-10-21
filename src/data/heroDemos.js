@@ -1,5 +1,5 @@
 // Hero demo for each product. Answers are illustrative sample data for the
-// fictional TEXOL company. In answer text, **bold** marks a value and
+// fictional Nuvora company. In answer text, **bold** marks a value and
 // ==highlight== marks the key result.
 
 export const heroWords = ['policies', 'documents', 'transactional data']
@@ -33,16 +33,16 @@ export const heroDemos = {
         followups: ['Can unused leave be paid out?'],
       },
       {
-        q: 'What is the price of TEXOL Growth per user per month?',
+        q: 'What is the price of Nuvora Growth per user per month?',
         steps: ['Understanding the question', 'Searching pricing documents', 'Found Pricing_2026.pdf · Growth plan'],
-        answer: 'TEXOL Growth costs ==$24 per user per month== on annual billing, or **$28** on monthly billing [1]. Teams over **50 seats** qualify for volume pricing [1].',
+        answer: 'Nuvora Growth costs ==$24 per user per month== on annual billing, or **$28** on monthly billing [1]. Teams over **50 seats** qualify for volume pricing [1].',
         facts: [
           { value: '$24', label: 'Per user, billed yearly' },
           { value: '$28', label: 'Per user, billed monthly' },
           { value: '50+', label: 'Seats for volume pricing' },
         ],
         sources: ['[1] Pricing_2026.pdf · Growth plan'],
-        followups: ['What are the differences between TEXOL Start, Growth, and Enterprise?'],
+        followups: ['What are the differences between Nuvora Start, Growth, and Enterprise?'],
       },
     ],
   },
@@ -52,16 +52,16 @@ export const heroDemos = {
       {
         q: 'Which product had the highest revenue in March 2026?',
         steps: ['Reading sales_invoices', 'Comparing March with February', 'Ranked 5 products by revenue'],
-        answer: '==TEXOL Enterprise== led March 2026 with **SAR 1.84M** in revenue, **38%** of the month\'s total and **+12%** on February.',
+        answer: '==Nuvora Enterprise== led March 2026 with **SAR 1.84M** in revenue, **38%** of the month\'s total and **+12%** on February.',
         chart: {
           title: 'Revenue by product',
           subtitle: 'March 2026 vs. February 2026 · SAR',
           series: ['March 2026', 'February 2026'],
           rows: [
-            { label: 'TEXOL Enterprise', values: [1840000, 1643000] },
-            { label: 'TEXOL Growth', values: [1320000, 1280000] },
+            { label: 'Nuvora Enterprise', values: [1840000, 1643000] },
+            { label: 'Nuvora Growth', values: [1320000, 1280000] },
             { label: 'Services', values: [650000, 700000] },
-            { label: 'TEXOL Start', values: [610000, 590000] },
+            { label: 'Nuvora Start', values: [610000, 590000] },
             { label: 'Add-ons', values: [420000, 380000] },
           ],
           meta: '1 query · 5 ms',

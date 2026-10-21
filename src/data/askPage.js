@@ -1,5 +1,5 @@
 // entaura ask product page. Each section answers one question a visitor has.
-// Screen recreations use sample data for the fictional TEXOL company.
+// Screen recreations use sample data for the fictional Nuvora company.
 
 export const askPage = {
   hero: {

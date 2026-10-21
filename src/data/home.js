@@ -119,7 +119,7 @@ export const flow = {
 
 // Two example questions per product from the /try list, other than the ones the hero demo plays.
 export const useCases = [
-  { product: 'ask', questions: ['How long is the TEXOL Start trial?', 'What should I do if I cannot sign in?'] },
-  { product: 'insight', questions: ['What are the differences between TEXOL Start, Growth, and Enterprise?', 'Compare the support commitments for Start, Growth, and Enterprise.'] },
+  { product: 'ask', questions: ['How long is the Nuvora Start trial?', 'What should I do if I cannot sign in?'] },
+  { product: 'insight', questions: ['What are the differences between Nuvora Start, Growth, and Enterprise?', 'Compare the support commitments for Start, Growth, and Enterprise.'] },
   { product: 'watch', questions: ['Which invoice is overdue?', 'Which products are running low on stock?'] },
 ]

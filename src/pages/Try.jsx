@@ -16,7 +16,7 @@ function Try() {
       <section className="try-hero container">
         <span className="try-pill"><i className="orb small classic" aria-hidden="true"></i>Try Entaura</span>
         <h1>Ask your business anything. <span className="gradient-text">See the proof.</span></h1>
-        <p>A live demo on sample data for TEXOL, a fictional software company: pricing, policies, revenue, and invoices.</p>
+        <p>A live demo on sample data for a fictional software company: pricing, policies, revenue, and invoices.</p>
       </section>
 
       <section className="container">

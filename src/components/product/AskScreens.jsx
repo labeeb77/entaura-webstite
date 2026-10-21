@@ -2,7 +2,7 @@ import { useState } from 'react'
 import IntegrationIcon from '../IntegrationIcons.jsx'
 import AppWindow from './AppWindow.jsx'
 
-// HTML recreations of the entaura ask app, filled with sample TEXOL data.
+// HTML recreations of the entaura ask app, filled with sample Nuvora data.
 
 const knowledgeBases = [
   { name: 'HR Policies', path: '/project/hr-policies', files: '14 files' },
@@ -45,7 +45,7 @@ function Sidebar({ active }) {
       <small>Settings</small>
       <span><IntegrationIcon name="people" />Users and roles</span>
       <span><IntegrationIcon name="key" />API keys</span>
-      <div className="aw-user"><b>TA</b><div><strong>TEXOL Admin</strong><em>admin@texol.example</em></div></div>
+      <div className="aw-user"><b>NA</b><div><strong>Nuvora Admin</strong><em>admin@nuvora.example</em></div></div>
     </aside>
   )
 }
