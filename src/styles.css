@@ -212,7 +212,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .contact-strip-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
 /* Diagrams */
-.connector-diagram, .knowledge-diagram, .analytics-diagram {
+.connector-diagram, .analytics-diagram {
   position: relative;
   min-height: 420px;
   padding: 28px;
@@ -254,50 +254,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .diagram-core small { display: block; margin-top: 4px; color: var(--faint); font-size: 9px; }
 .diagram-foot { display: flex; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line-strong); color: var(--body); font-size: 11px; }
 .diagram-foot b { display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: var(--ask); }
-/* Ask: sources orbiting the core (components/KnowledgeDiagram.jsx) */
-.knowledge-diagram { display: flex; flex-direction: column; }
-.orbit { position: relative; width: min(100%, 440px); aspect-ratio: 1; margin: 28px auto 8px; container-type: inline-size; }
-.orbit-ring {
-  position: absolute; left: 50%; top: 50%;
-  width: calc(var(--s) * 1cqw); height: calc(var(--s) * 1cqw);
-  margin: calc(var(--s) * -.5cqw) 0 0 calc(var(--s) * -.5cqw);
-  border-radius: 50%; border: 1px solid rgba(120, 140, 255, .28);
-  transform: rotate(var(--offset));
-  animation: orbit-spin var(--d) linear infinite;
-}
-.orbit-ring.reverse { animation-direction: reverse; border-color: rgba(200, 140, 240, .26); }
-/* A soft spark that rides each ring. */
-.orbit-ring::after {
-  content: ""; position: absolute; left: 50%; top: -3px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%;
-  background: #6f9bff; box-shadow: 0 0 10px 3px rgba(111, 155, 255, .55);
-}
-.orbit-ring.reverse::after { background: #c38cf0; box-shadow: 0 0 10px 3px rgba(195, 140, 240, .5); }
-.orbit-item { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--a)) translateY(calc(var(--s) * -.5cqw)) rotate(calc(var(--a) * -1)); }
-.orbit-logo {
-  position: absolute; left: 0; top: 0; display: grid; place-items: center;
-  --chip: clamp(30px, 10cqw, 44px);
-  width: var(--chip); height: var(--chip); margin: calc(var(--chip) / -2) 0 0 calc(var(--chip) / -2); border-radius: 50%;
-  background: #fff; border: 1px solid var(--line); box-shadow: 0 6px 16px -8px rgba(20, 30, 70, .35);
-  transform: rotate(calc(var(--offset) * -1));
-  animation: orbit-counter var(--d) linear infinite;
-  transition: box-shadow .25s;
-}
-.orbit-ring.reverse .orbit-logo { animation-direction: reverse; }
-.orbit-logo img { width: 55%; height: 55%; object-fit: contain; }
-.orbit-logo:hover { box-shadow: 0 0 0 4px rgba(111, 155, 255, .18), 0 8px 18px -8px rgba(20, 30, 70, .4); }
-/* Ring and logo turn by equal and opposite amounts, so logos stay level. */
-@keyframes orbit-spin { from { transform: rotate(var(--offset)); } to { transform: rotate(calc(var(--offset) + 360deg)); } }
-@keyframes orbit-counter { from { transform: rotate(calc(var(--offset) * -1)); } to { transform: rotate(calc(var(--offset) * -1 - 360deg)); } }
-.orbit-core {
-  position: absolute; left: 50%; top: 50%; width: 22cqw; height: 22cqw; margin: -11cqw 0 0 -11cqw;
-  display: grid; place-items: center; border-radius: 50%; background: #fff; border: 1px solid var(--line);
-  box-shadow: 0 0 0 8px rgba(255, 255, 255, .7), 0 20px 40px -18px rgba(40, 70, 140, .45);
-}
-.orbit-core img { position: relative; width: 62%; }
-.orbit-core i { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(111, 155, 255, .5); animation: orbit-ping 3.2s ease-out infinite; }
-.orbit-core i + i { animation-delay: 1.6s; border-color: rgba(195, 140, 240, .5); }
-@keyframes orbit-ping { from { transform: scale(1); opacity: .9; } to { transform: scale(2.6); opacity: 0; } }
-.knowledge-answer { align-self: center; padding: 10px 14px; border-radius: 12px; font-size: 13px; background: var(--ask-tint); border: 1px solid #bfe8de; color: #146e5e; }
 .analytics-window { margin-top: 24px; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
 .analytics-top { display: flex; justify-content: space-between; color: var(--body); font-size: 12px; }
 .analytics-top b { color: var(--insight); font-weight: 600; font-size: 12px; }
@@ -411,7 +367,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .solution-detail-grid, .contact-layout { grid-template-columns: 1fr; }
   .contact-form { grid-template-columns: 1fr; }
   .contact-form .full { grid-column: auto; }
-  .connector-diagram, .knowledge-diagram, .analytics-diagram { min-height: 0; }
+  .connector-diagram, .analytics-diagram { min-height: 0; }
   .diagram-stage { gap: 6px; }
   .diagram-core { width: 100px; height: 100px; }
   .footer-links { margin-left: 0; }
@@ -439,7 +395,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .orb::before, .analytics-bars i, .orbit-ring, .orbit-logo, .orbit-core i { animation: none; }
+  .orb::before, .analytics-bars i { animation: none; }
 }
 
 /* ---------- Integration page ---------- */

@@ -13,7 +13,7 @@ export const pageMeta = {
   },
   ask: {
     file: 'ask.html',
-    description: 'entaura ask searches ERP records and policy documents together and returns the exact entry or clause behind every answer.',
+    description: 'entaura ask answers questions across your documents, spreadsheets, and live databases, with the exact source behind every claim.',
     ogTitle: 'entaura ask | Answers you can verify',
     canonical: 'https://entaura.ai/ask.html',
     title: 'entaura ask | Answers you can verify',

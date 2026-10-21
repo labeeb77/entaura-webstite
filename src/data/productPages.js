@@ -1,36 +1,4 @@
 export const productPages = {
-  ask: {
-    meta: 'ask',
-    hero: {
-      eyebrow: '01 / Knowledge',
-      title: 'Ask the question.',
-      gradientLines: ['See the proof.'],
-      text: 'Unified search across your ERP records and policy documents.',
-    },
-    detail: {
-      eyebrow: 'Unified data and document search',
-      title: 'One question across records and policies.',
-      paragraphs: [
-        'One ERP connector fetches live transactional records while Ask scans your policy and document stores. If a question is unclear, it asks what you mean first.',
-        'Each answer isolates the exact database entry or document clause, with confidence and relevance scores, so you can validate it.',
-      ],
-      diagram: 'knowledge',
-    },
-    examples: {
-      eyebrow: 'See Ask in action',
-      title: 'Questions',
-      gradient: 'it answers.',
-      items: [
-        '“Show the policy for customer credit limits.”',
-        '“Give total sales orders by distributor.”',
-        '“Which retailers buying biscuits are not buying our beverages?”',
-      ],
-    },
-    cta: {
-      title: 'Give your team answers they can verify.',
-      text: 'Tell us which records and policies your teams need to search.',
-    },
-  },
   insight: {
     meta: 'insight',
     hero: {
@@ -110,14 +78,6 @@ export const connectorColumns = {
     { type: 'engineering', badge: 'HR', label: 'HR & attendance' },
   ],
 }
-
-// Ask's connected sources, drawn as logos on three orbits around the core.
-// `size` is the ring diameter as a percentage of the diagram's width.
-export const knowledgeOrbits = [
-  { size: 44, duration: 38, logos: [['sap.svg', 'SAP'], ['googledrive.svg', 'Google Drive'], ['postgresql.svg', 'PostgreSQL'], ['outlook.png', 'Outlook']] },
-  { size: 70, duration: 56, logos: [['oracle.png', 'Oracle'], ['slack.png', 'Slack'], ['mysql.svg', 'MySQL'], ['googledocs.svg', 'Google Docs'], ['zoho.png', 'Zoho'], ['teams.png', 'Microsoft Teams']] },
-  { size: 96, duration: 80, logos: [['azure.png', 'Azure'], ['gmail.svg', 'Gmail'], ['mongodb.svg', 'MongoDB'], ['aws.png', 'AWS'], ['whatsapp.png', 'WhatsApp'], ['basecamp.png', 'Basecamp']] },
-]
 
 export const analyticsKpis = [
   { label: 'Revenue', value: '↑ 18.4%' },
