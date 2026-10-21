@@ -1,4 +1,5 @@
-import { contactEmail, interestOptions } from '../data/contact.js'
+import { contactEmail, contactPhone, interestOptions } from '../data/contact.js'
+import IntegrationIcon from './IntegrationIcons.jsx'
 
 function submitContact(event) {
   event.preventDefault()
@@ -26,6 +27,17 @@ function ContactLayout({ messageRows }) {
         <label className="full">Message<textarea name="message" rows={messageRows} required placeholder="What would you like to improve?"></textarea></label>
         <button className="button primary" type="submit">Send enquiry ↗</button>
       </form>
+      <p className="contact-or">Prefer email or a call?</p>
+      <div className="contact-direct">
+        <a href={`mailto:${contactEmail}`}>
+          <IntegrationIcon name="mail" />
+          <span><small>Email us</small><strong>{contactEmail}</strong><em>Write to us any time</em></span>
+        </a>
+        <a href={contactPhone.href}>
+          <IntegrationIcon name="phone" />
+          <span><small>Call us</small><strong>{contactPhone.label}</strong><em>Speak to our team</em></span>
+        </a>
+      </div>
     </div>
   )
 }

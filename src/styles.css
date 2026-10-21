@@ -252,6 +252,16 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--text); box-shadow: 0 0 0 3px rgba(11, 11, 11, .06); }
 .contact-form .full { grid-column: 1 / -1; }
 .contact-form .button { justify-self: start; }
+.contact-or { display: flex; align-items: center; gap: 14px; margin: 32px 0 14px; color: var(--faint); font-size: 13.5px; }
+.contact-or::before, .contact-or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.contact-direct { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.contact-direct a { display: flex; align-items: center; gap: 16px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 18px; background: #fff; min-width: 0; transition: border-color .2s, transform .2s; }
+.contact-direct a:hover { border-color: var(--text); transform: translateY(-1px); }
+.contact-direct .int-icon { flex: none; width: 44px; height: 44px; padding: 11px; border-radius: 12px; background: var(--card); color: var(--text); }
+.contact-direct span { display: grid; gap: 2px; min-width: 0; }
+.contact-direct small { color: var(--faint); font-size: 12.5px; }
+.contact-direct strong { font-size: 16.5px; font-weight: 600; overflow-wrap: anywhere; }
+.contact-direct em { color: var(--body); font-size: 13px; font-style: normal; }
 
 /* ---------- Footer ---------- */
 
@@ -297,6 +307,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .solution-detail-grid { grid-template-columns: 1fr; }
   .contact-form { grid-template-columns: 1fr; }
   .contact-form .full { grid-column: auto; }
+  .contact-direct { grid-template-columns: 1fr; }
   .footer-links { margin-left: 0; }
 }
 
