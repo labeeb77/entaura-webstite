@@ -20,10 +20,10 @@ export const pageMeta = {
   },
   watch: {
     file: 'watch.html',
-    description: 'entaura watch monitors limits, sensor data, and compliance continuously and alerts teams before incidents occur.',
-    ogTitle: 'entaura watch | Monitor changes before incidents',
+    description: 'entaura watch turns any Ask or Insight answer into a WhatsApp or Telegram alert: on a schedule, when the answer changes, or when a limit is crossed.',
+    ogTitle: 'entaura watch | Get told when it matters',
     canonical: 'https://entaura.ai/watch.html',
-    title: 'entaura watch | Monitor changes before incidents',
+    title: 'entaura watch | Get told when it matters',
   },
   insight: {
     file: 'insight.html',

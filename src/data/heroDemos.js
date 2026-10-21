@@ -90,14 +90,14 @@ export const heroDemos = {
     ],
   },
   watch: {
-    tag: 'Autonomous Monitoring and Alerts',
+    tag: 'Alerts',
     // Each flow sets up a watch (what, when, how), then shows the alert it sends.
     flows: [
       {
         label: 'High-value orders',
-        prompt: 'Alert me when a high-value order is added',
-        what: 'Sales orders · ERP',
-        when: 'Real-time event',
+        prompt: 'Notify me when a single order goes above SAR 100,000',
+        what: 'Insight answer · sales orders',
+        when: 'When a limit is crossed',
         how: 'Order value > SAR 100,000 · Credit Policy',
         alert: {
           title: 'A high-value order is added',
@@ -111,9 +111,9 @@ export const heroDemos = {
       },
       {
         label: 'Low stock',
-        prompt: 'Tell me when any product drops below its minimum stock',
-        what: 'Inventory · Riyadh warehouse',
-        when: 'Every 5 minutes',
+        prompt: 'Notify me when any product drops below its minimum stock',
+        what: 'Insight answer · Riyadh stock',
+        when: 'When the answer changes',
         how: 'Below minimum · days left from 7-day sales',
         alert: {
           title: 'Qamh Flour 5kg is below minimum',
@@ -127,8 +127,8 @@ export const heroDemos = {
       },
       {
         label: 'Overdue invoices',
-        prompt: 'Notify finance when an invoice passes its credit term',
-        what: 'Receivables · invoices',
+        prompt: 'Notify me every morning about overdue invoices',
+        what: 'Insight answer · receivables',
         when: 'Daily at 09:00',
         how: 'Past the 30-day term · Credit Policy §3',
         alert: {

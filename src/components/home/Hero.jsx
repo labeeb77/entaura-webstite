@@ -238,7 +238,7 @@ function WatchFlow({ flow, live, reduced, onDone }) {
     <div className="hx-wf">
       <div className="hx-wf-setup">
         <div className="hx-wf-top">
-          <strong>New watch</strong>
+          <strong>Notify me</strong>
           <span className={`hx-wf-status ${status}`}>
             <i></i>{status === 'draft' ? 'Draft' : status === 'watching' ? 'Enabled · watching' : 'Condition met'}
           </span>
@@ -248,16 +248,16 @@ function WatchFlow({ flow, live, reduced, onDone }) {
           {step === 0 && live && <i className="hx-caret"></i>}
         </p>
         <ul className="hx-wf-rows">
-          <SetupRow label="What to watch" value={flow.what} shown={step >= 1} icon={icons.what} />
-          <SetupRow label="When to check" value={flow.when} shown={step >= 2} icon={icons.when} />
-          <SetupRow label="How to decide" value={flow.how} shown={step >= 3} icon={icons.how} />
+          <SetupRow label="Starts from" value={flow.what} shown={step >= 1} icon={icons.what} />
+          <SetupRow label="When to tell me" value={flow.when} shown={step >= 2} icon={icons.when} />
+          <SetupRow label="Condition" value={flow.how} shown={step >= 3} icon={icons.how} />
         </ul>
         <div className={`hx-wf-run ${status}`}>
           <span className="hx-wf-scan"><i></i></span>
           <small>
             {status === 'draft' && 'Waiting for setup'}
-            {status === 'watching' && 'Checked 1,309 rows · watching…'}
-            {status === 'met' && `Alert sent to ${notifyChannels.length} channels`}
+            {status === 'watching' && 'Re-checking the answer…'}
+            {status === 'met' && 'Alert sent · reply STOP to cancel'}
           </small>
         </div>
       </div>

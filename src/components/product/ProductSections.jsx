@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
+import ChannelIcon from '../ChannelIcon.jsx'
 import IntegrationIcon from '../IntegrationIcons.jsx'
+import ProductMark from '../ProductMark.jsx'
 import SectionHead from '../SectionHead.jsx'
 
 // Sections shared by the product pages. Each one answers a visitor question.
@@ -95,6 +97,7 @@ export function Screens({ eyebrow, title, gradient, text, children }) {
 
 // A logo when there is one in /assets/integrations, a file badge otherwise.
 function Logo({ mark, name }) {
+  if (mark === 'telegram') return <ChannelIcon channel="telegram" size={22} />
   if (mark.includes('.')) return <img src={`/assets/integrations/${mark}`} alt="" loading="lazy" />
   return <b className="pp-glyph" aria-hidden="true">{name.slice(0, 2)}</b>
 }
@@ -109,17 +112,26 @@ export function Integrations({ eyebrow, title, gradient, groups, models, setup }
             <article key={group.title} className="reveal" style={{ '--delay': `${index * 90}ms` }}>
               <h3>{group.title}</h3>
               <p>{group.note}</p>
-              <ul>
-                {group.items.map(([mark, name]) => <li key={name}><Logo mark={mark} name={name} />{name}</li>)}
-              </ul>
+              {group.links && (
+                <div className="pp-int-links">
+                  {group.links.map(([to, product]) => <Link key={product} to={to}><ProductMark product={product} /><span>→</span></Link>)}
+                </div>
+              )}
+              {group.items.length > 0 && (
+                <ul>
+                  {group.items.map(([mark, name]) => <li key={name}><Logo mark={mark} name={name} />{name}</li>)}
+                </ul>
+              )}
             </article>
           ))}
         </div>
         <div className="pp-int-foot reveal">
-          <div>
-            <small>Works with your AI provider</small>
-            <ul>{models.map(([mark, name]) => <li key={name}><Logo mark={mark} name={name} />{name}</li>)}</ul>
-          </div>
+          {models && (
+            <div>
+              <small>Works with your AI provider</small>
+              <ul>{models.map(([mark, name]) => <li key={name}><Logo mark={mark} name={name} />{name}</li>)}</ul>
+            </div>
+          )}
           <p>{setup} <Link to="/integration.html">How integration works →</Link></p>
         </div>
       </div>

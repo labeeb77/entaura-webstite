@@ -199,61 +199,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .detail-grid h2 { font-size: clamp(34px, 4vw, 52px); line-height: 1.05; letter-spacing: -.04em; margin: 16px 0 22px; }
 .detail-grid p { color: var(--body); font-size: 17px; }
 
-.examples { padding-top: 0; }
-.example-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.example-card { padding: 28px; border-radius: 22px; background: var(--card); }
-.example-card p { margin: 0; color: var(--text); font-family: var(--display); font-size: 20px; line-height: 1.4; letter-spacing: -.01em; }
-
-
-
 .contact-strip { padding: 110px 0; text-align: center; background: var(--soft); border-top: 1px solid var(--line); }
 .contact-strip h2 { font-size: clamp(34px, 4.4vw, 52px); letter-spacing: -.04em; line-height: 1.05; margin: 0 0 16px; }
 .contact-strip p { color: var(--body); font-size: 18px; margin: 0 auto 30px; max-width: 600px; }
 .contact-strip-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-
-/* Diagrams */
-.connector-diagram {
-  position: relative;
-  min-height: 420px;
-  padding: 28px;
-  border-radius: 28px;
-  background: radial-gradient(60% 50% at 50% 55%, #eef4ff, transparent 75%), var(--card);
-  overflow: hidden;
-}
-.diagram-heading h3 { margin: 12px 0 6px; font-size: 26px; line-height: 1.1; letter-spacing: -.03em; }
-.diagram-heading p { margin: 0; color: var(--body); font-size: 14px; }
-.diagram-stage { position: relative; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 14px; min-height: 230px; margin-top: 18px; }
-.diagram-stage::before, .diagram-stage::after { content: ""; position: absolute; z-index: 0; top: 50%; width: 24%; border-top: 1px dashed var(--line-strong); }
-.diagram-stage::before { left: 24%; }
-.diagram-stage::after { right: 24%; }
-.connector-column { z-index: 1; display: grid; gap: 10px; }
-.connector-column.left { justify-items: end; }
-.connector-column.right { justify-items: start; }
-.tool-chip { display: flex; align-items: center; gap: 8px; width: max-content; max-width: 100%; padding: 7px 12px 7px 7px; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--text); font-size: 12px; }
-.tool-chip i { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: var(--ask-tint); color: var(--ask); font-size: 9px; font-style: normal; font-weight: 700; }
-.tool-chip.storage i { background: var(--insight-tint); color: var(--insight); }
-.tool-chip.marketing i, .tool-chip.engineering i { background: var(--peach-tint); color: var(--peach); }
-.tool-chip.sales i { background: var(--watch-tint); color: var(--watch); }
-.diagram-core {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  width: 126px;
-  height: 126px;
-  margin: auto;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid var(--line);
-  box-shadow: 0 0 0 10px rgba(255, 255, 255, .6), 0 20px 40px -20px rgba(40, 70, 140, .35);
-  text-align: center;
-}
-.diagram-core img { width: 42px; height: 27px; object-fit: contain; margin-bottom: 4px; }
-.diagram-core strong { font-family: var(--display); font-size: 14px; font-weight: 600; line-height: 1.05; }
-.diagram-core small { display: block; margin-top: 4px; color: var(--faint); font-size: 9px; }
-.diagram-foot { display: flex; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line-strong); color: var(--body); font-size: 11px; }
-.diagram-foot b { display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: var(--ask); }
 
 /* ---------- Solutions ---------- */
 
@@ -347,13 +296,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .navcta { display: none; }
 
   .detail-grid { grid-template-columns: 1fr; gap: 40px; }
-  .example-list, .industry-grid, .problem-grid { grid-template-columns: 1fr 1fr; }
+  .industry-grid, .problem-grid { grid-template-columns: 1fr 1fr; }
   .solution-detail-grid, .contact-layout { grid-template-columns: 1fr; }
   .contact-form { grid-template-columns: 1fr; }
   .contact-form .full { grid-column: auto; }
-  .connector-diagram { min-height: 0; }
-  .diagram-stage { gap: 6px; }
-  .diagram-core { width: 100px; height: 100px; }
   .footer-links { margin-left: 0; }
 }
 
@@ -363,16 +309,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .page-hero { padding: 80px 0 64px; }
   .page-hero h1 { font-size: clamp(42px, 12vw, 64px); }
   .page-hero p { font-size: 17px; }
-  .example-list, .industry-grid, .problem-grid { grid-template-columns: 1fr; }
+  .industry-grid, .problem-grid { grid-template-columns: 1fr; }
   .contact-section { padding: 80px 0; }
   .contact-form, .contact-office { padding: 22px; }
-  .diagram-stage { grid-template-columns: 1fr; gap: 10px; min-height: 0; }
-  .diagram-stage::before, .diagram-stage::after { display: none; }
   .connector-column.left, .connector-column.right { justify-items: center; }
-  .diagram-core { grid-row: 1; grid-column: 1; }
   .connector-column.left { grid-row: 2; }
   .connector-column.right { grid-row: 3; }
-  .diagram-foot { flex-direction: column; }
   .footer-inner { flex-direction: column; gap: 28px; }
 }
 

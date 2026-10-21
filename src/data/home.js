@@ -55,11 +55,11 @@ export const showcase = [
   {
     key: 'watch',
     name: 'Watch',
-    tag: 'Autonomous Monitoring and Alerts',
-    title: 'The real action engine.',
-    text: 'Monitors limits, IoT metrics, and compliance, and notifies teams across instant messengers.',
-    points: ['Custom targets: what to watch, from ledgers to sensor telemetry', 'Custom triggers: real-time events, schedules, or thresholds', 'Custom logic: aggregations and agentic workflows that cut false positives'],
-    question: 'Alert me when a distributor reaches 80% of the target required to qualify for the scheme.',
+    tag: 'Alerts from your answers',
+    title: 'Get told when it matters.',
+    text: 'Tap Notify me on any Ask or Insight answer and get it on WhatsApp or Telegram.',
+    points: ['On a schedule: the fresh answer every day, week, or hour', 'When the answer changes, or a number crosses your limit', 'Reply STOP at any time to cancel'],
+    question: 'Notify me when a distributor reaches 80% of the target required to qualify for the scheme.',
     to: '/watch.html',
   },
 ]
@@ -82,9 +82,9 @@ export const quarterTable = [
 ]
 
 export const watchRecipe = [
-  { step: 'What to watch', items: ['Financial ledgers', 'Procurement policies', 'Sales quotas', 'Sensor telemetry', 'HR attendance'], active: 2 },
-  { step: 'When to watch', items: ['Real-time events', 'Scheduled intervals', 'Threshold conditions'], active: 2 },
-  { step: 'How to cook data', items: ['Custom aggregations', 'Policy limits on the fly', 'Agentic workflows'], active: 1 },
+  { step: 'Start from', items: ['An Ask answer', 'An Insight answer'], active: 1 },
+  { step: 'When to tell me', items: ['On a schedule', 'When the answer changes', 'Above or below a limit'], active: 2 },
+  { step: 'Where', items: ['WhatsApp', 'Telegram'], active: 0 },
 ]
 
 export const watchAlerts = [
