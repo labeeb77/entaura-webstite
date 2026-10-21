@@ -11,7 +11,7 @@ function Footer() {
       <div className="container footer-inner">
         <div className="footer-brand">
           <Brand />
-          <span className="footer-powered">Powered by Texol</span>
+          <a className="footer-powered" href="https://www.texolworld.com/" target="_blank" rel="noopener noreferrer">Powered by Texol</a>
         </div>
         <div className="footer-links">
           {footerLinks.map(link => (
