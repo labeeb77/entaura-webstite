@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import IntegrationIcon from '../IntegrationIcons.jsx'
-import { useReducedMotion } from '../../hooks/useReducedMotion.js'
+import AppWindow from './AppWindow.jsx'
 
 // HTML recreations of the entaura ask app, filled with sample TEXOL data.
 
@@ -161,34 +161,8 @@ const screens = [
   { key: 'sources', label: 'Add a source', Screen: SourcesScreen },
 ]
 
-// A browser-style window that cycles through the screens until someone picks one.
 export function ProductWindow() {
-  const reduced = useReducedMotion()
-  const [active, setActive] = useState(1)
-  const [picked, setPicked] = useState(false)
-  const { Screen } = screens[active]
-
-  useEffect(() => {
-    if (reduced || picked) return undefined
-    const timer = setTimeout(() => setActive(index => (index + 1) % screens.length), 7000)
-    return () => clearTimeout(timer)
-  }, [active, picked, reduced])
-
-  return (
-    <div className="aw-wrap">
-      <div className="aw-tabs" role="tablist" aria-label="Product screens">
-        {screens.map((screen, index) => (
-          <button key={screen.key} role="tab" aria-selected={index === active} className={index === active ? 'on' : ''} onClick={() => { setActive(index); setPicked(true) }}>
-            {screen.label}
-          </button>
-        ))}
-      </div>
-      <div className="aw-window">
-        <div className="aw-bar"><i></i><i></i><i></i><span>app.entaura.ai</span></div>
-        <div className="aw-scroll"><Screen key={active} /></div>
-      </div>
-    </div>
-  )
+  return <AppWindow screens={screens} start={1} />
 }
 
 // Small screens beside each "How it works" step.

@@ -26,6 +26,7 @@ export const askPage = {
 
   problems: {
     eyebrow: 'Why Ask',
+    outcomeLabel: 'With Ask',
     title: 'Less searching,',
     gradient: 'more knowing.',
     items: [

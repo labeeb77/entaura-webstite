@@ -212,7 +212,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .contact-strip-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
 /* Diagrams */
-.connector-diagram, .analytics-diagram {
+.connector-diagram {
   position: relative;
   min-height: 420px;
   padding: 28px;
@@ -254,22 +254,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .diagram-core small { display: block; margin-top: 4px; color: var(--faint); font-size: 9px; }
 .diagram-foot { display: flex; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line-strong); color: var(--body); font-size: 11px; }
 .diagram-foot b { display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: var(--ask); }
-.analytics-window { margin-top: 24px; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
-.analytics-top { display: flex; justify-content: space-between; color: var(--body); font-size: 12px; }
-.analytics-top b { color: var(--insight); font-weight: 600; font-size: 12px; }
-.analytics-kpis { display: flex; gap: 22px; margin: 20px 0; }
-.analytics-kpis span { color: var(--faint); font-size: 11px; }
-.analytics-kpis strong { display: block; color: var(--text); font-family: var(--display); font-weight: 500; font-size: 20px; margin-top: 3px; }
-.analytics-bars { height: 145px; display: flex; align-items: end; gap: 8px; padding: 0 4px; border-bottom: 1px solid var(--line); }
-.analytics-bars i { flex: 1; height: 32%; border-radius: 6px 6px 2px 2px; background: #9cc0ff; animation: bar-rise .8s ease both; transform-origin: bottom; }
-.analytics-bars i:nth-child(2) { height: 48%; animation-delay: .08s; }
-.analytics-bars i:nth-child(3) { height: 41%; animation-delay: .16s; }
-.analytics-bars i:nth-child(4) { height: 66%; animation-delay: .24s; }
-.analytics-bars i:nth-child(5) { height: 57%; animation-delay: .32s; }
-.analytics-bars i:nth-child(6) { height: 76%; animation-delay: .4s; }
-.analytics-bars i:nth-child(7) { height: 93%; animation-delay: .48s; background: var(--insight); }
-@keyframes bar-rise { from { transform: scaleY(0); } }
-.analytics-labels { display: flex; justify-content: space-between; padding-top: 8px; color: var(--faint); font-size: 10px; }
 
 /* ---------- Solutions ---------- */
 
@@ -367,7 +351,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .solution-detail-grid, .contact-layout { grid-template-columns: 1fr; }
   .contact-form { grid-template-columns: 1fr; }
   .contact-form .full { grid-column: auto; }
-  .connector-diagram, .analytics-diagram { min-height: 0; }
+  .connector-diagram { min-height: 0; }
   .diagram-stage { gap: 6px; }
   .diagram-core { width: 100px; height: 100px; }
   .footer-links { margin-left: 0; }
@@ -389,13 +373,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .connector-column.left { grid-row: 2; }
   .connector-column.right { grid-row: 3; }
   .diagram-foot { flex-direction: column; }
-  .analytics-bars { height: 110px; }
   .footer-inner { flex-direction: column; gap: 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .orb::before, .analytics-bars i { animation: none; }
+  .orb::before { animation: none; }
 }
 
 /* ---------- Integration page ---------- */

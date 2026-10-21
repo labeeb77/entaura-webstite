@@ -1,4 +1,3 @@
-import AnalyticsDiagram from '../components/AnalyticsDiagram.jsx'
 import ConnectorDiagram from '../components/ConnectorDiagram.jsx'
 import ContactStrip from '../components/ContactStrip.jsx'
 import ExampleList from '../components/ExampleList.jsx'
@@ -7,7 +6,7 @@ import SectionHead from '../components/SectionHead.jsx'
 import { pageMeta } from '../data/pageMeta.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 
-const diagrams = { connector: ConnectorDiagram, analytics: AnalyticsDiagram }
+const diagrams = { connector: ConnectorDiagram }
 
 function ProductPage({ page }) {
   usePageMeta(pageMeta[page.meta])

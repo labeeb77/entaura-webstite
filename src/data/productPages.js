@@ -1,36 +1,4 @@
 export const productPages = {
-  insight: {
-    meta: 'insight',
-    hero: {
-      eyebrow: '02 / Smart & trusted analytics',
-      title: 'One AI.',
-      gradientLines: ['Multiple sources.', 'Lightning-fast insights.'],
-      text: 'Analyse transactions and policy limits together in a single query.',
-    },
-    detail: {
-      eyebrow: 'Combined context and analytics',
-      title: 'Analyse the numbers and the rules together.',
-      paragraphs: [
-        'Insight queries policy limits and live transactions in one shot, and shows automated graphs, visual tables, the underlying SQL, and structured reasoning.',
-        'Disparate enterprise sources are pooled into a unified data store for fast, accurate answers.',
-      ],
-      diagram: 'analytics',
-    },
-    examples: {
-      eyebrow: 'See Insight in action',
-      title: 'Answers that reveal',
-      gradient: 'what is next.',
-      items: [
-        '“Compare sales and collections for the last six months.”',
-        '“Which promotions paid for their discount?”',
-        '“Where are last quarter’s orders getting stuck?”',
-      ],
-    },
-    cta: {
-      title: 'Give every decision a stronger foundation.',
-      text: 'Tell us which questions your data should be answering.',
-    },
-  },
   watch: {
     meta: 'watch',
     hero: {
@@ -78,10 +46,3 @@ export const connectorColumns = {
     { type: 'engineering', badge: 'HR', label: 'HR & attendance' },
   ],
 }
-
-export const analyticsKpis = [
-  { label: 'Revenue', value: '↑ 18.4%' },
-  { label: 'Margin', value: '↗ 6.2%' },
-]
-
-export const analyticsMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']

@@ -22,7 +22,7 @@ export function Audience({ eyebrow, title, gradient, text, items }) {
   )
 }
 
-export function Problems({ eyebrow, title, gradient, items }) {
+export function Problems({ eyebrow, title, gradient, outcomeLabel, items }) {
   return (
     <section className="section pp-section pp-soft">
       <div className="container">
@@ -32,7 +32,7 @@ export function Problems({ eyebrow, title, gradient, items }) {
             <article key={item.problem} className="reveal" style={{ '--delay': `${index * 90}ms` }}>
               <small>Problem</small>
               <p>{item.problem}</p>
-              <small className="ok">With Ask</small>
+              <small className="ok">{outcomeLabel}</small>
               <h3>{item.outcome}</h3>
             </article>
           ))}

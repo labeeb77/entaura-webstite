@@ -27,10 +27,10 @@ export const pageMeta = {
   },
   insight: {
     file: 'insight.html',
-    description: 'entaura insight combines transactional data with policy limits in one query and shows the charts, SQL, and reasoning.',
-    ogTitle: 'entaura insight | Data and policy, analysed together',
+    description: 'entaura insight turns your ERP data into certified answers, with the right chart and the query behind every number.',
+    ogTitle: 'entaura insight | Numbers you can trust',
     canonical: 'https://entaura.ai/insight.html',
-    title: 'entaura insight | Data and policy, analysed together',
+    title: 'entaura insight | Numbers you can trust',
   },
   solutions: {
     file: 'solutions.html',
