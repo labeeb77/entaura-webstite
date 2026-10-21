@@ -1,9 +1,12 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import ChannelIcon from '../components/ChannelIcon.jsx'
 import ContactStrip from '../components/ContactStrip.jsx'
 import IntegrationIcon from '../components/IntegrationIcons.jsx'
 import PageHero from '../components/PageHero.jsx'
+import ProductMark from '../components/ProductMark.jsx'
 import SectionHead from '../components/SectionHead.jsx'
-import { deployments, faqs, glance, phases, security, weProvide, youBring } from '../data/integration.js'
+import { appIntegrations, checklist, connectorCategories, connectors, deployments, faqGroups, glance, heroFacts, phases, sections, security, sourceGuides, weProvide, youBring } from '../data/integration.js'
 import { pageMeta } from '../data/pageMeta.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import { useReveal } from '../hooks/useReveal.js'
@@ -84,6 +87,156 @@ function Deployment() {
   )
 }
 
+// Chips that jump to each section and mark the one in view.
+function SectionNav() {
+  const [current, setCurrent] = useState(sections[0][0])
+
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) return undefined
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) setCurrent(entry.target.id) })
+    }, { rootMargin: '-30% 0px -60% 0px' })
+    sections.forEach(([id]) => { const element = document.getElementById(id); if (element) observer.observe(element) })
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <nav className="int-nav" aria-label="On this page">
+      <div className="container">
+        {sections.map(([id, label]) => <a key={id} href={`#${id}`} className={current === id ? 'on' : ''}>{label}</a>)}
+      </div>
+    </nav>
+  )
+}
+
+function ConnectorLogo({ mark, name }) {
+  if (mark === 'telegram') return <ChannelIcon channel="telegram" size={28} />
+  if (mark) return <img src={`/assets/integrations/${mark}`} alt="" loading="lazy" />
+  return <b aria-hidden="true">{name.replace(/[^A-Za-z]/g, '').slice(0, 2)}</b>
+}
+
+// Browse every connector by category, or search by name.
+function ConnectorDirectory() {
+  const [category, setCategory] = useState('all')
+  const [query, setQuery] = useState('')
+  const [open, setOpen] = useState(null)
+  const term = query.trim().toLowerCase()
+  const shown = connectors.filter(([, name, group]) => (category === 'all' || group === category) && (!term || name.toLowerCase().includes(term)))
+  const detail = connectors.find(([, name]) => name === open)
+
+  return (
+    <div className="int-dir">
+      <div className="int-dir-bar">
+        <div className="int-dir-tabs" role="tablist" aria-label="Connector categories">
+          {connectorCategories.map(([key, label]) => (
+            <button key={key} role="tab" aria-selected={category === key} className={category === key ? 'on' : ''} onClick={() => { setCategory(key); setOpen(null) }}>{label}</button>
+          ))}
+        </div>
+        <label className="int-dir-search">
+          <IntegrationIcon name="search" />
+          <input type="search" placeholder="Search connectors" value={query} onChange={event => { setQuery(event.target.value); setOpen(null) }} aria-label="Search connectors" />
+        </label>
+      </div>
+      <div className="int-dir-grid">
+        {shown.map(([mark, name]) => (
+          <button key={name} className={`int-tile${open === name ? ' on' : ''}`} aria-expanded={open === name} onClick={() => setOpen(open === name ? null : name)}>
+            <ConnectorLogo mark={mark} name={name} />
+            <span>{name}</span>
+          </button>
+        ))}
+        <Link className="int-tile more" to="/contact.html">
+          <b aria-hidden="true">+</b>
+          <span>100s more</span>
+        </Link>
+      </div>
+      {shown.length === 0 && <p className="int-dir-empty">No match in this list, but we likely connect to it. <Link to="/contact.html">Ask us →</Link></p>}
+      {detail && (
+        <div className="int-dir-detail" key={detail[1]}>
+          <strong><ConnectorLogo mark={detail[0]} name={detail[1]} />{detail[1]}</strong>
+          <dl>
+            <div><dt>How it connects</dt><dd>{detail[3].how}</dd></div>
+            <div><dt>Updates</dt><dd>{detail[3].sync}</dd></div>
+            <div><dt>Used by</dt><dd>{detail[3].products.map(product => <ProductMark key={product} product={product} size="sm" />)}</dd></div>
+          </dl>
+        </div>
+      )}
+      <p className="int-dir-foot">These are the most common. Don’t see yours? <Link to="/contact.html">Request a connector →</Link></p>
+    </div>
+  )
+}
+
+function SourceGuides() {
+  return (
+    <div className="int-guides">
+      {sourceGuides.map(guide => (
+        <article key={guide.title}>
+          <header><span className="int-step"><IntegrationIcon name={guide.icon} /></span><div><h3>{guide.title}</h3><p>{guide.lead}</p></div></header>
+          <ol>{guide.steps.map(step => <li key={step}>{step}</li>)}</ol>
+          <dl>
+            <div><dt>What we access</dt><dd>{guide.access}</dd></div>
+            <div className="never"><dt>What we never do</dt><dd>{guide.never}</dd></div>
+          </dl>
+        </article>
+      ))}
+    </div>
+  )
+}
+
+function AppIntegrations() {
+  return (
+    <div className="int-apps">
+      {appIntegrations.map(item => (
+        <article key={item.title}>
+          <IntegrationIcon name={item.icon} />
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+          <ul>{item.points.map(point => <li key={point}>{point}</li>)}</ul>
+          {item.code && <pre aria-hidden="true">{item.code}</pre>}
+          {item.channels && (
+            <div className="int-apps-channels">
+              <span><ChannelIcon channel="whatsapp" size={20} />WhatsApp</span>
+              <span><ChannelIcon channel="telegram" size={20} />Telegram</span>
+              <Link to={item.to}>About Watch →</Link>
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  )
+}
+
+// A list IT can tick through; ticks are kept on this page only.
+function Checklist() {
+  const [done, setDone] = useState(() => new Set())
+  const toggle = index => setDone(previous => {
+    const next = new Set(previous)
+    if (next.has(index)) next.delete(index)
+    else next.add(index)
+    return next
+  })
+
+  return (
+    <div className="int-check">
+      <div className="int-check-head">
+        <strong>{done.size} of {checklist.length} ready</strong>
+        <span className="int-check-bar"><i style={{ width: `${(done.size / checklist.length) * 100}%` }}></i></span>
+      </div>
+      <ul>
+        {checklist.map((item, index) => (
+          <li key={item.title}>
+            <label className={done.has(index) ? 'on' : ''}>
+              <input type="checkbox" checked={done.has(index)} onChange={() => toggle(index)} />
+              <i aria-hidden="true"><IntegrationIcon name="check" /></i>
+              <span><strong>{item.title}</strong><small>{item.note}</small></span>
+            </label>
+          </li>
+        ))}
+      </ul>
+      <p>Our team helps with every item, and confirms the details during discovery.</p>
+    </div>
+  )
+}
+
 function Integration() {
   usePageMeta(pageMeta.integration)
   const main = useRef(null)
@@ -96,7 +249,12 @@ function Integration() {
         title="A partnership,"
         gradientLines={['not a download.']}
         text="Our team scopes, onboards, and deploys entaura with yours, in your infrastructure or ours."
-      />
+      >
+        <ul className="int-facts-strip">
+          {heroFacts.map(([icon, label]) => <li key={label}><IntegrationIcon name={icon} />{label}</li>)}
+        </ul>
+      </PageHero>
+      <SectionNav />
 
       <section className="section int-glance-section">
         <div className="container">
@@ -105,9 +263,37 @@ function Integration() {
         </div>
       </section>
 
-      <section className="section int-soft">
+      <section className="section int-soft" id="connectors">
         <div className="container">
-          <SectionHead eyebrow="How it works" title="Five steps," gradient="from first call to go-live." />
+          <SectionHead eyebrow="Connectors" title="Connect what you" gradient="already use." text="Databases, business apps, files, email and AI models. Pick one to see how it connects." />
+          <ConnectorDirectory />
+        </div>
+      </section>
+
+      <section className="section" id="how">
+        <div className="container">
+          <SectionHead eyebrow="How it connects" title="Simple to connect," gradient="clear about access." text="Each kind of source takes a few steps, and you choose exactly what entaura can read." />
+          <SourceGuides />
+        </div>
+      </section>
+
+      <section className="section int-soft" id="apps">
+        <div className="container">
+          <SectionHead eyebrow="Into your apps" title="Answers wherever" gradient="your team works." text="Use the same answers outside entaura, with the same access rules and checks." />
+          <AppIntegrations />
+        </div>
+      </section>
+
+      <section className="section" id="checklist">
+        <div className="container int-check-wrap">
+          <SectionHead eyebrow="Before you start" title="What your IT team" gradient="prepares." text="A short list for the technical side. Tick items off as you go." />
+          <Checklist />
+        </div>
+      </section>
+
+      <section className="section int-soft" id="rollout">
+        <div className="container">
+          <SectionHead eyebrow="Rollout" title="Five steps," gradient="from first call to go-live." />
           <ol className="int-phases reveal">
             {phases.map((phase, index) => (
               <li key={phase.title} style={{ '--d': `${index * 120}ms` }}>
@@ -146,7 +332,7 @@ function Integration() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="security">
         <div className="container">
           <SectionHead eyebrow="Security and governance" title="Enterprise-grade" gradient="by default." />
           <div className="int-security">
@@ -155,21 +341,29 @@ function Integration() {
                 <IntegrationIcon name={item.icon} />
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
+                <small>{item.detail}</small>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section int-faq-section">
+      <section className="section int-faq-section" id="faq">
         <div className="container int-faq-wrap">
           <SectionHead eyebrow="FAQ" title="Questions," gradient="answered." />
-          <div className="int-faq">
-            {faqs.map(item => (
-              <details key={item.q}>
-                <summary>{item.q}<i aria-hidden="true"></i></summary>
-                <p>{item.a}</p>
-              </details>
+          <div>
+            {faqGroups.map(group => (
+              <div key={group.title} className="int-faq-group">
+                <h3>{group.title}</h3>
+                <div className="int-faq">
+                  {group.items.map(item => (
+                    <details key={item.q}>
+                      <summary>{item.q}<i aria-hidden="true"></i></summary>
+                      <p>{item.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
