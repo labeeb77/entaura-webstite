@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { contactEmail, contactPhone } from '../data/contact.js'
 import { footerLinks } from '../data/nav.js'
 import Brand from './Brand.jsx'
 
@@ -16,6 +17,10 @@ function Footer() {
           {footerLinks.map(link => (
             <Link key={link.to} to={link.to}>{link.label}</Link>
           ))}
+        </div>
+        <div className="footer-contact">
+          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+          <a href={contactPhone.href}>{contactPhone.label}</a>
         </div>
         <small className="legal">{`© ${year} entaura.ai`}</small>
       </div>
