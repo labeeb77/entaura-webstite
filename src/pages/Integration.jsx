@@ -6,7 +6,7 @@ import IntegrationIcon from '../components/IntegrationIcons.jsx'
 import PageHero from '../components/PageHero.jsx'
 import ProductMark from '../components/ProductMark.jsx'
 import SectionHead from '../components/SectionHead.jsx'
-import { appIntegrations, checklist, connectorCategories, connectors, deployments, faqGroups, glance, heroFacts, phases, sections, security, sourceGuides, weProvide, youBring } from '../data/integration.js'
+import { appIntegrations, checklist, connectors, deployments, faqGroups, glance, heroFacts, phases, sections, security, sourceGuides, weProvide, youBring } from '../data/integration.js'
 import { pageMeta } from '../data/pageMeta.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import { useReveal } from '../hooks/useReveal.js'
@@ -116,30 +116,15 @@ function ConnectorLogo({ mark }) {
   return <img src={`/assets/integrations/${mark}`} alt="" loading="lazy" />
 }
 
-// Browse every connector by category, or search by name.
+// Every connector as a tile; opening one shows how it connects.
 function ConnectorDirectory() {
-  const [category, setCategory] = useState('all')
-  const [query, setQuery] = useState('')
   const [open, setOpen] = useState(null)
-  const term = query.trim().toLowerCase()
-  const shown = connectors.filter(([, name, group]) => (category === 'all' || group === category) && (!term || name.toLowerCase().includes(term)))
   const detail = connectors.find(([, name]) => name === open)
 
   return (
     <div className="int-dir">
-      <div className="int-dir-bar">
-        <div className="int-dir-tabs" role="tablist" aria-label="Connector categories">
-          {connectorCategories.map(([key, label]) => (
-            <button key={key} role="tab" aria-selected={category === key} className={category === key ? 'on' : ''} onClick={() => { setCategory(key); setOpen(null) }}>{label}</button>
-          ))}
-        </div>
-        <label className="int-dir-search">
-          <IntegrationIcon name="search" />
-          <input type="search" placeholder="Search connectors" value={query} onChange={event => { setQuery(event.target.value); setOpen(null) }} aria-label="Search connectors" />
-        </label>
-      </div>
       <div className="int-dir-grid">
-        {shown.map(([mark, name]) => (
+        {connectors.map(([mark, name]) => (
           <button key={name} className={`int-tile${open === name ? ' on' : ''}`} aria-expanded={open === name} onClick={() => setOpen(open === name ? null : name)}>
             <ConnectorLogo mark={mark} />
             <span>{name}</span>
@@ -150,7 +135,6 @@ function ConnectorDirectory() {
           <span>600+ connectors</span>
         </Link>
       </div>
-      {shown.length === 0 && <p className="int-dir-empty">No match in this list, but we likely connect to it. <Link to="/contact.html">Ask us →</Link></p>}
       {detail && (
         <div className="int-dir-detail" key={detail[1]}>
           <strong><ConnectorLogo mark={detail[0]} />{detail[1]}</strong>

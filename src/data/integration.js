@@ -75,17 +75,6 @@ export const sections = [
 
 export const heroFacts = [['plug', '600+ connectors'], ['eye', 'Read-only access'], ['cloud', 'Our cloud or yours']]
 
-export const connectorCategories = [
-  ['all', 'All'],
-  ['databases', 'Databases'],
-  ['business', 'Business apps'],
-  ['documents', 'Documents'],
-  ['storage', 'Cloud storage'],
-  ['email', 'Email and code'],
-  ['ai', 'AI models'],
-  ['apps', 'Alerts and apps'],
-]
-
 // How each kind of source connects, shown when a tile is opened.
 const viaDatabase = { how: 'Read-only database account, tested before saving', sync: 'Synced on a schedule or by hand', products: ['ask', 'insight', 'watch'] }
 const viaUpload = { how: 'Drag and drop, up to 40 MB per file', sync: 'Indexed when uploaded', products: ['ask', 'insight'] }
