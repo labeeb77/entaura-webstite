@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const views = ['Bar', 'Column', 'Table']
 
@@ -22,21 +22,83 @@ const changeLabel = value => `${value >= 0 ? '+' : '−'}${Math.abs(value).toFix
 const sqlKeywords = /\b(SELECT|FROM|WHERE|GROUP BY|ORDER BY|SUM|AND|BETWEEN|AS|DESC|DATE_TRUNC)\b/
 const sqlToken = /('[^']*'|\b(?:SELECT|FROM|WHERE|GROUP BY|ORDER BY|SUM|AND|BETWEEN|AS|DESC|DATE_TRUNC)\b)/g
 
-function Sql({ code }) {
+// The query, coloured, showing only its first `count` characters while it types.
+function Sql({ code, count }) {
+  let used = 0
   return code.split(sqlToken).map((part, index) => {
-    if (part.startsWith("'")) return <span key={index} className="ic-s">{part}</span>
-    if (sqlKeywords.test(part)) return <span key={index} className="ic-k">{part}</span>
-    return part
+    const visible = part.slice(0, Math.max(0, count - used))
+    used += part.length
+    if (!visible) return null
+    if (part.startsWith("'")) return <span key={index} className="ic-s">{visible}</span>
+    if (sqlKeywords.test(part)) return <span key={index} className="ic-k">{visible}</span>
+    return visible
   })
 }
 
-const dbIcon = <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><ellipse cx="10" cy="4.5" rx="6" ry="2.5" /><path d="M4 4.5v11c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-11M4 10c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5" /></svg>
+// Counts a number up from zero once, unless motion is reduced.
+function useCountUp(target, run, delay = 0) {
+  const [value, setValue] = useState(run ? 0 : target)
+  useEffect(() => {
+    if (!run) return undefined
+    let frame
+    let start
+    const tick = now => {
+      start ??= now + delay
+      const t = Math.min(1, Math.max(0, (now - start) / 700))
+      setValue(target * (1 - (1 - t) ** 3))
+      if (t < 1) frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [target, run, delay])
+  return value
+}
+
+// Reveals text a few characters at a time after a delay, unless motion is reduced.
+function useTyped(text, run, delay) {
+  const [count, setCount] = useState(run ? 0 : text.length)
+  useEffect(() => {
+    if (!run) return undefined
+    let shown = 0
+    let interval
+    const start = setTimeout(() => {
+      interval = setInterval(() => {
+        shown = Math.min(text.length, shown + 3)
+        setCount(shown)
+        if (shown >= text.length) clearInterval(interval)
+      }, 18)
+    }, delay)
+    return () => {
+      clearTimeout(start)
+      clearInterval(interval)
+    }
+  }, [text, run, delay])
+  return count
+}
+
+function Kpi({ kpi, run, index }) {
+  const counted = useCountUp(kpi.value ?? 0, run && kpi.value !== undefined, index * 120)
+  return (
+    <div className="ic-kpi" style={{ '--d': `${index * 120}ms` }}>
+      <small>{kpi.label}</small>
+      <strong>{kpi.text ?? formatSar(counted)}</strong>
+      {kpi.delta !== undefined && <em className={kpi.delta >= 0 ? 'up' : 'down'}>{changeLabel(kpi.delta)}</em>}
+    </div>
+  )
+}
 
 const tickLabel = value => (value === 0 ? 'SAR 0' : value >= 1e6 ? `SAR ${value / 1e6}M` : `SAR ${value / 1e3}K`)
 
-function InsightChart({ chart }) {
+function InsightChart({ chart, reduced }) {
   const [view, setView] = useState('Bar')
   const [copied, setCopied] = useState(false)
+  const animate = !reduced
+  const typed = useTyped(chart.sql, animate, 1500)
+  const trail = [
+    { label: 'Source', title: `${chart.source.system} · ${chart.source.table}`, note: `${chart.source.rows} · read-only` },
+    { label: 'Query', title: chart.meta, note: chart.source.period },
+    { label: 'Result', title: chart.result, note: 'Numbers calculated by code' },
+  ]
   const ticks = axisTicks(Math.max(...chart.rows.flatMap(row => row.values)))
   const top = ticks[ticks.length - 1]
   const percent = value => `${(value / top) * 100}%`
@@ -51,10 +113,13 @@ function InsightChart({ chart }) {
 
   return (
     <div className="ic">
+      <div className="ic-kpis">
+        {chart.kpis.map((kpi, index) => <Kpi key={kpi.label} kpi={kpi} run={animate} index={index} />)}
+      </div>
       <div className="ic-head">
-        <div>
-          <strong>{chart.title}</strong>
-          <small>{chart.subtitle}</small>
+        <div className="ic-legend">
+          {view !== 'Table' && chart.series.map((name, index) => <span key={name} className={`s${index}`}><i></i>{name}</span>)}
+          <span className="ic-callout">{chart.callout}</span>
         </div>
         <div className="ic-views" role="tablist" aria-label="Chart view">
           {views.map(name => (
@@ -63,11 +128,6 @@ function InsightChart({ chart }) {
         </div>
       </div>
 
-      {view !== 'Table' && (
-        <div className="ic-legend">
-          {chart.series.map((name, index) => <span key={name} className={`s${index}`}><i></i>{name}</span>)}
-        </div>
-      )}
 
       {view === 'Bar' && (
         <div className="ic-bar" key="bar">
@@ -77,7 +137,7 @@ function InsightChart({ chart }) {
               <div className="ic-track">
                 {ticks.map(tick => <i key={tick} className="ic-grid" style={{ left: along(tick) }}></i>)}
                 {row.values.map((value, series) => (
-                  <b key={series} className={`s${series}`} style={{ width: percent(value), animationDelay: `${index * 60}ms` }} title={formatSar(value)}></b>
+                  <b key={series} className={`s${series}`} style={{ width: percent(value), animationDelay: `${300 + index * 90}ms` }} title={formatSar(value)}></b>
                 ))}
                 <em className="ic-val" style={{ left: along(row.values[0]) }}>
                   {shortSar(row.values[0])}
@@ -110,7 +170,7 @@ function InsightChart({ chart }) {
               <div className={`ic-group${index === 0 ? ' top' : ''}`} key={row.label}>
                 <div className="ic-bars">
                   {row.values.map((value, series) => (
-                    <b key={series} className={`s${series}`} style={{ height: percent(value), animationDelay: `${index * 60}ms` }} title={formatSar(value)}></b>
+                    <b key={series} className={`s${series}`} style={{ height: percent(value), animationDelay: `${300 + index * 90}ms` }} title={formatSar(value)}></b>
                   ))}
                   <em className="ic-cval" style={{ bottom: `calc(${percent(row.values[0])} + 6px)` }}>{shortSar(row.values[0])}</em>
                 </div>
@@ -150,14 +210,18 @@ function InsightChart({ chart }) {
           <button className="ic-copy" onClick={copy} aria-label="Copy SQL">{copied ? 'Copied' : 'Copy SQL'}</button>
         </div>
         <div className="ic-proof-body">
-          <div className="ic-source">
-            <small>Source</small>
-            <strong>{dbIcon}{chart.source.system} · <code>{chart.source.table}</code></strong>
-            <span>{chart.source.rows}</span>
-            <span>{chart.source.period}</span>
-            <span className="ro">Read-only</span>
-          </div>
-          <pre className="ic-sql" aria-label="SQL query"><Sql code={chart.sql} /></pre>
+          <ol className="ic-trail">
+            {trail.map((item, index) => (
+              <li key={item.label} style={{ '--d': `${900 + index * 350}ms` }}>
+                <strong><small>{item.label}</small>{item.title}</strong>
+                <span>{item.note}</span>
+              </li>
+            ))}
+          </ol>
+          <pre className="ic-sql" aria-label={chart.sql}>
+            <Sql code={chart.sql} count={typed} />
+            <i className={`ic-caret${typed >= chart.sql.length ? ' done' : ''}`} aria-hidden="true"></i>
+          </pre>
         </div>
       </div>
     </div>

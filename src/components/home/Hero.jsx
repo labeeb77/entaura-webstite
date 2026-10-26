@@ -143,10 +143,10 @@ function AskResult({ item }) {
   )
 }
 
-function InsightResult({ item }) {
+function InsightResult({ item, reduced }) {
   return (
     <div className="hx-insight">
-      <InsightChart chart={item.chart} />
+      <InsightChart chart={item.chart} reduced={reduced} />
     </div>
   )
 }
@@ -273,9 +273,7 @@ function Hero() {
   const [product, setProduct] = useState(1)
   const [questionIndex, setQuestionIndex] = useState(0)
   const [run, setRun] = useState(0)
-  // The first answer is shown complete, so the card is never empty on arrival;
-  // later questions type and stream in.
-  const [phase, setPhase] = useState('done')
+  const [phase, setPhase] = useState('typing')
   const [typed, setTyped] = useState(0)
   const [streamed, setStreamed] = useState(0)
   const [auto, setAuto] = useState(true)
@@ -343,8 +341,10 @@ function Hero() {
 
   const flowDone = useCallback(() => setPhase('done'), [])
 
-  const typing = phase === 'typing'
-  const finished = phase === 'done'
+  // With reduced motion the demo doesn't play, so show each answer complete.
+  const shownPhase = reduced && phase !== 'flow' ? 'done' : phase
+  const typing = shownPhase === 'typing'
+  const finished = shownPhase === 'done'
 
   return (
     <section className="hx">
@@ -391,12 +391,12 @@ function Hero() {
                     <span className="hx-avatar" aria-hidden="true"><img src="/assets/entaura-mark-sm.png" alt="" /></span>
                     <div className="hx-a">
                       <div className="hx-meta">
-                        <Reasoning steps={item.steps} thinking={phase === 'thinking'} reduced={reduced} />
+                        <Reasoning steps={item.steps} thinking={shownPhase === 'thinking'} reduced={reduced} />
                         {finished && item.worth && <span className="hx-worth">{item.worth}</span>}
                       </div>
-                      {(phase === 'answer' || finished) && <p><Rich text={item.answer} limit={finished ? Infinity : streamed} /></p>}
+                      {(shownPhase === 'answer' || finished) && <p><Rich text={item.answer} limit={finished ? Infinity : streamed} /></p>}
                       {finished && key === 'ask' && <div className="hx-extra"><AskResult item={item} /></div>}
-                      {finished && key === 'insight' && <div className="hx-extra"><InsightResult item={item} /></div>}
+                      {finished && key === 'insight' && <div className="hx-extra"><InsightResult item={item} reduced={reduced} /></div>}
                     </div>
                   </div>
                 )}
