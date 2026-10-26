@@ -4,6 +4,7 @@ import Hero from '../components/home/Hero.jsx'
 import LogoMarquee from '../components/home/LogoMarquee.jsx'
 import PlatformFlow from '../components/home/PlatformFlow.jsx'
 import ProductShowcase from '../components/home/ProductShowcase.jsx'
+import TrustBand from '../components/home/TrustBand.jsx'
 import UseCases from '../components/home/UseCases.jsx'
 import VisionBand from '../components/home/VisionBand.jsx'
 import { pageMeta } from '../data/pageMeta.js'
@@ -22,6 +23,7 @@ function Home() {
       <LogoMarquee />
       <VisionBand />
       <ProductShowcase />
+      <TrustBand />
       <PlatformFlow />
       <UseCases />
       <CtaBand />

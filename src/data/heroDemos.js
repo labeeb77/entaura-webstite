@@ -10,6 +10,7 @@ export const heroDemos = {
     questions: [
       {
         q: 'What is the refund request period?',
+        worth: 'No email to finance and no waiting for a reply',
         steps: ['Understanding the question', 'Searching 2 policy documents', 'Found Refund_Policy_2026.pdf · §2.1'],
         answer: 'Customers can request a refund within ==30 days== of the invoice date. Requests after that need **manager approval**, and refunds go back to the **original payment method** [1].',
         facts: [
@@ -22,6 +23,7 @@ export const heroDemos = {
       },
       {
         q: 'How many annual leave days do full-time employees receive?',
+        worth: 'HR doesn’t have to answer this one again',
         steps: ['Understanding the question', 'Searching HR policies', 'Found HR_Leave_Policy_v4.pdf · §3'],
         answer: 'Full-time employees receive ==30 calendar days== of paid annual leave a year, accrued at **2.5 days per month** [1]. Up to **10 unused days** can be carried into the next year [1].',
         facts: [
@@ -34,6 +36,7 @@ export const heroDemos = {
       },
       {
         q: 'What is the credit limit for a new retailer?',
+        worth: 'Risky orders are held before dispatch',
         steps: ['Understanding the question', 'Searching credit policies', 'Found Credit_Policy_v2.pdf · §4.1'],
         answer: 'New retailers start with a credit limit of ==SAR 50,000== on **30-day terms** [1]. Orders that take a customer above **90%** of their limit need **Finance Manager approval** before dispatch [1].',
         facts: [
@@ -51,6 +54,7 @@ export const heroDemos = {
     questions: [
       {
         q: 'Which product had the highest revenue in March 2026?',
+        worth: 'Instead of a two-day report request',
         steps: ['Reading sales_invoices', 'Comparing March with February', 'Ranked 5 products by revenue'],
         answer: '==Nuvora Enterprise== led March 2026 with **SAR 1.84M** in revenue, **38%** of the month\'s total and **+12%** on February.',
         chart: {
@@ -71,6 +75,7 @@ export const heroDemos = {
       },
       {
         q: 'What was the total Europe revenue in April 2026?',
+        worth: 'No spreadsheet exports or reconciling',
         steps: ['Reading sales_invoices', 'Filtering to Europe, March–April', 'Grouped 5 countries'],
         answer: 'Europe brought in ==SAR 2.96M== in April 2026, up **8.4%** on March. **Germany** contributed the most at **SAR 1.02M**.',
         chart: {

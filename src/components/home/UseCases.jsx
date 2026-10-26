@@ -18,12 +18,13 @@ function UseCases() {
             <article key={group.product} className={`uc-card tone-${group.product} reveal`} style={{ '--delay': `${index * 80}ms` }}>
               <ProductMark product={group.product} />
               <ul>
-                {group.questions.map(question => (
-                  <li key={question}>
-                    <Link to={`/try.html?q=${encodeURIComponent(question)}`}>
-                      <span>“{question}”</span>
+                {group.questions.map(({ q, before, now }) => (
+                  <li key={q}>
+                    <Link to={`/try.html?q=${encodeURIComponent(q)}`}>
+                      <span>“{q}”</span>
                       <i aria-hidden="true">↗</i>
                     </Link>
+                    <p className="uc-change"><b>Before:</b> {before}. <b className="now">Now:</b> {now}.</p>
                   </li>
                 ))}
               </ul>

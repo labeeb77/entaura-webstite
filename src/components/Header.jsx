@@ -86,7 +86,7 @@ function Header() {
             }
           />
           <Link to="/integration.html">Integration</Link>
-          <Link to="/index.html#platform">Platform</Link>
+          <Link to="/index.html#platform">How it works</Link>
           <Link to="/contact.html" aria-current={isContact ? 'page' : undefined}>Contact</Link>
           <Link className="button primary nav-try" to="/try.html">Try Entaura <span>↗</span></Link>
         </div>

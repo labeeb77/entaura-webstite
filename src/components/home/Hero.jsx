@@ -273,7 +273,9 @@ function Hero() {
   const [product, setProduct] = useState(1)
   const [questionIndex, setQuestionIndex] = useState(0)
   const [run, setRun] = useState(0)
-  const [phase, setPhase] = useState(reduced ? 'done' : 'typing')
+  // The first answer is shown complete, so the card is never empty on arrival;
+  // later questions type and stream in.
+  const [phase, setPhase] = useState('done')
   const [typed, setTyped] = useState(0)
   const [streamed, setStreamed] = useState(0)
   const [auto, setAuto] = useState(true)
@@ -388,7 +390,10 @@ function Hero() {
                   <div className="hx-turn">
                     <span className="hx-avatar" aria-hidden="true"><img src="/assets/entaura-mark-sm.png" alt="" /></span>
                     <div className="hx-a">
-                      <Reasoning steps={item.steps} thinking={phase === 'thinking'} reduced={reduced} />
+                      <div className="hx-meta">
+                        <Reasoning steps={item.steps} thinking={phase === 'thinking'} reduced={reduced} />
+                        {finished && item.worth && <span className="hx-worth">{item.worth}</span>}
+                      </div>
                       {(phase === 'answer' || finished) && <p><Rich text={item.answer} limit={finished ? Infinity : streamed} /></p>}
                       {finished && key === 'ask' && <div className="hx-extra"><AskResult item={item} /></div>}
                       {finished && key === 'insight' && <div className="hx-extra"><InsightResult item={item} /></div>}

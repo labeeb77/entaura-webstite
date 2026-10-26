@@ -118,8 +118,37 @@ export const flow = {
 }
 
 // Two example questions per product, in line with the product pages and the live demo on /try.
+// `before` and `now` say what changes for the team that asks it.
 export const useCases = [
-  { product: 'ask', questions: ['What is our credit limit policy for new retailers?', 'How many leave days can employees carry over to next year?'] },
-  { product: 'insight', questions: ['Which vans are underperforming today?', 'Which promotions paid for their discount?'] },
-  { product: 'watch', questions: ['Which invoice is overdue?', 'Which products are running low on stock?'] },
+  {
+    product: 'ask',
+    questions: [
+      { q: 'What is our credit limit policy for new retailers?', before: 'email finance and wait', now: 'the clause, cited, in seconds' },
+      { q: 'How many leave days can employees carry over to next year?', before: 'HR answers it every month', now: 'staff check it themselves' },
+    ],
+  },
+  {
+    product: 'insight',
+    questions: [
+      { q: 'Which vans are underperforming today?', before: 'spotted in next week’s report', now: 'fix today’s route today' },
+      { q: 'Which promotions paid for their discount?', before: 'guesswork after the campaign', now: 'stop the ones losing money' },
+    ],
+  },
+  {
+    product: 'watch',
+    questions: [
+      { q: 'Which invoice is overdue?', before: 'found at month-end', now: 'an alert the day it slips' },
+      { q: 'Which products are running low on stock?', before: 'noticed when the shelf is empty', now: 'reorder before the lost sale' },
+    ],
+  },
+]
+
+// Why answers can be trusted: the platform's safeguards, in plain words.
+export const trustPoints = [
+  { icon: 'support', title: 'It asks before it guesses', text: 'If a question can be read two ways, you see each reading with the result it gives, and pick one.' },
+  { icon: 'chart', title: 'Numbers come from code, not the AI', text: 'Every figure is fetched and calculated from certified metrics. The AI never writes a number.' },
+  { icon: 'check', title: 'Tested before it goes live', text: 'Updates must match known figures from your own reports. If one fails, the last good version keeps answering.' },
+  { icon: 'lock', title: 'Sealed and audited', text: 'Each workspace has its own data and read-only access. Keys are encrypted and every query is logged.' },
+  { icon: 'server', title: 'Your choice of AI model', text: 'Use OpenAI, Anthropic, OpenRouter, or a private model server that keeps data in-house.' },
+  { icon: 'people', title: 'Role-based access', text: 'Admins, managers and staff each see only the knowledge bases they’re given.' },
 ]
