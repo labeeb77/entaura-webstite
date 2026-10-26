@@ -509,7 +509,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .int-guides dd { margin: 0; color: var(--body); font-size: 14px; line-height: 1.55; }
 
 /* Into your apps */
-.int-apps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.int-apps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .int-apps article { display: flex; flex-direction: column; padding: 24px; border-radius: 24px; background: #fff; border: 1px solid var(--line); }
 .int-apps .int-icon { color: var(--text); }
 .int-apps h3 { margin: 16px 0 8px; font-size: 19px; letter-spacing: -.02em; }
@@ -565,7 +565,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .int-security { grid-template-columns: 1fr 1fr; }
   .int-faq-wrap { grid-template-columns: 1fr; gap: 0; }
   .int-guides { grid-template-columns: 1fr; }
-  .int-apps { grid-template-columns: 1fr 1fr; }
+  .int-apps { grid-template-columns: 1fr; }
   .int-check-wrap { grid-template-columns: 1fr; gap: 0; }
   .int-dir-detail { grid-template-columns: 1fr; gap: 14px; }
 }

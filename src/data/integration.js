@@ -120,7 +120,6 @@ export const connectors = [
   ['telegram', 'Telegram', 'apps', { how: 'Tap Notify me on any answer', sync: 'On a schedule, on change, or past a limit', products: ['watch'] }],
   ['icon:link', 'API', 'apps', { how: 'A key per member, shown once', sync: 'Answers stream as they’re written', products: ['ask', 'insight'] }],
   ['icon:chart', 'Chart widget', 'apps', { how: 'One script on any web page or mobile app', sync: 'Same charts as the app', products: ['insight'] }],
-  ['icon:workshop', 'Website embed', 'apps', { how: 'Paste an iframe, allow up to 10 sites', sync: 'Visitor chats deleted after an hour', products: ['ask', 'insight'] }],
 ]
 
 // How each kind of source connects, step by step.
@@ -166,13 +165,6 @@ export const appIntegrations = [
     text: 'One script draws entaura’s charts and tables on any page, with the same CSV and PNG download.',
     points: ['Your colours and font', 'Styles never clash with your page', 'Works in mobile app WebViews'],
     code: '<script src="…/entaura-widget.js"></script>\n<entaura-widget></entaura-widget>',
-  },
-  {
-    icon: 'workshop',
-    title: 'Website demo',
-    text: 'Let visitors try entaura on your own website, answering from a knowledge base you choose.',
-    points: ['Paste one iframe', 'Allow up to 10 websites', 'Visitor chats deleted after an hour'],
-    code: '<iframe src="…/demo/your-kb"></iframe>',
   },
   {
     icon: 'bell',
