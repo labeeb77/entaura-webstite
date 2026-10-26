@@ -252,6 +252,16 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--text); box-shadow: 0 0 0 3px rgba(11, 11, 11, .06); }
 .contact-form .full { grid-column: 1 / -1; }
 .contact-form .button { justify-self: start; }
+.contact-form .button:disabled { opacity: .6; cursor: progress; }
+.contact-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.contact-error { margin: 0; padding: 12px 14px; border-radius: 12px; background: #fdf0ee; color: #9b3a2e; font-size: 14px; }
+.contact-error a { color: inherit; font-weight: 600; text-decoration: underline; }
+.contact-sent { grid-template-columns: 1fr; justify-items: center; gap: 10px; padding: 56px 30px; text-align: center; animation: int-fade .4s ease both; }
+.contact-sent i { display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: 6px; border-radius: 50%; background: #e3f6ec; color: #13804b; }
+.contact-sent i .int-icon { width: 26px; height: 26px; color: inherit; }
+.contact-sent h3 { margin: 0; font-size: 26px; letter-spacing: -.03em; }
+.contact-sent p { margin: 0 0 10px; color: var(--body); }
+.contact-sent .button { justify-self: center; }
 .contact-or { display: flex; align-items: center; gap: 14px; margin: 32px 0 14px; color: var(--faint); font-size: 13.5px; }
 .contact-or::before, .contact-or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .contact-direct { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }

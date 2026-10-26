@@ -7,7 +7,6 @@ export const pageMeta = {
     ogTitle: 'entaura.ai | Enterprise Agentic AI Platform',
     ogDescription: 'Verify facts, analyse data against policy, and monitor operations with Ask, Insight, and Watch.',
     ogType: 'website',
-    ogImage: 'assets/entaura-mark.png',
     canonical: 'https://entaura.ai/',
     title: 'entaura.ai | Enterprise Agentic AI Platform',
   },
@@ -66,6 +65,10 @@ export const pageMeta = {
     title: 'Contact entaura.ai | Talk to our team',
   },
 }
+
+// Every page shares the same absolute share image, so link previews always find it.
+const shareImage = 'https://entaura.ai/assets/entaura-mark.png'
+for (const meta of Object.values(pageMeta)) meta.ogImage ??= shareImage
 
 // [meta key, tag, identifying attribute, identifying value, value attribute]
 export const metaTags = [
