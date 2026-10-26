@@ -38,7 +38,7 @@ export const showcase = [
     tag: 'Knowledge',
     title: 'Ask the question. See the proof.',
     text: 'Connects your ERP data and document repositories, and isolates the exact proof on demand.',
-    points: ['One ERP connector fetches live transactional records', 'Scans unstructured policy and document stores', 'Isolates the exact database entry or document clause for validation'],
+    points: ['Reads your ERP records and documents, read-only', 'Scans unstructured policy and document stores', 'Isolates the exact database entry or document clause for validation'],
     question: 'Show the policy for customer credit limits.',
     to: '/ask.html',
   },
@@ -93,14 +93,14 @@ export const watchAlerts = [
 ]
 
 export const flow = {
-  sources: ['ERP and transactions', 'Policy documents', 'Enterprise tools', 'IoT sensors', 'Ad hoc sources'],
+  sources: ['ERP and transactions', 'Policy documents', 'Enterprise tools', 'Email and drives', 'Ad hoc sources'],
   core: ['Retrieval-augmented generation', 'Agentic workflows', 'Unified data warehouse', 'Advanced LLMs'],
   products: ['ask', 'insight', 'watch'],
+  // Answers appear in the app; Watch alerts go to WhatsApp or Telegram.
   channels: [
-    { name: 'Microsoft Teams', icon: 'teams.png' },
-    { name: 'Slack', icon: 'slack.png' },
-    { name: 'WhatsApp', icon: 'whatsapp.png' },
-    { name: 'Email', icon: 'gmail.svg' },
+    { name: 'entaura app', src: '/assets/entaura-mark.png' },
+    { name: 'WhatsApp', channel: 'whatsapp' },
+    { name: 'Telegram', channel: 'telegram' },
   ],
   steps: [
     { label: 'Connect', caption: 'Your data and policies flow in.' },
@@ -112,8 +112,8 @@ export const flow = {
   // indexes into `sources` and `channels`.
   scenarios: [
     { product: 'ask', sources: [0, 1], channel: 0, output: 'Evidence: PO-4471 · Policy §4.2', message: 'Answer with sources shared' },
-    { product: 'insight', sources: [0, 2], channel: 1, output: 'Chart + SQL: overtime vs. cap', message: 'Report posted to #finance' },
-    { product: 'watch', sources: [3, 1], channel: 2, output: 'CS-02 above 8°C for 12 min', message: 'Alert sent to the shift lead' },
+    { product: 'insight', sources: [0, 2], channel: 0, output: 'Chart + query: overtime vs. cap', message: 'Chart ready for finance' },
+    { product: 'watch', sources: [0, 1], channel: 1, output: 'INV-2041 is 18 days overdue', message: 'Alert sent to the finance lead' },
   ],
 }
 

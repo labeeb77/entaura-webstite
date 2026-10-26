@@ -96,7 +96,7 @@ export const watchPage = {
       {
         title: 'No extra setup',
         note: 'Watch uses the knowledge bases, data and access you already have.',
-        items: [['doc', 'Same sources'], ['doc', 'Same access'], ['doc', 'Same answers']],
+        items: [['icon:database', 'Same sources'], ['icon:people', 'Same access'], ['icon:check', 'Same answers']],
       },
     ],
     setup: 'There’s nothing to install. Once your knowledge base answers questions, every answer can become an alert.',

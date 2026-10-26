@@ -73,7 +73,7 @@ export const sections = [
   ['faq', 'FAQ'],
 ]
 
-export const heroFacts = [['plug', '100+ connectors'], ['eye', 'Read-only access'], ['cloud', 'Our cloud or yours']]
+export const heroFacts = [['plug', '600+ connectors'], ['eye', 'Read-only access'], ['cloud', 'Our cloud or yours']]
 
 export const connectorCategories = [
   ['all', 'All'],
@@ -99,9 +99,9 @@ export const connectors = [
   ['mssqlserver.png', 'SQL Server', 'databases', viaDatabase],
   ['oracle.png', 'Oracle', 'databases', viaDatabase],
   ['sap.svg', 'SAP HANA', 'databases', viaDatabase],
-  ['', 'Snowflake', 'databases', viaDatabase],
-  ['', 'Redshift', 'databases', viaDatabase],
-  ['', 'Db2', 'databases', viaDatabase],
+  ['snowflake.svg', 'Snowflake', 'databases', viaDatabase],
+  ['redshift.svg', 'Redshift', 'databases', viaDatabase],
+  ['icon:database', 'Db2', 'databases', viaDatabase],
   ['mongodb.svg', 'MongoDB', 'databases', viaDatabase],
   ['sap.svg', 'SAP', 'business', viaApp],
   ['zoho.png', 'Zoho', 'business', viaApp],
@@ -109,29 +109,29 @@ export const connectors = [
   ['taskforces.svg', 'Taskforces', 'business', viaApp],
   ['speakorder.png', 'Speak Order', 'business', viaApp],
   ['whatasol.png', 'Whatasol', 'business', viaApp],
-  ['', 'PDF', 'documents', viaUpload],
-  ['', 'Word', 'documents', viaUpload],
-  ['', 'PowerPoint', 'documents', viaUpload],
-  ['', 'Excel', 'documents', viaUpload],
-  ['', 'Text', 'documents', viaUpload],
-  ['', 'Images (OCR)', 'documents', { ...viaUpload, how: 'Scanned pages and images are read with OCR' }],
+  ['icon:document', 'PDF', 'documents', viaUpload],
+  ['icon:document', 'Word', 'documents', viaUpload],
+  ['icon:document', 'PowerPoint', 'documents', viaUpload],
+  ['icon:chart', 'Excel', 'documents', viaUpload],
+  ['icon:document', 'Text', 'documents', viaUpload],
+  ['icon:eye', 'Images (OCR)', 'documents', { ...viaUpload, how: 'Scanned pages and images are read with OCR' }],
   ['googledrive.svg', 'Google Drive', 'storage', { how: 'Google sign-in, then pick folders and shared drives', sync: 'Every 15 minutes, or Sync now', products: ['ask', 'insight'] }],
   ['aws.png', 'AWS S3', 'storage', { how: 'Read-only access to a bucket or prefix', sync: 'Pick objects, then sync', products: ['ask'] }],
   ['azure.png', 'Azure Blob', 'storage', { how: 'Read access to a container', sync: 'Pick files, then sync', products: ['ask'] }],
   ['gmail.svg', 'Gmail', 'email', { how: 'Google sign-in; choose labels, senders and a start date', sync: 'Synced incrementally, fully checked every 6 hours', products: ['ask', 'insight'] }],
-  ['', 'GitHub', 'email', { how: 'Repository docs and issues', sync: 'Synced on request', products: ['ask'] }],
-  ['', 'GitLab', 'email', { how: 'Project docs and repository files', sync: 'Synced on request', products: ['ask'] }],
-  ['', 'Manual FAQ', 'email', { how: 'Type questions and answers straight in', sync: 'Available immediately', products: ['ask'] }],
+  ['github.svg', 'GitHub', 'email', { how: 'Repository docs and issues', sync: 'Synced on request', products: ['ask'] }],
+  ['gitlab.svg', 'GitLab', 'email', { how: 'Project docs and repository files', sync: 'Synced on request', products: ['ask'] }],
+  ['icon:support', 'Manual FAQ', 'email', { how: 'Type questions and answers straight in', sync: 'Available immediately', products: ['ask'] }],
   ['openai.png', 'OpenAI', 'ai', viaModel],
   ['anthropic.png', 'Anthropic', 'ai', viaModel],
   ['googlegemini.svg', 'Gemini', 'ai', { ...viaModel, products: ['ask'] }],
   ['openrouter.png', 'OpenRouter', 'ai', viaModel],
-  ['', 'OpenAI-compatible', 'ai', { ...viaModel, how: 'Your own server: vLLM, Ollama, LiteLLM or a gateway' }],
+  ['icon:server', 'OpenAI-compatible', 'ai', { ...viaModel, how: 'Your own server: vLLM, Ollama, LiteLLM or a gateway' }],
   ['whatsapp.png', 'WhatsApp', 'apps', { how: 'Tap Notify me on any answer', sync: 'On a schedule, on change, or past a limit', products: ['watch'] }],
   ['telegram', 'Telegram', 'apps', { how: 'Tap Notify me on any answer', sync: 'On a schedule, on change, or past a limit', products: ['watch'] }],
-  ['', 'API', 'apps', { how: 'A key per member, shown once', sync: 'Answers stream as they’re written', products: ['ask', 'insight'] }],
-  ['', 'Chart widget', 'apps', { how: 'One script on any web page or mobile app', sync: 'Same charts as the app', products: ['insight'] }],
-  ['', 'Website embed', 'apps', { how: 'Paste an iframe, allow up to 10 sites', sync: 'Visitor chats deleted after an hour', products: ['ask', 'insight'] }],
+  ['icon:link', 'API', 'apps', { how: 'A key per member, shown once', sync: 'Answers stream as they’re written', products: ['ask', 'insight'] }],
+  ['icon:chart', 'Chart widget', 'apps', { how: 'One script on any web page or mobile app', sync: 'Same charts as the app', products: ['insight'] }],
+  ['icon:workshop', 'Website embed', 'apps', { how: 'Paste an iframe, allow up to 10 sites', sync: 'Visitor chats deleted after an hour', products: ['ask', 'insight'] }],
 ]
 
 // How each kind of source connects, step by step.
@@ -140,8 +140,8 @@ export const sourceGuides = [
     icon: 'database',
     title: 'Databases',
     lead: 'Your ERP or any SQL database.',
-    steps: ['Add the host and a read-only user', 'Test the connection', 'Tick the tables and views to use', 'Sync on a schedule, or query live'],
-    access: 'Only the tables you pick. Insight copies them into a sealed workspace; Ask can also read them live.',
+    steps: ['Add the host and a read-only user', 'Test the connection', 'Tick the tables and views to use', 'Sync on a schedule (Ask can also read live)'],
+    access: 'Only the tables you pick. Insight analyses a synced, read-only copy; Ask can also read them live, read-only.',
     never: 'Write, change or delete anything. Passwords are encrypted and never shown again.',
   },
   {
@@ -210,10 +210,10 @@ export const faqGroups = [
     items: [
       { q: 'Which ERP systems do you support?', a: 'entaura connects to your ERP’s database, whatever the system: PostgreSQL, MySQL, SQL Server, Oracle, SAP HANA and many more. We confirm the details for your setup during discovery.' },
       { q: 'How often is our data updated?', a: 'Databases sync on a schedule you set, or by hand with one click. Google Drive syncs every 15 minutes, and Gmail syncs new mail incrementally.' },
-      { q: 'Do you query our ERP directly?', a: 'For analytics, your data is copied into a sealed workspace first, so questions never put load on your ERP. Ask can also read selected tables live with a read-only account.' },
+      { q: 'Do you query our ERP directly?', a: 'Insight analyses a synced, read-only copy in a sealed workspace, so questions never put load on your ERP. Ask can also read selected tables live, read-only.' },
       { q: 'What happens if a source is unavailable?', a: 'Answers keep working from the last good copy. A failed sync never deletes anything; it stops with a clear error so your team can reconnect.' },
       { q: 'Which files can we use?', a: 'PDF, Word, PowerPoint, Excel, text files and images, up to 40 MB each. Scanned pages are read with OCR.' },
-      { q: 'We use a system that isn’t listed. Can you connect it?', a: 'Most likely. entaura connects to hundreds of sources. Tell us what you use and we’ll confirm.' },
+      { q: 'We use a system that isn’t listed. Can you connect it?', a: 'Most likely. entaura connects to 600+ sources. Tell us what you use and we’ll confirm.' },
     ],
   },
   {

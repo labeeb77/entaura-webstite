@@ -81,12 +81,12 @@ export const askPage = {
     eyebrow: 'Works with your systems',
     title: 'Connects to the tools',
     gradient: 'you already use.',
-    text: 'These are the most common. Entaura connects to hundreds of databases, apps, and file stores.',
+    text: 'These are the most common. entaura connects to 600+ databases, apps, and file stores.',
     groups: [
       {
         title: 'Files',
         note: 'Upload with tags. Images and scanned PDFs are read with OCR.',
-        items: [['doc', 'PDF'], ['doc', 'DOCX'], ['doc', 'PPTX'], ['doc', 'XLSX'], ['doc', 'TXT'], ['doc', 'Images']],
+        items: [['icon:document', 'PDF'], ['icon:document', 'DOCX'], ['icon:document', 'PPTX'], ['icon:chart', 'XLSX'], ['icon:document', 'TXT'], ['icon:eye', 'Images']],
       },
       {
         title: 'Databases',
@@ -95,9 +95,9 @@ export const askPage = {
       },
       {
         title: 'Connectors',
-        note: 'Pick the folders, buckets, or labels to sync. Hundreds more are available.',
-        more: '100+',
-        items: [['aws.png', 'AWS S3'], ['azure.png', 'Azure Blob'], ['googledrive.svg', 'Google Drive'], ['gmail.svg', 'Gmail'], ['doc', 'GitHub'], ['doc', 'GitLab'], ['doc', 'Manual FAQ']],
+        note: 'Pick the folders, buckets, or labels to sync. 600+ connectors in total.',
+        more: '600+',
+        items: [['aws.png', 'AWS S3'], ['azure.png', 'Azure Blob'], ['googledrive.svg', 'Google Drive'], ['gmail.svg', 'Gmail'], ['github.svg', 'GitHub'], ['gitlab.svg', 'GitLab'], ['icon:support', 'Manual FAQ']],
       },
     ],
     models: [['openai.png', 'OpenAI'], ['anthropic.png', 'Anthropic'], ['googlegemini.svg', 'Gemini'], ['openrouter.png', 'OpenRouter']],

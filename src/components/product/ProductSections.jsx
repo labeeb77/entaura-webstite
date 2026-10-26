@@ -95,11 +95,11 @@ export function Screens({ eyebrow, title, gradient, text, children }) {
   )
 }
 
-// A logo when there is one in /assets/integrations, a file badge otherwise.
-function Logo({ mark, name }) {
+// A logo from /assets/integrations, or a line icon for 'icon:<name>' marks.
+function Logo({ mark }) {
   if (mark === 'telegram') return <ChannelIcon channel="telegram" size={22} />
-  if (mark.includes('.')) return <img src={`/assets/integrations/${mark}`} alt="" loading="lazy" />
-  return <b className="pp-glyph" aria-hidden="true">{name.slice(0, 2)}</b>
+  if (mark.startsWith('icon:')) return <span className="pp-glyph" aria-hidden="true"><IntegrationIcon name={mark.slice(5)} /></span>
+  return <img src={`/assets/integrations/${mark}`} alt="" loading="lazy" />
 }
 
 export function Integrations({ eyebrow, title, gradient, text, groups, models, setup }) {
@@ -114,12 +114,12 @@ export function Integrations({ eyebrow, title, gradient, text, groups, models, s
               <p>{group.note}</p>
               {group.links && (
                 <div className="pp-int-links">
-                  {group.links.map(([to, product]) => <Link key={product} to={to}><ProductMark product={product} /><span>→</span></Link>)}
+                  {group.links.map(([to, product]) => <Link key={product} to={to}><span>Start from</span><ProductMark product={product} /><span aria-hidden="true">→</span></Link>)}
                 </div>
               )}
               {group.items.length > 0 && (
                 <ul>
-                  {group.items.map(([mark, name]) => <li key={name}><Logo mark={mark} name={name} />{name}</li>)}
+                  {group.items.map(([mark, name]) => <li key={name}><Logo mark={mark} />{name}</li>)}
                   {group.more && (
                     <li className="pp-more">
                       <Link to="/integration.html" aria-label={`${group.more} more ${group.title.toLowerCase()}`}>
@@ -136,7 +136,7 @@ export function Integrations({ eyebrow, title, gradient, text, groups, models, s
           {models && (
             <div>
               <small>Works with your AI provider</small>
-              <ul>{models.map(([mark, name]) => <li key={name}><Logo mark={mark} name={name} />{name}</li>)}</ul>
+              <ul>{models.map(([mark, name]) => <li key={name}><Logo mark={mark} />{name}</li>)}</ul>
             </div>
           )}
           <p>{setup} <Link to="/integration.html">How integration works →</Link></p>

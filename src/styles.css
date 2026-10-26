@@ -467,6 +467,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .int-tile b { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: #fff; border: 1px solid var(--line); font-size: 12px; font-weight: 700; color: var(--body); }
 .int-tile.more { border-style: dashed; background: #fff; color: var(--body); }
 .int-tile.more b { border-style: dashed; font-size: 18px; font-weight: 500; }
+.int-tile b .int-icon, .int-dir-detail b .int-icon { width: 18px; height: 18px; color: var(--text); }
+.int-dir-detail > strong b { display: grid; place-items: center; border-radius: 8px; background: #fff; border: 1px solid var(--line); }
 .int-dir-empty { margin: 12px 6px 0; color: var(--body); font-size: 14.5px; }
 .int-dir-empty a, .int-dir-foot a { color: var(--text); font-weight: 600; }
 .int-dir-detail { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; margin: 10px 6px 0; padding: 18px 20px; border-radius: 18px; background: var(--soft); border: 1px solid var(--line); animation: int-fade .35s ease both; }

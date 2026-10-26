@@ -109,10 +109,11 @@ function SectionNav() {
   )
 }
 
-function ConnectorLogo({ mark, name }) {
+// A logo from /assets/integrations, or a line icon for 'icon:<name>' marks.
+function ConnectorLogo({ mark }) {
   if (mark === 'telegram') return <ChannelIcon channel="telegram" size={28} />
-  if (mark) return <img src={`/assets/integrations/${mark}`} alt="" loading="lazy" />
-  return <b aria-hidden="true">{name.replace(/[^A-Za-z]/g, '').slice(0, 2)}</b>
+  if (mark.startsWith('icon:')) return <b aria-hidden="true"><IntegrationIcon name={mark.slice(5)} /></b>
+  return <img src={`/assets/integrations/${mark}`} alt="" loading="lazy" />
 }
 
 // Browse every connector by category, or search by name.
@@ -140,19 +141,19 @@ function ConnectorDirectory() {
       <div className="int-dir-grid">
         {shown.map(([mark, name]) => (
           <button key={name} className={`int-tile${open === name ? ' on' : ''}`} aria-expanded={open === name} onClick={() => setOpen(open === name ? null : name)}>
-            <ConnectorLogo mark={mark} name={name} />
+            <ConnectorLogo mark={mark} />
             <span>{name}</span>
           </button>
         ))}
         <Link className="int-tile more" to="/contact.html">
           <b aria-hidden="true">+</b>
-          <span>100s more</span>
+          <span>600+ connectors</span>
         </Link>
       </div>
       {shown.length === 0 && <p className="int-dir-empty">No match in this list, but we likely connect to it. <Link to="/contact.html">Ask us →</Link></p>}
       {detail && (
         <div className="int-dir-detail" key={detail[1]}>
-          <strong><ConnectorLogo mark={detail[0]} name={detail[1]} />{detail[1]}</strong>
+          <strong><ConnectorLogo mark={detail[0]} />{detail[1]}</strong>
           <dl>
             <div><dt>How it connects</dt><dd>{detail[3].how}</dd></div>
             <div><dt>Updates</dt><dd>{detail[3].sync}</dd></div>

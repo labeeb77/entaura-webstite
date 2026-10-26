@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { flow, showcase } from '../../data/home.js'
 import { useReducedMotion } from '../../hooks/useReducedMotion.js'
+import ChannelIcon from '../ChannelIcon.jsx'
 import ProductMark from '../ProductMark.jsx'
 
 const stepDuration = 2600
@@ -194,7 +195,7 @@ function PlatformFlow() {
                 const active = index === scenario.channel
                 return (
                   <div key={item.name} ref={node(`c${index}`)} className={`fl-node fl-channel ${stateOf(active, 3)}`}>
-                    <img src={`/assets/integrations/${item.icon}`} alt="" />
+                    {item.channel ? <ChannelIcon channel={item.channel} size={18} /> : <img src={item.src} alt="" />}
                     <span>{item.name}</span>
                     {active && shown >= 3 && <em className="fl-toast">{scenario.message}</em>}
                   </div>
