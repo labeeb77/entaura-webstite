@@ -269,7 +269,8 @@ function WatchFlow({ flow, live, reduced, onDone }) {
 function Hero() {
   const reduced = useReducedMotion()
   const card = useRef(null)
-  const [product, setProduct] = useState(0)
+  // Opens on Insight, the most visual answer; autoplay continues from there.
+  const [product, setProduct] = useState(1)
   const [questionIndex, setQuestionIndex] = useState(0)
   const [run, setRun] = useState(0)
   const [phase, setPhase] = useState(reduced ? 'done' : 'typing')

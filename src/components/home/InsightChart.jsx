@@ -18,11 +18,24 @@ const shortSar = value => (value >= 1e6 ? `${(value / 1e6).toFixed(2)}M` : `${Ma
 const change = row => (row.values[0] / row.values[1] - 1) * 100
 const changeLabel = value => `${value >= 0 ? '+' : '−'}${Math.abs(value).toFixed(1)}%`
 
+// Light SQL colouring: keywords and quoted strings, everything else as is.
+const sqlKeywords = /\b(SELECT|FROM|WHERE|GROUP BY|ORDER BY|SUM|AND|BETWEEN|AS|DESC|DATE_TRUNC)\b/
+const sqlToken = /('[^']*'|\b(?:SELECT|FROM|WHERE|GROUP BY|ORDER BY|SUM|AND|BETWEEN|AS|DESC|DATE_TRUNC)\b)/g
+
+function Sql({ code }) {
+  return code.split(sqlToken).map((part, index) => {
+    if (part.startsWith("'")) return <span key={index} className="ic-s">{part}</span>
+    if (sqlKeywords.test(part)) return <span key={index} className="ic-k">{part}</span>
+    return part
+  })
+}
+
+const dbIcon = <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><ellipse cx="10" cy="4.5" rx="6" ry="2.5" /><path d="M4 4.5v11c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-11M4 10c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5" /></svg>
+
 const tickLabel = value => (value === 0 ? 'SAR 0' : value >= 1e6 ? `SAR ${value / 1e6}M` : `SAR ${value / 1e3}K`)
 
 function InsightChart({ chart }) {
   const [view, setView] = useState('Bar')
-  const [showSql, setShowSql] = useState(false)
   const [copied, setCopied] = useState(false)
   const ticks = axisTicks(Math.max(...chart.rows.flatMap(row => row.values)))
   const top = ticks[ticks.length - 1]
@@ -130,13 +143,23 @@ function InsightChart({ chart }) {
         </div>
       )}
 
-      <div className="ic-foot">
-        <button className="ic-how" onClick={() => setShowSql(open => !open)} aria-expanded={showSql}>
-          <span aria-hidden="true">{'<>'}</span> How this was computed <em>{chart.meta}</em>
-        </button>
-        <button className="ic-copy" onClick={copy} aria-label="Copy SQL">{copied ? 'Copied' : 'Copy SQL'}</button>
+      <div className="ic-proof">
+        <div className="ic-proof-head">
+          <span>How this was computed</span>
+          <em>{chart.meta}</em>
+          <button className="ic-copy" onClick={copy} aria-label="Copy SQL">{copied ? 'Copied' : 'Copy SQL'}</button>
+        </div>
+        <div className="ic-proof-body">
+          <div className="ic-source">
+            <small>Source</small>
+            <strong>{dbIcon}{chart.source.system} · <code>{chart.source.table}</code></strong>
+            <span>{chart.source.rows}</span>
+            <span>{chart.source.period}</span>
+            <span className="ro">Read-only</span>
+          </div>
+          <pre className="ic-sql" aria-label="SQL query"><Sql code={chart.sql} /></pre>
+        </div>
       </div>
-      {showSql && <pre className="ic-sql">{chart.sql}</pre>}
     </div>
   )
 }
