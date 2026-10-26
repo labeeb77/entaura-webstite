@@ -483,7 +483,7 @@
 .home .fl-pills button.active { background: #fff; color: var(--text); box-shadow: 0 1px 3px rgba(0, 0, 0, .1); }
 .home .fl-pills button.active::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: var(--tone); vertical-align: 1px; }
 
-.home .fl-grid { position: relative; display: grid; grid-template-columns: 1fr 1.1fr 1fr 1fr; gap: 56px; align-items: center; padding: 36px 0; }
+.home .fl-grid { position: relative; display: grid; grid-template-columns: 1fr 1.1fr 1fr 1fr; gap: 56px; align-items: center; padding: 36px 0; min-height: 470px; }
 .home .fl-svg { position: absolute; left: 0; top: 0; z-index: 0; overflow: visible; pointer-events: none; }
 .home .fl-link { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 3 4; }
 .home .fl-link.live { stroke: var(--tone); stroke-width: 1.5; stroke-dasharray: none; opacity: .75; }
@@ -515,6 +515,11 @@
 .home .fl-product.is-active small, .home .fl-product.is-done small { color: var(--tone); font-family: var(--mono); font-size: 11.5px; animation: hc-rise .4s ease both; }
 .home .fl-channel { display: flex; align-items: center; gap: 10px; }
 .home .fl-channel img { width: 18px; height: 18px; object-fit: contain; }
+.home .fl-channel .int-icon { width: 18px; height: 18px; color: var(--body); }
+.home .fl-swap { animation: hc-rise .4s ease both; }
+.home .fl-result > span { gap: 6px; }
+.home .fl-result b { font-family: var(--display); font-size: 16px; font-weight: 500; line-height: 1.3; color: var(--text); }
+.home .fl-result.is-dim b { color: var(--body); }
 .home .fl-toast {
   position: absolute; z-index: 3; right: 10px; top: -14px;
   padding: 4px 10px; border-radius: 999px; background: var(--text); color: #fff;
@@ -590,7 +595,7 @@
   .home .h-showcase { grid-template-columns: 1fr; }
   .home .h-showcase-nav { position: static; grid-template-columns: repeat(3, 1fr); }
   .home .sn-detail { display: none; }
-  .home .fl-grid { grid-template-columns: 1fr; gap: 44px; }
+  .home .fl-grid { grid-template-columns: 1fr; gap: 44px; min-height: 0; }
   .home .fl-col:not(.fl-core) { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
   .home .fl-col .fl-label { grid-column: 1 / -1; }
   /* Stacked layout: curves would cut across cards, so link columns simply. */

@@ -92,28 +92,67 @@ export const watchAlerts = [
   { channel: 'telegram', meta: 'entaura watch · Finance · 14:40', title: 'High-value credit sale held longer than usual', text: 'SO-7781 · SAR 186,000 · held 3 days (usual: under 1 day).' },
 ]
 
+// "How it works": one request traced end to end per product, matching the
+// product pages. Each scenario fills the four columns and the step captions.
 export const flow = {
-  sources: ['ERP and transactions', 'Policy documents', 'Enterprise tools', 'Email and drives', 'Ad hoc sources'],
-  core: ['Retrieval-augmented generation', 'Agentic workflows', 'Unified data warehouse', 'Advanced LLMs'],
-  products: ['ask', 'insight', 'watch'],
-  // Answers appear in the app; Watch alerts go to WhatsApp or Telegram.
-  channels: [
-    { name: 'entaura app', src: '/assets/entaura-mark-sm.png' },
-    { name: 'WhatsApp', channel: 'whatsapp' },
-    { name: 'Telegram', channel: 'telegram' },
-  ],
-  steps: [
-    { label: 'Connect', caption: 'Your data and policies flow in.' },
-    { label: 'Understand', caption: 'entaura.ai reasons over them together.' },
-    { label: 'Act', caption: 'The right product answers.' },
-    { label: 'Deliver', caption: 'Your team is notified where they work.' },
-  ],
-  // One request traced end to end per product. Sources and channel are
-  // indexes into `sources` and `channels`.
+  steps: ['Connect', 'Understand', 'Act', 'Deliver'],
   scenarios: [
-    { product: 'ask', sources: [0, 1], channel: 0, output: 'Evidence: PO-4471 · Policy §4.2', message: 'Answer with sources shared' },
-    { product: 'insight', sources: [0, 2], channel: 0, output: 'Chart + query: overtime vs. cap', message: 'Chart ready for finance' },
-    { product: 'watch', sources: [0, 1], channel: 1, output: 'INV-2041 is 18 days overdue', message: 'Alert sent to the finance lead' },
+    {
+      product: 'ask',
+      name: 'Ask',
+      sourcesLabel: 'Your sources',
+      sources: [
+        { name: 'Policies and documents', active: true },
+        { name: 'Google Drive and Gmail', active: false },
+        { name: 'ERP records, read-only', active: true },
+        { name: 'Scans and images (OCR)', active: false },
+      ],
+      core: ['Reads your question, in 9 languages', 'Searches documents and records together', 'Checks every claim against its source'],
+      result: { text: 'Refund window is 30 days [1]', meta: 'Refund_Policy_2026.pdf · §2.1' },
+      deliver: [
+        { name: 'entaura app', src: '/assets/entaura-mark-sm.png', active: true },
+        { name: 'Shared link', icon: 'link', active: false },
+        { name: 'Your apps (API)', icon: 'layers', active: false },
+      ],
+      message: 'Answer with its source',
+      captions: ['Documents and records, read-only.', 'Finds and checks the evidence.', 'Answers with the source.', 'In the app, with citations.'],
+    },
+    {
+      product: 'insight',
+      name: 'Insight',
+      sourcesLabel: 'Your sources',
+      sources: [
+        { name: 'ERP database, read-only copy', active: true },
+        { name: 'Budgets in Excel', active: true },
+        { name: 'Reports and contracts', active: false },
+      ],
+      core: ['Checked against your own reports', 'Picks certified business metrics', 'Code calculates every number'],
+      result: { text: 'Nuvora Enterprise led March: SAR 1.84M', meta: 'Chart + query · 5 ms' },
+      deliver: [
+        { name: 'entaura app', src: '/assets/entaura-mark-sm.png', active: true },
+        { name: 'Chart widget', icon: 'chart', active: false },
+        { name: 'Your apps (API)', icon: 'layers', active: false },
+      ],
+      message: 'Chart, table and CSV',
+      captions: ['Your ERP, as a read-only copy.', 'Certified metrics, numbers by code.', 'The right chart and its query.', 'In the app or your own tools.'],
+    },
+    {
+      product: 'watch',
+      name: 'Watch',
+      sourcesLabel: 'Starts from',
+      sources: [
+        { name: 'An Ask answer', active: false },
+        { name: 'An Insight answer', active: true },
+      ],
+      core: ['You tap Notify me on an answer', 'Re-runs it on a schedule, on change, or past a limit', 'Sends only what you asked for'],
+      result: { text: '7 invoices overdue · SAR 214,600', meta: 'Daily at 09:00' },
+      deliver: [
+        { name: 'WhatsApp', channel: 'whatsapp', active: true },
+        { name: 'Telegram', channel: 'telegram', active: false },
+      ],
+      message: 'Reply STOP to cancel',
+      captions: ['Any Ask or Insight answer.', 'Re-checks it on your schedule.', 'Spots what changed.', 'WhatsApp or Telegram; reply STOP to stop.'],
+    },
   ],
 }
 

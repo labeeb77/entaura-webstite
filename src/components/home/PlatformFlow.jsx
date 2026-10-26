@@ -1,7 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { flow, showcase } from '../../data/home.js'
+import { flow } from '../../data/home.js'
 import { useReducedMotion } from '../../hooks/useReducedMotion.js'
 import ChannelIcon from '../ChannelIcon.jsx'
+import IntegrationIcon from '../IntegrationIcons.jsx'
 import ProductMark from '../ProductMark.jsx'
 
 const stepDuration = 2600
@@ -27,7 +28,7 @@ function curve(a, b) {
 }
 
 // Measures the nodes and returns the connector paths, keyed by link id.
-function useConnectorPaths(gridRef, nodes) {
+function useConnectorPaths(gridRef, nodes, scenario) {
   const [layout, setLayout] = useState({ width: 0, height: 0, paths: {} })
 
   useLayoutEffect(() => {
@@ -40,9 +41,9 @@ function useConnectorPaths(gridRef, nodes) {
         return node && { x: node.left - box.left, y: node.top - box.top, w: node.width, h: node.height }
       }
       const paths = {}
-      flow.sources.forEach((_, index) => { paths[`s${index}`] = curve(rect(`s${index}`), rect('core')) })
-      flow.products.forEach(key => { paths[`p-${key}`] = curve(rect('core'), rect(`p-${key}`)) })
-      flow.scenarios.forEach(item => { paths[`c-${item.product}`] = curve(rect(`p-${item.product}`), rect(`c${item.channel}`)) })
+      scenario.sources.forEach((_, index) => { paths[`s${index}`] = curve(rect(`s${index}`), rect('core')) })
+      paths.result = curve(rect('core'), rect('result'))
+      scenario.deliver.forEach((_, index) => { paths[`d${index}`] = curve(rect('result'), rect(`d${index}`)) })
       setLayout({ width: box.width, height: box.height, paths })
     }
     measure()
@@ -51,7 +52,7 @@ function useConnectorPaths(gridRef, nodes) {
     observer.observe(grid)
     Object.values(nodes.current).forEach(element => element && observer.observe(element))
     return () => observer.disconnect()
-  }, [gridRef, nodes])
+  }, [gridRef, nodes, scenario])
 
   return layout
 }
@@ -62,9 +63,10 @@ function PlatformFlow() {
   const grid = useRef(null)
   const nodes = useRef({})
   const node = key => element => { nodes.current[key] = element }
-  const { width, height, paths } = useConnectorPaths(grid, nodes)
-
   const [scenarioIndex, setScenarioIndex] = useState(0)
+  const scenario = flow.scenarios[scenarioIndex]
+  const { width, height, paths } = useConnectorPaths(grid, nodes, scenario)
+
   const [step, setStep] = useState(0)
   const [inView, setInView] = useState(false)
   const [paused, setPaused] = useState(false)
@@ -91,15 +93,14 @@ function PlatformFlow() {
     return () => clearTimeout(timer)
   }, [playing, step, scenarioIndex])
 
-  const scenario = flow.scenarios[scenarioIndex]
   // With reduced motion the whole path is shown at once.
   const shown = reduced ? flow.steps.length - 1 : step
 
   // Links in play for this scenario, with the step at which each one fires.
   const links = [
-    ...scenario.sources.map(index => ({ id: `s${index}`, at: 0 })),
-    { id: `p-${scenario.product}`, at: 2 },
-    { id: `c-${scenario.product}`, at: 3 },
+    ...scenario.sources.flatMap((source, index) => (source.active ? [{ id: `s${index}`, at: 0 }] : [])),
+    { id: 'result', at: 2 },
+    ...scenario.deliver.flatMap((target, index) => (target.active ? [{ id: `d${index}`, at: 3 }] : [])),
   ]
   const activeLinks = links.filter(link => link.at <= shown && paths[link.id])
   const restLinks = Object.entries(paths).filter(([, d]) => d)
@@ -117,7 +118,7 @@ function PlatformFlow() {
         <div className="h-head reveal">
           <span className="eyebrow">How it works</span>
           <h2>From enterprise data <span className="muted">to business action.</span></h2>
-          <p>Policies, documents, and transactional data in. Answers and alerts out.</p>
+          <p>Pick a product and follow one request, from source to answer.</p>
         </div>
 
         <div className="fl-shell reveal" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
@@ -132,7 +133,7 @@ function PlatformFlow() {
                   className={`tone-${item.product}${index === scenarioIndex ? ' active' : ''}`}
                   onClick={() => choose(index, 0)}
                 >
-                  {showcase.find(product => product.key === item.product).name}
+                  {item.name}
                 </button>
               ))}
             </div>
@@ -159,58 +160,53 @@ function PlatformFlow() {
               ></i>
             ))}
 
-            <div className="fl-col">
-              <span className="fl-label">Your sources</span>
-              {flow.sources.map((item, index) => (
-                <div key={item} ref={node(`s${index}`)} className={`fl-node ${stateOf(scenario.sources.includes(index), 0)}`}>{item}</div>
+            <div className="fl-col fl-swap" key={`s-${scenarioIndex}`}>
+              <span className="fl-label">{scenario.sourcesLabel}</span>
+              {scenario.sources.map((item, index) => (
+                <div key={item.name} ref={node(`s${index}`)} className={`fl-node ${stateOf(item.active, 0)}`}>{item.name}</div>
               ))}
             </div>
 
             <div className={`fl-col fl-core${shown === 1 ? ' is-active' : shown > 1 ? ' is-done' : ''}`} ref={node('core')}>
               <i className="orb" aria-hidden="true"></i>
-              <strong>entaura.ai intelligence layer</strong>
-              {flow.core.map((item, index) => (
-                <span key={item} style={{ '--i': index }}>{item}</span>
+              <strong>How {scenario.name} works</strong>
+              {scenario.core.map((item, index) => (
+                <span key={`${scenarioIndex}-${item}`} style={{ '--i': index }}>{item}</span>
               ))}
             </div>
 
-            <div className="fl-col">
-              <span className="fl-label">Products</span>
-              {showcase.map(item => {
-                const active = item.key === scenario.product
-                return (
-                  <div key={item.key} ref={node(`p-${item.key}`)} className={`fl-node fl-product tone-${item.key} ${stateOf(active, 2)}`}>
-                    <span>
-                      <ProductMark product={item.key} size="sm" />
-                      <small>{active && shown >= 2 ? scenario.output : item.tag}</small>
-                    </span>
-                  </div>
-                )
-              })}
+            <div className="fl-col fl-swap" key={`r-${scenarioIndex}`}>
+              <span className="fl-label">The result</span>
+              <div ref={node('result')} className={`fl-node fl-product fl-result tone-${scenario.product} ${stateOf(true, 2)}`}>
+                <span>
+                  <ProductMark product={scenario.product} size="sm" />
+                  <b>{scenario.result.text}</b>
+                  <small>{scenario.result.meta}</small>
+                </span>
+              </div>
             </div>
 
-            <div className="fl-col">
-              <span className="fl-label">Where teams act</span>
-              {flow.channels.map((item, index) => {
-                const active = index === scenario.channel
-                return (
-                  <div key={item.name} ref={node(`c${index}`)} className={`fl-node fl-channel ${stateOf(active, 3)}`}>
-                    {item.channel ? <ChannelIcon channel={item.channel} size={18} /> : <img src={item.src} alt="" />}
-                    <span>{item.name}</span>
-                    {active && shown >= 3 && <em className="fl-toast">{scenario.message}</em>}
-                  </div>
-                )
-              })}
+            <div className="fl-col fl-swap" key={`d-${scenarioIndex}`}>
+              <span className="fl-label">Where it lands</span>
+              {scenario.deliver.map((item, index) => (
+                <div key={item.name} ref={node(`d${index}`)} className={`fl-node fl-channel ${stateOf(item.active, 3)}`}>
+                  {item.channel && <ChannelIcon channel={item.channel} size={18} />}
+                  {item.src && <img src={item.src} alt="" />}
+                  {item.icon && <IntegrationIcon name={item.icon} />}
+                  <span>{item.name}</span>
+                  {item.active && shown >= 3 && <em className="fl-toast">{scenario.message}</em>}
+                </div>
+              ))}
             </div>
           </div>
 
           <ol className="fl-steps">
-            {flow.steps.map((item, index) => (
-              <li key={item.label} className={index === shown ? 'active' : index < shown ? 'done' : ''}>
+            {flow.steps.map((label, index) => (
+              <li key={label} className={index === shown ? 'active' : index < shown ? 'done' : ''}>
                 <button onClick={() => choose(scenarioIndex, index)}>
                   <i>{playing && index === shown && <b key={`${scenarioIndex}-${step}`} style={{ animationDuration: `${stepDuration}ms` }}></b>}</i>
-                  <span>0{index + 1} · {item.label}</span>
-                  <small>{item.caption}</small>
+                  <span>0{index + 1} · {label}</span>
+                  <small>{scenario.captions[index]}</small>
                 </button>
               </li>
             ))}
