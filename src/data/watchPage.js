@@ -116,6 +116,6 @@ export const watchPage = {
 
   cta: {
     title: 'Turn your next answer into an alert.',
-    text: 'Try the live demo, or book a walkthrough with our team.',
+    text: 'Try the live demo, or talk to our team about your own data.',
   },
 }

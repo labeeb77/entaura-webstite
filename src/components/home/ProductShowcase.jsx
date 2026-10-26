@@ -32,7 +32,6 @@ function AskPanel({ product }) {
       <div className="sp-verdict">
         <span className="sp-badge">Needs approval</span>
         Al Noor Trading is at 93% of its limit. New orders need Finance Manager approval.
-        <strong>96%</strong>
       </div>
     </div>
   )

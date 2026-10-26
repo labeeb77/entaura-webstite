@@ -51,7 +51,7 @@ export const insightPage = {
     gradient: 'from raw data to answers.',
     items: [
       { screen: 'connect', title: 'Connect your database', text: 'Insight analyses a synced, read-only copy in a sealed workspace, so questions never put load on your ERP.' },
-      { screen: 'certify', title: 'Model and certify', text: 'Start from a ready-made data model. A new version goes live only when every golden check passes.' },
+      { screen: 'certify', title: 'Check the numbers', text: 'We map your data to a ready-made template and test it against figures from your own reports. It goes live only when every check passes.' },
       { screen: 'ask', title: 'Ask and see the chart', text: 'Get the answer with the right chart, and open “How this was computed” to see every query behind it.' },
     ],
   },
@@ -111,7 +111,7 @@ export const insightPage = {
     items: [
       { icon: 'layers', title: 'Isolated per knowledge base', text: 'Each knowledge base has its own databases and its own read-only user, even inside one company.' },
       { icon: 'server', title: 'Runs on a synced copy', text: 'Analytics run on a synced, read-only copy, so questions never put load on your ERP.' },
-      { icon: 'check', title: 'Checked before it goes live', text: 'Golden checks must pass before a new data model is published. Otherwise the last good version keeps answering.' },
+      { icon: 'check', title: 'Checked before it goes live', text: 'Every update is tested against known figures from your own reports. If a check fails, the last good version keeps answering.' },
       { icon: 'lock', title: 'Read-only, with limits', text: 'Every query is read-only, with time and row caps.' },
       { icon: 'key', title: 'Encrypted credentials', text: 'Database passwords and AI keys are encrypted and never sent back to the browser.' },
       { icon: 'people', title: 'Role access and audit', text: 'Roles decide who can ask what, and every query is logged with who asked and what ran.' },
@@ -120,6 +120,6 @@ export const insightPage = {
 
   cta: {
     title: 'See Insight on your own data.',
-    text: 'Try the live demo, or book a walkthrough with our team.',
+    text: 'Try the live demo, or talk to our team about your own data.',
   },
 }

@@ -20,7 +20,7 @@ function UseCases() {
               <ul>
                 {group.questions.map(question => (
                   <li key={question}>
-                    <Link to="/try.html">
+                    <Link to={`/try.html?q=${encodeURIComponent(question)}`}>
                       <span>“{question}”</span>
                       <i aria-hidden="true">↗</i>
                     </Link>

@@ -55,6 +55,22 @@ export const pageMeta = {
     canonical: 'https://entaura.ai/try.html',
     title: 'Try Entaura | Live demo',
   },
+  privacy: {
+    file: 'privacy.html',
+    themeColor: '#ffffff',
+    description: 'How entaura.ai collects, uses and protects information on this website and in the platform.',
+    ogTitle: 'Privacy policy | entaura.ai',
+    canonical: 'https://entaura.ai/privacy.html',
+    title: 'Privacy policy | entaura.ai',
+  },
+  terms: {
+    file: 'terms.html',
+    themeColor: '#ffffff',
+    description: 'The terms for using the entaura.ai website and live demo.',
+    ogTitle: 'Terms of use | entaura.ai',
+    canonical: 'https://entaura.ai/terms.html',
+    title: 'Terms of use | entaura.ai',
+  },
   contact: {
     file: 'contact.html',
     themeColor: '#ffffff',

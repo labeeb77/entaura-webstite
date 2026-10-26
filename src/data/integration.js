@@ -58,7 +58,7 @@ export const security = [
   { icon: 'key', title: 'Encrypted credentials', text: 'Encrypted at rest, never shown', detail: 'Database passwords, AI keys and Google access are never sent back to the browser.' },
   { icon: 'check', title: 'Certified numbers', text: 'Governed metrics, not AI guesses', detail: 'Figures are fetched and calculated by code, not written by the model.' },
   { icon: 'link', title: 'Traceable answers', text: 'Every answer cites its source', detail: 'Open the exact page, cells or query behind each answer.' },
-  { icon: 'shield', title: 'Validated releases', text: 'Checked against known figures first', detail: 'A new data model goes live only when every golden check passes.' },
+  { icon: 'shield', title: 'Validated releases', text: 'Checked against known figures first', detail: 'Updates go live only when they match known figures from your own reports.' },
   { icon: 'server', title: 'Audited and self-hostable', text: 'Every action logged', detail: 'Admin actions and every query are logged. Run it in your own infrastructure if you need to.' },
 ]
 

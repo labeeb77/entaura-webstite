@@ -16,7 +16,7 @@ const totalOrders = statuses.reduce((sum, status) => sum + status.count, 0)
 
 const configure = [
   ['layers', 'Overview'], ['plug', 'Connections'], ['document', 'Documents'], ['database', 'Data model'],
-  ['shield', 'Semantic layer'], ['check', 'Golden checks'], ['chart', 'Builds'], ['people', 'Access'],
+  ['shield', 'Business definitions'], ['check', 'Report checks'], ['chart', 'Builds'], ['people', 'Access'],
 ]
 
 const templates = [
@@ -110,7 +110,7 @@ function AnswerScreen() {
         </div>
         <div className="iw-how"><span>{'<>'}</span>How this was computed<em>4 queries · 23 ms</em></div>
         <div className="aw-chips iw-suggest"><span>Which retailers are due for reorder?</span><span>Which vans are underperforming today?</span></div>
-        <div className="aw-input">Ask a question…<span className="iw-model">gpt · default model</span><i>➤</i></div>
+        <div className="aw-input">Ask a question…<span className="iw-model">Default model</span><i>➤</i></div>
       </div>
     </div>
   )
@@ -122,7 +122,7 @@ function KnowledgeBasesScreen() {
       <Sidebar active="Overview" />
       <div className="aw-main">
         <div className="aw-head">
-          <div><h4>Knowledge bases</h4><p>Each one is an isolated workspace with its own data, data model and certified metrics.</p></div>
+          <div><h4>Knowledge bases</h4><p>Each one is an isolated workspace with its own data, business definitions and tested numbers.</p></div>
           <span className="aw-btn">+ New knowledge base</span>
         </div>
         <div className="iw-kbs">
@@ -130,7 +130,7 @@ function KnowledgeBasesScreen() {
             <div className="iw-wave"><span>Live</span><svg viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50 C60 40 100 20 160 22 S250 30 300 8" fill="none" stroke="#7fa6f2" strokeWidth="1.5" strokeDasharray="4 4" /><path d="M0 56 C80 52 140 40 200 44 S270 40 300 30" fill="none" stroke="#2f6be6" strokeWidth="1.5" /></svg></div>
             <strong>Sales</strong>
             <p>A distributor of beverages, dairy, snacks and staples, with van sales across 12 branches.</p>
-            <div className="iw-tags"><span>sales</span><span className="ok">golden 44/44</span></div>
+            <div className="iw-tags"><span>sales</span><span className="ok">44/44 checks passed</span></div>
             <dl><div><dt>Connections</dt><dd>1</dd></div><div><dt>Published</dt><dd>2 days ago</dd></div><div><dt>Documents</dt><dd>2</dd></div></dl>
           </div>
           <div className="iw-templates">
@@ -152,7 +152,7 @@ function ConnectionsScreen() {
       <div className="aw-main">
         <div className="aw-head">
           <div><h4>Connections</h4><p>Source databases this knowledge base copies from. Data never leaves this knowledge base.</p></div>
-          <div className="iw-actions"><span>Run golden checks</span><span className="aw-btn">Sync + build</span></div>
+          <div className="iw-actions"><span>Run checks</span><span className="aw-btn">Sync + build</span></div>
         </div>
         <div className="iw-conn">
           <i><IntegrationIcon name="database" /></i>
@@ -161,7 +161,7 @@ function ConnectionsScreen() {
         </div>
         <div className="iw-build">
           <small>Latest build</small>
-          {['Sync 28 tables', 'Build data model', 'Golden checks 44/44', 'Published to live'].map(step => (
+          {['Sync 28 tables', 'Build data model', 'Checked against your reports · 44/44', 'Published to live'].map(step => (
             <span key={step}><IntegrationIcon name="check" />{step}</span>
           ))}
         </div>
@@ -201,7 +201,7 @@ export function StepScreen({ screen }) {
     return (
       <div className="aw-mini iw-build mini">
         <small>Sync + build</small>
-        {['Sync 28 tables', 'Build data model', 'Golden checks 44/44', 'Published to live'].map((step, index) => (
+        {['Sync 28 tables', 'Build data model', 'Checked against your reports · 44/44', 'Published to live'].map((step, index) => (
           <span key={step} style={{ '--d': `${index * 120}ms` }}><IntegrationIcon name="check" />{step}</span>
         ))}
       </div>

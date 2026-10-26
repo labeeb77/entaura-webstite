@@ -88,6 +88,7 @@ function Header() {
           <Link to="/integration.html">Integration</Link>
           <Link to="/index.html#platform">Platform</Link>
           <Link to="/contact.html" aria-current={isContact ? 'page' : undefined}>Contact</Link>
+          <Link className="button primary nav-try" to="/try.html">Try Entaura <span>↗</span></Link>
         </div>
         <Link className="button primary navcta" to="/contact.html">
           {isHome || isContact ? <>Talk to our team <span>↗</span></> : 'Talk to our team ↗'}

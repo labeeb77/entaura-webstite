@@ -11,6 +11,10 @@
 .try-pill .orb { width: 18px; height: 18px; }
 .try-hero h1 { font-size: clamp(40px, 5.6vw, 72px); line-height: 1; letter-spacing: -.05em; margin: 24px 0 18px; text-wrap: balance; max-width: 900px; }
 .try-hero p { margin: 0; color: var(--body); font-size: 18px; max-width: 620px; }
+.try-ask { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 12px; margin-top: 22px; padding: 8px 8px 8px 16px; border-radius: 999px; background: #fff; border: 1px solid var(--line); box-shadow: 0 10px 30px -22px rgba(30, 50, 110, .5); animation: int-fade .35s ease both; }
+.try-ask span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+.try-ask strong { font-size: 15px; font-weight: 500; }
+.try-ask button { border: 0; padding: 7px 14px; border-radius: 999px; background: var(--text); color: #fff; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
 
 /* Chat card */
 .try-chat {
@@ -49,6 +53,7 @@
   .try { padding-bottom: 32px; }
   .try-hero { padding: 48px 0 28px; }
   .try-hero p { font-size: 16px; }
+  .try-ask { border-radius: 18px; }
   .try-chat { border-radius: 22px; }
   .tc-head { padding: 12px 14px; }
   .tc-frame { height: min(640px, calc(100vh - 160px)); min-height: 520px; border-radius: 0 0 22px 22px; }

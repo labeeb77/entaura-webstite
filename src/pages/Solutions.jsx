@@ -32,7 +32,7 @@ function Solutions() {
       </section>
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Where entaura.ai fits" title="Built around your" gradient="industry reality." />
+          <SectionHead eyebrow="Ready-made for your industry" title="Built around your" gradient="industry reality." text="Each comes with a tested data model and questions that work from day one. Tap a question to try it in the live demo." />
           <IndustryGrid items={industries} />
         </div>
       </section>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import IntegrationIcon from './IntegrationIcons.jsx'
 import SectionHead from './SectionHead.jsx'
 
 function SolutionDetail({ items }) {
@@ -9,7 +10,7 @@ function SolutionDetail({ items }) {
         <div className="solution-detail-grid">
           {items.map(solution => (
             <article id={solution.id} key={solution.id}>
-              <span className="solution-icon">{solution.icon}</span>
+              <span className="solution-icon"><IntegrationIcon name={solution.icon} /></span>
               <h3>{solution.title}</h3>
               <p><strong>{solution.lead}</strong>{` ${solution.text}`}</p>
               <ul>

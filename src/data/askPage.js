@@ -120,6 +120,6 @@ export const askPage = {
 
   cta: {
     title: 'See Ask on your own documents.',
-    text: 'Try the live demo, or book a walkthrough with our team.',
+    text: 'Try the live demo, or talk to our team about your own data.',
   },
 }

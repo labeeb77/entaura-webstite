@@ -348,7 +348,7 @@ function Hero() {
       <HeroRibbon reduced={reduced} />
       <div className="container">
         <div className="hx-top">
-          <span className="hx-badge"><img src="/assets/entaura-mark.png" alt="" />Enterprise Agentic AI Platform</span>
+          <span className="hx-badge"><img src="/assets/entaura-mark-sm.png" alt="" />Enterprise Agentic AI Platform</span>
           <h1 aria-label="Transform enterprise policies, documents, and transactional data into actionable insights.">
             <span aria-hidden="true">
               <span className="hx-line"><span>Transform enterprise</span></span>
@@ -385,7 +385,7 @@ function Hero() {
                 )}
                 {!typing && (
                   <div className="hx-turn">
-                    <span className="hx-avatar" aria-hidden="true"><img src="/assets/entaura-mark.png" alt="" /></span>
+                    <span className="hx-avatar" aria-hidden="true"><img src="/assets/entaura-mark-sm.png" alt="" /></span>
                     <div className="hx-a">
                       <Reasoning steps={item.steps} thinking={phase === 'thinking'} reduced={reduced} />
                       {(phase === 'answer' || finished) && <p><Rich text={item.answer} limit={finished ? Infinity : streamed} /></p>}

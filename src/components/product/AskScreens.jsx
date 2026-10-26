@@ -35,7 +35,7 @@ const money = value => value.toLocaleString('en-US', { minimumFractionDigits: 2,
 function Sidebar({ active }) {
   return (
     <aside className="aw-side">
-      <div className="aw-brand"><img src="/assets/entaura-mark.png" alt="" />entaura</div>
+      <div className="aw-brand"><img src="/assets/entaura-mark-sm.png" alt="" />entaura</div>
       <small>Workspace</small>
       <span className={active === 'dashboard' ? 'on' : ''}><IntegrationIcon name="layers" />Dashboard</span>
       <span><IntegrationIcon name="document" />Knowledge bases</span>

@@ -38,7 +38,7 @@ export const showcase = [
     tag: 'Knowledge',
     title: 'Ask the question. See the proof.',
     text: 'Connects your ERP data and document repositories, and isolates the exact proof on demand.',
-    points: ['Reads your ERP records and documents, read-only', 'Scans unstructured policy and document stores', 'Isolates the exact database entry or document clause for validation'],
+    points: ['Reads your ERP records and documents, read-only', 'Ask in Arabic, English, Hindi, Urdu, Malayalam, Tamil and more', 'Isolates the exact database entry or document clause for validation'],
     question: 'Show the policy for customer credit limits.',
     to: '/ask.html',
   },
@@ -98,7 +98,7 @@ export const flow = {
   products: ['ask', 'insight', 'watch'],
   // Answers appear in the app; Watch alerts go to WhatsApp or Telegram.
   channels: [
-    { name: 'entaura app', src: '/assets/entaura-mark.png' },
+    { name: 'entaura app', src: '/assets/entaura-mark-sm.png' },
     { name: 'WhatsApp', channel: 'whatsapp' },
     { name: 'Telegram', channel: 'telegram' },
   ],

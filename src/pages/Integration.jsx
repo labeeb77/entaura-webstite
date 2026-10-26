@@ -31,7 +31,7 @@ function Glance() {
       <GlanceNode title="Your systems" items={glance.systems} />
       <div className="int-link"><span>read-only</span><i></i></div>
       <div className="int-core">
-        <span className="int-core-mark"><img src="/assets/entaura-mark.png" alt="" /></span>
+        <span className="int-core-mark"><img src="/assets/entaura-mark-sm.png" alt="" /></span>
         <strong>entaura</strong>
         <small>Connect · Model · Certify</small>
       </div>
@@ -70,7 +70,7 @@ function Deployment() {
         <div className={`int-place ${option.key}`}>
           <span><IntegrationIcon name={option.icon} />{option.place}</span>
           <div>
-            <b><img src="/assets/entaura-mark.png" alt="" />entaura</b>
+            <b><img src="/assets/entaura-mark-sm.png" alt="" />entaura</b>
             <b><IntegrationIcon name="database" />Your data</b>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { contactEmail, contactPhone } from '../data/contact.js'
-import { footerLinks } from '../data/nav.js'
+import { footerLinks, legalLinks } from '../data/nav.js'
 import Brand from './Brand.jsx'
 
 const year = new Date().getFullYear()
@@ -22,7 +22,10 @@ function Footer() {
           <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
           <a href={contactPhone.href}>{contactPhone.label}</a>
         </div>
-        <small className="legal">{`© ${year} entaura.ai`}</small>
+        <small className="legal">
+          <span>{`© ${year} entaura.ai`}</span>
+          {legalLinks.map(link => <Link key={link.to} to={link.to}>{link.label}</Link>)}
+        </small>
       </div>
     </footer>
   )
