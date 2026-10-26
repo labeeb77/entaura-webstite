@@ -22,6 +22,7 @@
 .pp-audience span { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
 .pp-audience span .int-icon { color: var(--accent); }
 .pp-audience p { margin: 12px 0 0; color: var(--body); font-size: 15px; }
+.pp-value { display: block; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line-strong); color: #13795b; font-size: 13.5px; }
 
 /* Problems → outcomes */
 .pp-problems { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }

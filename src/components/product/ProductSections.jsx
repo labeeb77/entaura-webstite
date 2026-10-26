@@ -6,9 +6,9 @@ import SectionHead from '../SectionHead.jsx'
 
 // Sections shared by the product pages. Each one answers a visitor question.
 
-export function Audience({ eyebrow, title, gradient, text, items }) {
+export function Audience({ id, eyebrow, title, gradient, text, items }) {
   return (
-    <section className="section pp-section">
+    <section id={id} className="section pp-section">
       <div className="container">
         <SectionHead eyebrow={eyebrow} title={title} gradient={gradient} text={text} />
         <div className="pp-audience">
@@ -16,6 +16,7 @@ export function Audience({ eyebrow, title, gradient, text, items }) {
             <div key={item.team} className="reveal" style={{ '--delay': `${index * 60}ms` }}>
               <span><IntegrationIcon name={item.icon} />{item.team}</span>
               <p>{item.example}</p>
+              {item.value && <small className="pp-value">{item.value}</small>}
             </div>
           ))}
         </div>
@@ -24,9 +25,9 @@ export function Audience({ eyebrow, title, gradient, text, items }) {
   )
 }
 
-export function Problems({ eyebrow, title, gradient, outcomeLabel, items }) {
+export function Problems({ id, eyebrow, title, gradient, outcomeLabel, items }) {
   return (
-    <section className="section pp-section pp-soft">
+    <section id={id} className="section pp-section pp-soft">
       <div className="container">
         <SectionHead eyebrow={eyebrow} title={title} gradient={gradient} />
         <div className="pp-problems">
@@ -44,9 +45,9 @@ export function Problems({ eyebrow, title, gradient, outcomeLabel, items }) {
   )
 }
 
-export function Steps({ eyebrow, title, gradient, items, Screen }) {
+export function Steps({ id, eyebrow, title, gradient, items, Screen }) {
   return (
-    <section className="section pp-section">
+    <section id={id} className="section pp-section">
       <div className="container">
         <SectionHead eyebrow={eyebrow} title={title} gradient={gradient} />
         <ol className="pp-steps">
@@ -64,9 +65,9 @@ export function Steps({ eyebrow, title, gradient, items, Screen }) {
   )
 }
 
-export function Capabilities({ eyebrow, title, gradient, items }) {
+export function Capabilities({ id, eyebrow, title, gradient, items }) {
   return (
-    <section className="section pp-section pp-soft">
+    <section id={id} className="section pp-section pp-soft">
       <div className="container">
         <SectionHead eyebrow={eyebrow} title={title} gradient={gradient} />
         <div className="pp-caps">
@@ -83,9 +84,9 @@ export function Capabilities({ eyebrow, title, gradient, items }) {
   )
 }
 
-export function Screens({ eyebrow, title, gradient, text, children }) {
+export function Screens({ id, eyebrow, title, gradient, text, children }) {
   return (
-    <section className="section pp-section pp-screens">
+    <section id={id} className="section pp-section pp-screens">
       <div className="container">
         <SectionHead eyebrow={eyebrow} title={title} gradient={gradient} text={text} />
         <div className="reveal">{children}</div>
@@ -102,9 +103,9 @@ function Logo({ mark }) {
   return <img src={`/assets/integrations/${mark}`} alt="" loading="lazy" />
 }
 
-export function Integrations({ eyebrow, title, gradient, text, groups, models, setup }) {
+export function Integrations({ id, eyebrow, title, gradient, text, groups, models, setup }) {
   return (
-    <section className="section pp-section pp-soft">
+    <section id={id} className="section pp-section pp-soft">
       <div className="container">
         <SectionHead eyebrow={eyebrow} title={title} gradient={gradient} text={text} />
         <div className="pp-int">
@@ -146,9 +147,9 @@ export function Integrations({ eyebrow, title, gradient, text, groups, models, s
   )
 }
 
-export function Trust({ eyebrow, title, gradient, items }) {
+export function Trust({ id, eyebrow, title, gradient, items }) {
   return (
-    <section className="section pp-section">
+    <section id={id} className="section pp-section">
       <div className="container">
         <SectionHead eyebrow={eyebrow} title={title} gradient={gradient} />
         <div className="pp-trust">

@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx'
 import InsightPage from './pages/InsightPage.jsx'
 import Integration from './pages/Integration.jsx'
 import Legal from './pages/Legal.jsx'
+import NotFound from './pages/NotFound.jsx'
 import AskPage from './pages/AskPage.jsx'
 import Solutions from './pages/Solutions.jsx'
 import Try from './pages/Try.jsx'
@@ -30,6 +31,7 @@ function App() {
         <Route path="/try.html" element={<Try />} />
         <Route path="/privacy.html" element={<Legal key="privacy" page={legalPages.privacy} />} />
         <Route path="/terms.html" element={<Legal key="terms" page={legalPages.terms} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>

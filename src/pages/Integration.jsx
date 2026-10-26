@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ChannelIcon from '../components/ChannelIcon.jsx'
 import ContactStrip from '../components/ContactStrip.jsx'
@@ -6,6 +6,7 @@ import IntegrationIcon from '../components/IntegrationIcons.jsx'
 import PageHero from '../components/PageHero.jsx'
 import ProductMark from '../components/ProductMark.jsx'
 import SectionHead from '../components/SectionHead.jsx'
+import SectionNav from '../components/SectionNav.jsx'
 import { appIntegrations, checklist, connectors, deployments, faqGroups, glance, heroFacts, phases, sections, security, sourceGuides, weProvide, youBring } from '../data/integration.js'
 import { pageMeta } from '../data/pageMeta.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
@@ -87,28 +88,6 @@ function Deployment() {
   )
 }
 
-// Chips that jump to each section and mark the one in view.
-function SectionNav() {
-  const [current, setCurrent] = useState(sections[0][0])
-
-  useEffect(() => {
-    if (!('IntersectionObserver' in window)) return undefined
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if (entry.isIntersecting) setCurrent(entry.target.id) })
-    }, { rootMargin: '-30% 0px -60% 0px' })
-    sections.forEach(([id]) => { const element = document.getElementById(id); if (element) observer.observe(element) })
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <nav className="int-nav" aria-label="On this page">
-      <div className="container">
-        {sections.map(([id, label]) => <a key={id} href={`#${id}`} className={current === id ? 'on' : ''}>{label}</a>)}
-      </div>
-    </nav>
-  )
-}
-
 // A logo from /assets/integrations, or a line icon for 'icon:<name>' marks.
 function ConnectorLogo({ mark }) {
   if (mark === 'telegram') return <ChannelIcon channel="telegram" size={28} />
@@ -130,10 +109,10 @@ function ConnectorDirectory() {
             <span>{name}</span>
           </button>
         ))}
-        <Link className="int-tile more" to="/contact.html">
+        <div className="int-tile more">
           <b aria-hidden="true">+</b>
-          <span>600+ connectors</span>
-        </Link>
+          <span>600+ more connectors</span>
+        </div>
       </div>
       {detail && (
         <div className="int-dir-detail" key={detail[1]}>
@@ -239,7 +218,7 @@ function Integration() {
           {heroFacts.map(([icon, label]) => <li key={label}><IntegrationIcon name={icon} />{label}</li>)}
         </ul>
       </PageHero>
-      <SectionNav />
+      <SectionNav sections={sections} />
 
       <section className="section int-glance-section">
         <div className="container">
@@ -279,6 +258,14 @@ function Integration() {
       <section className="section int-soft" id="rollout">
         <div className="container">
           <SectionHead eyebrow="Rollout" title="Five steps," gradient="from first call to go-live." />
+          <div className="int-pilot reveal">
+            <span className="int-step"><IntegrationIcon name="rocket" /></span>
+            <div>
+              <h3>Start with a small pilot</h3>
+              <p>One business area, a few documents and read-only access to your ERP. Our team sets it up and checks the first answers against your own figures.</p>
+            </div>
+            <Link className="button primary" to="/contact.html?interest=pilot">Plan a pilot <span>↗</span></Link>
+          </div>
           <ol className="int-phases reveal">
             {phases.map((phase, index) => (
               <li key={phase.title} style={{ '--d': `${index * 120}ms` }}>

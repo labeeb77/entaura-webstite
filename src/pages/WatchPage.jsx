@@ -5,8 +5,10 @@ import PageHero from '../components/PageHero.jsx'
 import ProductMark from '../components/ProductMark.jsx'
 import { ProductWindow, StepScreen } from '../components/product/WatchScreens.jsx'
 import { Audience, Capabilities, Integrations, Problems, Screens, Steps, Trust } from '../components/product/ProductSections.jsx'
+import SectionNav from '../components/SectionNav.jsx'
 import { watchPage } from '../data/watchPage.js'
 import { pageMeta } from '../data/pageMeta.js'
+import { productSections } from '../data/productSections.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import { useReveal } from '../hooks/useReveal.js'
 import '../product.css'
@@ -25,13 +27,14 @@ function WatchPage() {
           <Link className="button ghost" to="/contact.html">Talk to our team</Link>
         </div>
       </PageHero>
-      <Audience {...audience} />
-      <Problems {...problems} />
-      <Steps {...steps} Screen={StepScreen} />
-      <Capabilities {...capabilities} />
-      <Screens {...screens}><ProductWindow /></Screens>
-      <Integrations {...integrations} />
-      <Trust {...trust} />
+      <SectionNav sections={productSections} />
+      <Audience id="for" {...audience} />
+      <Problems id="why" {...problems} />
+      <Steps id="how" {...steps} Screen={StepScreen} />
+      <Capabilities id="features" {...capabilities} />
+      <Screens id="see" {...screens}><ProductWindow /></Screens>
+      <Integrations id="works-with" {...integrations} />
+      <Trust id="security" {...trust} />
       <ContactStrip title={cta.title} text={cta.text} secondary="Talk to our team" />
     </main>
   )

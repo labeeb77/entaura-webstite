@@ -71,6 +71,13 @@ export const pageMeta = {
     canonical: 'https://entaura.ai/terms.html',
     title: 'Terms of use | entaura.ai',
   },
+  notFound: {
+    file: '404.html',
+    themeColor: '#ffffff',
+    description: 'This page could not be found on entaura.ai.',
+    robots: 'noindex',
+    title: 'Page not found | entaura.ai',
+  },
   contact: {
     file: 'contact.html',
     themeColor: '#ffffff',
@@ -89,6 +96,7 @@ for (const meta of Object.values(pageMeta)) meta.ogImage ??= shareImage
 // [meta key, tag, identifying attribute, identifying value, value attribute]
 export const metaTags = [
   ['themeColor', 'meta', 'name', 'theme-color', 'content'],
+  ['robots', 'meta', 'name', 'robots', 'content'],
   ['description', 'meta', 'name', 'description', 'content'],
   ['ogTitle', 'meta', 'property', 'og:title', 'content'],
   ['ogDescription', 'meta', 'property', 'og:description', 'content'],

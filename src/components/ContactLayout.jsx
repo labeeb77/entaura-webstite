@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { contactEmail, contactPhone, interestOptions } from '../data/contact.js'
+import { useState, useSyncExternalStore } from 'react'
+import { contactEmail, contactPhone, interestKeys, interestOptions } from '../data/contact.js'
 import IntegrationIcon from './IntegrationIcons.jsx'
 
 // Enquiries go to reachus@entaura.ai through Web3Forms. Without a key (local
@@ -12,8 +12,14 @@ function mailtoFor(data) {
   return `mailto:${contactEmail}?subject=${subject}&body=${body}`
 }
 
+// The option picked by ?interest=, read once the page is running so the
+// pre-rendered form and the first browser render match.
+const noSubscribe = () => () => {}
+const linkedInterest = () => interestKeys[new URLSearchParams(window.location.search).get('interest')] || ''
+
 function ContactLayout({ messageRows }) {
   const [status, setStatus] = useState('idle')
+  const interest = useSyncExternalStore(noSubscribe, linkedInterest, () => '')
 
   const submit = async event => {
     event.preventDefault()
@@ -52,7 +58,7 @@ function ContactLayout({ messageRows }) {
         <label>Company<input name="company" placeholder="Company name" /></label>
         <label>
           Interested in
-          <select name="interest">
+          <select name="interest" key={interest} defaultValue={interest || interestOptions[0]}>
             {interestOptions.map(option => (
               <option key={option}>{option}</option>
             ))}

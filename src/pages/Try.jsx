@@ -54,6 +54,10 @@ function Try() {
             <iframe src={DEMO_URL} title="Try Entaura" loading="lazy" allow="clipboard-write" onLoad={() => setLoaded(true)} />
           </div>
         </div>
+        <div className="try-own">
+          <p><strong>Like what you see?</strong> Run it on your own policies and ERP data.</p>
+          <Link className="button primary" to="/contact.html?interest=pilot">Run this on your own data <span>↗</span></Link>
+        </div>
         <p className="try-note">
           Answers are AI-generated from demo data.
           <a href={DEMO_URL} target="_blank" rel="noopener noreferrer">Open the demo in a new tab ↗</a>

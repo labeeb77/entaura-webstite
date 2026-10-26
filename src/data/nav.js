@@ -5,7 +5,9 @@ export const megaItems = [
 ]
 
 export const footerLinks = [
-  { to: '/index.html#products', label: 'Products' },
+  { to: '/ask.html', label: 'Ask' },
+  { to: '/insight.html', label: 'Insight' },
+  { to: '/watch.html', label: 'Watch' },
   { to: '/solutions.html', label: 'Solutions' },
   { to: '/integration.html', label: 'Integration' },
   { to: '/try.html', label: 'Try Entaura' },

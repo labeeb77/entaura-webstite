@@ -15,12 +15,12 @@ export const watchPage = {
     gradient: 'the same number every day.',
     text: 'If you already ask it in Ask or Insight, you can be told about it automatically.',
     items: [
-      { icon: 'chart', team: 'Finance', example: '“Tell me every morning which invoices went overdue.”' },
-      { icon: 'rocket', team: 'Sales', example: '“Message me when a distributor reaches 80% of target.”' },
-      { icon: 'server', team: 'Operations', example: '“Alert me if orders awaiting stock go above 10.”' },
-      { icon: 'layers', team: 'Procurement and stock', example: '“Tell me when any SKU drops below its minimum.”' },
-      { icon: 'people', team: 'HR', example: '“Headcount and absences every Sunday.”' },
-      { icon: 'flag', team: 'Leadership', example: '“Send me today’s sales at 6 pm.”' },
+      { icon: 'chart', team: 'Finance', example: '“Tell me every morning which invoices went overdue.”', value: 'Collections start the day an invoice slips, not at month-end.' },
+      { icon: 'rocket', team: 'Sales', example: '“Message me when a distributor reaches 80% of target.”', value: 'The last push happens while there’s still time to qualify.' },
+      { icon: 'server', team: 'Operations', example: '“Alert me if orders awaiting stock go above 10.”', value: 'Stuck orders are fixed before customers call.' },
+      { icon: 'layers', team: 'Procurement and stock', example: '“Tell me when any SKU drops below its minimum.”', value: 'Reorder before the shelf is empty and the sale is lost.' },
+      { icon: 'people', team: 'HR', example: '“Headcount and absences every Sunday.”', value: 'The weekly report arrives without anyone building it.' },
+      { icon: 'flag', team: 'Leadership', example: '“Send me today’s sales at 6 pm.”', value: 'The day’s number, without opening a dashboard.' },
     ],
   },
 
