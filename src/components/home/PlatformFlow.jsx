@@ -63,7 +63,8 @@ function PlatformFlow() {
   const grid = useRef(null)
   const nodes = useRef({})
   const node = key => element => { nodes.current[key] = element }
-  const [scenarioIndex, setScenarioIndex] = useState(0)
+  // Opens on Insight, like the hero demo; autoplay continues from there.
+  const [scenarioIndex, setScenarioIndex] = useState(1)
   const scenario = flow.scenarios[scenarioIndex]
   const { width, height, paths } = useConnectorPaths(grid, nodes, scenario)
 
