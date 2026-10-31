@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { fetchSlots } from '../../data/booking.js'
 
 // How many weeks ahead visitors can page.
-const maxWeeks = 4
+const maxWeeks = 5
 
 const dayKey = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
 
@@ -41,9 +41,14 @@ function SlotPicker({ selected, onPick, notice, onError }) {
   // Fetched per week, and again after a notice (a slot was taken meanwhile).
   useEffect(() => {
     let current = true
-    fetchSlots(dayKey(week), 7)
-      .then(list => {
+    // Calendar uses India dates; fetch adjacent dates, then group in visitor time.
+    fetchSlots(dayKey(addDays(week, -1)), 9)
+      .then(result => {
         if (!current) return
+        const list = result.filter(slot => {
+          const key = dayKey(new Date(slot))
+          return key >= dayKey(week) && key < dayKey(addDays(week, 7))
+        })
         // Late in the week nothing may be left: open on the next week instead.
         if (!list.length && !skipped.current && week.getTime() === thisWeek.getTime()) {
           skipped.current = true
@@ -65,6 +70,7 @@ function SlotPicker({ selected, onPick, notice, onError }) {
   const loading = slots === null
 
   const page = step => {
+    onPick(null)
     setSlots(null)
     setWeek(addDays(week, step * 7))
   }
@@ -86,7 +92,7 @@ function SlotPicker({ selected, onPick, notice, onError }) {
                 aria-selected={day === key}
                 className={day === key ? 'on' : ''}
                 disabled={!open}
-                onClick={() => setDay(key)}
+                onClick={() => { onPick(null); setDay(key) }}
               >
                 <small>{date.toLocaleDateString([], { weekday: 'short' })}</small>
                 <b>{date.getDate()}</b>

@@ -2,7 +2,7 @@
 // that reads free time from Google Calendar, books the meeting with a Meet link
 // and logs each lead in a Google Sheet. Without its URL, leads are emailed
 // through Web3Forms so the team can arrange a time by hand.
-const bookingUrl = import.meta.env.VITE_BOOKING_URL
+const bookingUrl = (import.meta.env.VITE_BOOKING_URL || '').trim()
 const formKey = import.meta.env.VITE_WEB3FORMS_KEY
 
 export const bookingEnabled = Boolean(bookingUrl)
@@ -15,14 +15,17 @@ async function post(body) {
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify(body),
   })
-  return response.json()
+  if (!response.ok) throw new Error('Booking service unavailable')
+  const result = await response.json()
+  if (!result.ok && body.action !== 'book') throw new Error(result.error || 'Request failed')
+  return result
 }
 
 // Free slot start times (ISO) for `days` days from `from` (YYYY-MM-DD).
 export async function fetchSlots(from, days) {
   const response = await fetch(`${bookingUrl}?action=slots&from=${from}&days=${days}`)
   const result = await response.json()
-  if (!result.ok) throw new Error(result.error || 'slots')
+  if (!response.ok || !result.ok) throw new Error(result.error || 'slots')
   return result.slots
 }
 
@@ -45,7 +48,7 @@ export async function emailLead(lead, note) {
   data.append('message', note || 'Requested a demo. Please email them to find a time.')
   try {
     const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
-    return (await response.json()).success
+    return response.ok && (await response.json()).success === true
   } catch {
     return false
   }

@@ -116,14 +116,19 @@ const longDate = iso => new Date(iso).toLocaleString([], { weekday: 'long', day:
 function SlotStep({ lead }) {
   const navigate = useNavigate()
   const [slot, setSlot] = useState(null)
-  const [state, setState] = useState(bookingEnabled ? 'pick' : 'manual')
+  const [state, setState] = useState(bookingEnabled ? 'pick' : 'sending')
   const [notice, setNotice] = useState('')
 
   // If the booking service can't be reached, the team arranges a time by email.
-  const fallBack = useCallback(() => {
-    emailLead(lead)
-    setState('manual')
+  const fallBack = useCallback(async () => {
+    setState('sending')
+    const sent = await emailLead(lead)
+    setState(sent ? 'manual' : 'failed')
   }, [lead])
+
+  useEffect(() => {
+    if (!bookingEnabled) fallBack()
+  }, [fallBack])
 
   const confirm = async () => {
     setState('booking')
@@ -138,15 +143,28 @@ function SlotStep({ lead }) {
       }
       throw new Error(result.error)
     } catch {
-      emailLead(lead, `Tried to book ${longDate(slot)} (${slot}) but the booking failed. Please confirm a time by email.`)
-      setState('manual')
+      setState('sending')
+      const sent = await emailLead(lead, `Tried to book ${longDate(slot)} (${slot}), but confirmation could not be received. Check the calendar before arranging another meeting.`)
+      setState(sent ? 'uncertain' : 'uncertain-failed')
     }
   }
 
-  if (state === 'manual') {
+  if (state === 'sending') return <div className="dm-form" role="status">Sending your request…</div>
+
+  if (state === 'failed' || state === 'uncertain-failed') return (
+    <div className="dm-form" role="alert">
+      <h1>We couldn’t confirm your request.</h1>
+      <p>{state === 'uncertain-failed' ? 'Your booking may have been created. Check your email for a calendar invite before trying again.' : 'Your request has not been sent. Please try again.'}</p>
+      <button type="button" className="dm-submit" onClick={fallBack}>Send a follow-up request</button>
+      <Link className="dm-back" to="/">Return to entaura.ai →</Link>
+    </div>
+  )
+
+  if (state === 'manual' || state === 'uncertain') {
     return (
       <div className="dm-form dm-done">
         <h1>Thanks, {lead.firstName}.</h1>
+        {state === 'uncertain' && <p>We couldn’t confirm the booking response. Check your inbox for an invite; the team has received a request to verify your booking.</p>}
         <p>We’ll email <strong>{lead.email}</strong> within one working day to find a time for your demo.</p>
         <Link className="dm-back" to="/">Return to entaura.ai →</Link>
       </div>
@@ -173,11 +191,21 @@ function SlotStep({ lead }) {
 function DoneStep({ lead, at }) {
   const [answers, setAnswers] = useState({ goals: '', source: '' })
   const [sent, setSent] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
 
-  const submit = event => {
+  const submit = async event => {
     event.preventDefault()
-    if (bookingEnabled) saveAnswers(lead.email, answers).catch(() => {})
-    setSent(true)
+    setSaving(true)
+    setError('')
+    try {
+      await saveAnswers(lead.email, answers)
+      setSent(true)
+    } catch {
+      setError('Your answers could not be saved. Please try again.')
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (
@@ -200,7 +228,8 @@ function DoneStep({ lead, at }) {
               {sources.map(source => <option key={source}>{source}</option>)}
             </select>
           </Field>
-          <button className="dm-submit" type="submit">Submit</button>
+          <button className="dm-submit" type="submit" disabled={saving}>{saving ? 'Saving…' : 'Submit'}</button>
+          {error && <p role="alert">{error}</p>}
         </>
       )}
       <Link className="dm-back" to="/">Return to entaura.ai →</Link>
@@ -231,7 +260,8 @@ function Demo() {
     const match = countries.find(([code]) => code === guessCountry())
     return match ? { ...emptyLead, country: match[0], dialCode: match[2] } : emptyLead
   })
-  const step = Number(params.get('step')) || 1
+  const requestedStep = Number(params.get('step'))
+  const step = [1, 2, 3, 4].includes(requestedStep) ? requestedStep : 1
   const at = params.get('at')
 
   // Later steps need the earlier answers; after a refresh, start again.
@@ -251,7 +281,6 @@ function Demo() {
   const toSlots = details => {
     setLead(details)
     if (bookingEnabled) saveLead(details).catch(() => {})
-    else emailLead(details)
     go(3)
   }
 

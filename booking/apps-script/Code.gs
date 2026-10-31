@@ -13,6 +13,7 @@
 const CONFIG = {
   // 'primary' is the calendar of the account that deploys this script.
   CALENDAR_ID: 'primary',
+  SPREADSHEET_ID: '1jWyNpBzqMwNxjeczLcrqWtWkLkEtLDBIt7elbTHRKWI',
   TIME_ZONE: 'Asia/Kolkata',
   // ISO weekdays: 1 = Monday ... 7 = Sunday.
   WEEKDAYS: [1, 2, 3, 4, 5],
@@ -53,7 +54,9 @@ function doPost(e) {
   if (tooMany(email)) return json({ ok: false, error: 'too many requests' })
 
   if (body.action === 'lead') {
-    saveLead(email, body, 'Details given')
+    const lock = LockService.getScriptLock()
+    lock.waitLock(20000)
+    try { saveLead(email, body, 'Details given') } finally { lock.releaseLock() }
     return json({ ok: true })
   }
   if (body.action === 'book') return json(book(email, body))
@@ -101,7 +104,8 @@ function busyTimes(from, to) {
     timeZone: CONFIG.TIME_ZONE,
     items: [{ id: CONFIG.CALENDAR_ID }],
   })
-  const calendar = result.calendars[CONFIG.CALENDAR_ID] || { busy: [] }
+  const calendar = result.calendars && result.calendars[CONFIG.CALENDAR_ID]
+  if (!calendar || calendar.errors || !Array.isArray(calendar.busy)) throw new Error('Calendar availability unavailable')
   return calendar.busy.map(block => ({ start: new Date(block.start).getTime(), end: new Date(block.end).getTime() }))
 }
 
@@ -155,7 +159,7 @@ function book(email, body) {
 // ---------- Leads sheet ----------
 
 function sheet() {
-  const book = SpreadsheetApp.getActiveSpreadsheet()
+  const book = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID)
   const tab = book.getSheetByName(CONFIG.SHEET_NAME) || book.insertSheet(CONFIG.SHEET_NAME)
   if (tab.getLastRow() === 0) {
     tab.appendRow(COLUMNS)
@@ -190,6 +194,11 @@ function saveLead(email, body, status, extra) {
   }, extra || {})
   const row = rowOf(tab, email)
   if (row) {
+    // A delayed details request must never reopen a completed booking.
+    if (status !== 'Booked' && tab.getRange(row, COLUMNS.indexOf('Status') + 1).getValue() === 'Booked') {
+      delete values.Status
+      delete values.Received
+    }
     writeRow(tab, row, values)
   } else {
     tab.appendRow(COLUMNS.map(column => (column in values ? safe(values[column]) : '')))
