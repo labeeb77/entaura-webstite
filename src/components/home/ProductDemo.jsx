@@ -260,9 +260,6 @@ function ProductDemo() {
 
   return (
     <div className="pd">
-      <Story product={product} onPick={index => start(index, 0, true)} isLit={isLit} progress={progress} />
-      <p className="pd-tagline">{heroStory[key].tagline}</p>
-
       <div className={`pd-window tone-${key}`} ref={windowRef} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
         <i className="pd-glow" aria-hidden="true"></i>
         <div className="pd-bar">
@@ -271,76 +268,82 @@ function ProductDemo() {
           <span className="pd-mode"><ProductMark product={key} size="sm" /></span>
         </div>
 
-        <div className="pd-screen" key={key}>
-          {key === 'watch' ? (
-            <div className="pd-watch">
-              <WatchFlow key={`${questionIndex}-${run}`} flow={entries[questionIndex]} live={live} reduced={reduced} onDone={flowDone} onStep={setWatchStep} />
-            </div>
-          ) : (
-            <div className="pd-log" ref={logRef} onWheel={onWheel} onTouchMove={() => { follow.current = false }}>
-              <div className="pd-thread" ref={threadRef}>
-                {thread.map((turn, index) => {
-                  const isLatest = index === thread.length - 1
-                  const turnPhase = isLatest ? shownPhase : 'done'
-                  if (isLatest && turnPhase === 'typing') return null
-                  const answerProps = {
-                    item: turn.entry,
-                    limit: turnPhase === 'answer' ? streamed : Infinity,
-                    stage: turnPhase,
-                    compact: !isLatest,
-                    reduced,
-                  }
-                  return (
-                    <Fragment key={turn.id}>
-                      <p className="pd-q">{turn.entry.q}</p>
-                      <div className={`pd-turn${isLatest ? '' : ' past'}`}>
-                        <span className="pd-avatar" aria-hidden="true"><img src="/assets/entaura-mark-sm.png" alt="" /></span>
-                        <div className="pd-a">
-                          <div className="hx-meta">
-                            <Reasoning steps={turn.entry.steps} thinking={turnPhase === 'thinking'} reduced={reduced} />
-                            {turnPhase === 'done' && isLatest && turn.entry.worth && <span className="hx-worth">{turn.entry.worth}</span>}
-                          </div>
-                          {turnPhase !== 'thinking' && (key === 'ask'
-                            ? <AskAnswer {...answerProps} />
-                            : <InsightAnswer {...answerProps} proof={isLatest && proof} onProof={() => setProof(value => !value)} tapping={isLatest && tapping === 'proof'} />)}
-                        </div>
-                      </div>
-                    </Fragment>
-                  )
-                })}
+        <div className="pd-main">
+          <aside className="pd-side">
+            <Story product={product} onPick={index => start(index, 0, true)} isLit={isLit} progress={progress} />
+            <p className="pd-tagline">{heroStory[key].tagline}</p>
+          </aside>
+          <div className="pd-screen" key={key}>
+            {key === 'watch' ? (
+              <div className="pd-watch">
+                <WatchFlow key={`${questionIndex}-${run}`} flow={entries[questionIndex]} live={live} reduced={reduced} onDone={flowDone} onStep={setWatchStep} />
               </div>
-            </div>
-          )}
-
-          <div className="pd-dock">
-            <div className="pd-chips">
-              {followups.length > 0 ? (
-                <>
-                  <span className="pd-chips-label">Follow up</span>
-                  {followups.map((entry, index) => (
-                    <button key={entry.q} className={`follow${tapping === index ? ' tapping' : ''}`} onClick={() => askFollowup(entry, true)}>
-                      {entry.q}
-                      {tapping === index && <i className="pd-pointer" aria-hidden="true"></i>}
-                    </button>
-                  ))}
-                </>
-              ) : (
-                entries.map((entry, index) => (
-                  <button key={entry.q || entry.label} className={index === questionIndex ? 'on' : ''} onClick={() => start(product, index, true)}>{entry.q || entry.label}</button>
-                ))
-              )}
-            </div>
-            {key !== 'watch' && (
-              <div className={`pd-composer${typing ? ' typing' : ''}`}>
-                <span className={typing && typed > 0 ? '' : 'empty'}>
-                  {typing && typed > 0 ? latest.q.slice(0, typed) : 'Ask about your policies, documents or data…'}
-                  {typing && live && <i className="hx-caret"></i>}
-                </span>
-                <b className={typing && latest && typed >= latest.q.length ? 'send' : ''} aria-hidden="true">
-                  <svg viewBox="0 0 16 16" width="14" height="14"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </b>
+            ) : (
+              <div className="pd-log" ref={logRef} onWheel={onWheel} onTouchMove={() => { follow.current = false }}>
+                <div className="pd-thread" ref={threadRef}>
+                  {thread.map((turn, index) => {
+                    const isLatest = index === thread.length - 1
+                    const turnPhase = isLatest ? shownPhase : 'done'
+                    if (isLatest && turnPhase === 'typing') return null
+                    const answerProps = {
+                      item: turn.entry,
+                      limit: turnPhase === 'answer' ? streamed : Infinity,
+                      stage: turnPhase,
+                      compact: !isLatest,
+                      reduced,
+                    }
+                    return (
+                      <Fragment key={turn.id}>
+                        <p className="pd-q">{turn.entry.q}</p>
+                        <div className={`pd-turn${isLatest ? '' : ' past'}`}>
+                          <span className="pd-avatar" aria-hidden="true"><img src="/assets/entaura-mark-sm.png" alt="" /></span>
+                          <div className="pd-a">
+                            <div className="hx-meta">
+                              <Reasoning steps={turn.entry.steps} thinking={turnPhase === 'thinking'} reduced={reduced} />
+                              {turnPhase === 'done' && isLatest && turn.entry.worth && <span className="hx-worth">{turn.entry.worth}</span>}
+                            </div>
+                            {turnPhase !== 'thinking' && (key === 'ask'
+                              ? <AskAnswer {...answerProps} />
+                              : <InsightAnswer {...answerProps} proof={isLatest && proof} onProof={() => setProof(value => !value)} tapping={isLatest && tapping === 'proof'} />)}
+                          </div>
+                        </div>
+                      </Fragment>
+                    )
+                  })}
+                </div>
               </div>
             )}
+
+            <div className="pd-dock">
+              <div className="pd-chips">
+                {followups.length > 0 ? (
+                  <>
+                    <span className="pd-chips-label">Follow up</span>
+                    {followups.map((entry, index) => (
+                      <button key={entry.q} className={`follow${tapping === index ? ' tapping' : ''}`} onClick={() => askFollowup(entry, true)}>
+                        {entry.q}
+                        {tapping === index && <i className="pd-pointer" aria-hidden="true"></i>}
+                      </button>
+                    ))}
+                  </>
+                ) : (
+                  entries.map((entry, index) => (
+                    <button key={entry.q || entry.label} className={index === questionIndex ? 'on' : ''} onClick={() => start(product, index, true)}>{entry.q || entry.label}</button>
+                  ))
+                )}
+              </div>
+              {key !== 'watch' && (
+                <div className={`pd-composer${typing ? ' typing' : ''}`}>
+                  <span className={typing && typed > 0 ? '' : 'empty'}>
+                    {typing && typed > 0 ? latest.q.slice(0, typed) : 'Ask about your policies, documents or data…'}
+                    {typing && live && <i className="hx-caret"></i>}
+                  </span>
+                  <b className={typing && latest && typed >= latest.q.length ? 'send' : ''} aria-hidden="true">
+                    <svg viewBox="0 0 16 16" width="14" height="14"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  </b>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

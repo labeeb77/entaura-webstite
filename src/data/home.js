@@ -26,7 +26,7 @@ export const logos = [
 ]
 
 export const vision = [
-  { label: 'The enterprise challenge', title: 'Knowledge and data live apart.', text: 'Business policies, tools, and structured and unstructured transactional data are disconnected.' },
+  { label: 'The enterprise challenge', title: 'Knowledge and data live apart.', text: 'Policies, tools and transactional data sit in separate systems.' },
   { label: 'The entaura.ai vision', title: 'One intelligent layer.', text: 'Connecting enterprise knowledge with business action.' },
   { label: 'Business value', title: 'Decide, comply, and act sooner.', text: 'Better decisions, improved compliance, and proactive management.' },
 ]

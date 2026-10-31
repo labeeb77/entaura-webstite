@@ -16,7 +16,7 @@ function LogoRow({ hidden }) {
 function LogoMarquee() {
   return (
     <section className="h-logos" aria-label="Integrations">
-      <p className="container">Connects with the systems you already run, through <strong>600+ connectors</strong></p>
+      <p className="container">Works with the systems you already run · <strong>600+ connectors</strong></p>
       <div className="h-marquee">
         <div className="h-marquee-track">
           <LogoRow />

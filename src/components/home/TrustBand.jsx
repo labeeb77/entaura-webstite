@@ -7,8 +7,8 @@ function TrustBand() {
       <div className="container">
         <div className="h-head reveal">
           <span className="eyebrow">Built for trust</span>
-          <h2>Answers your auditors can check. <span className="muted">Controls your IT team will approve.</span></h2>
-          <p>A wrong number in a credit decision costs more than a slow one, so entaura.ai asks, refuses, or flags a problem rather than guess.</p>
+          <h2>Answers auditors can check. <span className="muted">Controls IT will approve.</span></h2>
+          <p>When a number is unsure, entaura asks, refuses or flags it rather than guess.</p>
         </div>
         <div className="h-trust-grid">
           {trustPoints.map((point, index) => (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { heroWords } from '../../data/heroDemos.js'
 import { useReducedMotion } from '../../hooks/useReducedMotion.js'
@@ -16,10 +16,16 @@ function Letters({ word, mode }) {
   )
 }
 
-// The rotating word: letters of the old word slide up and out while the new ones cascade in.
+// Each word's pill colour: knowledge, analytics, then data.
+const pillTones = ['ask', 'insight', 'peach']
+
+// The rotating word in a coloured pill: letters of the old word slide up and
+// out while the new ones cascade in, and the pill eases to the new width.
 function Rotator({ reduced }) {
   const [index, setIndex] = useState(0)
   const [previous, setPrevious] = useState(null)
+  const [width, setWidth] = useState(null)
+  const sizer = useRef(null)
 
   useEffect(() => {
     if (reduced) return undefined
@@ -36,10 +42,24 @@ function Rotator({ reduced }) {
     return () => clearTimeout(timer)
   }, [previous])
 
+  // Measured after render (and again once fonts load or the window resizes),
+  // so the pre-rendered page simply sizes the pill to its first word.
+  useEffect(() => {
+    const measure = () => sizer.current && setWidth(sizer.current.offsetWidth)
+    measure()
+    document.fonts?.ready.then(measure)
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [index])
+
   return (
-    <span className="hx-rot">
-      {previous !== null && <Letters key={`out-${previous}-${index}`} word={heroWords[previous]} mode="out" />}
-      <Letters key={`in-${index}`} word={heroWords[index]} mode={previous !== null ? 'in' : 'still'} />
+    <span className={`hx-pill tone-${pillTones[index]}`} style={width ? { '--w': `${width}px` } : undefined}>
+      <i className="hx-pill-dot" aria-hidden="true"></i>
+      <span className="hx-rot">
+        {previous !== null && <Letters key={`out-${previous}-${index}`} word={heroWords[previous]} mode="out" />}
+        <Letters key={`in-${index}`} word={heroWords[index]} mode={previous !== null ? 'in' : 'still'} />
+      </span>
+      <span className="hx-pill-sizer" ref={sizer} aria-hidden="true">{heroWords[index]}</span>
     </span>
   )
 }
@@ -53,13 +73,13 @@ function Hero() {
       <div className="container">
         <div className="hx-top">
           <span className="hx-badge"><img src="/assets/entaura-mark-sm.png" alt="" />Enterprise Agentic AI Platform</span>
-          <h1 aria-label="Transform enterprise policies, documents, and transactional data into actionable insights.">
+          <h1 aria-label="Turn enterprise policies, documents, and transactional data into actionable insights.">
             <span aria-hidden="true">
-              <span className="hx-line"><span>Transform enterprise</span></span>
-              <span className="hx-line"><span><Rotator reduced={reduced} /></span></span>
+              <span className="hx-line"><span>Turn enterprise <Rotator reduced={reduced} /></span></span>
               <span className="hx-line muted"><span>into actionable insights.</span></span>
             </span>
           </h1>
+          <p className="hx-sub">Ask, Insight and Watch connect your policies, documents and data in one intelligent layer.</p>
           <div className="hx-actions">
             <Link className="button primary" to="/try.html">Try Entaura</Link>
             <Link className="button ghost" to="/contact.html">Contact sales</Link>

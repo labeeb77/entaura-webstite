@@ -23,8 +23,8 @@ function Home() {
       <LogoMarquee />
       <VisionBand />
       <ProductShowcase />
-      <TrustBand />
       <PlatformFlow />
+      <TrustBand />
       <UseCases />
       <CtaBand />
     </main>
