@@ -10,28 +10,28 @@ export const heroWords = ['policies', 'documents', 'transactional data']
 // when the demo reaches its stage (watch uses its flow's step number).
 export const heroStory = {
   ask: {
-    tagline: 'Answers from your documents, with the proof attached.',
+    tagline: 'Answers from your documents, with proof.',
     points: [
-      { text: 'Cites the exact clause, page or cell', at: 'answer' },
-      { text: 'Shows the context it used and how it reasoned', at: 'extras' },
-      { text: 'Follow-up questions keep the thread going', at: 'followup' },
+      { text: 'Cites the exact clause or cell', at: 'answer' },
+      { text: 'Shows its context and reasoning', at: 'extras' },
+      { text: 'Follow-ups keep the thread going', at: 'followup' },
     ],
   },
   insight: {
-    tagline: 'Live ERP numbers, as charts you can check.',
+    tagline: 'Live ERP numbers you can check.',
     points: [
       { text: 'Answers in plain words', at: 'answer' },
-      { text: 'Bar, column or table, one tap away', at: 'extras' },
-      { text: 'Shows the SQL behind every figure', at: 'proof' },
-      { text: 'Ask a follow-up and keep digging', at: 'followup' },
+      { text: 'Bar, column or table in one tap', at: 'extras' },
+      { text: 'The SQL behind every figure', at: 'proof' },
+      { text: 'Follow-ups to keep digging', at: 'followup' },
     ],
   },
   watch: {
-    tagline: 'Alerts on WhatsApp or Telegram when it matters.',
+    tagline: 'WhatsApp or Telegram alerts that matter.',
     points: [
       { text: 'Turn any answer into a watch', at: 1 },
-      { text: 'Checks on a schedule or when a limit is crossed', at: 4 },
-      { text: 'Sends the alert where your team already is', at: 5 },
+      { text: 'On a schedule or when a limit is hit', at: 4 },
+      { text: 'Sent where your team already is', at: 5 },
     ],
   },
 }
