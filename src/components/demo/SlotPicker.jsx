@@ -59,7 +59,10 @@ function SlotPicker({ selected, onPick, notice, onError }) {
         const first = list[0] && dayKey(new Date(list[0]))
         setDay(previous => (previous && list.some(slot => dayKey(new Date(slot)) === previous) ? previous : first || null))
       })
-      .catch(() => current && onError())
+      .catch(error => {
+        console.error('Demo booking: could not load free times.', error)
+        if (current) onError()
+      })
     return () => { current = false }
   }, [week, notice, onError, thisWeek])
 

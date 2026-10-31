@@ -34,7 +34,27 @@ const COLUMNS = ['Received', 'Email', 'First name', 'Last name', 'Company', 'Cou
 
 // ---------- Web app entry points ----------
 
+// Any error comes back as JSON with its message, so the website (and the
+// browser's Network tab) shows the real reason instead of Google's HTML page.
 function doGet(e) {
+  try {
+    return handleGet(e)
+  } catch (error) {
+    console.error(error)
+    return json({ ok: false, error: String(error && error.message || error) })
+  }
+}
+
+function doPost(e) {
+  try {
+    return handlePost(e)
+  } catch (error) {
+    console.error(error)
+    return json({ ok: false, error: String(error && error.message || error) })
+  }
+}
+
+function handleGet(e) {
   const params = (e && e.parameter) || {}
   if (params.action !== 'slots') return json({ ok: false, error: 'unknown action' })
   const days = Math.min(Math.max(Number(params.days) || 7, 1), 14)
@@ -42,7 +62,7 @@ function doGet(e) {
   return json({ ok: true, slots: freeSlots(from, days).map(date => date.toISOString()) })
 }
 
-function doPost(e) {
+function handlePost(e) {
   let body
   try {
     body = JSON.parse(e.postData.contents)

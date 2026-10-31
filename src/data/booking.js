@@ -24,7 +24,13 @@ async function post(body) {
 // Free slot start times (ISO) for `days` days from `from` (YYYY-MM-DD).
 export async function fetchSlots(from, days) {
   const response = await fetch(`${bookingUrl}?action=slots&from=${from}&days=${days}`)
-  const result = await response.json()
+  const text = await response.text()
+  let result
+  try {
+    result = JSON.parse(text)
+  } catch {
+    throw new Error(`The booking script returned a page instead of JSON (${text.slice(0, 120)})`)
+  }
   if (!response.ok || !result.ok) throw new Error(result.error || 'slots')
   return result.slots
 }
