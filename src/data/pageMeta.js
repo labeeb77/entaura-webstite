@@ -47,6 +47,14 @@ export const pageMeta = {
     canonical: 'https://entaura.ai/integration.html',
     title: 'Integration | entaura.ai',
   },
+  pricing: {
+    file: 'pricing.html',
+    description: 'entaura.ai plans: Basic (Ask), Standard (Ask + Insight) and Enterprise (Ask + Insight + Watch, customised). Every plan starts with a free pilot on your own data.',
+    ogTitle: 'Pricing | entaura.ai',
+    ogDescription: 'Start with Ask. Grow into Insight and Watch. Every plan starts with a free pilot.',
+    canonical: 'https://entaura.ai/pricing.html',
+    title: 'Pricing | entaura.ai',
+  },
   try: {
     file: 'try.html',
     description: 'Try Entaura: a live demo on sample data.',

@@ -119,7 +119,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .nav { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 21px; font-weight: 400; letter-spacing: -.035em; }
 .brand img { width: 46px; height: 32px; object-fit: contain; }
-.navlinks { display: flex; gap: 30px; align-items: center; color: var(--body); font-size: 14px; font-weight: 500; }
+.navlinks { display: flex; gap: 30px; align-items: center; color: var(--body); font-size: 14px; font-weight: 500; white-space: nowrap; }
+@media (min-width: 851px) and (max-width: 1080px) { .navlinks { gap: 18px; font-size: 13.5px; } .nav { gap: 16px; } }
 .navlinks a:hover, .footer a:hover { color: var(--text); }
 .navlinks .nav-try { display: none; }
 .navlinks .nav-try:hover { color: #fff; }

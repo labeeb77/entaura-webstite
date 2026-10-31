@@ -10,6 +10,7 @@ export const footerLinks = [
   { to: '/watch.html', label: 'Watch' },
   { to: '/solutions.html', label: 'Solutions' },
   { to: '/integration.html', label: 'Integration' },
+  { to: '/pricing.html', label: 'Pricing' },
   { to: '/try.html', label: 'Try Entaura' },
   { to: '/contact.html', label: 'Contact' },
 ]
