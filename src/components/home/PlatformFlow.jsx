@@ -70,8 +70,7 @@ function PlatformFlow() {
 
   const [step, setStep] = useState(0)
   const [inView, setInView] = useState(false)
-  const [paused, setPaused] = useState(false)
-  const playing = !reduced && inView && !paused
+  const playing = !reduced && inView
 
   useEffect(() => {
     const target = section.current
@@ -122,7 +121,7 @@ function PlatformFlow() {
           <p>Pick a product and follow one request, from source to answer.</p>
         </div>
 
-        <div className="fl-shell reveal" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        <div className="fl-shell reveal">
           <div className="fl-bar">
             <span className="fl-label">Follow a request</span>
             <div className="fl-pills" role="tablist" aria-label="Example request">
