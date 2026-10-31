@@ -89,16 +89,38 @@ function Kpi({ kpi, run, index }) {
 
 const tickLabel = value => (value === 0 ? 'SAR 0' : value >= 1e6 ? `SAR ${value / 1e6}M` : `SAR ${value / 1e3}K`)
 
-function InsightChart({ chart, reduced }) {
-  const [view, setView] = useState('Bar')
-  const [copied, setCopied] = useState(false)
-  const animate = !reduced
-  const typed = useTyped(chart.sql, animate, 1500)
+// The source, query and result, then the SQL typing in. Mounted when the
+// section opens, so the animation plays each time it is opened.
+function Proof({ chart, animate }) {
+  const typed = useTyped(chart.sql, animate, 250)
   const trail = [
     { label: 'Source', title: `${chart.source.system} · ${chart.source.table}`, note: `${chart.source.rows} · read-only` },
     { label: 'Query', title: chart.meta, note: chart.source.period },
     { label: 'Result', title: chart.result, note: 'Numbers calculated by code' },
   ]
+  return (
+    <div className="ic-proof-body">
+      <ol className="ic-trail">
+        {trail.map((item, index) => (
+          <li key={item.label} style={{ '--d': `${index * 250}ms` }}>
+            <strong><small>{item.label}</small>{item.title}</strong>
+            <span>{item.note}</span>
+          </li>
+        ))}
+      </ol>
+      <pre className="ic-sql" aria-label={chart.sql}>
+        <Sql code={chart.sql} count={typed} />
+        <i className={`ic-caret${typed >= chart.sql.length ? ' done' : ''}`} aria-hidden="true"></i>
+      </pre>
+    </div>
+  )
+}
+
+// `proof` opens "How this was computed"; `tapping` shows the demo's pointer on it.
+function InsightChart({ chart, reduced, proof, onProof, tapping }) {
+  const [view, setView] = useState(chart.view ?? 'Bar')
+  const [copied, setCopied] = useState(false)
+  const animate = !reduced
   const ticks = axisTicks(Math.max(...chart.rows.flatMap(row => row.values)))
   const top = ticks[ticks.length - 1]
   const percent = value => `${(value / top) * 100}%`
@@ -203,26 +225,17 @@ function InsightChart({ chart, reduced }) {
         </div>
       )}
 
-      <div className="ic-proof">
+      <div className={`ic-proof${proof ? ' open' : ''}`}>
         <div className="ic-proof-head">
-          <span>How this was computed</span>
-          <em>{chart.meta}</em>
-          <button className="ic-copy" onClick={copy} aria-label="Copy SQL">{copied ? 'Copied' : 'Copy SQL'}</button>
+          <button className={`ic-proof-toggle${tapping ? ' tapping' : ''}`} onClick={onProof} aria-expanded={Boolean(proof)}>
+            <span>How this was computed</span>
+            <em>{chart.meta}</em>
+            <svg className="chev" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            {tapping && <i className="pd-pointer" aria-hidden="true"></i>}
+          </button>
+          {proof && <button className="ic-copy" onClick={copy} aria-label="Copy SQL">{copied ? 'Copied' : 'Copy SQL'}</button>}
         </div>
-        <div className="ic-proof-body">
-          <ol className="ic-trail">
-            {trail.map((item, index) => (
-              <li key={item.label} style={{ '--d': `${900 + index * 350}ms` }}>
-                <strong><small>{item.label}</small>{item.title}</strong>
-                <span>{item.note}</span>
-              </li>
-            ))}
-          </ol>
-          <pre className="ic-sql" aria-label={chart.sql}>
-            <Sql code={chart.sql} count={typed} />
-            <i className={`ic-caret${typed >= chart.sql.length ? ' done' : ''}`} aria-hidden="true"></i>
-          </pre>
-        </div>
+        {proof && <Proof chart={chart} animate={animate} />}
       </div>
     </div>
   )
