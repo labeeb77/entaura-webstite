@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-function ContactStrip({ title, text, secondary = 'Contact sales' }) {
+function ContactStrip({ title, text, secondary = 'Contact sales', secondaryTo = '/contact.html' }) {
   return (
     <section className="contact-strip">
       <div className="container">
@@ -8,7 +8,7 @@ function ContactStrip({ title, text, secondary = 'Contact sales' }) {
         <p>{text}</p>
         <div className="contact-strip-actions">
           <Link className="button primary" to="/try.html">Try Entaura</Link>
-          <Link className="button ghost" to="/contact.html">{secondary}</Link>
+          <Link className="button ghost" to={secondaryTo}>{secondary}</Link>
         </div>
       </div>
     </section>

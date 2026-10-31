@@ -24,7 +24,7 @@ function InsightPage() {
       <PageHero className="pp-hero" {...hero} badge={<span className="pp-badge"><ProductMark product="insight" size="sm" />{hero.eyebrow}</span>}>
         <div className="pp-hero-actions">
           <Link className="button primary" to="/try.html">Try Entaura <span>↗</span></Link>
-          <Link className="button ghost" to="/contact.html">Talk to our team</Link>
+          <Link className="button ghost" to="/demo.html">Request a demo</Link>
         </div>
       </PageHero>
       <SectionNav sections={productSections} />
@@ -35,7 +35,7 @@ function InsightPage() {
       <Screens id="see" {...screens}><ProductWindow /></Screens>
       <Integrations id="works-with" {...integrations} />
       <Trust id="security" {...trust} />
-      <ContactStrip title={cta.title} text={cta.text} secondary="Talk to our team" />
+      <ContactStrip title={cta.title} text={cta.text} secondary="Request a demo" secondaryTo="/demo.html" />
     </main>
   )
 }

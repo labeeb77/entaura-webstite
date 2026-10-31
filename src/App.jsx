@@ -3,6 +3,7 @@ import Footer from './components/Footer.jsx'
 import Header from './components/Header.jsx'
 import ScrollManager from './components/ScrollManager.jsx'
 import Contact from './pages/Contact.jsx'
+import Demo from './pages/Demo.jsx'
 import { legalPages } from './data/legal.js'
 import Home from './pages/Home.jsx'
 import InsightPage from './pages/InsightPage.jsx'
@@ -29,6 +30,7 @@ function App() {
         <Route path="/solutions.html" element={<Solutions />} />
         <Route path="/integration.html" element={<Integration />} />
         <Route path="/pricing.html" element={<Pricing />} />
+        <Route path="/demo.html" element={<Demo />} />
         <Route path="/contact.html" element={<Contact />} />
         <Route path="/try.html" element={<Try />} />
         <Route path="/privacy.html" element={<Legal key="privacy" page={legalPages.privacy} />} />

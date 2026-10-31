@@ -61,7 +61,7 @@ function Try() {
         <p className="try-note">
           Answers are AI-generated from demo data.
           <a href={DEMO_URL} target="_blank" rel="noopener noreferrer">Open the demo in a new tab ↗</a>
-          <Link to="/contact.html">Talk to our team →</Link>
+          <Link to="/demo.html">Request a demo →</Link>
         </p>
       </section>
     </main>

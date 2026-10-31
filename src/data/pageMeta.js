@@ -55,6 +55,15 @@ export const pageMeta = {
     canonical: 'https://entaura.ai/pricing.html',
     title: 'Pricing | entaura.ai',
   },
+  demo: {
+    file: 'demo.html',
+    themeColor: '#ffffff',
+    description: 'Request a demo of entaura.ai: pick a time with our team and see Ask, Insight and Watch on your own questions.',
+    ogTitle: 'Request a demo | entaura.ai',
+    ogDescription: 'Book a 30-minute demo with the entaura team.',
+    canonical: 'https://entaura.ai/demo.html',
+    title: 'Request a demo | entaura.ai',
+  },
   try: {
     file: 'try.html',
     description: 'Try Entaura: a live demo on sample data.',

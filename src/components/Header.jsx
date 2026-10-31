@@ -91,8 +91,8 @@ function Header() {
           <Link to="/contact.html" aria-current={isContact ? 'page' : undefined}>Contact</Link>
           <Link className="button primary nav-try" to="/try.html">Try Entaura <span>↗</span></Link>
         </div>
-        <Link className="button primary navcta" to="/contact.html">
-          {isHome || isContact ? <>Talk to our team <span>↗</span></> : 'Talk to our team ↗'}
+        <Link className="button primary navcta" to="/demo.html">
+          {isHome || isContact ? <>Request a demo <span>↗</span></> : 'Request a demo ↗'}
         </Link>
       </nav>
     </header>

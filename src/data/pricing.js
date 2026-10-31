@@ -42,7 +42,7 @@ export const plans = [
     products: ['ask', 'insight', 'watch'],
     text: 'All three products, customised to your business, systems and policies.',
     price: null,
-    cta: { label: 'Talk to our team', to: '/contact.html', arrow: true },
+    cta: { label: 'Request a demo', to: '/demo.html', arrow: true },
     lead: 'Everything in Basic and Standard, plus:',
     features: [
       'entaura watch: alerts on WhatsApp or Telegram, on a schedule or when a limit is crossed',

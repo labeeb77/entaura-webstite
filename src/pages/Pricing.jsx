@@ -141,7 +141,7 @@ function Pricing() {
         <h2>Not sure which plan fits?</h2>
         <p>Tell us your systems and team size. We’ll recommend a plan and show where it pays back in your business.</p>
         <div className="contact-strip-actions">
-          <Link className="button primary" to="/contact.html">Talk to our team <span>↗</span></Link>
+          <Link className="button primary" to="/demo.html">Request a demo <span>↗</span></Link>
           <Link className="button ghost" to="/index.html#platform">See the products</Link>
         </div>
       </section>
