@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { heroWords } from '../../data/heroDemos.js'
 import { useReducedMotion } from '../../hooks/useReducedMotion.js'
-import HeroRibbon from './HeroRibbon.jsx'
 import ProductDemo from './ProductDemo.jsx'
 
 // Each word's pill colour: knowledge, analytics, then data.
@@ -47,7 +46,6 @@ function Hero() {
 
   return (
     <section className="hx">
-      <HeroRibbon reduced={reduced} />
       <div className="container">
         <div className="hx-top">
           <span className="hx-badge"><img src="/assets/entaura-mark-sm.png" alt="" />Enterprise Agentic AI Platform</span>

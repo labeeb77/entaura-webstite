@@ -260,8 +260,8 @@ function ProductDemo() {
 
   return (
     <div className="pd">
+      <i className="pd-glow" aria-hidden="true"></i>
       <div className={`pd-window tone-${key}`} ref={windowRef} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-        <i className="pd-glow" aria-hidden="true"></i>
         <div className="pd-bar">
           <span className="pd-lights" aria-hidden="true"><i></i><i></i><i></i></span>
           <span className="pd-title"><img src="/assets/entaura-mark-sm.png" alt="" />Nuvora workspace</span>
