@@ -5,42 +5,23 @@ import { useReducedMotion } from '../../hooks/useReducedMotion.js'
 import HeroRibbon from './HeroRibbon.jsx'
 import ProductDemo from './ProductDemo.jsx'
 
-// Splits a word into letters so each can slide on its own.
-function Letters({ word, mode }) {
-  return (
-    <span className={`hx-word ${mode}`}>
-      {[...word].map((letter, index) => (
-        <span key={index} className="hx-ch" style={{ '--i': index }}>{letter === ' ' ? '\u00a0' : letter}</span>
-      ))}
-    </span>
-  )
-}
-
 // Each word's pill colour: knowledge, analytics, then data.
 const pillTones = ['ask', 'insight', 'peach']
 
-// The rotating word in a coloured pill: letters of the old word slide up and
-// out while the new ones cascade in, and the pill eases to the new width.
+// The rotating word in a coloured pill: the word fades in while the pill
+// eases to its width and colour.
 function Rotator({ reduced }) {
   const [index, setIndex] = useState(0)
-  const [previous, setPrevious] = useState(null)
   const [width, setWidth] = useState(null)
   const sizer = useRef(null)
 
   useEffect(() => {
     if (reduced) return undefined
     const timer = setTimeout(() => {
-      setPrevious(index)
       setIndex((index + 1) % heroWords.length)
     }, 2600)
     return () => clearTimeout(timer)
   }, [index, reduced])
-
-  useEffect(() => {
-    if (previous === null) return undefined
-    const timer = setTimeout(() => setPrevious(null), 1100)
-    return () => clearTimeout(timer)
-  }, [previous])
 
   // Measured after render (and again once fonts load or the window resizes),
   // so the pre-rendered page simply sizes the pill to its first word.
@@ -55,10 +36,7 @@ function Rotator({ reduced }) {
   return (
     <span className={`hx-pill tone-${pillTones[index]}`} style={width ? { '--w': `${width}px` } : undefined}>
       <i className="hx-pill-dot" aria-hidden="true"></i>
-      <span className="hx-rot">
-        {previous !== null && <Letters key={`out-${previous}-${index}`} word={heroWords[previous]} mode="out" />}
-        <Letters key={`in-${index}`} word={heroWords[index]} mode={previous !== null ? 'in' : 'still'} />
-      </span>
+      <span className="hx-word" key={index}>{heroWords[index]}</span>
       <span className="hx-pill-sizer" ref={sizer} aria-hidden="true">{heroWords[index]}</span>
     </span>
   )

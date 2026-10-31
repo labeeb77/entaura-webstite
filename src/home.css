@@ -78,9 +78,6 @@
 @keyframes hx-rise { from { transform: translateY(130%); } }
 @keyframes hx-up { from { opacity: 0; transform: translateY(16px); } }
 
-/* Rotating word: letters cascade through a clean window. */
-.home .hx-rot { display: inline-grid; clip-path: inset(.06em -.2em -.04em 0); }
-
 /* The word pill: a tinted capsule with a dot, easing to each word's width. */
 .home .hx-pill {
   position: relative; display: inline-flex; align-items: baseline; gap: .2em; vertical-align: baseline;
@@ -89,15 +86,10 @@
 }
 .home .hx-pill[style] { width: calc(var(--w) + 1.02em); }
 .home .hx-pill-dot { flex: none; align-self: center; width: .22em; height: .22em; border-radius: 50%; background: var(--tone); transition: background .6s ease; }
-.home .hx-pill .hx-word { color: var(--text); }
+.home .hx-pill .hx-word { color: var(--text); white-space: nowrap; animation: hx-word-in .45s ease both; }
+@keyframes hx-word-in { from { opacity: 0; transform: translateY(4px); } }
 .home .hx-pill-sizer { position: absolute; left: 0; top: 0; visibility: hidden; white-space: nowrap; pointer-events: none; }
 .home .tone-peach { --tone: var(--peach); --tint: var(--peach-tint); }
-.home .hx-word { grid-area: 1 / 1; white-space: nowrap; }
-.home .hx-ch { display: inline-block; }
-.home .hx-word.in .hx-ch { animation: hx-ch-in .65s calc(var(--i) * 30ms + 260ms) cubic-bezier(.2, .8, .2, 1) both; }
-.home .hx-word.out .hx-ch { animation: hx-ch-out .38s calc(var(--i) * 20ms) cubic-bezier(.5, 0, .75, .3) both; }
-@keyframes hx-ch-in { from { transform: translateY(115%); } }
-@keyframes hx-ch-out { to { transform: translateY(-120%); } }
 
 .home .hx-actions { display: flex; flex-wrap: wrap; gap: 10px; animation: hx-up .9s .3s cubic-bezier(.2, .7, .2, 1) both; }
 .home .hx-actions .button { padding: 11px 20px; font-size: 15px; }
@@ -825,5 +817,5 @@
 @media (prefers-reduced-motion: reduce) {
   .home .h-marquee-track, .home .fl-core.is-active > .orb, .home .fl-core.is-active span { animation: none; }
   .home .reveal { opacity: 1; transform: none; transition: none; }
-  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-ch, .home .hx-actions, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::before, .home .hx-badge::after, .home .ic-track b, .home .ic-bars b, .home .hx-reason-steps li, .home .ic-cval, .home .hx-wf *, .home .ic-kpi, .home .ic-callout, .home .ic-trail li, .home .ic-trail li::after, .home .ic-caret, .home .ic-proof { animation: none !important; }
+  .home .stage-body, .home .sn-detail, .home .sp-qchart i, .home .hx-line > span, .home .hx-pill .hx-word, .home .hx-actions, .home .hx-ribbon, .home .hx-badge, .home .hx-badge::before, .home .hx-badge::after, .home .ic-track b, .home .ic-bars b, .home .hx-reason-steps li, .home .ic-cval, .home .hx-wf *, .home .ic-kpi, .home .ic-callout, .home .ic-trail li, .home .ic-trail li::after, .home .ic-caret, .home .ic-proof { animation: none !important; }
 }
