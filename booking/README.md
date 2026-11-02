@@ -1,66 +1,86 @@
 # Demo booking (Request a demo)
 
-`/demo.html` asks for a work email, then name, company and phone, then shows free
-times from the team's Google Calendar. Booking a time creates a 30-minute Google
-Meet event, emails the visitor an invite, and logs the lead in a Google Sheet.
+Every "Request a demo" button opens `/demo.html`. It shows a short intro and the
+team's **Google Calendar appointment schedule**, embedded inline. Google handles
+everything else, so there is no backend:
 
-The website is static, so the calendar work is done by a small **Google Apps
-Script web app** (`apps-script/Code.gs`) that runs in the entaura Google account.
-It is free and needs no server.
+1. The visitor sees the free days and times (in their own time zone).
+2. They pick a slot and fill in Google's booking form: name, email, phone and
+   any extra questions.
+3. Google creates the event, with a Meet link, in the calendar, and emails a
+   confirmation to the visitor and to you.
 
-| What | Where |
-|---|---|
-| Free slots | Mon–Fri, 10:00–18:00 India time, 30 minutes, 2 hours' notice, up to 4 weeks ahead, 10 minutes kept free around other meetings |
-| Visitor sees | Times in their own time zone |
-| Leads | The **Leads** tab of the "entaura demo leads" sheet: one row per visitor, status *Details given* → *Booked* |
-| Without the script | The details are emailed to the team through Web3Forms, and the visitor is told we'll email them a time |
+## 1. Create the appointment schedule (about 5 minutes)
 
-## One-time setup (about 10 minutes)
+Sign in to [calendar.google.com](https://calendar.google.com/) as the account
+that should take the demos (currently **dev@texolworld.com**).
 
-Use the Google account whose calendar should take the demos (e.g. the sales
-or founder account).
+1. Click **Create** (top left) → **Appointment schedule**.
+2. Set it up:
+   - **Title:** `entaura demo`
+   - **Appointment duration:** 30 minutes
+   - **General availability:** Mon–Fri, 10:00–18:00 (time zone *India
+     Standard Time*). Change these as needed.
+   - **Scheduling window:** e.g. *Available now* to *28 days in advance*
+   - **Adjusted availability:** block holidays or specific dates
+   - **Booked appointment settings:**
+     - *Buffer time:* 10 minutes
+     - *Maximum bookings per day:* optional
+     - *Minimum notice:* 2 hours
+   - **Location and conferencing:** *Google Meet video conferencing*
+   - **Description:** e.g. "A 30-minute walkthrough of entaura Ask, Insight and
+     Watch on your own questions."
+3. **Booking form**, in the same panel:
+   - First name, last name and email are always collected.
+   - **Phone number:** tick it and set it to **Required**.
+   - **Add item** → custom questions:
+     - `Company name` (optional)
+     - `Service required` (optional; e.g. "Ask, Insight, Watch or not sure")
+     - `What would you like to discuss?` (optional)
+   - Custom questions depend on your Google plan. If **Add item** isn't
+     offered, keep phone as required and ask the rest on the call.
+4. **Booking confirmations and reminders:** keep the confirmation email on,
+   and add an email reminder (e.g. 1 hour before).
+5. Click **Save**.
 
-1. **Create the sheet.** In Google Drive, create a Google Sheet named
-   `entaura demo leads`. Open **Extensions → Apps Script**.
-2. **Add the code.** Replace the contents of `Code.gs` with
-   [`apps-script/Code.gs`](apps-script/Code.gs). In `CONFIG` at the top, check:
-   - `CALENDAR_ID`: `'primary'` uses this account's own calendar, or paste a
-     shared calendar's ID (Calendar settings → Integrate calendar).
-   - `TEAM_GUESTS`: teammates to invite to every demo, e.g. `['sales@entaura.ai']`.
-   - Hours, days and slot length, if they should change.
-3. **Turn on the Calendar API.** In the Apps Script editor, click **Services
-   (+)** → **Google Calendar API** → **Add**. This is needed for Meet links.
-4. **Approve permissions.** Choose `testSetup` in the function menu and click
-   **Run**. Approve the Calendar and Sheets permissions. The log should show
-   the number of free slots, and a **Leads** tab appears in the sheet.
-5. **Deploy.** **Deploy → New deployment → ⚙ → Web app**:
-   - Execute as: **Me**
-   - Who has access: **Anyone**
+## 2. Get the embed link
 
-   Click **Deploy** and copy the **Web app URL** (ends in `/exec`).
-6. **Connect the website.** Set the URL as `VITE_BOOKING_URL` where the site is
-   built:
-   - Locally: add `VITE_BOOKING_URL=https://script.google.com/macros/s/…/exec`
-     to `.env.local`.
-   - For the live site: add the same variable to the build that uploads to
-     S3/CloudFront.
+1. Click the new schedule in the calendar (or in **Booking pages**), then
+   **Share**.
+2. Choose **Website embed** → **Inline booking page**, then **Copy**.
+3. You get iframe code like this:
+   ```html
+   <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ…?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+   ```
+   You only need the address inside `src="…"`.
 
-   Rebuild with `npm run build` and deploy.
-7. **Test.** Open `/demo.html`, go through the steps with your own email and
-   book a time. Check that the invite with a Meet link arrives, the event is
-   in the calendar, and the row in the sheet says *Booked*.
+## 3. Connect the website
 
-## Changing it later
+- **Local:** add the address to `.env.local` in the project folder, then
+  restart `npm run dev`:
+  ```
+  VITE_GOOGLE_CALENDAR_BOOKING_URL=https://calendar.google.com/calendar/appointments/schedules/AcZssZ…?gv=true
+  ```
+- **Production:** in GitHub, go to **Settings → Secrets and variables → Actions
+  → Variables → New repository variable**. Name it
+  `VITE_GOOGLE_CALENDAR_BOOKING_URL` and use the same address as its value. The
+  deploy workflow already passes it to the build; it goes live on the next
+  deploy from `main`.
 
-- Edit `CONFIG` in the Apps Script editor, then **Deploy → Manage deployments
-  → ✎ → Version: New version → Deploy**. The URL stays the same, so the website
-  doesn't need rebuilding.
-- To stop bookings, archive the deployment. The site then falls back to
-  emailing the details.
+Without the address, `/demo.html` asks visitors to email reachus@entaura.ai.
 
-## Notes
+## 4. Manage bookings
 
-- The script only reads free/busy times; visitors never see event titles.
-- The same email can make at most 8 requests every 10 minutes.
-- Values that start with `=`, `+`, `-` or `@` are stored as text, so they can't
-  run as spreadsheet formulas.
+- **Every booking is an event** in the Google Calendar. Open it to see the
+  visitor's name, email, phone and answers, plus the Meet link.
+- **Emails:** Google sends a confirmation to the visitor and to the calendar
+  owner, and the reminders you set.
+- **Cancel or reschedule:** open the event and use **Delete** or change the
+  time; the visitor is told automatically. Visitors can also cancel from their
+  confirmation email.
+- **The public page:** click the schedule → **Open booking page** to see what
+  visitors see.
+- **Change hours or questions:** edit the schedule in Google Calendar. The
+  website updates by itself, with no rebuild.
+- **For the team:** add teammates as guests on the schedule, or create it on a
+  calendar shared with them, so everyone sees the bookings.
