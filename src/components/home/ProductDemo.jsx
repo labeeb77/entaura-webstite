@@ -202,7 +202,9 @@ function ProductDemo() {
   }, [live, key, latest, phase, typed, streamed, answerLength, proof, tapping])
 
   // Then tap one follow-up, so the thread continues once on its own, and
-  // after that move on: next question, or next product while left alone.
+  // after that move on. Left alone, ask and insight show one question and its
+  // follow-up, then hand over to the next product; after a click, the chosen
+  // product cycles through all its questions.
   // Hovering pauses ask and insight so answers can be read.
   useEffect(() => {
     if (!live || phase !== 'done' || held || (paused && key !== 'watch')) return undefined
@@ -214,7 +216,8 @@ function ProductDemo() {
         : setTimeout(() => setTapping(0), followAfter)
     } else {
       timer = setTimeout(() => {
-        if (questionIndex + 1 < entries.length) start(product, questionIndex + 1)
+        if (auto && key !== 'watch') start((product + 1) % products.length, 0)
+        else if (questionIndex + 1 < entries.length) start(product, questionIndex + 1)
         else if (auto) start((product + 1) % products.length, 0)
         else start(product, 0)
       }, holdFor[key])
@@ -251,9 +254,11 @@ function ProductDemo() {
     if (point.at === 'followup') return followed
     return followed || stageIndex >= stages.indexOf(point.at)
   }
+  // While autoplaying, ask and insight play a single question.
+  const count = auto && key !== 'watch' ? 1 : entries.length
   const progress = key === 'watch'
     ? (questionIndex + Math.min(1, watchStep / 7)) / entries.length
-    : (questionIndex + (followed ? 0.5 : 0) + ((stageIndex + 1) / stages.length) * 0.5) / entries.length
+    : (Math.min(questionIndex, count - 1) + (followed ? 0.5 : 0) + ((stageIndex + 1) / stages.length) * 0.5) / count
 
   const typing = shownPhase === 'typing'
   const followups = key !== 'watch' && shownPhase === 'done' ? latest?.followups ?? [] : []
