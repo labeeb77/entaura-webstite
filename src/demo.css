@@ -1,45 +1,54 @@
 /* ---------- Request a demo (pages/Demo.jsx) ---------- */
 
-.dm { padding: 64px 0 112px; }
-.dm-wrap { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 56px; align-items: start; }
+.dm { padding: 64px 0 112px; background: radial-gradient(60% 420px at 50% 0, #f2f6ff, transparent 70%); }
 
-.dm-intro { position: sticky; top: 104px; padding-top: 12px; }
-.dm-intro h1 { margin: 16px 0 18px; font-size: clamp(34px, 3.6vw, 46px); font-weight: 600; line-height: 1.08; letter-spacing: -.035em; }
-.dm-intro > p { margin: 0; color: var(--body); font-size: 17px; line-height: 1.6; }
-.dm-intro ul { display: grid; gap: 18px; margin: 32px 0; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); list-style: none; }
-.dm-intro li { display: flex; gap: 14px; }
-.dm-intro li .int-icon { flex: none; width: 36px; height: 36px; padding: 8px; border-radius: 10px; background: var(--card); color: var(--text); }
-.dm-intro li div { display: grid; gap: 2px; }
-.dm-intro li strong { font-size: 15px; font-weight: 600; }
-.dm-intro li span { color: var(--body); font-size: 14px; line-height: 1.5; }
-.dm-intro .dm-alt { font-size: 14px; }
-.dm-intro a, .dm-offline a { color: var(--text); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+.dm-head { display: grid; justify-items: center; text-align: center; }
+.dm-head h1 { margin: 16px 0 14px; font-size: clamp(34px, 4.4vw, 56px); font-weight: 600; line-height: 1.06; letter-spacing: -.04em; text-wrap: balance; }
+.dm-head > p { max-width: 560px; margin: 0; color: var(--body); font-size: 18px; line-height: 1.55; text-wrap: balance; }
+.dm-facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+.dm-facts li { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: 14px; color: var(--text); }
+.dm-facts .int-icon { width: 16px; height: 16px; color: var(--body); }
 
-/* Google's booking page, with a soft shimmer until it has loaded. */
-.dm-booking { position: relative; min-height: 760px; border: 1px solid var(--line); border-radius: 24px; background: #fff; overflow: hidden; box-shadow: 0 30px 70px -45px rgba(20, 30, 70, .3); }
-.dm-booking::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #fff, var(--soft), #fff); background-size: 200% 100%; animation: dm-shimmer 1.4s linear infinite; }
-.dm-booking.loaded::before, .dm-booking:has(.dm-offline)::before { display: none; }
-.dm-booking iframe { position: relative; display: block; width: 100%; height: 760px; border: 0; }
+/* Google's booking page in a soft frame. Its top row (the account name) is
+   trimmed off by shifting the page up inside a clipped box. */
+.dm-stage { margin-top: 44px; }
+.dm-frame { position: relative; max-width: 1040px; margin: 0 auto; padding: 10px; border-radius: 30px; background: linear-gradient(180deg, #fff, var(--soft)); border: 1px solid var(--line); box-shadow: 0 40px 90px -55px rgba(20, 30, 70, .35); }
+.dm-crop { --trim: 56px; position: relative; height: 780px; overflow: hidden; border-radius: 22px; background: #fff; }
+.dm-crop::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #fff, var(--soft), #fff); background-size: 200% 100%; animation: dm-shimmer 1.4s linear infinite; }
+.dm-frame.loaded .dm-crop::before { display: none; }
+.dm-crop iframe { position: relative; display: block; width: 100%; height: calc(100% + var(--trim)); margin-top: calc(var(--trim) * -1); border: 0; }
 @keyframes dm-shimmer { to { background-position: -200% 0; } }
 
-.dm-offline { display: grid; justify-items: center; gap: 12px; max-width: 420px; margin: 0 auto; padding: 200px 24px; text-align: center; }
+.dm-offline { display: grid; justify-items: center; gap: 12px; max-width: 420px; margin: 0 auto; padding: 140px 24px; text-align: center; }
 .dm-offline .int-icon { width: 44px; height: 44px; padding: 11px; border-radius: 12px; background: var(--card); color: var(--text); }
 .dm-offline h2 { margin: 6px 0 0; font-family: var(--sans); font-size: 19px; font-weight: 600; }
 .dm-offline p { margin: 0; color: var(--body); font-size: 15px; line-height: 1.6; }
+.dm-offline a, .dm-alt a { color: var(--text); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 
-@media (max-width: 960px) {
-  .dm-wrap { grid-template-columns: minmax(0, 1fr); gap: 36px; }
-  .dm-intro { position: static; }
-  .dm-intro ul { margin: 24px 0; }
+/* What happens after booking */
+.dm-next { max-width: 1040px; margin-top: 56px; }
+.dm-next h2 { margin: 0 0 18px; text-align: center; font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: .02em; color: var(--body); }
+.dm-next ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.dm-next li { padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+.dm-next-icon { position: relative; display: inline-grid; place-items: center; width: 40px; height: 40px; margin-bottom: 14px; border-radius: 12px; background: var(--card); }
+.dm-next-icon .int-icon { width: 20px; height: 20px; color: var(--text); }
+.dm-next-icon b { position: absolute; top: -6px; right: -6px; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--text); color: #fff; font-size: 10.5px; }
+.dm-next strong { display: block; margin-bottom: 4px; font-size: 15.5px; font-weight: 600; }
+.dm-next p { margin: 0; color: var(--body); font-size: 14px; line-height: 1.55; }
+.dm-alt { margin: 26px 0 0 !important; text-align: center; color: var(--body) !important; font-size: 14px !important; }
+
+@media (max-width: 760px) {
+  .dm-next ol { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 560px) {
   .dm { padding: 40px 0 72px; }
-  .dm-booking { min-height: 900px; border-radius: 18px; }
-  .dm-booking iframe { height: 900px; }
-  .dm-offline { padding: 120px 20px; }
+  .dm-head > p { font-size: 16px; }
+  .dm-stage { margin-top: 30px; }
+  .dm-frame { padding: 6px; border-radius: 22px; }
+  .dm-crop { height: 940px; border-radius: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dm-booking::before { animation: none; }
+  .dm-crop::before { animation: none; }
 }
