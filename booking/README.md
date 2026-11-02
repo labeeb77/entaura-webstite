@@ -56,18 +56,15 @@ that should take the demos (currently **dev@texolworld.com**).
 
 ## 3. Connect the website
 
-- **Local:** add the address to `.env.local` in the project folder, then
-  restart `npm run dev`:
-  ```
-  VITE_GOOGLE_CALENDAR_BOOKING_URL=https://calendar.google.com/calendar/appointments/schedules/AcZssZ…?gv=true
-  ```
-- **Production:** in GitHub, go to **Settings → Secrets and variables → Actions
-  → Variables → New repository variable**. Name it
-  `VITE_GOOGLE_CALENDAR_BOOKING_URL` and use the same address as its value. The
-  deploy workflow already passes it to the build; it goes live on the next
-  deploy from `main`.
+The site already uses the team's schedule (the address is in
+`src/data/booking.js`), locally and in production, with no setup.
 
-Without the address, `/demo.html` asks visitors to email reachus@entaura.ai.
+To use a **different** schedule, either replace the address in
+`src/data/booking.js`, or set `VITE_GOOGLE_CALENDAR_BOOKING_URL`:
+- **Local:** add it to `.env.local`, then restart `npm run dev`.
+- **Production:** add it as a GitHub repository variable (**Settings → Secrets
+  and variables → Actions → Variables**). The deploy workflow passes it to the
+  build.
 
 ## 4. Manage bookings
 
