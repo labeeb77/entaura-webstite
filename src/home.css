@@ -73,11 +73,13 @@
 /* The word pill: a tinted capsule with a dot, easing to each word's width. */
 .home .hx-pill {
   position: relative; display: inline-flex; align-items: baseline; gap: .2em; vertical-align: baseline;
-  margin: 0 .04em; padding: .02em .32em .06em .26em; border-radius: 999px; background: var(--tint); overflow: hidden;
+  margin: 0 .04em; padding: .16em .36em .2em .3em; border-radius: 999px; background: var(--tint); overflow: hidden;
+  /* The word sits a little smaller and lighter than the headline around it. */
+  font-size: .82em; font-weight: 400; letter-spacing: -.035em;
   transition: background .6s ease, width .6s cubic-bezier(.3, .8, .2, 1);
 }
-.home .hx-pill[style] { width: calc(var(--w) + 1.02em); }
-.home .hx-pill-dot { flex: none; align-self: center; width: .26em; height: .26em; border-radius: 50%; background: var(--tone); transition: background .6s ease; }
+.home .hx-pill[style] { width: calc(var(--w) + 1.16em); }
+.home .hx-pill-dot { flex: none; align-self: center; width: .28em; height: .28em; border-radius: 50%; background: var(--tone); transition: background .6s ease; }
 .home .hx-pill .hx-word { color: var(--text); white-space: nowrap; animation: hx-word-in .4s .25s ease both; }
 @keyframes hx-word-in { from { opacity: 0; transform: translateY(4px); } }
 .home .hx-pill-sizer { position: absolute; left: 0; top: 0; visibility: hidden; white-space: nowrap; pointer-events: none; }
