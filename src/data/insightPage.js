@@ -85,7 +85,7 @@ export const insightPage = {
       {
         "screen": "certify",
         "title": "Build and check the data model",
-        "text": "We model your data and check it against your own reports before it goes live."
+        "text": "We model the tables you chose and check them against your own reports before go-live."
       },
       {
         "screen": "ask",
@@ -145,7 +145,7 @@ export const insightPage = {
     "groups": [
       {
         "title": "ERP and databases",
-        "note": "A read-only connection to the tables you pick, synced on your schedule.",
+        "note": "A read-only connection to the tables you pick. Nothing is ever changed in your ERP.",
         "items": [
           [
             "sap.svg",
@@ -175,7 +175,7 @@ export const insightPage = {
       },
       {
         "title": "Reports and spreadsheets",
-        "note": "Bring in budgets, targets and the reports you already trust.",
+        "note": "Add budgets, targets and the reports you already trust.",
         "items": [
           [
             "icon:chart",

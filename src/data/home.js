@@ -263,7 +263,7 @@ export const trustPoints = [
   { "icon": "check", "title": "Checked before go-live", "text": "Results are matched against your own reports before your team relies on them." },
   { "icon": "document", "title": "Every answer cites its source", "text": "Open the exact page, cells or query behind each answer." },
   { "icon": "people", "title": "You control access", "text": "Admins decide who sees what, and every query is logged with who asked." },
-  { "icon": "server", "title": "Our cloud or yours", "text": "Run in our managed cloud or inside your own infrastructure." }
+  { "icon": "server", "title": "Our cloud or yours", "text": "Your data stays yours: isolated for your company in our cloud, or kept inside your own network." }
 ]
 
 export const useCases = [
@@ -317,8 +317,8 @@ export const useCases = [
 export const vision = [
   {
     "label": "Connect",
-    "title": "Bring documents and data together.",
-    "text": "Policies from uploads, Google Drive and Gmail. Sales, stock and finance from your ERP, read-only."
+    "title": "Connect only what you choose.",
+    "text": "Pick the documents, folders and ERP tables entaura can read. Read-only, and you can disconnect any time."
   },
   {
     "label": "Ask",

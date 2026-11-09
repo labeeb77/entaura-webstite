@@ -282,18 +282,18 @@ function Integration() {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Roles" title="What we provide," gradient="and what you bring." />
+          <SectionHead eyebrow="Roles" title="What we provide," gradient="and what you provide." />
           <div className="int-split">
             <article>
               <span className="eyebrow">entaura provides</span>
               <ItemList items={weProvide} />
             </article>
             <article>
-              <span className="eyebrow">You bring</span>
+              <span className="eyebrow">You provide</span>
               <ItemList items={youBring} />
             </article>
           </div>
-          <p className="int-note">You bring the data and the domain expertise. <span>We bring the platform and the team.</span></p>
+          <p className="int-note">Your data stays yours, and you bring the business knowledge. <span>We bring the platform and the team.</span></p>
         </div>
       </section>
 

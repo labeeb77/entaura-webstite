@@ -80,7 +80,7 @@ export const askPage = {
       {
         "screen": "connect",
         "title": "Connect approved documents",
-        "text": "Bring together uploaded files, cloud documents and email."
+        "text": "Choose the files, folders and mail labels entaura can read. Nothing else is touched."
       },
       {
         "screen": "ask",

@@ -13,7 +13,7 @@ export const plans = [
       'entaura ask: questions in plain language',
       'Every answer cited to the exact clause, page or cell',
       'Upload PDF, Word, PowerPoint and Excel',
-      'Google Drive, Google Docs and Gmail sync',
+      'Connect Google Drive, Google Docs and Gmail',
       'Clarifying questions instead of guesses',
       '1 knowledge base, up to 5 members',
     ],
@@ -104,10 +104,10 @@ export const pricingFaq = [
   },
   {
     q: 'Where is our data hosted?',
-    a: 'In our managed cloud in Saudi Arabia, the UAE or India, or inside your own infrastructure if you prefer. entaura is designed for Saudi PDPL, UAE PDPL and India DPDP.',
+    a: 'In our managed cloud in Saudi Arabia, the UAE or India, in a workspace isolated for your company, or inside your own infrastructure if you prefer. Your data stays yours, and we delete it when you ask or when you leave. entaura is designed for Saudi PDPL, UAE PDPL and India DPDP.',
   },
   {
     q: 'How long does setup take?',
-    a: 'Typical go-live is 4 to 6 weeks from the first call. Our team connects your sources, sets up your metrics and trains your users; you bring the data and someone who knows the business.',
+    a: 'Typical go-live is 4 to 6 weeks from the first call. Our team connects your sources, sets up your metrics and trains your users; you give read-only access and someone who knows the business.',
   },
 ]

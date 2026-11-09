@@ -151,7 +151,7 @@ function ConnectionsScreen() {
       <Sidebar active="Connections" />
       <div className="aw-main">
         <div className="aw-head">
-          <div><h4>Connections</h4><p>Source databases this knowledge base copies from. Data never leaves this knowledge base.</p></div>
+          <div><h4>Connections</h4><p>Source databases this knowledge base reads from, read-only. Data never leaves this knowledge base.</p></div>
           <div className="iw-actions"><span>Run checks</span><span className="aw-btn">Sync + build</span></div>
         </div>
         <div className="iw-conn">
