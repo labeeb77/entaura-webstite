@@ -1,7 +1,7 @@
 export const megaItems = [
-  { to: '/ask.html', key: 'ask', title: 'entaura ask', text: 'Verified answers from records and policies.' },
+  { to: '/ask.html', key: 'ask', title: 'entaura ask', text: 'Answers from your policies and documents, with the source.' },
   { to: '/insight.html', key: 'insight', title: 'entaura insight', text: 'Numbers you can trust, with the query behind them.' },
-  { to: '/watch.html', key: 'watch', title: 'entaura watch', text: 'Alerts from your answers on WhatsApp or Telegram.' },
+  { to: '/watch.html', key: 'watch', title: 'entaura watch', text: 'Alerts from your answers on WhatsApp, Telegram or email.' },
 ]
 
 export const footerLinks = [

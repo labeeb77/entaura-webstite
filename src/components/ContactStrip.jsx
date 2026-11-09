@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-function ContactStrip({ title, text, secondary = 'Contact sales', secondaryTo = '/contact.html' }) {
+function ContactStrip({ title, text, secondary = 'Request a demo', secondaryTo = '/demo.html' }) {
   return (
     <section className="contact-strip">
       <div className="container">

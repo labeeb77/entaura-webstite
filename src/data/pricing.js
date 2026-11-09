@@ -1,12 +1,12 @@
-// Pricing page content. Prices and the bracketed limits are placeholders until
-// management confirms them; monthly prices are the yearly ones without the 15%.
+// Pricing page content, in US dollars. Prices are SAMPLE figures until
+// management confirms them; yearly prices are the monthly ones less 15%.
 export const plans = [
   {
     key: 'basic',
     name: 'Basic',
     products: ['ask'],
     text: 'Verify any fact against your own policies and documents, with the proof attached.',
-    price: { monthly: 499, yearly: 424 },
+    price: { monthly: 129, yearly: 110 },
     cta: { label: 'Start a free pilot', to: '/contact.html?interest=pilot' },
     lead: 'Includes:',
     features: [
@@ -15,7 +15,7 @@ export const plans = [
       'Upload PDF, Word, PowerPoint and Excel',
       'Google Drive, Google Docs and Gmail sync',
       'Clarifying questions instead of guesses',
-      '1 knowledge base, up to [10] members',
+      '1 knowledge base, up to 5 members',
     ],
   },
   {
@@ -24,16 +24,16 @@ export const plans = [
     badge: 'Most popular',
     products: ['ask', 'insight'],
     text: 'Analyse live ERP data against your policy limits, with charts, tables and SQL.',
-    price: { monthly: 1499, yearly: 1274 },
+    price: { monthly: 349, yearly: 297 },
     cta: { label: 'Start a free pilot', to: '/contact.html?interest=pilot' },
     lead: 'Everything in Basic, plus:',
     features: [
-      'entaura insight: smart and trusted analytics',
+      'entaura insight: analytics you can check',
       'ERP connectors: SAP, Oracle, MS SQL Server, PostgreSQL, MySQL, MongoDB and more',
       'Automated charts, tables and the SQL behind every figure',
       'Budgets and targets compared with actuals',
       'Industry templates for distribution, parts, food and HR',
-      'Up to [5] knowledge bases and [50] members',
+      'Up to 6 knowledge bases and 10 members',
     ],
   },
   {
@@ -45,7 +45,7 @@ export const plans = [
     cta: { label: 'Request a demo', to: '/demo.html', arrow: true },
     lead: 'Everything in Basic and Standard, plus:',
     features: [
-      'entaura watch: alerts on WhatsApp or Telegram, on a schedule or when a limit is crossed',
+      'entaura watch: alerts on WhatsApp, Telegram or email, on a schedule or when a limit is crossed',
       'Custom data model, metrics and business rules built with our team',
       'Custom connectors, including Vanforces, Taskforces, Zoho and your in-house systems',
       'Private AI models: vLLM, Ollama or any OpenAI-compatible server',
@@ -65,12 +65,12 @@ export const comparison = [
   ['Documents, Google Drive and Gmail', 'Yes', 'Yes', 'Yes'],
   ['ERP database connectors', null, 'Yes', 'Yes + custom'],
   ['Charts, tables and SQL', null, 'Yes', 'Yes'],
-  ['WhatsApp and Telegram alerts', null, null, 'Yes'],
+  ['WhatsApp, Telegram and email alerts', null, null, 'Yes'],
   ['Industry templates', null, 'All', 'All + custom'],
   ['Private AI models', null, null, 'Yes'],
   ['API and embedding', null, null, 'Yes'],
-  ['Knowledge bases', '1', '[5]', 'Unlimited'],
-  ['Members', '[10]', '[50]', 'Unlimited'],
+  ['Knowledge bases', '1', '6', 'Unlimited'],
+  ['Members', '5', '10', 'Unlimited'],
   ['Support', 'Email', 'Email + chat', 'Priority, named contact'],
 ]
 
@@ -96,7 +96,7 @@ export const pricingFaq = [
   },
   {
     q: 'Can we try it before we buy?',
-    a: 'Yes. Every plan starts with a free pilot on your own data: one business area, a few documents and read-only access to your ERP. You only pay once you have seen it work.',
+    a: 'Yes. Every plan starts with a free pilot on your own data: one business area, a few documents and, for Insight, read-only access to your ERP. You only pay once you have seen it work.',
   },
   {
     q: 'What if it doesn’t work for us?',
@@ -104,10 +104,10 @@ export const pricingFaq = [
   },
   {
     q: 'Where is our data hosted?',
-    a: 'In our managed cloud in [KSA / UAE / India], or inside your own infrastructure if you prefer. entaura is designed for Saudi PDPL, UAE PDPL and India DPDP.',
+    a: 'In our managed cloud in Saudi Arabia, the UAE or India, or inside your own infrastructure if you prefer. entaura is designed for Saudi PDPL, UAE PDPL and India DPDP.',
   },
   {
     q: 'How long does setup take?',
-    a: 'Typical go-live is [X weeks] from the first call. Our team connects your sources, sets up your metrics and trains your users; you bring the data and someone who knows the business.',
+    a: 'Typical go-live is 4 to 6 weeks from the first call. Our team connects your sources, sets up your metrics and trains your users; you bring the data and someone who knows the business.',
   },
 ]

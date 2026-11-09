@@ -19,14 +19,14 @@ export const pageMeta = {
   },
   watch: {
     file: 'watch.html',
-    description: 'entaura watch turns any Ask or Insight answer into a WhatsApp or Telegram alert: on a schedule, when the answer changes, or when a limit is crossed.',
+    description: 'entaura watch turns any Ask or Insight answer into a WhatsApp, Telegram or email alert: on a schedule, when the answer changes, or when a limit is crossed.',
     ogTitle: 'entaura watch | Get told when it matters',
     canonical: 'https://entaura.ai/watch.html',
     title: 'entaura watch | Get told when it matters',
   },
   insight: {
     file: 'insight.html',
-    description: 'entaura insight turns your ERP data into certified answers, with the right chart and the query behind every number.',
+    description: 'entaura insight turns your ERP data into answers checked against your own reports, with the right chart and the query behind every number.',
     ogTitle: 'entaura insight | Numbers you can trust',
     canonical: 'https://entaura.ai/insight.html',
     title: 'entaura insight | Numbers you can trust',

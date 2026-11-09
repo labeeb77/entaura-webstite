@@ -12,37 +12,43 @@ export const insightPage = {
     "eyebrow": "Who it’s for",
     "title": "For the people who",
     "gradient": "wait on reports.",
-    "text": "Managers set up the data once. Staff only see the knowledge bases they’ve been given.",
+    "text": "Managers set up the data once. Each person only sees the data they’ve been given.",
     "items": [
       {
         "icon": "chart",
         "team": "Finance",
-        "example": "“Revenue by branch compared with last year.”"
+        "example": "“Revenue by branch compared with last year.”",
+        "value": "The comparison in seconds, not a two-day report request."
       },
       {
         "icon": "rocket",
         "team": "Sales leadership",
-        "example": "“Which reps missed their target this month?”"
+        "example": "“Which reps missed their target this month?”",
+        "value": "Coach them while the month can still be saved."
       },
       {
         "icon": "server",
         "team": "Distribution and operations",
-        "example": "“Where are today’s orders getting stuck?”"
+        "example": "“Where are today’s orders getting stuck?”",
+        "value": "Fix today’s bottleneck today."
       },
       {
         "icon": "people",
         "team": "HR",
-        "example": "“Attrition by department this year.”"
+        "example": "“Attrition by department this year.”",
+        "value": "Spot the team that needs attention before the next exit."
       },
       {
         "icon": "flag",
         "team": "Trade marketing",
-        "example": "“Which promotions paid for their discount?”"
+        "example": "“Which promotions paid for their discount?”",
+        "value": "Stop the promotions that lose money."
       },
       {
         "icon": "eye",
         "team": "Leadership",
-        "example": "“How is the business performing this quarter?”"
+        "example": "“How is the business performing this quarter?”",
+        "value": "One clear answer, with the numbers behind it."
       }
     ]
   },
@@ -54,15 +60,15 @@ export const insightPage = {
     "items": [
       {
         "problem": "Managers wait for reports to understand performance.",
-        "outcome": "Ask for a clear explanation of connected business data."
+        "outcome": "Ask the question and get the number, a chart and how it was calculated."
       },
       {
         "problem": "Comparisons require gathering information from several sources.",
-        "outcome": "Bring approved information together for multi-step analysis."
+        "outcome": "Combine ERP data, budgets and policy limits in one answer."
       },
       {
         "problem": "A number alone leaves questions unanswered.",
-        "outcome": "Explore the context through follow-up questions and source references."
+        "outcome": "Ask why, and follow up until you have the full picture."
       }
     ]
   },
@@ -74,17 +80,17 @@ export const insightPage = {
       {
         "screen": "connect",
         "title": "Connect approved information",
-        "text": "Use business data from files, databases and approved integrations."
+        "text": "Give entaura read-only access to your ERP and pick the tables to use."
       },
       {
         "screen": "certify",
-        "title": "Ask a business question",
-        "text": "Request a comparison across periods, branches, customers or products."
+        "title": "Build and check the data model",
+        "text": "We model your data and check it against your own reports before it goes live."
       },
       {
         "screen": "ask",
-        "title": "Understand the result",
-        "text": "Review explanations, tables and charts, with supporting evidence."
+        "title": "Ask and understand",
+        "text": "Compare periods, branches or products and get the explanation, chart and query."
       }
     ]
   },
@@ -100,18 +106,18 @@ export const insightPage = {
       },
       {
         "icon": "document",
-        "title": "Clear explanations",
-        "text": "Understand the result in everyday language."
+        "title": "Checked against your reports",
+        "text": "Results are matched against figures you already trust before go-live."
       },
       {
         "icon": "check",
-        "title": "Source references",
-        "text": "Trace answers back to the business information used."
+        "title": "The query behind every number",
+        "text": "Open how each figure was calculated, down to the SQL."
       },
       {
         "icon": "layers",
-        "title": "Multi-step analysis",
-        "text": "Combine approved tools and sources to answer more involved questions."
+        "title": "Against your policy limits",
+        "text": "Check transactions against credit limits, budgets and targets in one question."
       },
       {
         "icon": "support",
@@ -119,9 +125,9 @@ export const insightPage = {
         "text": "Continue exploring in the same conversation."
       },
       {
-        "icon": "link",
-        "title": "External comparisons",
-        "text": "Compare market or competitor information when the required external data is connected."
+        "icon": "document",
+        "title": "Clear explanations",
+        "text": "Every result comes with a plain-words summary, in Arabic, English or Hindi."
       }
     ]
   },
@@ -135,55 +141,59 @@ export const insightPage = {
     "eyebrow": "Connected knowledge",
     "title": "Put your business information",
     "gradient": "to work.",
-    "text": "Connect approved sources so teams can find and use the information they need.",
+    "text": "Connect your ERP read-only, and entaura never writes back.",
     "groups": [
       {
-        "title": "Cloud documents and email",
-        "note": "Bring approved business knowledge into one searchable experience.",
+        "title": "ERP and databases",
+        "note": "A read-only connection to the tables you pick, synced on your schedule.",
         "items": [
           [
-            "googledrive.svg",
-            "Google Drive"
+            "sap.svg",
+            "SAP"
           ],
           [
-            "gmail.svg",
-            "Gmail"
+            "oracle.png",
+            "Oracle"
           ],
           [
-            "aws.png",
-            "Amazon S3"
+            "mssqlserver.png",
+            "MS SQL Server"
           ],
           [
-            "azure.png",
-            "Azure Blob Storage"
+            "postgresql.svg",
+            "PostgreSQL"
+          ],
+          [
+            "mysql.svg",
+            "MySQL"
+          ],
+          [
+            "mongodb.svg",
+            "MongoDB"
           ]
         ]
       },
       {
-        "title": "Business information",
-        "note": "Work with approved files and connected business data.",
+        "title": "Reports and spreadsheets",
+        "note": "Bring in budgets, targets and the reports you already trust.",
         "items": [
-          [
-            "icon:document",
-            "PDF and Word"
-          ],
           [
             "icon:chart",
             "Excel"
           ],
           [
-            "icon:eye",
-            "Images"
+            "icon:document",
+            "PDF reports"
           ],
           [
-            "icon:database",
-            "Databases"
+            "googledrive.svg",
+            "Google Drive"
           ]
         ]
       },
       {
-        "title": "External applications",
-        "note": "Use authorized knowledge in your existing applications through APIs.",
+        "title": "Your own applications",
+        "note": "Show the same charts and answers in your apps through the API and chart widget.",
         "items": [
           [
             "icon:link",
@@ -191,7 +201,7 @@ export const insightPage = {
           ],
           [
             "icon:layers",
-            "Portals"
+            "Chart widget"
           ],
           [
             "icon:document",
@@ -200,7 +210,7 @@ export const insightPage = {
         ]
       }
     ],
-    "setup": "Source availability and access are configured for your organization."
+    "setup": "You choose which sources each team can use."
   },
   "trust": {
     "eyebrow": "Access and control",
@@ -208,19 +218,19 @@ export const insightPage = {
     "gradient": "Company controls.",
     "items": [
       {
+        "icon": "eye",
+        "title": "Read-only by design",
+        "text": "entaura reads from your systems and never writes back to them."
+      },
+      {
         "icon": "document",
-        "title": "Check the source",
-        "text": "Review the supporting document, page or record behind an answer."
+        "title": "Every answer cites its source",
+        "text": "Open the exact page, cells or query behind each answer."
       },
       {
         "icon": "people",
-        "title": "Control access",
-        "text": "Administrators control access to knowledge, documents and capabilities."
-      },
-      {
-        "icon": "server",
-        "title": "Choose private deployment",
-        "text": "Deploy on client-controlled infrastructure to keep information in your preferred environment."
+        "title": "You control access",
+        "text": "Admins decide who sees what, and every query is logged with who asked."
       }
     ]
   },

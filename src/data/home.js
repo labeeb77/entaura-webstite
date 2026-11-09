@@ -88,8 +88,8 @@ export const flow = {
       ],
       "core": [
         "Compare periods, products and branches",
-        "Trace answers to supporting sources",
-        "Bring approved sources together for multi-step analysis"
+        "See the query behind every number",
+        "Combine several sources in one answer"
       ],
       "result": {
         "text": "Nuvora Enterprise led March: SAR 1.84M",
@@ -109,10 +109,10 @@ export const flow = {
       ],
       "message": "Explanation, table or chart",
       "captions": [
-        "Connect approved business data.",
-        "Compare the information you need.",
-        "Review the result and sources.",
-        "Use the answer in your work."
+        "Connect your ERP, read-only.",
+        "Ask for the comparison you need.",
+        "Check the chart and the query behind it.",
+        "Use it in the app or your own tools."
       ]
     },
     {
@@ -121,14 +121,14 @@ export const flow = {
       "sourcesLabel": "Starts from",
       "sources": [
         {
-          "name": "Approved business information",
+          "name": "Any Ask or Insight answer",
           "active": true
         }
       ],
       "core": [
-        "Monitor agreed business measures",
-        "Configure timing, conditions and recipients",
-        "Deliver through WhatsApp Business, Telegram or email"
+        "Watch the numbers you care about",
+        "Set timing, conditions and recipients",
+        "Delivered on WhatsApp Business, Telegram or email"
       ],
       "result": {
         "text": "7 invoices overdue · SAR 214,600",
@@ -148,10 +148,10 @@ export const flow = {
       ],
       "message": "Scheduled update",
       "captions": [
-        "Choose agreed information.",
-        "Configure conditions and timing.",
-        "Identify exceptions.",
-        "Notify responsible recipients."
+        "Pick the number to watch.",
+        "Set when, and who hears about it.",
+        "entaura spots the exception.",
+        "Your team gets the alert."
       ]
     }
   ]
@@ -230,13 +230,13 @@ export const showcase = [
   {
     "key": "insight",
     "name": "Insight",
-    "tag": "Smart & Trusted Analytics",
+    "tag": "Analytics",
     "title": "Understand business performance.",
-    "text": "Explore connected business information through explanations, comparisons, tables and charts.",
+    "text": "Ask about sales, stock or collections and get the number, a chart and the query behind it.",
     "points": [
       "Compare periods, products and branches",
-      "Trace answers to supporting sources",
-      "Bring approved sources together for multi-step analysis"
+      "See the query behind every number",
+      "Checked against your own reports before go-live"
     ],
     "question": "Give me profit, margin, cost and tax by quarter.",
     "to": "/insight.html"
@@ -244,13 +244,13 @@ export const showcase = [
   {
     "key": "watch",
     "name": "Watch",
-    "tag": "Alerts from your answers",
+    "tag": "Alerts",
     "title": "Catch changes that need attention.",
-    "text": "Receive scheduled summaries, reminders and exception alerts through connected communication channels.",
+    "text": "Get scheduled summaries, reminders and exception alerts on WhatsApp, Telegram or email.",
     "points": [
-      "Monitor agreed business measures",
-      "Configure timing, conditions and recipients",
-      "Deliver through WhatsApp Business, Telegram or email"
+      "Watch the numbers you care about",
+      "Choose when, and who hears about it",
+      "Delivered on WhatsApp Business, Telegram or email"
     ],
     "question": "Notify me when a distributor reaches 80% of the target required to qualify for the scheme.",
     "to": "/watch.html"
@@ -258,21 +258,12 @@ export const showcase = [
 ]
 
 export const trustPoints = [
-  {
-    "icon": "document",
-    "title": "Check the source",
-    "text": "Review the supporting document, page or record behind an answer."
-  },
-  {
-    "icon": "people",
-    "title": "Control access",
-    "text": "Administrators control access to knowledge, documents and capabilities."
-  },
-  {
-    "icon": "server",
-    "title": "Choose private deployment",
-    "text": "Deploy on client-controlled infrastructure to keep information in your preferred environment."
-  }
+  { "icon": "eye", "title": "Read-only by design", "text": "entaura reads from your systems and never writes back to them." },
+  { "icon": "chart", "title": "Calculated, not guessed", "text": "Numbers are fetched and calculated by code, not written by the AI." },
+  { "icon": "check", "title": "Checked before go-live", "text": "Results are matched against your own reports before your team relies on them." },
+  { "icon": "document", "title": "Every answer cites its source", "text": "Open the exact page, cells or query behind each answer." },
+  { "icon": "people", "title": "You control access", "text": "Admins decide who sees what, and every query is logged with who asked." },
+  { "icon": "server", "title": "Our cloud or yours", "text": "Run in our managed cloud or inside your own infrastructure." }
 ]
 
 export const useCases = [
@@ -312,7 +303,7 @@ export const useCases = [
       {
         "q": "Which invoice is overdue?",
         "before": "found at month-end",
-        "now": "a configured overdue alert"
+        "now": "a WhatsApp alert the morning it falls overdue"
       },
       {
         "q": "Which products are running low on stock?",
@@ -326,18 +317,18 @@ export const useCases = [
 export const vision = [
   {
     "label": "Connect",
-    "title": "Bring approved documents together.",
-    "text": "Access knowledge from uploaded files, cloud storage and email."
+    "title": "Bring documents and data together.",
+    "text": "Policies from uploads, Google Drive and Gmail. Sales, stock and finance from your ERP, read-only."
   },
   {
     "label": "Ask",
-    "title": "Find what you need in plain language.",
-    "text": "Search policies, procedures and business documents with a question."
+    "title": "Ask in plain words, get the proof.",
+    "text": "Every answer shows the clause, page or query it came from, in Arabic, English or Hindi."
   },
   {
-    "label": "Understand",
-    "title": "Move forward with the source in view.",
-    "text": "Read the answer, check its references and ask follow-up questions."
+    "label": "Act",
+    "title": "Hear about it before it’s a problem.",
+    "text": "Turn any answer into a WhatsApp, Telegram or email alert for the right person."
   }
 ]
 

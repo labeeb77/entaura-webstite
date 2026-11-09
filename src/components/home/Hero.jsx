@@ -57,10 +57,10 @@ function Hero() {
               <span className="hx-line muted"><span>into actionable insights.</span></span>
             </span>
           </h1>
-          <p className="hx-sub">Monitor changes before they become bigger problems.<br />Give your team time to act with timely answers and alerts.</p>
+          <p className="hx-sub">Ask your policies and business data questions in plain words, see the source behind every answer, and get alerts before small issues grow.</p>
           <div className="hx-actions">
             <Link className="button primary" to="/try.html">Try Entaura</Link>
-            <Link className="button ghost" to="/contact.html">Contact sales</Link>
+            <Link className="button ghost" to="/demo.html">Request a demo</Link>
           </div>
         </div>
 

@@ -8,7 +8,7 @@ function TrustBand() {
         <div className="h-head reveal">
           <span className="eyebrow">Built for trust</span>
           <h2>Answers you can trace. <span className="muted">Access you can control.</span></h2>
-          <p>Review supporting sources and give teams access to approved knowledge.</p>
+          <p>Every answer shows where it came from, and nothing in your systems is ever changed.</p>
         </div>
         <div className="h-trust-grid">
           {trustPoints.map((point, index) => (

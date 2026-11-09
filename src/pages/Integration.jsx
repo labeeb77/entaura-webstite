@@ -34,7 +34,7 @@ function Glance() {
       <div className="int-core">
         <span className="int-core-mark"><img src="/assets/entaura-mark-sm.png" alt="" /></span>
         <strong>entaura</strong>
-        <small>Connect · Model · Certify</small>
+        <small>Connect · Model · Check</small>
       </div>
       <div className="int-link"><span>cited answers</span><i></i></div>
       <GlanceNode title="Your team" items={glance.team} />
@@ -210,8 +210,8 @@ function Integration() {
     <main className="int" ref={main}>
       <PageHero
         eyebrow="Integration"
-        title="A partnership,"
-        gradientLines={['not a download.']}
+        title="We set it up with you."
+        gradientLines={['In our cloud or yours.']}
         text="Our team scopes, onboards, and deploys entaura with yours, in your infrastructure or ours."
       >
         <ul className="int-facts-strip">
@@ -257,7 +257,7 @@ function Integration() {
 
       <section className="section int-soft" id="rollout">
         <div className="container">
-          <SectionHead eyebrow="Rollout" title="Five steps," gradient="from first call to go-live." />
+          <SectionHead eyebrow="Rollout" title="Five steps, about 4 to 6 weeks," gradient="from first call to go-live." />
           <div className="int-pilot reveal">
             <span className="int-step"><IntegrationIcon name="rocket" /></span>
             <div>

@@ -1,16 +1,17 @@
 // Content for the integration page, from the enterprise engagement copy.
 // Plain words first, the formal term as a small chip. Only states what the
-// platform and team do today: no certifications, prices, or timelines.
+// platform and team do today: no certifications or prices. The rollout
+// timeframe (4 to 6 weeks) is a sample until confirmed.
 
 export const glance = {
   systems: [['database', 'ERP database'], ['document', 'Documents'], ['chart', 'Reports']],
-  team: [['search', 'Cited answers'], ['chart', 'Certified numbers'], ['bell', 'Alerts']],
+  team: [['search', 'Cited answers'], ['chart', 'Checked numbers'], ['bell', 'Alerts']],
 }
 
 export const phases = [
   { icon: 'workshop', title: 'We learn your business', text: 'Workshops with your team, onsite or remote.', term: 'Discovery · SOW' },
   { icon: 'layers', title: 'We design the solution', text: 'Map your data sources and agree key metrics.', term: 'Solution design' },
-  { icon: 'plug', title: 'We connect your data', text: 'Read-only access, modelled into certified metrics.', term: 'Data onboarding' },
+  { icon: 'plug', title: 'We connect your data', text: 'Read-only access, modelled into metrics your team agrees.', term: 'Data onboarding' },
   { icon: 'check', title: 'You check the numbers', text: 'Results matched against your own reports.', term: 'UAT' },
   { icon: 'rocket', title: 'You go live, we stay', text: 'Training, extra care after launch, ongoing support.', term: 'Hypercare · SLA' },
 ]
@@ -56,7 +57,7 @@ export const security = [
   { icon: 'eye', title: 'Read-only', text: 'Never writes back to your systems', detail: 'Every query is read-only, with time and row limits.' },
   { icon: 'people', title: 'Role-based access', text: 'People see only what they’re granted', detail: 'Staff only see the knowledge bases they were given.' },
   { icon: 'key', title: 'Encrypted credentials', text: 'Encrypted at rest, never shown', detail: 'Database passwords, AI keys and Google access are never sent back to the browser.' },
-  { icon: 'check', title: 'Certified numbers', text: 'Governed metrics, not AI guesses', detail: 'Figures are fetched and calculated by code, not written by the model.' },
+  { icon: 'check', title: 'Calculated, not guessed', text: 'Numbers come from code, not the AI', detail: 'Figures are fetched and calculated by code, not written by the model.' },
   { icon: 'link', title: 'Traceable answers', text: 'Every answer cites its source', detail: 'Open the exact page, cells or query behind each answer.' },
   { icon: 'shield', title: 'Validated releases', text: 'Checked against known figures first', detail: 'Updates go live only when they match known figures from your own reports.' },
   { icon: 'server', title: 'Audited and self-hostable', text: 'Every action logged', detail: 'Admin actions and every query are logged. Run it in your own infrastructure if you need to.' },
@@ -128,8 +129,8 @@ export const sourceGuides = [
     icon: 'database',
     title: 'Databases',
     lead: 'Your ERP or any SQL database.',
-    steps: ['Add the host and a read-only user', 'Test the connection', 'Tick the tables and views to use', 'Sync on a schedule (Ask can also read live)'],
-    access: 'Only the tables you pick. Insight analyses a synced, read-only copy; Ask can also read them live, read-only.',
+    steps: ['Add the host and a read-only user', 'Test the connection', 'Tick the tables and views to use', 'Sync on a schedule, or by hand'],
+    access: 'Only the tables you pick. Insight analyses a synced, read-only copy.',
     never: 'Write, change or delete anything. Passwords are encrypted and never shown again.',
   },
   {
@@ -169,7 +170,7 @@ export const appIntegrations = [
   {
     icon: 'bell',
     title: 'Alerts with Watch',
-    text: 'Turn any answer into a WhatsApp or Telegram alert: on a schedule, on change, or past a limit.',
+    text: 'Turn any answer into a WhatsApp, Telegram or email alert: on a schedule, on change, or past a limit.',
     points: ['Tap Notify me on any answer', 'Reply STOP to cancel', 'Same verified figures'],
     channels: true,
     to: '/watch.html',
@@ -191,7 +192,7 @@ export const faqGroups = [
     items: [
       { q: 'Which ERP systems do you support?', a: 'entaura connects to your ERP’s database, whatever the system: PostgreSQL, MySQL, SQL Server, Oracle, SAP HANA and many more. We confirm the details for your setup during discovery.' },
       { q: 'How often is our data updated?', a: 'Databases sync on a schedule you set, or by hand with one click. Google Drive syncs every 15 minutes, and Gmail syncs new mail incrementally.' },
-      { q: 'Do you query our ERP directly?', a: 'Insight analyses a synced, read-only copy in a sealed workspace, so questions never put load on your ERP. Ask can also read selected tables live, read-only.' },
+      { q: 'Do you query our ERP directly?', a: 'Insight analyses a synced, read-only copy in a sealed workspace, so questions never put load on your ERP.' },
       { q: 'What happens if a source is unavailable?', a: 'Answers keep working from the last good copy. A failed sync never deletes anything; it stops with a clear error so your team can reconnect.' },
       { q: 'Which files can we use?', a: 'PDF, Word, PowerPoint, Excel, text files and images, up to 40 MB each. Scanned pages are read with OCR.' },
       { q: 'We use a system that isn’t listed. Can you connect it?', a: 'Most likely. entaura connects to 600+ sources. Tell us what you use and we’ll confirm.' },

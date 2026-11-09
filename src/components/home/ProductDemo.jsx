@@ -354,7 +354,7 @@ function ProductDemo() {
       </div>
 
       <div className="pd-foot">
-        <span>Sample data for a fictional company, Nuvora.</span>
+        <span>Sample data for Nuvora, a fictional company in the Gulf.</span>
         <Link to="/try.html">Try it on the live demo <span aria-hidden="true">↗</span></Link>
       </div>
     </div>

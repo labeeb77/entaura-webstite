@@ -136,7 +136,7 @@ export function StepScreen({ screen }) {
       <div className="aw-mini aw-mini-ask">
         <div className="aw-input"><span>How many leave days carry over to next year?</span><i>➤</i></div>
         <div className="aw-chips">
-          <span>Supported languages</span><span>🎙 Voice</span>
+          <span>Arabic · English · Hindi</span><span>🎙 Voice</span>
         </div>
         <p>Ask follow-up questions to explore the policy in more detail.</p>
       </div>

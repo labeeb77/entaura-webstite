@@ -12,37 +12,43 @@ export const askPage = {
     "eyebrow": "Who it’s for",
     "title": "For every team that",
     "gradient": "asks the same questions twice.",
-    "text": "Give each team access to approved policies, procedures and product knowledge.",
+    "text": "Give each team the policies, procedures and product documents they need, and only those.",
     "items": [
       {
         "icon": "chart",
         "team": "Finance",
-        "example": "“What is our refund window for annual plans?”"
+        "example": "“Who approves an order above a customer’s credit limit?”",
+        "value": "No more waiting on finance to answer the same question."
       },
       {
         "icon": "rocket",
         "team": "Sales",
-        "example": "“What does the product guide say about installation?”"
+        "example": "“What discount can I offer a new distributor?”",
+        "value": "Reps quote the right terms on the first call."
       },
       {
         "icon": "people",
         "team": "HR",
-        "example": "“How many leave days carry over to next year?”"
+        "example": "“How many leave days carry over to next year?”",
+        "value": "Staff check it themselves instead of emailing HR."
       },
       {
         "icon": "server",
         "team": "Operations",
-        "example": "“What is the procedure for returning an order?”"
+        "example": "“What is the procedure for returning an order?”",
+        "value": "Every branch follows the same steps."
       },
       {
         "icon": "support",
         "team": "Customer support",
-        "example": "“What does the warranty cover for spare parts?”"
+        "example": "“What does the warranty cover for spare parts?”",
+        "value": "Customers get a clear answer while they’re on the line."
       },
       {
         "icon": "flag",
         "team": "Leadership",
-        "example": "“What does our latest management report say?”"
+        "example": "“What does our latest management report say?”",
+        "value": "The key points, with the page to read in full."
       }
     ]
   },
@@ -54,15 +60,15 @@ export const askPage = {
     "items": [
       {
         "problem": "The answer is somewhere in a folder, handbook or email.",
-        "outcome": "Search connected knowledge by asking a question in everyday language."
+        "outcome": "Ask in plain words and get the answer from the right document."
       },
       {
         "problem": "A summary is hard to trust without the original document.",
-        "outcome": "Check the supporting source before you act."
+        "outcome": "Every answer links to the clause and page it came from."
       },
       {
         "problem": "Repeated policy questions interrupt the same people.",
-        "outcome": "Help teams find answers in the knowledge they are allowed to access."
+        "outcome": "Staff look it up themselves, so HR and finance stop answering the same question."
       }
     ]
   },
@@ -111,7 +117,7 @@ export const askPage = {
       {
         "icon": "link",
         "title": "Voice and languages",
-        "text": "Ask by voice and interact in supported languages."
+        "text": "Ask by voice or text in Arabic, English or Hindi."
       },
       {
         "icon": "people",
@@ -135,11 +141,11 @@ export const askPage = {
     "eyebrow": "Connected knowledge",
     "title": "Put your business information",
     "gradient": "to work.",
-    "text": "Connect approved sources so teams can find and use the information they need.",
+    "text": "Connect the documents your teams already rely on, and choose exactly what entaura can read.",
     "groups": [
       {
         "title": "Cloud documents and email",
-        "note": "Bring approved business knowledge into one searchable experience.",
+        "note": "Policies, handbooks and procedures from where they already live.",
         "items": [
           [
             "googledrive.svg",
@@ -160,8 +166,8 @@ export const askPage = {
         ]
       },
       {
-        "title": "Business information",
-        "note": "Work with approved files and connected business data.",
+        "title": "Files you upload",
+        "note": "Drag and drop files up to 40 MB each. Scanned pages are read with OCR.",
         "items": [
           [
             "icon:document",
@@ -172,18 +178,18 @@ export const askPage = {
             "Excel"
           ],
           [
-            "icon:eye",
-            "Images"
+            "icon:layers",
+            "PowerPoint"
           ],
           [
-            "icon:database",
-            "Databases"
+            "icon:eye",
+            "Images"
           ]
         ]
       },
       {
-        "title": "External applications",
-        "note": "Use authorized knowledge in your existing applications through APIs.",
+        "title": "Your own applications",
+        "note": "Put the same cited answers inside your portal or app through the API.",
         "items": [
           [
             "icon:link",
@@ -200,7 +206,7 @@ export const askPage = {
         ]
       }
     ],
-    "setup": "Source availability and access are configured for your organization."
+    "setup": "You choose which sources each team can use."
   },
   "trust": {
     "eyebrow": "Access and control",
@@ -208,19 +214,19 @@ export const askPage = {
     "gradient": "Company controls.",
     "items": [
       {
+        "icon": "eye",
+        "title": "Read-only by design",
+        "text": "entaura reads from your systems and never writes back to them."
+      },
+      {
         "icon": "document",
-        "title": "Check the source",
-        "text": "Review the supporting document, page or record behind an answer."
+        "title": "Every answer cites its source",
+        "text": "Open the exact page, cells or query behind each answer."
       },
       {
         "icon": "people",
-        "title": "Control access",
-        "text": "Administrators control access to knowledge, documents and capabilities."
-      },
-      {
-        "icon": "server",
-        "title": "Choose private deployment",
-        "text": "Deploy on client-controlled infrastructure to keep information in your preferred environment."
+        "title": "You control access",
+        "text": "Admins decide who sees what, and every query is logged with who asked."
       }
     ]
   },

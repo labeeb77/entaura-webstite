@@ -5,7 +5,7 @@ import { usePageMeta } from '../hooks/usePageMeta.js'
 import '../product.css'
 
 const destinations = [
-  { to: '/ask.html', label: 'entaura ask', text: 'Answers from your policies and records' },
+  { to: '/ask.html', label: 'entaura ask', text: 'Answers from your policies and documents' },
   { to: '/insight.html', label: 'entaura insight', text: 'Numbers you can trust, with the query' },
   { to: '/watch.html', label: 'entaura watch', text: 'Alerts from your answers' },
   { to: '/integration.html', label: 'Integration', text: 'How entaura connects to your systems' },

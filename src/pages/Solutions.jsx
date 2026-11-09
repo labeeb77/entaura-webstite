@@ -18,7 +18,7 @@ function Solutions() {
         eyebrow="Solutions for real work"
         title="Less searching."
         gradientLines={['More moving forward.']}
-        text="Better decisions, improved compliance, and proactive management."
+        text="Ready-made templates for distribution, manufacturing and HR, with questions that work on day one."
       />
       <section className="section">
         <div className="container">

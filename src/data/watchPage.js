@@ -6,7 +6,7 @@ export const watchPage = {
     "gradientLines": [
       "Give your team time to act."
     ],
-    "text": "Monitor agreed business measures and receive scheduled summaries, reminders and exception alerts through connected channels. Spend less time checking and respond sooner when something needs attention."
+    "text": "Watch the numbers you care about and get scheduled summaries, reminders and exception alerts on WhatsApp, Telegram or email. Spend less time checking and respond sooner when something needs attention."
   },
   "audience": {
     "eyebrow": "Who it’s for",
@@ -60,15 +60,15 @@ export const watchPage = {
     "items": [
       {
         "problem": "Important changes depend on someone remembering to check.",
-        "outcome": "Monitor agreed information on a schedule or against defined conditions."
+        "outcome": "Watch checks for you, on a schedule or the moment a limit is crossed."
       },
       {
         "problem": "Reports do not always reach the person who needs them.",
-        "outcome": "Send summaries and exceptions to responsible people through connected channels."
+        "outcome": "The right person gets it on WhatsApp, Telegram or email."
       },
       {
         "problem": "Routine checks take time away from follow-up.",
-        "outcome": "Receive reminders when agreed activities or business events are due."
+        "outcome": "Your team spends the time following up instead of checking."
       }
     ]
   },
@@ -80,7 +80,7 @@ export const watchPage = {
       {
         "screen": "ask",
         "title": "Choose what to monitor",
-        "text": "Identify the approved information or business measure that needs attention."
+        "text": "Start from any Ask or Insight answer, or the number that needs attention."
       },
       {
         "screen": "setup",
@@ -107,7 +107,7 @@ export const watchPage = {
       {
         "icon": "eye",
         "title": "Exception alerts",
-        "text": "Monitor stock, collections, expenses or another agreed business measure."
+        "text": "Get told when stock, collections, expenses or any other number goes off track."
       },
       {
         "icon": "flag",
@@ -117,12 +117,12 @@ export const watchPage = {
       {
         "icon": "link",
         "title": "Connected channels",
-        "text": "Deliver through WhatsApp Business, Telegram, email or other approved services."
+        "text": "Deliver through WhatsApp Business, Telegram or email."
       },
       {
         "icon": "people",
-        "title": "Responsible recipients",
-        "text": "Configure who receives each notification."
+        "title": "The right people, nobody else",
+        "text": "Choose who gets each alert. Anyone can reply STOP to cancel at any time."
       },
       {
         "icon": "check",
@@ -141,72 +141,52 @@ export const watchPage = {
     "eyebrow": "Connected knowledge",
     "title": "Put your business information",
     "gradient": "to work.",
-    "text": "Connect approved sources so teams can find and use the information they need.",
+    "text": "Watch reads the same read-only data as Ask and Insight, and sends alerts where your team already works.",
     "groups": [
       {
-        "title": "Cloud documents and email",
-        "note": "Bring approved business knowledge into one searchable experience.",
-        "items": [
-          [
-            "googledrive.svg",
-            "Google Drive"
-          ],
-          [
-            "gmail.svg",
-            "Gmail"
-          ],
-          [
-            "aws.png",
-            "Amazon S3"
-          ],
-          [
-            "azure.png",
-            "Azure Blob Storage"
-          ]
-        ]
-      },
-      {
-        "title": "Business information",
-        "note": "Work with approved files and connected business data.",
+        "title": "Starts from any answer",
+        "note": "Any Ask or Insight answer can become an alert.",
         "items": [
           [
             "icon:document",
-            "PDF and Word"
+            "Ask answers"
           ],
           [
             "icon:chart",
-            "Excel"
-          ],
-          [
-            "icon:eye",
-            "Images"
-          ],
-          [
-            "icon:database",
-            "Databases"
+            "Insight numbers"
           ]
         ]
       },
       {
-        "title": "Notification channels",
-        "note": "Delivery depends on the connected service.",
+        "title": "Delivered where your team is",
+        "note": "Pick the channel for each alert, and the people who get it.",
         "items": [
           [
             "whatsapp.png",
             "WhatsApp Business"
           ],
           [
-            "telegram",
+            "icon:link",
             "Telegram"
           ],
           [
-            "icon:document",
+            "gmail.svg",
             "Email"
+          ]
+        ]
+      },
+      {
+        "title": "Your own applications",
+        "note": "Trigger and manage alerts from your own tools through the API.",
+        "items": [
+          [
+            "icon:link",
+            "APIs"
           ]
         ]
       }
     ],
-    "setup": "Source availability and access are configured for your organization."
+    "setup": "You choose which sources each team can use."
   },
   "trust": {
     "eyebrow": "Access and control",
@@ -214,19 +194,19 @@ export const watchPage = {
     "gradient": "Company controls.",
     "items": [
       {
+        "icon": "eye",
+        "title": "Read-only by design",
+        "text": "entaura reads from your systems and never writes back to them."
+      },
+      {
         "icon": "document",
-        "title": "Check the source",
-        "text": "Review the supporting document, page or record behind an answer."
+        "title": "Every answer cites its source",
+        "text": "Open the exact page, cells or query behind each answer."
       },
       {
         "icon": "people",
-        "title": "Control access",
-        "text": "Administrators control access to knowledge, documents and capabilities."
-      },
-      {
-        "icon": "server",
-        "title": "Choose private deployment",
-        "text": "Deploy on client-controlled infrastructure to keep information in your preferred environment."
+        "title": "You control access",
+        "text": "Admins decide who sees what, and every query is logged with who asked."
       }
     ]
   },

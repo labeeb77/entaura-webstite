@@ -37,7 +37,7 @@ function PlanCard({ plan, period }) {
       <p className="pr-text">{plan.text}</p>
       {plan.price ? (
         <div className="pr-price">
-          <strong>SAR {plan.price[period].toLocaleString('en-US')}</strong><span>/ month</span>
+          <strong>${plan.price[period].toLocaleString('en-US')}</strong><span>/ month</span>
           <small>{period === 'yearly' ? 'Billed yearly' : 'Billed monthly'}</small>
         </div>
       ) : (
@@ -70,7 +70,7 @@ function Pricing() {
         <div className="container">
           <span className="eyebrow">Pricing</span>
           <h1>Start with Ask. <span className="gradient-text">Grow into Insight and Watch.</span></h1>
-          <p>Every plan starts with a free pilot on your own data, so you only pay once you have seen it work.</p>
+          <p>Every plan starts with a free pilot on your own data, so you only pay once you have seen it work. If it doesn’t save your team time, you owe nothing and we delete your data.</p>
           <div className="int-toggle pr-toggle" role="group" aria-label="Billing period" style={{ '--i': active }}>
             <i aria-hidden="true"></i>
             {billing.map(item => (
@@ -86,7 +86,7 @@ function Pricing() {
             {plans.map(plan => <PlanCard key={plan.key} plan={plan} period={period} />)}
           </div>
           <p className="pr-note">
-            Prices exclude AI model usage, which your own AI provider bills you for directly. Setup, training and support are included.
+            Prices in US dollars. They exclude AI model usage, which your own AI provider bills you for directly. Setup, training and support are included.
             {' '}Not sure which plan pays off? <Link to="/contact.html?interest=pilot">Ask us for a payback estimate on your own data.</Link>
           </p>
         </div>
@@ -118,7 +118,7 @@ function Pricing() {
             <strong><IntegrationIcon name="shield" />Safe by default, on every plan</strong>
             <ul>{safety.map(item => <li key={item}><IntegrationIcon name="check" />{item}</li>)}</ul>
           </div>
-          <p className="pr-foot">Every plan includes certified answers, tested publishing, role-based access and the full audit log.</p>
+          <p className="pr-foot">Every plan includes answers checked against your own reports, updates tested before they go live, role-based access and the full audit log.</p>
         </div>
       </section>
 
