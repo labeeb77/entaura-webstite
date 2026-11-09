@@ -121,6 +121,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .brand img { width: 46px; height: 32px; object-fit: contain; }
 .navlinks { display: flex; gap: 30px; align-items: center; color: var(--body); font-size: 14px; font-weight: 500; white-space: nowrap; }
 @media (min-width: 851px) and (max-width: 1080px) { .navlinks { gap: 18px; font-size: 13.5px; } .nav { gap: 16px; } }
+/* Seven menu links: keep the demo button on one line on small laptops. */
+.navcta { white-space: nowrap; }
+@media (min-width: 851px) and (max-width: 960px) { .navlinks { gap: 13px; font-size: 13px; } .nav { gap: 12px; } .navcta { padding-left: 14px; padding-right: 14px; } }
 .navlinks a:hover, .footer a:hover { color: var(--text); }
 .navlinks .nav-try { display: none; }
 .navlinks .nav-try:hover { color: #fff; }

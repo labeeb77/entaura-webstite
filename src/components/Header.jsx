@@ -88,6 +88,7 @@ function Header() {
           <Link to="/integration.html">Integration</Link>
           <Link to="/index.html#platform">How it works</Link>
           <Link to="/pricing.html" aria-current={pathname === '/pricing.html' ? 'page' : undefined}>Pricing</Link>
+          <Link to="/partners.html" aria-current={pathname === '/partners.html' ? 'page' : undefined}>Partners</Link>
           <Link to="/contact.html" aria-current={isContact ? 'page' : undefined}>Contact</Link>
           <Link className="button primary nav-try" to="/try.html">Try Entaura <span>↗</span></Link>
         </div>

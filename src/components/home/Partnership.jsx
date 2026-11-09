@@ -4,13 +4,15 @@ import IntegrationIcon from '../IntegrationIcons.jsx'
 
 const applyLink = '/contact.html?interest=partner'
 
-function Partnership() {
+// On its own page (Partners) the heading is the page's h1.
+function Partnership({ page = false }) {
+  const Heading = page ? 'h1' : 'h2'
   return (
     <section className="h-section h-partners" id="partners" aria-labelledby="partners-title">
       <div className="container">
         <div className="h-head reveal">
           <span className="eyebrow">Partner with us</span>
-          <h2 id="partners-title">Grow with entaura.ai.<br /> <span className="muted">Sell, deliver and build together.</span></h2>
+          <Heading id="partners-title">Grow with entaura.ai.<br /> <span className="muted">Sell, deliver and build together.</span></Heading>
           <p>Join the consultancies, integrators and platforms helping businesses get trusted answers from their own data.</p>
         </div>
 

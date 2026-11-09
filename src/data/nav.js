@@ -11,6 +11,7 @@ export const footerLinks = [
   { to: '/solutions.html', label: 'Solutions' },
   { to: '/integration.html', label: 'Integration' },
   { to: '/pricing.html', label: 'Pricing' },
+  { to: '/partners.html', label: 'Partners' },
   { to: '/try.html', label: 'Try Entaura' },
   { to: '/contact.html', label: 'Contact' },
 ]

@@ -12,7 +12,7 @@ export const pageMeta = {
   },
   ask: {
     file: 'ask.html',
-    description: 'entaura ask answers questions across your documents, spreadsheets, and live databases, with the exact source behind every claim.',
+    description: 'entaura ask answers questions from your policies, handbooks and documents in 9 languages, with the file and page behind every answer.',
     ogTitle: 'entaura ask | Answers you can verify',
     canonical: 'https://entaura.ai/ask.html',
     title: 'entaura ask | Answers you can verify',
@@ -46,6 +46,14 @@ export const pageMeta = {
     ogDescription: 'Our team scopes, onboards, and deploys entaura with yours, in your infrastructure or ours.',
     canonical: 'https://entaura.ai/integration.html',
     title: 'Integration | entaura.ai',
+  },
+  partners: {
+    file: 'partners.html',
+    description: 'Partner with entaura.ai: referral and resale, implementation, and technology partnerships, with training, co-selling and a named partner manager.',
+    ogTitle: 'Partners | entaura.ai',
+    ogDescription: 'Sell, deliver and build with entaura.ai. Apply to become a partner.',
+    canonical: 'https://entaura.ai/partners.html',
+    title: 'Partners | entaura.ai',
   },
   pricing: {
     file: 'pricing.html',
