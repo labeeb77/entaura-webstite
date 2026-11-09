@@ -383,3 +383,51 @@ export const watchRecipe = [
     "active": 0
   }
 ]
+
+// "Partner with us" section on the home page. Kept to what a partner actually
+// does with entaura.ai; no commission figures or partner logos until agreed.
+export const partnerTypes = [
+  {
+    "key": "referral",
+    "tone": "ask",
+    "icon": "link",
+    "label": "Referral & resale",
+    "title": "Bring entaura.ai to your clients.",
+    "for": "Consultancies, resellers and advisors",
+    "text": "Introduce Ask, Insight and Watch to the businesses you already serve and grow a recurring line of revenue.",
+    "points": ["Registered opportunities", "Joint demos and pilots", "Recurring revenue on every account"]
+  },
+  {
+    "key": "implementation",
+    "tone": "insight",
+    "icon": "workshop",
+    "label": "Implementation",
+    "title": "Deliver AI projects with us.",
+    "for": "System integrators and ERP partners",
+    "text": "Connect client systems, set up approved knowledge and roll out answers, dashboards and alerts that teams use every day.",
+    "points": ["Hands-on technical training", "Deployment playbooks", "Direct line to our engineers"]
+  },
+  {
+    "key": "technology",
+    "tone": "watch",
+    "icon": "plug",
+    "label": "Technology",
+    "title": "Integrate your platform.",
+    "for": "Software, data and messaging platforms",
+    "text": "Make your product a source or a channel for entaura.ai, so shared customers get answers from the data they keep with you.",
+    "points": ["Connector and API support", "Joint solution listing", "Co-marketing to shared customers"]
+  }
+]
+
+export const partnerBenefits = [
+  { "icon": "training", "title": "Enablement", "text": "Product training, demo environments and sales material for your team." },
+  { "icon": "people", "title": "Co-selling", "text": "Our team joins discovery calls, demos and pilots alongside yours." },
+  { "icon": "rocket", "title": "Go-to-market", "text": "Joint campaigns, case studies and a place on our partner listing." },
+  { "icon": "support", "title": "Priority support", "text": "A named partner manager and fast escalation to engineering." }
+]
+
+export const partnerSteps = [
+  { "title": "Apply", "text": "Tell us about your business, your clients and where you see a fit." },
+  { "title": "Get enabled", "text": "Meet your partner manager, train your team and set up a demo space." },
+  { "title": "Grow together", "text": "Register opportunities, run pilots and deliver with our support." }
+]

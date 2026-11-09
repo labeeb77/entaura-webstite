@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import CtaBand from '../components/home/CtaBand.jsx'
 import Hero from '../components/home/Hero.jsx'
 import LogoMarquee from '../components/home/LogoMarquee.jsx'
+import Partnership from '../components/home/Partnership.jsx'
 import PlatformFlow from '../components/home/PlatformFlow.jsx'
 import ProductShowcase from '../components/home/ProductShowcase.jsx'
 import TrustBand from '../components/home/TrustBand.jsx'
@@ -26,6 +27,7 @@ function Home() {
       <PlatformFlow />
       <TrustBand />
       <UseCases />
+      <Partnership />
       <CtaBand />
     </main>
   )

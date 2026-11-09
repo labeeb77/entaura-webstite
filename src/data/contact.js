@@ -1,7 +1,7 @@
-export const interestOptions = ['entaura ask', 'entaura insight', 'entaura watch', 'A pilot on our own data', 'Solutions and integrations']
+export const interestOptions = ['entaura ask', 'entaura insight', 'entaura watch', 'A pilot on our own data', 'Solutions and integrations', 'Partnership']
 
 // Links can preselect an option with ?interest=<key>, e.g. /contact.html?interest=pilot.
-export const interestKeys = { ask: 'entaura ask', insight: 'entaura insight', watch: 'entaura watch', pilot: 'A pilot on our own data' }
+export const interestKeys = { ask: 'entaura ask', insight: 'entaura insight', watch: 'entaura watch', pilot: 'A pilot on our own data', partner: 'Partnership' }
 
 // Public contact details, shown in the footer and used by the enquiry form.
 export const contactEmail = 'reachus@entaura.ai'
