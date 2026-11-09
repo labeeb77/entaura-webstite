@@ -38,7 +38,7 @@ export const deployments = [
     label: 'Managed by entaura',
     place: 'entaura cloud',
     icon: 'cloud',
-    rows: [['Runs on', 'entaura’s cloud infrastructure'], ['Operated by', 'entaura: hosting, updates, monitoring'], ['Your data', 'Isolated for your organisation']],
+    rows: [['Runs on', 'entaura’s cloud infrastructure'], ['Operated by', 'entaura: hosting, updates, monitoring'], ['Your data', 'Isolated for your organization']],
     best: 'Fastest time to value, nothing to manage.',
   },
   {

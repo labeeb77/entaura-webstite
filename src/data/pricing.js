@@ -47,7 +47,7 @@ export const plans = [
     features: [
       'entaura watch: alerts on WhatsApp or Telegram, on a schedule or when a limit is crossed',
       'Custom data model, metrics and business rules built with our team',
-      'Custom connectors, including Varforces, Taskforces, Zoho and your in-house systems',
+      'Custom connectors, including Vanforces, Taskforces, Zoho and your in-house systems',
       'Private AI models: vLLM, Ollama or any OpenAI-compatible server',
       'Embed in your own apps through the API and chart widget',
       'Unlimited knowledge bases, members and group companies',
