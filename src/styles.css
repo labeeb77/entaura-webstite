@@ -526,18 +526,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
 .int-guides dd { margin: 0; color: var(--body); font-size: 14px; line-height: 1.55; }
 
 /* Into your apps */
-.int-apps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.int-apps article { display: flex; flex-direction: column; padding: 24px; border-radius: 24px; background: #fff; border: 1px solid var(--line); }
-.int-apps .int-icon { color: var(--text); }
-.int-apps h3 { margin: 16px 0 8px; font-size: 19px; letter-spacing: -.02em; }
-.int-apps p { margin: 0; color: var(--body); font-size: 14.5px; }
-.int-apps ul { list-style: none; margin: 16px 0; padding: 0; display: grid; gap: 6px; }
-.int-apps li { position: relative; padding-left: 18px; font-size: 14px; }
-.int-apps li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 8px; height: 5px; border-left: 1.6px solid var(--text); border-bottom: 1.6px solid var(--text); transform: rotate(-45deg); }
-.int-apps pre { margin: auto 0 0; padding: 12px 14px; border-radius: 12px; background: #0f1729; color: #c9d4f5; font-family: var(--mono); font-size: 11.5px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
-.int-apps-channels { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: auto; }
-.int-apps-channels span { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px 5px 5px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; font-weight: 500; }
-.int-apps-channels a { margin-left: auto; font-size: 14px; font-weight: 600; }
 
 /* Checklist */
 .int-check-wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: start; }
@@ -582,7 +570,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .int-security { grid-template-columns: 1fr 1fr; }
   .int-faq-wrap { grid-template-columns: 1fr; gap: 0; }
   .int-guides { grid-template-columns: 1fr; }
-  .int-apps { grid-template-columns: 1fr; }
   .int-check-wrap { grid-template-columns: 1fr; gap: 0; }
   .int-dir-detail { grid-template-columns: 1fr; gap: 14px; }
 }
@@ -597,7 +584,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--text); 
   .int-facts dl div { grid-template-columns: 1fr; gap: 2px; }
   .int-dir-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .int-dir-detail dl { grid-template-columns: 1fr; gap: 10px; }
-  .int-apps { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {

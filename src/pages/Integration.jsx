@@ -7,7 +7,7 @@ import PageHero from '../components/PageHero.jsx'
 import ProductMark from '../components/ProductMark.jsx'
 import SectionHead from '../components/SectionHead.jsx'
 import SectionNav from '../components/SectionNav.jsx'
-import { appIntegrations, checklist, connectors, deployments, faqGroups, glance, heroFacts, phases, sections, security, sourceGuides, weProvide, youBring } from '../data/integration.js'
+import { checklist, connectors, deployments, faqGroups, glance, heroFacts, phases, sections, security, sourceGuides, weProvide, youBring } from '../data/integration.js'
 import { pageMeta } from '../data/pageMeta.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import { useReveal } from '../hooks/useReveal.js'
@@ -146,30 +146,6 @@ function SourceGuides() {
   )
 }
 
-function AppIntegrations() {
-  return (
-    <div className="int-apps">
-      {appIntegrations.map(item => (
-        <article key={item.title}>
-          <IntegrationIcon name={item.icon} />
-          <h3>{item.title}</h3>
-          <p>{item.text}</p>
-          <ul>{item.points.map(point => <li key={point}>{point}</li>)}</ul>
-          {item.code && <pre aria-hidden="true">{item.code}</pre>}
-          {item.channels && (
-            <div className="int-apps-channels">
-              <span><ChannelIcon channel="whatsapp" size={20} />WhatsApp</span>
-              <span><ChannelIcon channel="telegram" size={20} />Telegram</span>
-              <span><img src="/assets/integrations/gmail.svg" alt="" width={20} height={20} />Email</span>
-              <Link to={item.to}>About Watch →</Link>
-            </div>
-          )}
-        </article>
-      ))}
-    </div>
-  )
-}
-
 // A list IT can tick through; ticks are kept on this page only.
 function Checklist() {
   const [done, setDone] = useState(() => new Set())
@@ -242,21 +218,14 @@ function Integration() {
         </div>
       </section>
 
-      <section className="section int-soft" id="apps">
-        <div className="container">
-          <SectionHead eyebrow="Into your apps" title="Answers wherever" gradient="your team works." text="Put the same answers inside your own portal, ERP or mobile app. Every request runs the same access rules and checks as the entaura app, so the answers match." />
-          <AppIntegrations />
-        </div>
-      </section>
-
-      <section className="section" id="checklist">
+      <section className="section int-soft" id="checklist">
         <div className="container int-check-wrap">
           <SectionHead eyebrow="Before you start" title="What your IT team" gradient="prepares." text="A short list for the technical side. Tick items off as you go." />
           <Checklist />
         </div>
       </section>
 
-      <section className="section int-soft" id="rollout">
+      <section className="section" id="rollout">
         <div className="container">
           <SectionHead eyebrow="Rollout" title="Five steps, about 4 to 6 weeks," gradient="from first call to go-live." />
           <div className="int-pilot reveal">
@@ -281,7 +250,7 @@ function Integration() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section int-soft">
         <div className="container">
           <SectionHead eyebrow="Roles" title="What we provide," gradient="and what you provide." />
           <div className="int-split">
@@ -298,14 +267,14 @@ function Integration() {
         </div>
       </section>
 
-      <section className="section int-soft">
+      <section className="section">
         <div className="container">
           <SectionHead eyebrow="Deployment" title="Deployed" gradient="on your terms." />
           <Deployment />
         </div>
       </section>
 
-      <section className="section" id="security">
+      <section className="section int-soft" id="security">
         <div className="container">
           <SectionHead eyebrow="Security and governance" title="Enterprise-grade" gradient="by default." />
           <div className="int-security">
