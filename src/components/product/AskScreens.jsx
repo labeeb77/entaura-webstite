@@ -10,9 +10,8 @@ const knowledgeBases = [
 ]
 
 const sourceTypes = [
-  ['document', 'Uploaded documents', 'PDF, Word, Excel and images.', 'Files'],
+  ['document', 'Uploaded documents', 'PDF, Word, Excel, text and images.', 'Files'],
   ['cloud', 'Amazon S3', 'Connect approved files.'],
-  ['cloud', 'Azure Blob Storage', 'Connect approved documents.', 'Azure Blob'],
   ['link', 'Gmail', 'Search approved email.'],
   ['document', 'Google Drive', 'Access approved documents.', 'Drive'],
 ]
@@ -136,9 +135,9 @@ export function StepScreen({ screen }) {
       <div className="aw-mini aw-mini-ask">
         <div className="aw-input"><span>How many leave days carry over to next year?</span><i>➤</i></div>
         <div className="aw-chips">
-          <span>Arabic · English · Hindi</span><span>🎙 Voice</span>
+          <span>9 languages</span><span>🎙 Voice</span>
         </div>
-        <p>Ask follow-up questions to explore the policy in more detail.</p>
+        <p>العربية · English · हिन्दी · اردو · മലയാളം and more</p>
       </div>
     )
   }

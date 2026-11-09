@@ -6,7 +6,7 @@ export const askPage = {
     "gradientLines": [
       "Get back to work."
     ],
-    "text": "Ask questions across your connected enterprise documents. Get clear answers with source references, so your team spends less time searching and more time moving work forward."
+    "text": "Ask about your policies, handbooks and procedures in your own language. Every answer shows the file and page it came from, and when your documents don’t say, Ask tells you instead of guessing."
   },
   "audience": {
     "eyebrow": "Who it’s for",
@@ -79,18 +79,18 @@ export const askPage = {
     "items": [
       {
         "screen": "connect",
-        "title": "Connect approved documents",
-        "text": "Choose the files, folders and mail labels entaura can read. Nothing else is touched."
+        "title": "Add your documents",
+        "text": "Upload files, or pick Google Drive folders, Gmail labels or an S3 bucket. Access is read-only."
       },
       {
         "screen": "ask",
         "title": "Ask in your own words",
-        "text": "Type or speak a question about the information you need."
+        "text": "Type or speak in any of 9 languages. Ask follows the language of your question."
       },
       {
         "screen": "answer",
         "title": "Read and verify",
-        "text": "Get an answer with supporting source references, then ask a follow-up."
+        "text": "Each claim is numbered to its source. Open it to see the exact page, figure or table."
       }
     ]
   },
@@ -100,34 +100,34 @@ export const askPage = {
     "gradient": "you can act on.",
     "items": [
       {
-        "icon": "document",
-        "title": "Answers from documents",
-        "text": "Find information in policies, handbooks, procedures and other approved documents."
+        "icon": "check",
+        "title": "Answers with proof",
+        "text": "Every answer cites the file and page. Hover a citation to preview the exact passage."
       },
       {
-        "icon": "check",
-        "title": "Supporting references",
-        "text": "Check the source document and page behind the answer."
+        "icon": "eye",
+        "title": "Scans, figures and tables",
+        "text": "Scanned pages and images are read with OCR, and you can ask what a figure or table in a document says."
+      },
+      {
+        "icon": "shield",
+        "title": "Says when it doesn’t know",
+        "text": "If your documents don’t contain the answer, Ask says so. It never makes up company facts."
       },
       {
         "icon": "support",
-        "title": "Follow-up questions",
-        "text": "Continue the conversation to explore a topic in more detail."
+        "title": "9 languages, by voice too",
+        "text": "English, Arabic, Hindi, Urdu, Malayalam, Tamil, Telugu, Bengali and Kannada, with right-to-left layouts and read-aloud answers."
       },
       {
-        "icon": "link",
-        "title": "Voice and languages",
-        "text": "Ask by voice or text in Arabic, English or Hindi."
-      },
-      {
-        "icon": "people",
-        "title": "Team-specific knowledge",
-        "text": "Organize knowledge by department, project, product or function."
+        "icon": "document",
+        "title": "Summaries and follow-ups",
+        "text": "Summarize a document or a whole knowledge base, then keep asking in the same chat. Chats are saved for later."
       },
       {
         "icon": "layers",
-        "title": "Conversation history",
-        "text": "Return to earlier chats and keep useful discussions organized."
+        "title": "Ask across teams",
+        "text": "Group knowledge bases such as HR and Finance and ask across them at once. People only get answers from the ones they can access."
       }
     ]
   },
@@ -145,7 +145,7 @@ export const askPage = {
     "groups": [
       {
         "title": "Cloud documents and email",
-        "note": "Policies, handbooks and procedures from where they already live.",
+        "note": "Read-only access to the folders, labels and buckets you pick.",
         "items": [
           [
             "googledrive.svg",
@@ -158,16 +158,12 @@ export const askPage = {
           [
             "aws.png",
             "Amazon S3"
-          ],
-          [
-            "azure.png",
-            "Azure Blob Storage"
           ]
         ]
       },
       {
         "title": "Files you upload",
-        "note": "Drag and drop files up to 40 MB each. Scanned pages are read with OCR.",
+        "note": "Tag each file so people can point a question at it. Scanned pages are read with OCR.",
         "items": [
           [
             "icon:document",
@@ -178,18 +174,18 @@ export const askPage = {
             "Excel"
           ],
           [
-            "icon:layers",
-            "PowerPoint"
+            "icon:document",
+            "Text files"
           ],
           [
             "icon:eye",
-            "Images"
+            "Scans and images"
           ]
         ]
       },
       {
         "title": "Your own applications",
-        "note": "Put the same cited answers inside your portal or app through the API.",
+        "note": "Put the same cited answers in your portal or app with an API key limited to chosen knowledge bases.",
         "items": [
           [
             "icon:link",

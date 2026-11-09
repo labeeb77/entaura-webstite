@@ -12,9 +12,9 @@ export const plans = [
     features: [
       'entaura ask: questions in plain language',
       'Every answer cited to the exact clause, page or cell',
-      'Upload PDF, Word, PowerPoint and Excel',
-      'Connect Google Drive, Google Docs and Gmail',
-      'Clarifying questions instead of guesses',
+      'Upload PDF, Word, Excel, text and scanned images',
+      'Connect Google Drive, Gmail and Amazon S3',
+      'Says so when your documents don’t have the answer',
       '1 knowledge base, up to 5 members',
     ],
   },

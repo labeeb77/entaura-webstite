@@ -41,7 +41,7 @@ export const solutionDetails = [
     title: 'entaura ask',
     lead: 'When proof is hard to find:',
     text: 'Searches your policies, handbooks and procedures and returns the exact clause and page.',
-    items: ['Verify answers against the source', 'Search every approved document in one place', 'Ask in Arabic, English or Hindi'],
+    items: ['Verify answers against the source', 'Search every approved document in one place', 'Ask in 9 languages, including Arabic, English and Hindi'],
     to: '/ask.html',
     linkLabel: 'Explore Ask →',
   },
