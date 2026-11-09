@@ -12,24 +12,24 @@ export const heroStory = {
   ask: {
     tagline: 'Answers from your documents, with proof.',
     points: [
-      { text: 'Cites the exact clause or cell', at: 'answer' },
-      { text: 'Shows its context and reasoning', at: 'extras' },
+      { text: 'References supporting documents', at: 'answer' },
+      { text: 'Includes supporting source references', at: 'extras' },
       { text: 'Follow-ups keep the thread going', at: 'followup' },
     ],
   },
   insight: {
-    tagline: 'Live ERP numbers you can check.',
+    tagline: 'Understand connected business data.',
     points: [
       { text: 'Answers in plain words', at: 'answer' },
       { text: 'Bar, column or table in one tap', at: 'extras' },
-      { text: 'The SQL behind every figure', at: 'proof' },
+      { text: 'Supporting business sources', at: 'proof' },
       { text: 'Follow-ups to keep digging', at: 'followup' },
     ],
   },
   watch: {
     tagline: 'WhatsApp or Telegram alerts that matter.',
     points: [
-      { text: 'Turn any answer into a watch', at: 1 },
+      { text: 'Monitor agreed business information', at: 1 },
       { text: 'On a schedule or when a limit is hit', at: 4 },
       { text: 'Sent where your team already is', at: 5 },
     ],

@@ -1,125 +1,231 @@
-// entaura ask product page. Each section answers one question a visitor has.
-// Screen recreations use sample data for the fictional Nuvora company.
-
+// Capabilities sourced from EntAura Feature Documentation.pdf.
 export const askPage = {
-  hero: {
-    eyebrow: 'Knowledge',
-    title: 'Ask your business anything.',
-    gradientLines: ['Get answers you can verify.'],
-    text: 'Ask searches your documents, spreadsheets, and live databases at once, then answers in plain language with the exact source behind every claim.',
-  },
-
-  audience: {
-    eyebrow: 'Who it’s for',
-    title: 'For every team that',
-    gradient: 'asks the same questions twice.',
-    text: 'Admins connect the sources once. Everyone else just asks, and only sees the knowledge bases their role allows.',
-    items: [
-      { icon: 'chart', team: 'Finance', example: '“What is our refund window for annual plans?”' },
-      { icon: 'rocket', team: 'Sales', example: '“Total sales orders by distributor this month.”' },
-      { icon: 'people', team: 'HR', example: '“How many leave days carry over to next year?”' },
-      { icon: 'server', team: 'Operations', example: '“Which branches missed their delivery target?”' },
-      { icon: 'support', team: 'Customer support', example: '“What does the warranty cover for spare parts?”' },
-      { icon: 'flag', team: 'Leadership', example: '“How is the business performing this quarter?”' },
+  "hero": {
+    "eyebrow": "Document intelligence",
+    "title": "Find the answer.",
+    "gradientLines": [
+      "Get back to work."
     ],
+    "text": "Ask questions across your connected enterprise documents. Get clear answers with source references, so your team spends less time searching and more time moving work forward."
   },
-
-  problems: {
-    eyebrow: 'Why Ask',
-    outcomeLabel: 'With Ask',
-    title: 'Less searching,',
-    gradient: 'more knowing.',
-    items: [
+  "audience": {
+    "eyebrow": "Who it’s for",
+    "title": "For every team that",
+    "gradient": "asks the same questions twice.",
+    "text": "Give each team access to approved policies, procedures and product knowledge.",
+    "items": [
       {
-        problem: 'Answers are buried in PDFs, spreadsheets, and ERP screens.',
-        outcome: 'One question returns one clear answer, in seconds.',
+        "icon": "chart",
+        "team": "Finance",
+        "example": "“What is our refund window for annual plans?”"
       },
       {
-        problem: 'AI answers sound right, but nobody can check them.',
-        outcome: 'Every claim links to the file, page, or database query it came from.',
+        "icon": "rocket",
+        "team": "Sales",
+        "example": "“What does the product guide say about installation?”"
       },
       {
-        problem: 'Policies and numbers live in different systems.',
-        outcome: 'Documents and live records are searched together, in one conversation.',
-      },
-    ],
-  },
-
-  steps: {
-    eyebrow: 'How it works',
-    title: 'Three steps',
-    gradient: 'from question to proof.',
-    items: [
-      { screen: 'connect', title: 'Connect your sources', text: 'Upload files or connect a database, drive, or mailbox to a knowledge base. Ask indexes them in the background.' },
-      { screen: 'ask', title: 'Ask in plain language', text: 'Type or speak a question in your own words and language. No query syntax, no report builder.' },
-      { screen: 'answer', title: 'Get a cited answer', text: 'See how the question was understood, the answer, and the sources it used, with tables and charts when the data allows.' },
-    ],
-  },
-
-  capabilities: {
-    eyebrow: 'What you can do',
-    title: 'Built for answers',
-    gradient: 'you can act on.',
-    items: [
-      { icon: 'check', title: 'Cited answers', text: 'Inline [1] citations open the exact page, figure, or table, so anyone can verify the answer.' },
-      { icon: 'eye', title: 'Thinking summary', text: 'A short note on what was checked and why, so you know how much to trust the result.' },
-      { icon: 'database', title: 'Live data answers', text: 'Questions about sales or invoices run read-only on your database and come back as a table, chart, or CSV.' },
-      { icon: 'link', title: '9 languages', text: 'English, Arabic, Hindi, Urdu, Malayalam, Tamil, Telugu, Bengali and Kannada, with right-to-left layouts and read-aloud.' },
-      { icon: 'layers', title: 'Knowledge groups', text: 'Group several knowledge bases and ask across all of them in one conversation.' },
-      { icon: 'people', title: 'History and sharing', text: 'Every chat is saved. Share a link to an answer, and rate answers so quality improves.' },
-    ],
-  },
-
-  screens: {
-    eyebrow: 'See it',
-    title: 'What Ask',
-    gradient: 'looks like.',
-    text: 'Screens from the app, shown with sample data.',
-  },
-
-  integrations: {
-    eyebrow: 'Works with your systems',
-    title: 'Connects to the tools',
-    gradient: 'you already use.',
-    text: 'These are the most common. entaura connects to 600+ databases, apps, and file stores.',
-    groups: [
-      {
-        title: 'Files',
-        note: 'Upload with tags. Images and scanned PDFs are read with OCR.',
-        items: [['icon:document', 'PDF'], ['icon:document', 'DOCX'], ['icon:document', 'PPTX'], ['icon:chart', 'XLSX'], ['icon:document', 'TXT'], ['icon:eye', 'Images']],
+        "icon": "people",
+        "team": "HR",
+        "example": "“How many leave days carry over to next year?”"
       },
       {
-        title: 'Databases',
-        note: 'Sync selected tables, or query them live with a read-only account.',
-        items: [['postgresql.svg', 'PostgreSQL'], ['mysql.svg', 'MySQL'], ['mssqlserver.png', 'SQL Server'], ['mongodb.svg', 'MongoDB']],
+        "icon": "server",
+        "team": "Operations",
+        "example": "“What is the procedure for returning an order?”"
       },
       {
-        title: 'Connectors',
-        note: 'Pick the folders, buckets, or labels to sync. 600+ connectors in total.',
-        more: '600+',
-        items: [['aws.png', 'AWS S3'], ['azure.png', 'Azure Blob'], ['googledrive.svg', 'Google Drive'], ['gmail.svg', 'Gmail'], ['github.svg', 'GitHub'], ['gitlab.svg', 'GitLab'], ['icon:support', 'Manual FAQ']],
+        "icon": "support",
+        "team": "Customer support",
+        "example": "“What does the warranty cover for spare parts?”"
       },
+      {
+        "icon": "flag",
+        "team": "Leadership",
+        "example": "“What does our latest management report say?”"
+      }
+    ]
+  },
+  "problems": {
+    "eyebrow": "Why Ask",
+    "outcomeLabel": "With Ask",
+    "title": "Less searching,",
+    "gradient": "more knowing.",
+    "items": [
+      {
+        "problem": "The answer is somewhere in a folder, handbook or email.",
+        "outcome": "Search connected knowledge by asking a question in everyday language."
+      },
+      {
+        "problem": "A summary is hard to trust without the original document.",
+        "outcome": "Check the supporting source before you act."
+      },
+      {
+        "problem": "Repeated policy questions interrupt the same people.",
+        "outcome": "Help teams find answers in the knowledge they are allowed to access."
+      }
+    ]
+  },
+  "steps": {
+    "eyebrow": "How it works",
+    "title": "Three steps",
+    "gradient": "from question to proof.",
+    "items": [
+      {
+        "screen": "connect",
+        "title": "Connect approved documents",
+        "text": "Bring together uploaded files, cloud documents and email."
+      },
+      {
+        "screen": "ask",
+        "title": "Ask in your own words",
+        "text": "Type or speak a question about the information you need."
+      },
+      {
+        "screen": "answer",
+        "title": "Read and verify",
+        "text": "Get an answer with supporting source references, then ask a follow-up."
+      }
+    ]
+  },
+  "capabilities": {
+    "eyebrow": "What you can do",
+    "title": "Built for answers",
+    "gradient": "you can act on.",
+    "items": [
+      {
+        "icon": "document",
+        "title": "Answers from documents",
+        "text": "Find information in policies, handbooks, procedures and other approved documents."
+      },
+      {
+        "icon": "check",
+        "title": "Supporting references",
+        "text": "Check the source document and page behind the answer."
+      },
+      {
+        "icon": "support",
+        "title": "Follow-up questions",
+        "text": "Continue the conversation to explore a topic in more detail."
+      },
+      {
+        "icon": "link",
+        "title": "Voice and languages",
+        "text": "Ask by voice and interact in supported languages."
+      },
+      {
+        "icon": "people",
+        "title": "Team-specific knowledge",
+        "text": "Organize knowledge by department, project, product or function."
+      },
+      {
+        "icon": "layers",
+        "title": "Conversation history",
+        "text": "Return to earlier chats and keep useful discussions organized."
+      }
+    ]
+  },
+  "screens": {
+    "eyebrow": "See it",
+    "title": "What Ask",
+    "gradient": "looks like.",
+    "text": "Illustrative experience with fictional sample data."
+  },
+  "integrations": {
+    "eyebrow": "Connected knowledge",
+    "title": "Put your business information",
+    "gradient": "to work.",
+    "text": "Connect approved sources so teams can find and use the information they need.",
+    "groups": [
+      {
+        "title": "Cloud documents and email",
+        "note": "Bring approved business knowledge into one searchable experience.",
+        "items": [
+          [
+            "googledrive.svg",
+            "Google Drive"
+          ],
+          [
+            "gmail.svg",
+            "Gmail"
+          ],
+          [
+            "aws.png",
+            "Amazon S3"
+          ],
+          [
+            "azure.png",
+            "Azure Blob Storage"
+          ]
+        ]
+      },
+      {
+        "title": "Business information",
+        "note": "Work with approved files and connected business data.",
+        "items": [
+          [
+            "icon:document",
+            "PDF and Word"
+          ],
+          [
+            "icon:chart",
+            "Excel"
+          ],
+          [
+            "icon:eye",
+            "Images"
+          ],
+          [
+            "icon:database",
+            "Databases"
+          ]
+        ]
+      },
+      {
+        "title": "External applications",
+        "note": "Use authorized knowledge in your existing applications through APIs.",
+        "items": [
+          [
+            "icon:link",
+            "APIs"
+          ],
+          [
+            "icon:layers",
+            "Portals"
+          ],
+          [
+            "icon:document",
+            "Websites"
+          ]
+        ]
+      }
     ],
-    models: [['openai.png', 'OpenAI'], ['anthropic.png', 'Anthropic'], ['googlegemini.svg', 'Gemini'], ['openrouter.png', 'OpenRouter']],
-    setup: 'Admins connect each source once from the knowledge base. Organization API keys let your own apps ask the same questions.',
+    "setup": "Source availability and access are configured for your organization."
   },
-
-  trust: {
-    eyebrow: 'Security and data',
-    title: 'Your data stays',
-    gradient: 'yours.',
-    items: [
-      { icon: 'layers', title: 'Isolated per organization', text: 'Documents, chats, and settings are kept separate for each organization.' },
-      { icon: 'people', title: 'Role-based access', text: 'Roles decide which knowledge bases a person can open and ask.' },
-      { icon: 'key', title: 'Encrypted credentials', text: 'Database passwords and AI provider keys are stored encrypted.' },
-      { icon: 'lock', title: 'Read-only queries', text: 'Every database query is validated as read-only and row-limited before it runs.' },
-      { icon: 'check', title: 'No guessing', text: 'If your sources don’t hold the answer, Ask says so instead of inventing one.' },
-      { icon: 'eye', title: 'Nothing sensitive exposed', text: 'Answers never show passwords, API keys, or internal prompts.' },
-    ],
+  "trust": {
+    "eyebrow": "Access and control",
+    "title": "Company knowledge.",
+    "gradient": "Company controls.",
+    "items": [
+      {
+        "icon": "document",
+        "title": "Check the source",
+        "text": "Review the supporting document, page or record behind an answer."
+      },
+      {
+        "icon": "people",
+        "title": "Control access",
+        "text": "Administrators control access to knowledge, documents and capabilities."
+      },
+      {
+        "icon": "server",
+        "title": "Choose private deployment",
+        "text": "Deploy on client-controlled infrastructure to keep information in your preferred environment."
+      }
+    ]
   },
-
-  cta: {
-    title: 'See Ask on your own documents.',
-    text: 'Try the live demo, or talk to our team about your own data.',
-  },
+  "cta": {
+    "title": "See Ask on your own documents.",
+    "text": "Try the live demo, or talk to our team about your own data."
+  }
 }

@@ -7,8 +7,8 @@ function TrustBand() {
       <div className="container">
         <div className="h-head reveal">
           <span className="eyebrow">Built for trust</span>
-          <h2>Answers auditors can check. <span className="muted">Controls IT will approve.</span></h2>
-          <p>When a number is unsure, entaura asks, refuses or flags it rather than guess.</p>
+          <h2>Answers you can trace. <span className="muted">Access you can control.</span></h2>
+          <p>Review supporting sources and give teams access to approved knowledge.</p>
         </div>
         <div className="h-trust-grid">
           {trustPoints.map((point, index) => (

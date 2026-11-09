@@ -3,7 +3,7 @@ import ChannelIcon from '../ChannelIcon.jsx'
 import IntegrationIcon from '../IntegrationIcons.jsx'
 import AppWindow from './AppWindow.jsx'
 
-// HTML recreations of the Notify me flow, filled with sample data for a
+// HTML recreations of the Configure alert flow, filled with sample data for a
 // fictional distributor.
 
 const question = 'Which invoices are overdue today?'
@@ -64,8 +64,8 @@ function AnswerScreen() {
         <div className="ww-actions">
           <span><IntegrationIcon name="document" />Copy</span>
           <span>↻ Retry</span>
-          <b className="ww-notify">{bell}Notify me</b>
-          <em>Answered in 3s</em>
+          <b className="ww-notify">{bell}Configure alert</b>
+          <em>Illustrative example</em>
         </div>
         <div className="aw-input">Ask a question…<i>➤</i></div>
       </div>
@@ -77,8 +77,8 @@ function SetupSheet() {
   const [channel, setChannel] = useState('whatsapp')
   const [trigger, setTrigger] = useState('schedule')
   return (
-    <div className="ww-sheet" role="group" aria-label="Notify me">
-      <header><b>{bell}</b><div><strong>Notify me about this answer</strong><small>“{question}”</small></div></header>
+    <div className="ww-sheet" role="group" aria-label="Configure alert">
+      <header><b>{bell}</b><div><strong>Configure an exception alert</strong><small>“{question}”</small></div></header>
       <small className="ww-label">Send to</small>
       <div className="ww-channels">
         {channels.map(([key, name]) => (
@@ -96,7 +96,7 @@ function SetupSheet() {
         ))}
       </div>
       <span className="aw-btn ww-start">Start watching</span>
-      <p className="ww-note">Reply STOP in the chat to cancel any time.</p>
+      <p className="ww-note">Timing, conditions and recipients are configured for your team.</p>
     </div>
   )
 }
@@ -126,10 +126,9 @@ function Chat({ compact }) {
               <p>Largest: INV-2041 · Al Noor Trading · SAR 48,200</p>
             </>
           )}
-          <small>Reply STOP to cancel · 09:00</small>
+          <small>Scheduled summary · 09:00</small>
         </div>
-        <div className="ww-out">STOP<small>09:02 ✓✓</small></div>
-        <div className="ww-in ok"><p>{compact ? '✓ Alert cancelled.' : '✓ Alert cancelled. You won’t get “Overdue invoices” updates any more.'}</p><small>09:02</small></div>
+
       </div>
     </div>
   )
@@ -147,7 +146,7 @@ function MessageScreen() {
           <div><dt>When</dt><dd>Every day at 09:00</dd></div>
           <div><dt>Answers from</dt><dd>Finance knowledge base</dd></div>
         </dl>
-        <p>Each morning Watch re-runs the question and sends the fresh answer. Reply STOP to end it.</p>
+        <p>Watch sends a scheduled summary of the approved information each morning.</p>
       </div>
       <div className="ww-phone"><Chat /></div>
     </div>
@@ -156,7 +155,7 @@ function MessageScreen() {
 
 const screens = [
   { key: 'answer', label: 'Answer', Screen: AnswerScreen },
-  { key: 'setup', label: 'Notify me', Screen: SetupScreen },
+  { key: 'setup', label: 'Configure alert', Screen: SetupScreen },
   { key: 'message', label: 'The alert', Screen: MessageScreen },
 ]
 
@@ -171,7 +170,7 @@ export function StepScreen({ screen }) {
       <div className="aw-mini">
         <p className="aw-q">{question}</p>
         <p className="aw-a"><b>7 invoices</b> are past their term, worth <b>SAR 214,600</b>.</p>
-        <div className="ww-actions"><span>Copy</span><span>↻ Retry</span><b className="ww-notify">{bell}Notify me</b></div>
+        <div className="ww-actions"><span>Copy</span><span>↻ Retry</span><b className="ww-notify">{bell}Configure alert</b></div>
       </div>
     )
   }

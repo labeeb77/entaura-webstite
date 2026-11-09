@@ -1,125 +1,231 @@
-// entaura insight product page. Each section answers one question a visitor has.
-// Screen recreations use sample data for a fictional distributor.
-
+// Capabilities sourced from EntAura Feature Documentation.pdf.
 export const insightPage = {
-  hero: {
-    eyebrow: 'Analytics',
-    title: 'Ask your data.',
-    gradientLines: ['Get numbers you can trust.'],
-    text: 'Insight turns your ERP data into certified answers: the right chart, the exact figures, and the query behind every number.',
-  },
-
-  audience: {
-    eyebrow: 'Who it’s for',
-    title: 'For the people who',
-    gradient: 'wait on reports.',
-    text: 'Managers set up the data once. Staff only see the knowledge bases they’ve been given.',
-    items: [
-      { icon: 'chart', team: 'Finance', example: '“Revenue by branch compared with last year.”' },
-      { icon: 'rocket', team: 'Sales leadership', example: '“Which reps missed their target this month?”' },
-      { icon: 'server', team: 'Distribution and operations', example: '“Where are today’s orders getting stuck?”' },
-      { icon: 'people', team: 'HR', example: '“Attrition by department this year.”' },
-      { icon: 'flag', team: 'Trade marketing', example: '“Which promotions paid for their discount?”' },
-      { icon: 'eye', team: 'Leadership', example: '“How is the business performing this quarter?”' },
+  "hero": {
+    "eyebrow": "Business analysis",
+    "title": "Understand performance.",
+    "gradientLines": [
+      "Make the next decision sooner."
     ],
+    "text": "Turn connected business data into clear explanations, comparisons, tables and charts. Explore sales, expenses and collections without waiting for a manually prepared report."
   },
-
-  problems: {
-    eyebrow: 'Why Insight',
-    outcomeLabel: 'With Insight',
-    title: 'Answers in seconds,',
-    gradient: 'not report requests.',
-    items: [
+  "audience": {
+    "eyebrow": "Who it’s for",
+    "title": "For the people who",
+    "gradient": "wait on reports.",
+    "text": "Managers set up the data once. Staff only see the knowledge bases they’ve been given.",
+    "items": [
       {
-        problem: 'Every new question needs a report, a data team, and a few days.',
-        outcome: 'Ask in plain words and get the chart in seconds.',
+        "icon": "chart",
+        "team": "Finance",
+        "example": "“Revenue by branch compared with last year.”"
       },
       {
-        problem: 'AI tools sound confident, then make up the numbers.',
-        outcome: 'Every figure is fetched and calculated by code from certified metrics.',
+        "icon": "rocket",
+        "team": "Sales leadership",
+        "example": "“Which reps missed their target this month?”"
       },
       {
-        problem: 'Each team counts an “active customer” a different way.',
-        outcome: 'Company definitions are shared, and Insight asks when a question could mean two things.',
-      },
-    ],
-  },
-
-  steps: {
-    eyebrow: 'How it works',
-    title: 'Three steps',
-    gradient: 'from raw data to answers.',
-    items: [
-      { screen: 'connect', title: 'Connect your database', text: 'Insight analyses a synced, read-only copy in a sealed workspace, so questions never put load on your ERP.' },
-      { screen: 'certify', title: 'Check the numbers', text: 'We map your data to a ready-made template and test it against figures from your own reports. It goes live only when every check passes.' },
-      { screen: 'ask', title: 'Ask and see the chart', text: 'Get the answer with the right chart, and open “How this was computed” to see every query behind it.' },
-    ],
-  },
-
-  capabilities: {
-    eyebrow: 'What you can do',
-    title: 'Analytics that',
-    gradient: 'shows its work.',
-    items: [
-      { icon: 'check', title: 'Certified metrics', text: 'Answers come from metrics your team has defined and tested, so the same question always gives the same number.' },
-      { icon: 'chart', title: 'The right chart', text: 'KPI tiles, bars, lines, donuts or tables, chosen from the shape of the result. Download as CSV or PNG.' },
-      { icon: 'search', title: 'How this was computed', text: 'Every answer shows the metrics, filters, dates and queries it used, so anyone can check it.' },
-      { icon: 'support', title: 'Asks instead of guessing', text: 'When a question could mean two things, it shows the options with real counts and lets you choose.' },
-      { icon: 'link', title: 'Follow-ups and files', text: '“Same for September” reuses the last query. Attach a budget sheet and compare it with actuals.' },
-      { icon: 'document', title: 'Documents beside numbers', text: 'Contracts, reports and email threads are searched too, with citations to the exact page.' },
-    ],
-  },
-
-  screens: {
-    eyebrow: 'See it',
-    title: 'What Insight',
-    gradient: 'looks like.',
-    text: 'Screens from the app, shown with sample data.',
-  },
-
-  integrations: {
-    eyebrow: 'Works with your systems',
-    title: 'Built for the ERP',
-    gradient: 'you already run.',
-    text: 'These are the most common. entaura connects to 600+ databases, apps, and file stores.',
-    groups: [
-      {
-        title: 'Databases',
-        note: 'Connected with a read-only account and synced on a schedule. Plus 600+ other sources.',
-        more: '600+',
-        items: [['postgresql.svg', 'PostgreSQL'], ['mysql.svg', 'MySQL'], ['mssqlserver.png', 'SQL Server'], ['oracle.png', 'Oracle'], ['sap.svg', 'SAP HANA'], ['snowflake.svg', 'Snowflake'], ['redshift.svg', 'Redshift'], ['icon:database', 'Db2'], ['mongodb.svg', 'MongoDB']],
+        "icon": "server",
+        "team": "Distribution and operations",
+        "example": "“Where are today’s orders getting stuck?”"
       },
       {
-        title: 'Documents',
-        note: 'Uploaded or synced, then cited next to the numbers.',
-        items: [['icon:document', 'PDF'], ['icon:document', 'Word'], ['icon:document', 'PowerPoint'], ['icon:chart', 'Excel'], ['googledrive.svg', 'Google Drive'], ['gmail.svg', 'Gmail']],
+        "icon": "people",
+        "team": "HR",
+        "example": "“Attrition by department this year.”"
       },
       {
-        title: 'Ready-made data models',
-        note: 'Start from a tested template instead of a blank page.',
-        items: [['icon:document', 'SAP-style billing'], ['icon:database', 'Order-based ERP'], ['icon:rocket', 'Van sales (FMCG)'], ['icon:people', 'HR and workforce']],
+        "icon": "flag",
+        "team": "Trade marketing",
+        "example": "“Which promotions paid for their discount?”"
       },
+      {
+        "icon": "eye",
+        "team": "Leadership",
+        "example": "“How is the business performing this quarter?”"
+      }
+    ]
+  },
+  "problems": {
+    "eyebrow": "Why Insight",
+    "outcomeLabel": "With Insight",
+    "title": "Less report preparation.",
+    "gradient": "More time to decide.",
+    "items": [
+      {
+        "problem": "Managers wait for reports to understand performance.",
+        "outcome": "Ask for a clear explanation of connected business data."
+      },
+      {
+        "problem": "Comparisons require gathering information from several sources.",
+        "outcome": "Bring approved information together for multi-step analysis."
+      },
+      {
+        "problem": "A number alone leaves questions unanswered.",
+        "outcome": "Explore the context through follow-up questions and source references."
+      }
+    ]
+  },
+  "steps": {
+    "eyebrow": "How it works",
+    "title": "Three steps",
+    "gradient": "from raw data to answers.",
+    "items": [
+      {
+        "screen": "connect",
+        "title": "Connect approved information",
+        "text": "Use business data from files, databases and approved integrations."
+      },
+      {
+        "screen": "certify",
+        "title": "Ask a business question",
+        "text": "Request a comparison across periods, branches, customers or products."
+      },
+      {
+        "screen": "ask",
+        "title": "Understand the result",
+        "text": "Review explanations, tables and charts, with supporting evidence."
+      }
+    ]
+  },
+  "capabilities": {
+    "eyebrow": "What you can do",
+    "title": "Analytics that",
+    "gradient": "shows its work.",
+    "items": [
+      {
+        "icon": "chart",
+        "title": "Performance comparisons",
+        "text": "Compare sales, expenses, collections and trends in connected data."
+      },
+      {
+        "icon": "document",
+        "title": "Clear explanations",
+        "text": "Understand the result in everyday language."
+      },
+      {
+        "icon": "check",
+        "title": "Source references",
+        "text": "Trace answers back to the business information used."
+      },
+      {
+        "icon": "layers",
+        "title": "Multi-step analysis",
+        "text": "Combine approved tools and sources to answer more involved questions."
+      },
+      {
+        "icon": "support",
+        "title": "Follow-up questions",
+        "text": "Continue exploring in the same conversation."
+      },
+      {
+        "icon": "link",
+        "title": "External comparisons",
+        "text": "Compare market or competitor information when the required external data is connected."
+      }
+    ]
+  },
+  "screens": {
+    "eyebrow": "See it",
+    "title": "What Insight",
+    "gradient": "looks like.",
+    "text": "Illustrative experience with fictional sample data."
+  },
+  "integrations": {
+    "eyebrow": "Connected knowledge",
+    "title": "Put your business information",
+    "gradient": "to work.",
+    "text": "Connect approved sources so teams can find and use the information they need.",
+    "groups": [
+      {
+        "title": "Cloud documents and email",
+        "note": "Bring approved business knowledge into one searchable experience.",
+        "items": [
+          [
+            "googledrive.svg",
+            "Google Drive"
+          ],
+          [
+            "gmail.svg",
+            "Gmail"
+          ],
+          [
+            "aws.png",
+            "Amazon S3"
+          ],
+          [
+            "azure.png",
+            "Azure Blob Storage"
+          ]
+        ]
+      },
+      {
+        "title": "Business information",
+        "note": "Work with approved files and connected business data.",
+        "items": [
+          [
+            "icon:document",
+            "PDF and Word"
+          ],
+          [
+            "icon:chart",
+            "Excel"
+          ],
+          [
+            "icon:eye",
+            "Images"
+          ],
+          [
+            "icon:database",
+            "Databases"
+          ]
+        ]
+      },
+      {
+        "title": "External applications",
+        "note": "Use authorized knowledge in your existing applications through APIs.",
+        "items": [
+          [
+            "icon:link",
+            "APIs"
+          ],
+          [
+            "icon:layers",
+            "Portals"
+          ],
+          [
+            "icon:document",
+            "Websites"
+          ]
+        ]
+      }
     ],
-    models: [['openai.png', 'OpenAI'], ['anthropic.png', 'Anthropic'], ['openrouter.png', 'OpenRouter'], ['icon:server', 'OpenAI-compatible']],
-    setup: 'Your team connects a read-only account and we help map your data model. An API and an embeddable chart widget bring the same answers into your own apps.',
+    "setup": "Source availability and access are configured for your organization."
   },
-
-  trust: {
-    eyebrow: 'Security and data',
-    title: 'Sealed off,',
-    gradient: 'by design.',
-    items: [
-      { icon: 'layers', title: 'Isolated per knowledge base', text: 'Each knowledge base has its own databases and its own read-only user, even inside one company.' },
-      { icon: 'server', title: 'Runs on a synced copy', text: 'Analytics run on a synced, read-only copy, so questions never put load on your ERP.' },
-      { icon: 'check', title: 'Checked before it goes live', text: 'Every update is tested against known figures from your own reports. If a check fails, the last good version keeps answering.' },
-      { icon: 'lock', title: 'Read-only, with limits', text: 'Every query is read-only, with time and row caps.' },
-      { icon: 'key', title: 'Encrypted credentials', text: 'Database passwords and AI keys are encrypted and never sent back to the browser.' },
-      { icon: 'people', title: 'Role access and audit', text: 'Roles decide who can ask what, and every query is logged with who asked and what ran.' },
-    ],
+  "trust": {
+    "eyebrow": "Access and control",
+    "title": "Company knowledge.",
+    "gradient": "Company controls.",
+    "items": [
+      {
+        "icon": "document",
+        "title": "Check the source",
+        "text": "Review the supporting document, page or record behind an answer."
+      },
+      {
+        "icon": "people",
+        "title": "Control access",
+        "text": "Administrators control access to knowledge, documents and capabilities."
+      },
+      {
+        "icon": "server",
+        "title": "Choose private deployment",
+        "text": "Deploy on client-controlled infrastructure to keep information in your preferred environment."
+      }
+    ]
   },
-
-  cta: {
-    title: 'See Insight on your own data.',
-    text: 'Try the live demo, or talk to our team about your own data.',
-  },
+  "cta": {
+    "title": "See Insight on your own data.",
+    "text": "Try the live demo, or talk to our team about your own data."
+  }
 }

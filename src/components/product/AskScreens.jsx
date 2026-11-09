@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import IntegrationIcon from '../IntegrationIcons.jsx'
 import AppWindow from './AppWindow.jsx'
 
@@ -6,31 +5,17 @@ import AppWindow from './AppWindow.jsx'
 
 const knowledgeBases = [
   { name: 'HR Policies', path: '/project/hr-policies', files: '14 files' },
-  { name: 'Sales Database', path: '/project/sales-db', files: 'Live database' },
+  { name: 'Company Procedures', path: '/project/sales-db', files: '18 files' },
   { name: 'Product Docs', path: '/project/product-docs', files: '32 files' },
 ]
 
-const sales = [
-  ['2026-10-01', 362726.43],
-  ['2026-10-03', 326944.19],
-  ['2026-10-04', 342121.29],
-  ['2026-10-05', 390072.46],
-  ['2026-10-06', 417138.47],
-  ['2026-10-07', 307970.9],
-]
-
 const sourceTypes = [
-  ['database', 'Connect database', 'Sync rows or query live.', 'Database'],
-  ['cloud', 'AWS S3', 'Sync files from private buckets.'],
-  ['cloud', 'Azure Blob Storage', 'Sync files from containers.', 'Azure Blob'],
-  ['link', 'Gmail', 'Import support threads.'],
-  ['document', 'Google Drive', 'Connect shared drives.', 'Drive'],
-  ['layers', 'GitHub', 'Index docs and issues.'],
-  ['layers', 'GitLab', 'Index project docs.'],
-  ['document', 'Manual FAQ / text', 'Add custom Q&A.'],
+  ['document', 'Uploaded documents', 'PDF, Word, Excel and images.', 'Files'],
+  ['cloud', 'Amazon S3', 'Connect approved files.'],
+  ['cloud', 'Azure Blob Storage', 'Connect approved documents.', 'Azure Blob'],
+  ['link', 'Gmail', 'Search approved email.'],
+  ['document', 'Google Drive', 'Access approved documents.', 'Drive'],
 ]
-
-const money = value => value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
 function Sidebar({ active }) {
   return (
@@ -51,7 +36,7 @@ function Sidebar({ active }) {
 }
 
 function DashboardScreen() {
-  const stats = [['document', 'Knowledge bases', '3'], ['layers', 'Knowledge groups', '1'], ['database', 'Sources', '6'], ['link', 'Languages', '9']]
+  const stats = [['document', 'Knowledge bases', '3'], ['people', 'Teams', '3'], ['database', 'Sources', '6'], ['document', 'Documents', '64']]
   return (
     <div className="aw-body">
       <Sidebar active="dashboard" />
@@ -81,50 +66,21 @@ function DashboardScreen() {
   )
 }
 
-function SalesView({ view }) {
-  const top = Math.max(...sales.map(([, value]) => value))
-  if (view === 'Bar') {
-    return (
-      <div className="aw-bars">
-        {sales.map(([date, value]) => (
-          <div key={date}><b style={{ height: `${(value / top) * 100}%` }} title={money(value)}></b><span>{date.slice(5)}</span></div>
-        ))}
-      </div>
-    )
-  }
-  return (
-    <table className="aw-table">
-      <thead><tr><th>sales_date</th><th>total_sales</th></tr></thead>
-      <tbody>{sales.map(([date, value]) => <tr key={date}><td>{date}</td><td>{money(value)}</td></tr>)}</tbody>
-    </table>
-  )
-}
-
 function ChatScreen() {
-  const [view, setView] = useState('Table')
   return (
     <div className="aw-body">
-      <Sidebar active="Sales Database" />
+      <Sidebar active="HR Policies" />
       <div className="aw-main aw-chat">
-        <p className="aw-q">Show daily sales for the first week of October.</p>
-        <div className="aw-think">
-          <strong><IntegrationIcon name="eye" />Thinking summary</strong>
-          <p>I read this as a request for daily sales totals, so I checked the connected Sales database. I found 6 matching days for 1–7 October and used those rows as evidence. No sales were recorded on 2 October.</p>
-        </div>
-        <p className="aw-a">Sales peaked on <b>6 October at SAR 417,138</b>, and the week totalled <b>SAR 2.15M</b> across 6 trading days <sup>1</sup>.</p>
+        <p className="aw-q">How many leave days can I carry over?</p>
+        <p className="aw-a">You can carry over up to <b>10 unused days</b> into the next year, according to the leave policy <sup>1</sup>.</p>
         <div className="aw-visual">
-          <small>Visual answer</small>
-          <strong>Sales Database</strong>
-          <div className="aw-views" role="group" aria-label="Answer view">
-            {['Table', 'Bar'].map(name => (
-              <button key={name} className={view === name ? 'on' : ''} aria-pressed={view === name} onClick={() => setView(name)}>{name}</button>
-            ))}
-            <span>Line</span><span>Pie</span><span>CSV</span>
-          </div>
-          <SalesView view={view} />
+          <small>Supporting document · illustrative example</small>
+          <h4>HR Leave Policy</h4>
+          <p>Section 3 · Carry-over</p>
+          <blockquote>Employees may carry over a maximum of 10 unused leave days into the following calendar year.</blockquote>
         </div>
-        <div className="aw-meta"><span><IntegrationIcon name="document" />Sources <i>1</i></span>Answered in 4s</div>
-        <div className="aw-input">Ask anything or browse your knowledge…<i>➤</i></div>
+        <div className="aw-cite"><IntegrationIcon name="document" /><b>HR_Leave_Policy_v4.pdf</b><small>§3 · page 4</small><i>1</i></div>
+        <div className="aw-input">Ask a follow-up about this policy…<i>➤</i></div>
       </div>
     </div>
   )
@@ -146,7 +102,7 @@ function SourcesScreen() {
       <Sidebar active="Product Docs" />
       <div className="aw-main">
         <div className="aw-head">
-          <div><h4>Add knowledge source</h4><p>Choose a database or connector. Files are uploaded from the knowledge base panel.</p></div>
+          <div><h4>Add knowledge source</h4><p>Connect approved documents or upload files to your knowledge base.</p></div>
         </div>
         <SourceGrid />
         <p className="aw-hint">Select a source type to continue. You can add several sources one after another.</p>
@@ -170,7 +126,7 @@ export function StepScreen({ screen }) {
   if (screen === 'connect') {
     return (
       <div className="aw-mini">
-        <div className="aw-upload"><IntegrationIcon name="cloud" />Upload files<small>PDF, DOCX, PPTX, XLSX, TXT, images</small></div>
+        <div className="aw-upload"><IntegrationIcon name="cloud" />Upload files<small>PDF, Word, Excel, images</small></div>
         <SourceGrid compact />
       </div>
     )
@@ -180,9 +136,9 @@ export function StepScreen({ screen }) {
       <div className="aw-mini aw-mini-ask">
         <div className="aw-input"><span>How many leave days carry over to next year?</span><i>➤</i></div>
         <div className="aw-chips">
-          <span>English</span><span>العربية</span><span>हिन्दी</span><span>🎙 Voice</span>
+          <span>Supported languages</span><span>🎙 Voice</span>
         </div>
-        <p>Power users can narrow a question with <code>@source</code>, <code>#tag</code> or <code>/compare</code>.</p>
+        <p>Ask follow-up questions to explore the policy in more detail.</p>
       </div>
     )
   }

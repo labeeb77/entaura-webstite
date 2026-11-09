@@ -22,7 +22,7 @@ function AskPanel({ product }) {
         </p>
       </div>
       <div className="sp-card">
-        <header><b>ERP</b> customers · live record</header>
+        <header><b>Source</b> Document reference</header>
         <dl>
           {askRecord.map(([key, value]) => (
             <div key={key} className={key === 'Utilisation' ? 'hit' : ''}><dt>{key}</dt><dd>{value}</dd></div>
@@ -31,7 +31,7 @@ function AskPanel({ product }) {
       </div>
       <div className="sp-verdict">
         <span className="sp-badge">Needs approval</span>
-        Al Noor Trading is at 93% of its limit. New orders need Finance Manager approval.
+        Orders above 90% of a customer’s credit limit require Finance Manager approval, according to §4.1.
       </div>
     </div>
   )
@@ -70,17 +70,7 @@ function InsightPanel({ product }) {
         </div>
         <div className="sp-legend"><span><i></i>Profit</span><span><i className="cost"></i>Cost</span></div>
       </div>
-      <div className="sp-card">
-        <header><b>SQL</b> Generated and verified</header>
-        <pre>{`SELECT date_trunc('quarter', d.document_date) AS quarter,
-  SUM(l.gross_profit) AS profit,
-  SUM(l.gross_profit) / SUM(l.paid_value) AS margin,
-  SUM(l.paid_value - l.gross_profit) AS cost,
-  SUM(d.tax_amount) AS tax
-FROM sales_documents d JOIN sales_lines l USING (document_id)
-WHERE d.status <> 'cancelled'
-GROUP BY 1 ORDER BY 1;`}</pre>
-      </div>
+      <div className="sp-card"><header><b>Source</b> Quarterly business report</header><p>Illustrative comparison using fictional business data.</p></div>
     </div>
   )
 }
@@ -129,7 +119,7 @@ function ProductShowcase() {
       <div className="container">
         <div className="h-head reveal">
           <span className="eyebrow">Ask • Insight • Watch</span>
-          <h2>Three products. <span className="gradient-text">One intelligent layer.</span></h2>
+          <h2>Find answers. <span className="gradient-text">Understand changes. Take action.</span></h2>
         </div>
 
         <div className="h-showcase reveal">

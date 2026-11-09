@@ -5,8 +5,8 @@ function VisionBand() {
     <section className="h-section h-vision">
       <div className="container">
         <div className="h-head reveal">
-          <span className="eyebrow">Unified enterprise intelligence</span>
-          <h2>Your knowledge is scattered. <span className="muted">Your decisions shouldn’t be.</span></h2>
+          <span className="eyebrow">Enterprise document knowledge</span>
+          <h2>Find the knowledge you need. <span className="muted">Understand it with confidence.</span></h2>
         </div>
         <ol className="h-vision-steps">
           {vision.map((item, index) => (

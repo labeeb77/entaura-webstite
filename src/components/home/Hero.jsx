@@ -57,7 +57,7 @@ function Hero() {
               <span className="hx-line muted"><span>into actionable insights.</span></span>
             </span>
           </h1>
-          <p className="hx-sub">Ask, Insight and Watch connect your policies, documents and data in one intelligent layer.</p>
+          <p className="hx-sub">Monitor changes before they become bigger problems.<br />Give your team time to act with timely answers and alerts.</p>
           <div className="hx-actions">
             <Link className="button primary" to="/try.html">Try Entaura</Link>
             <Link className="button ghost" to="/contact.html">Contact sales</Link>
