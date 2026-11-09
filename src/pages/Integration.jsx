@@ -160,6 +160,7 @@ function AppIntegrations() {
             <div className="int-apps-channels">
               <span><ChannelIcon channel="whatsapp" size={20} />WhatsApp</span>
               <span><ChannelIcon channel="telegram" size={20} />Telegram</span>
+              <span><img src="/assets/integrations/gmail.svg" alt="" width={20} height={20} />Email</span>
               <Link to={item.to}>About Watch →</Link>
             </div>
           )}
@@ -243,7 +244,7 @@ function Integration() {
 
       <section className="section int-soft" id="apps">
         <div className="container">
-          <SectionHead eyebrow="Into your apps" title="Answers wherever" gradient="your team works." text="Use the same answers outside entaura, with the same access rules and checks." />
+          <SectionHead eyebrow="Into your apps" title="Answers wherever" gradient="your team works." text="Put the same answers inside your own portal, ERP or mobile app. Every request runs the same access rules and checks as the entaura app, so the answers match." />
           <AppIntegrations />
         </div>
       </section>

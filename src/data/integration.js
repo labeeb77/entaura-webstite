@@ -119,7 +119,7 @@ export const connectors = [
   ['icon:server', 'OpenAI-compatible', 'ai', { ...viaModel, how: 'Your own server: vLLM, Ollama, LiteLLM or a gateway' }],
   ['whatsapp.png', 'WhatsApp', 'apps', { how: 'Tap Notify me on any answer', sync: 'On a schedule, on change, or past a limit', products: ['watch'] }],
   ['telegram', 'Telegram', 'apps', { how: 'Tap Notify me on any answer', sync: 'On a schedule, on change, or past a limit', products: ['watch'] }],
-  ['icon:link', 'API', 'apps', { how: 'A key per member, shown once', sync: 'Answers stream as they’re written', products: ['ask', 'insight'] }],
+  ['icon:link', 'API', 'apps', { how: 'A key per member, shown once and revocable at any time', sync: 'Answers stream as they’re written', products: ['ask', 'insight'] }],
   ['icon:chart', 'Chart widget', 'apps', { how: 'One script on any web page or mobile app', sync: 'Same charts as the app', products: ['insight'] }],
 ]
 
@@ -156,22 +156,22 @@ export const appIntegrations = [
   {
     icon: 'link',
     title: 'API',
-    text: 'Ask questions from your own apps and get answers, charts and token counts as they stream.',
-    points: ['A key per member, shown once', 'Same access rules as the app', 'Revoke any time, effective at once'],
-    code: 'ask("Top 5 products this month")\n→ answer · chart · sources',
+    text: 'Ask questions from your portal, ERP or mobile app. Answers stream back with the text, charts and sources.',
+    points: ['Each key sees only what its member can see', 'Revoke a key and it stops at once', 'Keys never reach a visitor’s browser'],
+    code: 'connect  /api/v1/ws\nask      "Top 5 products this month"\n→ answer · chart · sources',
   },
   {
     icon: 'chart',
     title: 'Chart widget',
-    text: 'One script draws entaura’s charts and tables on any page, with the same CSV and PNG download.',
-    points: ['Your colours and font', 'Styles never clash with your page', 'Works in mobile app WebViews'],
+    text: 'Add one script to show entaura’s charts and tables on any web page, with CSV and PNG download.',
+    points: ['Matches your colours and font', 'Never clashes with your page styles', 'Works inside mobile apps'],
     code: '<script src="…/entaura-widget.js"></script>\n<entaura-widget></entaura-widget>',
   },
   {
     icon: 'bell',
     title: 'Alerts with Watch',
     text: 'Turn any answer into a WhatsApp, Telegram or email alert: on a schedule, on change, or past a limit.',
-    points: ['Tap Notify me on any answer', 'Reply STOP to cancel', 'Same verified figures'],
+    points: ['Tap Notify me on any answer', 'Reply STOP to cancel', 'The same checked figures as the app'],
     channels: true,
     to: '/watch.html',
   },
