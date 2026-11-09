@@ -46,6 +46,51 @@
 .tc-frame.loaded::before { opacity: 0; animation: none; }
 .tc-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
 @keyframes tc-shimmer { to { background-position: -200% 0; } }
+
+/* Lead form over the demo (components/TryGate.jsx). The demo loads underneath,
+   softly blurred, so it is ready the moment the form is sent. */
+.tc-frame iframe { transition: filter .45s ease, opacity .45s ease; }
+.tc-frame.locked iframe { filter: blur(6px) saturate(.8); opacity: .55; pointer-events: none; }
+.tc-frame.locked::before { display: none; }
+.tg {
+  position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; padding: 24px; overflow-y: auto;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, .55), rgba(255, 255, 255, .88));
+  backdrop-filter: blur(2px);
+  transition: opacity .32s ease, visibility .32s;
+}
+.tg.leaving { opacity: 0; visibility: hidden; }
+.tg-card {
+  width: min(520px, 100%); padding: 30px; border-radius: 24px; background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 40px 80px -40px rgba(30, 50, 110, .45);
+  display: grid; gap: 22px; animation: tg-in .5s cubic-bezier(.2, .7, .2, 1) both;
+}
+.tg.leaving .tg-card { transform: translateY(-8px) scale(.98); transition: transform .32s ease; }
+.tg-head { display: grid; gap: 8px; }
+.tg-badge { justify-self: start; display: inline-flex; align-items: center; gap: 8px; padding: 4px 11px; border-radius: 999px; background: var(--ask-tint); color: #157a69; font-size: 12px; font-weight: 500; }
+.tg-badge i { width: 7px; height: 7px; border-radius: 50%; background: var(--ask); animation: tg-pulse 1.8s ease-in-out infinite; }
+.tg-head h2 { margin: 6px 0 0; font-size: 26px; line-height: 1.15; letter-spacing: -.03em; text-wrap: balance; }
+.tg-head p { margin: 0; color: var(--body); font-size: 15px; }
+.tg-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tg-fields label { display: grid; gap: 6px; align-content: start; font-size: 13px; font-weight: 500; color: var(--text); }
+.tg-fields label > span { display: flex; justify-content: space-between; gap: 8px; }
+.tg-fields em { font-style: normal; font-weight: 400; color: var(--faint); font-size: 12px; }
+.tg-fields input {
+  width: 100%; min-width: 0; padding: 11px 13px; border: 1px solid var(--line-strong); border-radius: 12px; background: #fff;
+  font: inherit; font-size: 15px; font-weight: 400; color: var(--text); outline: none; transition: border-color .2s, box-shadow .2s;
+}
+.tg-fields input::placeholder { color: #a9a9a5; }
+.tg-fields input:focus { border-color: var(--text); box-shadow: 0 0 0 3px rgba(11, 11, 11, .06); }
+.tg-fields .bad input { border-color: #d0533f; box-shadow: 0 0 0 3px rgba(208, 83, 63, .1); }
+.tg-fields small { color: #b2432f; font-size: 12.5px; font-weight: 400; }
+.tg-go { justify-content: center; width: 100%; padding: 13px 20px; font-size: 15.5px; }
+.tg-go span { transition: transform .2s; }
+.tg-go:hover span { transform: translateX(3px); }
+.tg-trust { list-style: none; margin: -6px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; font-size: 12.5px; color: var(--faint); }
+.tg-trust li { display: inline-flex; align-items: center; gap: 6px; }
+.tg-trust .int-icon { width: 14px; height: 14px; color: var(--faint); }
+.tg-trust a { color: var(--body); text-decoration: underline; text-underline-offset: 2px; }
+@keyframes tg-in { from { opacity: 0; transform: translateY(12px) scale(.98); } }
+@keyframes tg-pulse { 50% { box-shadow: 0 0 0 4px rgba(31, 156, 134, .18); } }
 .try-own { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; max-width: 920px; margin: 20px auto 0; padding: 18px 22px; border-radius: 20px; background: var(--soft); border: 1px solid var(--line); }
 .try-own p { margin: 0; color: var(--body); font-size: 15.5px; }
 .try-own strong { color: var(--text); font-weight: 600; }
@@ -60,8 +105,16 @@
   .try-chat { border-radius: 22px; }
   .tc-head { padding: 12px 14px; }
   .tc-frame { height: min(640px, calc(100vh - 160px)); min-height: 520px; border-radius: 0 0 22px 22px; }
+  .tc-frame.locked { height: auto; min-height: 560px; }
+  .tg { position: relative; inset: auto; min-height: 560px; padding: 14px; }
+  .tc-frame.locked iframe { position: absolute; inset: 0; height: 100%; }
+  .tg-card { padding: 22px 18px; gap: 18px; border-radius: 20px; }
+  .tg-head h2 { font-size: 22px; }
+  .tg-fields { grid-template-columns: 1fr; gap: 12px; }
+  .tg-fields input { font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tc-frame::before { animation: none; }
+  .tc-frame::before, .tg-card, .tg-badge i { animation: none; }
+  .tg, .tc-frame iframe { transition: none; }
 }

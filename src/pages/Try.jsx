@@ -1,5 +1,7 @@
 import { useState, useSyncExternalStore } from 'react'
 import { Link } from 'react-router-dom'
+import TryGate from '../components/TryGate.jsx'
+import { savedLead } from '../data/leads.js'
 import { pageMeta } from '../data/pageMeta.js'
 import { usePageMeta } from '../hooks/usePageMeta.js'
 import '../try.css'
@@ -12,12 +14,17 @@ const DEMO_URL = import.meta.env.VITE_ENTAURA_DEMO_URL || 'https://insight.dev.e
 // pre-rendered page has no question; the browser fills it in after loading.
 const noSubscribe = () => () => {}
 const askedQuestion = () => new URLSearchParams(window.location.search).get('q')?.slice(0, 200) || ''
+// Visitors who already filled in the form on this browser go straight in.
+const knownVisitor = () => Boolean(savedLead())
 
 function Try() {
   usePageMeta(pageMeta.try)
   const [loaded, setLoaded] = useState(false)
   const question = useSyncExternalStore(noSubscribe, askedQuestion, () => '')
   const [copied, setCopied] = useState(false)
+  const [started, setStarted] = useState(false)
+  const known = useSyncExternalStore(noSubscribe, knownVisitor, () => false)
+  const open = started || known
 
   const copy = () => {
     navigator.clipboard?.writeText(question).catch(() => {})
@@ -47,11 +54,13 @@ function Try() {
             <div className="tc-title">
               <img src="/assets/entaura-mark-sm.png" alt="" />
               <strong>entaura</strong>
-              <span className="tc-status live"><i></i>Live</span>
+              <span className={`tc-status${open ? ' live' : ''}`}><i></i>{open ? 'Live' : 'Ready'}</span>
             </div>
           </header>
-          <div className={`tc-frame${loaded ? ' loaded' : ''}`}>
-            <iframe src={DEMO_URL} title="Try Entaura" loading="lazy" allow="clipboard-write" onLoad={() => setLoaded(true)} />
+          <div className={`tc-frame${loaded ? ' loaded' : ''}${open ? '' : ' locked'}`}>
+            <iframe src={DEMO_URL} title="Try Entaura" allow="clipboard-write" onLoad={() => setLoaded(true)}
+              inert={!open} aria-hidden={open ? undefined : true} tabIndex={open ? undefined : -1} />
+            {!open && <TryGate question={question} onStart={() => setStarted(true)} />}
           </div>
         </div>
         <div className="try-own">
@@ -60,7 +69,7 @@ function Try() {
         </div>
         <p className="try-note">
           Answers are AI-generated from demo data.
-          <a href={DEMO_URL} target="_blank" rel="noopener noreferrer">Open the demo in a new tab ↗</a>
+          {open && <a href={DEMO_URL} target="_blank" rel="noopener noreferrer">Open the demo in a new tab ↗</a>}
           <Link to="/demo.html">Request a demo →</Link>
         </p>
       </section>
